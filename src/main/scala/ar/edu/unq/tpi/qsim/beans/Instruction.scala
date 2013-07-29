@@ -1,12 +1,12 @@
 package ar.edu.unq.tpi.qsim.beans
 
-class Instruction(var operationCode: Int, var name: String, var op1: String, var op2: String){
+class Instruction(var operationCode: Int, var name: String, var destino: String, var origen: String){
 
-override def toString() =  name + " " + op1 + " " + op2
+override def toString() =  name + " " + destino + " " + origen
   
 }
 
-case class MUL(operand1: String, operand2: String) extends Instruction(0000,"MUL",operand1,operand2)
+case class MUL(destiny: String, origin: String) extends Instruction(0000,"MUL",destiny,origin)
 {
 
 }
