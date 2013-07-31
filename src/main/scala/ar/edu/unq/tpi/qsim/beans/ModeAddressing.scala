@@ -1,12 +1,24 @@
 package ar.edu.unq.tpi.qsim.beans
 
-class ModeAddressing(var value:String, var amountCellOccupies : Int) {
+abstract class ModeAddressing {
 }
 
-case class Register extends ModeAddressing("",6){
+case class Register(var value:String, var number:Int) extends ModeAddressing{
   
+def codeOperation()
+{ 
+  var new_number = number.toBinaryString
+  var new_string = "100"
+    
+    for (x <- new_number.size to 3) {
+      new_string = new_string + "0"
+    }
+   new_string + new_number
+ } 
+  
+   
 }
 
-case class immediate extends ModeAddressing("FFFF",6){
-  
+case class Immediate (var value:String) extends ModeAddressing{
+  def codeOperation() = "000000"
 }
