@@ -5,6 +5,7 @@ abstract class ModeAddressing {
 
 case class Register(var value:String, var number:Int) extends ModeAddressing{
   
+  
 def codeOperation()
 { 
   var new_number = number.toBinaryString
