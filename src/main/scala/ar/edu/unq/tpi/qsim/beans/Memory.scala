@@ -9,7 +9,6 @@ class Memory {
     var current_cel = Integer.parseInt(this.pc,16)
     
     
-    
   }
   
 }
