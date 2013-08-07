@@ -6,7 +6,7 @@ abstract class ModeAddressing {
 case class Register(var value:String, var number:Int) extends ModeAddressing{
   
   
-def codeOperation()
+def codeOperation() :String =
 { 
   var new_number = number.toBinaryString
   var new_string = "100"
@@ -21,5 +21,5 @@ def codeOperation()
 }
 
 case class Immediate (var value:String) extends ModeAddressing{
-  def codeOperation() = "000000"
+  def codeOperation() :String  = "000000"
 }
