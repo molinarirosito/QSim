@@ -11,10 +11,15 @@ case class Register(var value:String, var number:Int) extends ModeAddressing{
   { 
 	"100" + Util.toBinary3B(number)
   } 
+  
+  def getValue() : String = value
+  
 }
 
 case class Immediate (var value:String) extends ModeAddressing{
-  def codeOperation() :String  = "000000"
+  def codeOperation() :String  = "000000" 
+  def getValue() : String = value
+ 
 }
 
 object ddd extends App{

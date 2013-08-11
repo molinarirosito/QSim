@@ -15,10 +15,10 @@ case class ADD(dest: String, orig: String) extends Instruction(0010,"ADD",dest,o
 case class SUB(dest: String, orig: String) extends Instruction(0011,"SUB",dest,orig){
 }
 
-case class DIV(dest: String, orig: String) extends Instruction(0111,"MUL",dest,orig){
+case class DIV(dest: String, orig: String) extends Instruction(0111,"DIV",dest,orig){
 }
 
-case class MOV(dest: String, orig: String) extends Instruction(0001,"ADD",dest,orig){
+case class MOV(dest: String, orig: String) extends Instruction(0001,"MOV",dest,orig){
 }
 
 
