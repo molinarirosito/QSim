@@ -1,29 +1,34 @@
 package ar.edu.unq.tpi.qsim.beans
 
-import ar.edu.unq.tpi.qsim.utils.Util
-
-abstract class ModeAddressing {
-}
-
-case class Register(var value:String, var number:Int) extends ModeAddressing{
+abstract class ModeAddressing (var value_saved:String) {
   
-  def codeOperation() :String =
-  { 
-	"100" + Util.toBinary3B(number)
-  } 
-  
-  def getValue() : String = value
+  def codeOperation() : String
+  def stringOperation() : String
+  override def toString() =  this.stringOperation()
+  def toBinaryString() =  this.codeOperation() + "," + value_saved
   
 }
 
-case class Immediate (var value:String) extends ModeAddressing{
-  def codeOperation() :String  = "000000" 
-  def getValue() : String = value
- 
+case class Register(value : String, var number:Int) extends ModeAddressing(value){
+  
+
+def stringOperation() :String = "R" + number
+
+def codeOperation() :String =
+{ 
+  var new_number = number.toBinaryString
+  var new_string = "100"
+    
+    for (x <- new_number.size to 2) {
+      new_string = new_string + "0"
+    }
+   new_string + new_number
+ } 
+  
+   
 }
 
-object ddd extends App{
-  
-  var r = Register("23",7)
-  print(r.codeOperation())
+case class Immediate (value : String) extends ModeAddressing(value){
+  def stringOperation() :String = value
+  def codeOperation() :String  = "000000"
 }

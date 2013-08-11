@@ -6,10 +6,10 @@ case class Program(var instructions:List[Instruction]) {
 }
 
 object dd extends App{
-  var array = List(MOV("R0","0x0023"),
-		  		   ADD("R0","R3"),
-		  		   MOV("R0","0x0023"),
-		  		   ADD("R0","R3"))
+  //var array = List(MOV("R0","0x0023"),
+	//	  		   ADD("R0","R3"),
+		//  		   MOV("R0","0x0023"),
+		  		   //ADD("R0","R3"))
 //  array.::(MOV("R0","0x0023"))
 //  array.::(ADD("R0","R3"))
 //  array.::(MUL("R0","0xF102"))
@@ -19,6 +19,6 @@ object dd extends App{
 //  array.::(ADD("R0","0x5000"))
 //  array.::(MUL("R0","0x8000"))
   
-  var p = new Program(array)
-  print(p.instructions)
+//  var p = new Program(array)
+  //print(p.instructions)
 }
