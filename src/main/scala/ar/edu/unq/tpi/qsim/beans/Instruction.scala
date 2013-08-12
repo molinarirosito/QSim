@@ -3,17 +3,17 @@ package ar.edu.unq.tpi.qsim.beans
 class Instruction(val codeOperation: String, var name: String, var destiny: ModeAddressing, var origin: ModeAddressing){
 
 def toBinaryString() : String  =  {
-  val destiny_code = destiny.toBinaryString().split(",")(0)
-  val destiny_value = destiny.toBinaryString().split(",")(1)
+//  val destiny_code = destiny.toBinaryString().split(",")(0)
+ // val destiny_value = destiny.toBinaryString().split(",")(1)
   
-  val origin_code = origin.toBinaryString().split(",")(0)
-  val origin_value = origin.toBinaryString().split(",")(1)
+  //val origin_code = origin.toBinaryString().split(",")(0)
+  //val origin_value = origin.toBinaryString().split(",")(1)
     
-  codeOperation + " " + destiny_code + " " + origin_code + " " + destiny_value + " " + origin_value
-  
+  //codeOperation + " " + destiny_code + " " + origin_code + " " + destiny_value + " " + origin_value
+		"NO ME ROMPAS LAS PELOTAS :)"
 }
 
-def sizeOfCells() : Int = destiny.sizeOfCells() + origin.sizeOfCells() + 1
+def sizeOfCells() : Int = destiny.bits() + origin.bits() + 4
 
  override def toString() =  name + " " + destiny.toString() + " " + origin.toString() 
   
@@ -38,7 +38,8 @@ case class MOV(dest: ModeAddressing, orig: ModeAddressing) extends Instruction("
 
 object Testud extends App{
 
-  val t = ADD(Register("0012",1),Immediate("0013"))
-  println(t.toString())
-  println(t.toBinaryString())
+
+  val e = ADD(R1,Immediate("0013"))
+  println(e.toString())
+  println(e.toBinaryString())
 }

@@ -1,20 +1,26 @@
 package ar.edu.unq.tpi.qsim.beans
 
-abstract class ModeAddressing (var value_saved:String) {
+
+trait ModeAddressing {
+  //CAMBIAR CODEOPERATION NOMBRE
+  //DELEGAR CAMBIO A EXADECIMAL A LA INSTRUCCION, SE SOLAPAN LOS MODOS DE DIRECCIONAMIENTO!!!
+
   
   def codeOperation() : String
   def stringOperation() : String
   override def toString() =  this.stringOperation()
-  def toBinaryString() =  this.codeOperation() + "," + value_saved
-  def sizeOfCells() : Int = 0
+//  def toBinaryString() : String
+  def bits() : Int = 0
   
 }
 
-case class Register(value : String, var number:Int) extends ModeAddressing(value){
-  
+ abstract class Register() extends ModeAddressing{
 
+var value : String = "0000"
+
+def number: Int
 def stringOperation() :String = "R" + number
-def sizeOfCells() : Int = 1
+override def bits() : Int = 6
 
 def codeOperation() :String =
 { 
@@ -30,8 +36,42 @@ def codeOperation() :String =
    
 }
 
-case class Immediate (value : String) extends ModeAddressing(value){
+object R0 extends Register()
+{ 
+  override def number : Int = 0
+}
+object R1 extends Register()
+{ 
+  override def number : Int = 1
+}
+object R2 extends Register()
+{ 
+  override def number : Int = 2
+}
+object R3 extends Register()
+{ 
+  override def number : Int = 3
+}
+object R4 extends Register()
+{ 
+  override def number : Int = 4
+}
+object R5 extends Register()
+{ 
+  override def number : Int = 5
+}
+object R6 extends Register()
+{ 
+  override def number : Int = 6
+}
+object R7 extends Register()
+{ 
+  override def number : Int = 7
+}
+
+
+case class Immediate (value : String) extends ModeAddressing{
   def stringOperation() :String = value
   def codeOperation() :String  = "000000"
-  def sizeOfCells() : Int = 1
+ // override def bits() : Int = this.toBinaryString.size - 1
 }

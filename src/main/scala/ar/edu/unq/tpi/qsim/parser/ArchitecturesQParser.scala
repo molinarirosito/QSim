@@ -4,14 +4,8 @@ import scala.util.parsing.combinator.syntactical.StdTokenParsers
 import scala.util.parsing.combinator.ImplicitConversions
 import scala.util.parsing.combinator.token.StdTokens
 import scala.util.parsing.combinator.lexical.StdLexical
-import ar.edu.unq.tpi.qsim.beans.Register
-import ar.edu.unq.tpi.qsim.beans.Immediate
-import ar.edu.unq.tpi.qsim.beans.ModeAddressing
-import ar.edu.unq.tpi.qsim.beans.ModeAddressing
-import ar.edu.unq.tpi.qsim.beans.ModeAddressing
-import ar.edu.unq.tpi.qsim.beans.ModeAddressing
-import ar.edu.unq.tpi.qsim.beans.Instruction
-import ar.edu.unq.tpi.qsim.beans.Program
+import ar.edu.unq.tpi.qsim.beans._
+import scala.collection.mutable.ArrayBuffer
 
 trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   type Tokens = StdTokens
@@ -25,14 +19,14 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
 
   def number = accept("number", { case lexical.NumericLit(n) => numberParser(n) })
   
-  def registers = "R0" ^^^ Register("0000", 0) | 
-  				  "R1" ^^^ Register("0000", 1) | 
-  				  "R2" ^^^ Register("0000", 2) |
-  				  "R3" ^^^ Register("0000", 3) | 
-  				  "R4" ^^^ Register("0000", 4) |
-  				  "R5" ^^^ Register("0000", 5) | 
-  				  "R6" ^^^ Register("0000", 6) | 
-  				  "R7" ^^^ Register("0000", 7)
+  def registers = "R0" ^^^ R0 | 
+  				  "R1" ^^^ R1 | 
+  				  "R2" ^^^ R2 |
+  				  "R3" ^^^ R3 | 
+  				  "R4" ^^^ R4 |
+  				  "R5" ^^^ R5 | 
+  				  "R6" ^^^ R6 | 
+  				  "R7" ^^^ R7
   
   def register = registers //^^ { case id => Class.forName(s"ar.edu.unq.tpi.qsim.parser.$id").newInstance().asInstanceOf[R] }
   
@@ -56,7 +50,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
 //  def instruction1 = instruccions1 ~ (asignable <~";") ^^
 //    { case ins ~ dir1 => Class.forName(s"parser.$ins").getConstructor(classOf[Directionable]).newInstance(dir1).asInstanceOf[Instruction] }
   
-  def program = rep(instruction2) ^^ {case instructions => Program(instructions)}
+  def program = rep(instruction2) ^^ {case instructions => Program(ArrayBuffer()++instructions)}
 
   def parse(input: String) = phrase(program)(new lexical.Scanner(input))
 }

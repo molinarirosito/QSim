@@ -3,7 +3,7 @@ import ar.edu.unq.tpi.qsim.utils.Util
 
 class ALU {
   
-  def execute(add : ADD) :String = {
+ /* def execute(add : ADD) :String = {
     val value_destiny = add.destiny.value_saved
     val value_origin = add.origin.value_saved
     val result = Util.toInteger(value_destiny) + Util.toInteger(value_origin)
@@ -34,5 +34,5 @@ class ALU {
     Util.toHex(result)
     
   }
-
+*/
 }
