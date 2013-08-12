@@ -6,6 +6,7 @@ abstract class ModeAddressing (var value_saved:String) {
   def stringOperation() : String
   override def toString() =  this.stringOperation()
   def toBinaryString() =  this.codeOperation() + "," + value_saved
+  def sizeOfCells() : Int = 0
   
 }
 
@@ -13,6 +14,7 @@ case class Register(value : String, var number:Int) extends ModeAddressing(value
   
 
 def stringOperation() :String = "R" + number
+def sizeOfCells() : Int = 1
 
 def codeOperation() :String =
 { 
@@ -31,4 +33,5 @@ def codeOperation() :String =
 case class Immediate (value : String) extends ModeAddressing(value){
   def stringOperation() :String = value
   def codeOperation() :String  = "000000"
+  def sizeOfCells() : Int = 1
 }

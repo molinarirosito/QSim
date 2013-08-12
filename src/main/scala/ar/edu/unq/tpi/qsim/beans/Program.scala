@@ -2,7 +2,12 @@ package ar.edu.unq.tpi.qsim.beans
 
 import scala.collection.mutable.ArrayBuffer
 
-case class Program(var instructions:List[Instruction]) {
+case class Program(var instructions:ArrayBuffer[Instruction]) {
+  
+  def sizeOfProgram() : Int = {
+    
+    foreach
+  }
 }
 
 object dd extends App{

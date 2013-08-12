@@ -13,11 +13,14 @@ def toBinaryString() : String  =  {
   
 }
 
+def sizeOfCells() : Int = destiny.sizeOfCells() + origin.sizeOfCells() + 1
+
  override def toString() =  name + " " + destiny.toString() + " " + origin.toString() 
   
 }
 
 case class MUL(dest: ModeAddressing, orig: ModeAddressing) extends Instruction("0000","MUL",dest,orig){
+
 }
 
 case class ADD(dest: ModeAddressing, orig: ModeAddressing) extends Instruction("0010","ADD",dest,orig){
