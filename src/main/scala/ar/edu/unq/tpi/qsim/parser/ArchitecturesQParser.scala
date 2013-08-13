@@ -6,18 +6,13 @@ import scala.util.parsing.combinator.token.StdTokens
 import scala.util.parsing.combinator.lexical.StdLexical
 import ar.edu.unq.tpi.qsim.beans._
 import scala.collection.mutable.ArrayBuffer
+import ar.edu.unq.tpi.qsim.beans.Program
 
 trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   type Tokens = StdTokens
   val lexical = new StdLexical
   lexical.reserved ++= List("MOV", "SUB", "ADD", "DIV", "MUL", "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7")
   lexical.delimiters ++= List(",", ";", "[",  "]")
-  
-  val numberParser: String => Any = { _.toDouble }
-
-  def stringVal = accept("string", { case lexical.StringLit(n) => n })
-
-  def number = accept("number", { case lexical.NumericLit(n) => numberParser(n) })
   
   def registers = "R0" ^^^ R0 | 
   				  "R1" ^^^ R1 | 
@@ -30,7 +25,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   
   def register = registers //^^ { case id => Class.forName(s"ar.edu.unq.tpi.qsim.parser.$id").newInstance().asInstanceOf[R] }
   
-  def inmediate = number ^^ {case direction => Immediate(direction.toString)}
+  def inmediate = numericLit ^^ {case direction => Immediate(direction)}
   
   //def directionDirect = "[" ~> direction <~ "]" ^^ {case direction => DirectionDirect(direction)}
   
@@ -45,7 +40,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   //def instruccions1 = "Jump"  
 
   def instruction2 = instruccions2 ~ asignable ~ ("," ~> directionable <~";") ^^
-    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.beans.$ins").getConstructor(classOf[String],classOf[String]).newInstance(dir1.toString, dir2.toString()).asInstanceOf[Instruction] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.beans.$ins").getConstructor(classOf[ModeAddressing],classOf[ModeAddressing]).newInstance(dir1, dir2).asInstanceOf[Instruction] }
 
 //  def instruction1 = instruccions1 ~ (asignable <~";") ^^
 //    { case ins ~ dir1 => Class.forName(s"parser.$ins").getConstructor(classOf[Directionable]).newInstance(dir1).asInstanceOf[Instruction] }
@@ -61,6 +56,7 @@ object QuarqExample extends App with ArchitecturesQParser {
 		MOV R1, R2;				
 	    SUB R2, 0023;
 	    ADD R0, 0255;
+	    DIV R3, R0;	 
 	    DIV R3, R0;	 
     """
 

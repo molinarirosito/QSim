@@ -18,7 +18,7 @@ object dd extends App{
 	//	  		   ADD("R0","R3"),
 		//  		   MOV("R0","0x0023"),
 		  		   //ADD("R0","R3"))
-//  array.::(MOV("R0","0x0023"))
+  array.+:(ADD(R1,Immediate("0013")))
 //  array.::(ADD("R0","R3"))
 //  array.::(MUL("R0","0xF102"))
 //  array.::(DIV("R0","0x2453"))
