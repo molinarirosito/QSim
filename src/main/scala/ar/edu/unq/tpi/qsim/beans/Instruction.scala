@@ -6,10 +6,10 @@ class Instruction(val codeOperation: String, var name: String, var destiny: Mode
 def toHexString() : String  =  {
   val codeOperation_hex = Util.binaryToHex(codeOperation)
   val destiny_code = Util.binaryToHex(destiny.code)
-  val destiny_value = destiny.getValue
+  val destiny_value = destiny.getStringValue
   
   val origin_code = Util.binaryToHex(origin.code)
-  val origin_value = origin.getValue
+  val origin_value = origin.getStringValue
     
   (codeOperation + " " + destiny_code + " " + origin_code + " " + destiny_value + " " + origin_value).replace("  "," ")
 }

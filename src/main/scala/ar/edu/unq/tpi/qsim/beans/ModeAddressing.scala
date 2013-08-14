@@ -8,7 +8,7 @@ trait ModeAddressing {
   def code() : String
   def stringOperation() : String
   override def toString() =  this.stringOperation()
-  def getValue() : String
+  def getStringValue() : String
   def bits() : Int = 0
   
 }
@@ -20,7 +20,7 @@ var value : String = "0000"
 def number: Int
 def stringOperation() :String = "R" + number
 override def bits() : Int = 6
-override def getValue() : String = ""
+override def getStringValue() : String = ""
 
 def code() :String =
 { 
@@ -71,7 +71,7 @@ object R7 extends Register()
 
 
 case class Immediate (value : String) extends ModeAddressing{
-  override def getValue() : String = value
+  override def getStringValue() : String = value
   def stringOperation() :String = value
   def code() :String  = "000000"
  // override def bits() : Int = this.toBinaryString.size - 1
