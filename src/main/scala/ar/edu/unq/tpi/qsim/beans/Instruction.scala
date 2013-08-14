@@ -1,16 +1,17 @@
 package ar.edu.unq.tpi.qsim.beans
+import ar.edu.unq.tpi.qsim.utils._
 
 class Instruction(val codeOperation: String, var name: String, var destiny: ModeAddressing, var origin: ModeAddressing){
 
-def toBinaryString() : String  =  {
-//  val destiny_code = destiny.toBinaryString().split(",")(0)
- // val destiny_value = destiny.toBinaryString().split(",")(1)
+def toHexString() : String  =  {
+  val codeOperation_hex = Util.binaryToHex(codeOperation)
+  val destiny_code = Util.binaryToHex(destiny.code)
+  val destiny_value = destiny.getValue
   
-  //val origin_code = origin.toBinaryString().split(",")(0)
-  //val origin_value = origin.toBinaryString().split(",")(1)
+  val origin_code = Util.binaryToHex(origin.code)
+  val origin_value = origin.getValue
     
-  //codeOperation + " " + destiny_code + " " + origin_code + " " + destiny_value + " " + origin_value
-		"NO ME ROMPAS LAS PELOTAS :)"
+  (codeOperation + " " + destiny_code + " " + origin_code + " " + destiny_value + " " + origin_value).replace("  "," ")
 }
 
 def sizeOfCells() : Int = destiny.bits() + origin.bits() + 4
@@ -39,7 +40,7 @@ case class MOV(dest: ModeAddressing, orig: ModeAddressing) extends Instruction("
 object Testud extends App{
 
 
-  val e = ADD(R1,Immediate("0013"))
+  val e = ADD(R1,Immediate("0F13"))
   println(e.toString())
-  println(e.toBinaryString())
+  println(e.toHexString())
 }
