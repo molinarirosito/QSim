@@ -1,5 +1,7 @@
 package ar.edu.unq.tpi.qsim.beans
 
+import ar.edu.unq.tpi.qsim.utils.Util
+
 
 trait ModeAddressing {
   //DELEGAR CAMBIO A EXADECIMAL A LA INSTRUCCION, SE SOLAPAN LOS MODOS DE DIRECCIONAMIENTO!!!
@@ -24,16 +26,7 @@ override def getStringValue() : String = ""
 
 def code() :String =
 { 
-  var new_number = number.toBinaryString
-  var new_string = "100"
-    
-    for (x <- new_number.size to 2) {
-      new_string = new_string + "0"
-    }
-   new_string + new_number
- } 
-  
-   
+  "100" + Util.toBinary3B(number)
 }
 
 object R0 extends Register()
