@@ -46,12 +46,12 @@ object Util {
    * Representa un numero dependiendo de la funcion que se le pasa por parametro.
    * functions: toHex o toBinary
    */
-  def to(represent: ⇒ String, countBit: Int): String =
+  def to(represent:  String, countBit: Int): String =
     {
       var new_number = represent
       var new_string = ""
 
-      for (x ← new_number.size to countBit) {
+      for (x <- new_number.size to countBit) {
         new_string = new_string + "0"
       }
       new_string + new_number

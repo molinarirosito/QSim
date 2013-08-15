@@ -1,6 +1,6 @@
 package ar.edu.unq.tpi.qsim.beans
 import scala.collection.mutable.ArrayBuffer
-import ar.edu.unq.tpi.qsim.utils.Util
+import ar.edu.unq.tpi.qsim.utils._
 
 
 case class Memory() {
