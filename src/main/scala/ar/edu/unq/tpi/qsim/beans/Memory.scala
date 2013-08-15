@@ -19,6 +19,12 @@ case class Memory() {
     else
     	"This is not a valid memory cell"
   }
+  def setValue(cell: String, value: String) =
+  {
+    val number_cel = Util.hexToInteger(cell)
+    cells(number_cel)=value
+    
+  }
   
 }
 
