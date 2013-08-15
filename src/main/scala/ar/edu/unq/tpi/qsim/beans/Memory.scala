@@ -3,13 +3,18 @@ import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.utils._
 
 
-case class Memory() {
+case class Memory(var size: Int) {
   
-  var cells = ArrayBuffer[String]()
+  var cells : ArrayBuffer[String] = _
   
-  def memorySize() : Int = {
-    cells.size
+  def memorySize() : Int = size
+  
+  def initialize() = {
+    
+    cells = new ArrayBuffer[String](size)
+    cells.map(i => "0000")
   }
+  
   def getValue(pc : String) : String = {
     var current_cel = Util.hexToInteger(pc)
     if(current_cel< this.memorySize())
@@ -29,8 +34,10 @@ case class Memory() {
 }
 
 object Testing extends App{
-  var memory = Memory()
-  memory.cells = ArrayBuffer("1000","1200","1300","1400","1000","1200","1300","1400")
+  var memory = Memory(5)
+  memory.initialize
+  print(memory.cells.size)
+  /*memory.cells = ArrayBuffer("1000","1200","1300","1400","1000","1200","1300","1400")
   
   var value = memory.getValue("0001")
   print("el valor es" )
@@ -39,5 +46,7 @@ object Testing extends App{
   value = memory.getValue("0002")
   memory.cells(1)= "ola"
     print("\n")
-    print(memory.cells)
+    print(memory.cells)*/
+  
+  
 }
