@@ -11,7 +11,7 @@ case class Memory() {
     cells.size
   }
   def getValue(pc : String) : String = {
-    var current_cel = Util.toInteger(pc)
+    var current_cel = Util.hexToInteger(pc)
     if(current_cel< this.memorySize())
     {   var value = cells(current_cel)
     	//pc = Util.toHex(current_cel + 1)

@@ -2,14 +2,13 @@ package ar.edu.unq.tpi.qsim.beans
 
 
 trait ModeAddressing {
-  //CAMBIAR CODEOPERATION NOMBRE
   //DELEGAR CAMBIO A EXADECIMAL A LA INSTRUCCION, SE SOLAPAN LOS MODOS DE DIRECCIONAMIENTO!!!
 
   
-  def codeOperation() : String
+  def code() : String
   def stringOperation() : String
   override def toString() =  this.stringOperation()
-//  def toBinaryString() : String
+  def getStringValue() : String
   def bits() : Int = 0
   
 }
@@ -21,8 +20,9 @@ var value : String = "0000"
 def number: Int
 def stringOperation() :String = "R" + number
 override def bits() : Int = 6
+override def getStringValue() : String = ""
 
-def codeOperation() :String =
+def code() :String =
 { 
   var new_number = number.toBinaryString
   var new_string = "100"
@@ -71,7 +71,8 @@ object R7 extends Register()
 
 
 case class Immediate (value : String) extends ModeAddressing{
+  override def getStringValue() : String = value
   def stringOperation() :String = value
-  def codeOperation() :String  = "000000"
+  def code() :String  = "000000"
  // override def bits() : Int = this.toBinaryString.size - 1
 }
