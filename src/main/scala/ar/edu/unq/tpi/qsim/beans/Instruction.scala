@@ -14,7 +14,8 @@ def toHexString() : String  =  {
   (codeOperation + " " + destiny_code + " " + origin_code + " " + destiny_value + " " + origin_value).replace("  "," ")
 }
 
-def sizeOfCells() : Int = destiny.bits() + origin.bits() + 4
+def sizeOfbits() : Int = this.toHexString.replace(" ","").size
+
 
  override def toString() =  name + " " + destiny.toString() + " " + origin.toString() 
   
@@ -40,7 +41,8 @@ case class MOV(dest: ModeAddressing, orig: ModeAddressing) extends Instruction("
 object Testud extends App{
 
 
-  val e = ADD(R1,Immediate("0F13"))
+  val e = ADD(R1,R5)
   println(e.toString())
   println(e.toHexString())
+  println(e.sizeOfbits)
 }

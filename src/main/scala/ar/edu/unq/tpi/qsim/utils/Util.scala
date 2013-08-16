@@ -4,15 +4,12 @@ object Util {
 	
   /**
    * Representa un numero en una cadena hexacimal.
-   * 
+   *
    * @param number: Int
    * @return String
    */
-  def toHex(number:Int): String =
-  { 
-    to(Integer.toHexString(number),3)
-  }
-  
+  def toHex(number: Int): String = to(Integer.toHexString(number), 3)
+
   /**
    * Interpreta una cadena hexadecimal en numero.
    * @param chain: String
@@ -89,10 +86,15 @@ object Util {
      val value = binaryToInteger(binaryNumber)
      toHex(value)
    }
+
+
+  def IntSumToHex(number: Int): String = toHex(number)
+ 
+
 }
 
-object Test extends App{
- 
+object Test extends App {
+
   val t = Util.toBinary3B(3)
   print(t)
 }

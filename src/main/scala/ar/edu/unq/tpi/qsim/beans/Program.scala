@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 case class Program(var instructions:ArrayBuffer[Instruction]) {
   
 	
-def sizeOfProgram() : Int = instructions.map(i => i.sizeOfCells()).fold(0)(_+_)
+def sizeOfProgram() : Int = (instructions.map(i => i.sizeOfbits).fold(0)(_+_))/4
  
 }
 
