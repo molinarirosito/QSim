@@ -14,7 +14,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   lexical.reserved ++= List("MOV", "SUB", "ADD", "DIV", "MUL", "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7")
   lexical.delimiters ++= List(",", ";", "[",  "]")
   
-  def registers = "R0" ^^^ R0 | 
+  def registers = "R0" ^^^ R0 |    
   				  "R1" ^^^ R1 | 
   				  "R2" ^^^ R2 |
   				  "R3" ^^^ R3 | 
@@ -35,6 +35,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   
   def asignable = register
 
+  //operacion
   def instruccions2 = "MOV" | "SUB" | "DIV" | "ADD" | "MUL"
   
   //def instruccions1 = "Jump"  
