@@ -35,9 +35,16 @@ case class Memoria(var tamanio: Int) {
 }
 
 object Testing extends App{
-  var memory = Memoria(5)
-  memory.initialize
-  print(memory.celdas)
+  var memory = Memoria(65536)
+  var a = 0
+   memory.initialize
+  do{
+         memory.celdas+= ("0000")
+         a = a + 1
+      }while( a < 65536 )
+  
+  println(memory.celdas)
+   println(memory.celdas.size)
   /*memory.cells = ArrayBuffer("1000","1200","1300","1400","1000","1200","1300","1400")
   
   var value = memory.getValue("0001")
