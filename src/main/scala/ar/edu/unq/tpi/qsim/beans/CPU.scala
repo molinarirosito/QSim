@@ -5,12 +5,13 @@ import ar.edu.unq.tpi.qsim.utils.Util
 
 case class CPU() {
 
-  var registers = ArrayBuffer[Register]()+=(R0,R1,R2,R3,R4,R5,R6,R7)
+  var registros = ArrayBuffer[Registro](R0,R1,R2,R3,R4,R5,R6,R7)
+  var flags = ArrayBuffer[Int](0,0,0,0)
   var pc = Util.toHex(0)
   var ir = ""  
   var alu = new ALU() 
   
-  def incrementPc(){
+  def incrementarPc(){
    // pc = Util.
   }
 
@@ -19,6 +20,6 @@ case class CPU() {
 object pur extends App(){
   
   var cpu = CPU()
-  print(cpu.registers +"\n")
+  print(cpu.registros +"\n")
   print(cpu.pc)
 }

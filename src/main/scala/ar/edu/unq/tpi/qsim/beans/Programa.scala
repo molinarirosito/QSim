@@ -3,10 +3,10 @@ package ar.edu.unq.tpi.qsim.beans
 import scala.collection.mutable.Buffer
 import scala.collection.mutable.ArrayBuffer
 
-case class Program(var instructions:ArrayBuffer[Instruction]) {
+case class Programa(var instrucciones:ArrayBuffer[Instruccion]) {
   
 	
-def sizeOfProgram() : Int = (instructions.map(i => i.sizeOfbits).fold(0)(_+_))/4
+def tamanioDelPrograma() : Int = (instrucciones.map(i => i.tamanioHex).fold(0)(_+_))/4
  
 }
 
@@ -16,7 +16,7 @@ object dd extends App{
 	//	  		   ADD("R0","R3"),
 		//  		   MOV("R0","0x0023"),
 		  		   //ADD("R0","R3"))
-  array.+:(ADD(R1,Immediate("0013")))
+  array.+:(ADD(R1,Inmediato("0013")))
 //  array.::(ADD("R0","R3"))
 //  array.::(MUL("R0","0xF102"))
 //  array.::(DIV("R0","0x2453"))

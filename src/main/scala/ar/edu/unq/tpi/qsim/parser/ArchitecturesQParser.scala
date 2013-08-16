@@ -6,7 +6,7 @@ import scala.util.parsing.combinator.token.StdTokens
 import scala.util.parsing.combinator.lexical.StdLexical
 import ar.edu.unq.tpi.qsim.beans._
 import scala.collection.mutable.ArrayBuffer
-import ar.edu.unq.tpi.qsim.beans.Program
+import ar.edu.unq.tpi.qsim.beans.Programa
 
 trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   type Tokens = StdTokens
@@ -41,7 +41,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   //def instruccions1 = "Jump"  
 
   def instruction2 = instruccions2 ~ asignable ~ ("," ~> directionable <~";") ^^
-    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.beans.$ins").getConstructor(classOf[ModeAddressing],classOf[ModeAddressing]).newInstance(dir1, dir2).asInstanceOf[Instruction] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.beans.$ins").getConstructor(classOf[ModoDireccionamiento],classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion] }
 
 //  def instruction1 = instruccions1 ~ (asignable <~";") ^^
 //    { case ins ~ dir1 => Class.forName(s"parser.$ins").getConstructor(classOf[Directionable]).newInstance(dir1).asInstanceOf[Instruction] }
