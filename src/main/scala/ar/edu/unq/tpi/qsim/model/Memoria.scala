@@ -10,9 +10,12 @@ case class Memoria(var tamanio: Int) {
   def tamanioMemoria() : Int = tamanio
   
   def initialize() = {
-    
     celdas = new ArrayBuffer[String](tamanio)
-    celdas = celdas.map(i => "0000")
+    var a = 0
+    do{
+       celdas+= ("0000")
+         a = a + 1
+      }while( a < 65536 )
   }
   
   def getValor(pc : String) : String = {
@@ -24,6 +27,22 @@ case class Memoria(var tamanio: Int) {
     else
     	"Esta no es una celda de memoria valida!!"
   }
+  
+  def cargarPrograma(programa: Programa, pc:String){
+   //Quiero hacerlo de esta forma pero tengo que pensar bien las cosas
+    //programa.instrucciones.foreach(instruccion => setValor(pc, instruccion.representacionHexadecimal()))
+    var celda_pc = Util.hexToInteger(pc)
+    for (x <- 0 to programa.instrucciones.size - 1){
+  		if(celda_pc < Memoria.this.tamanioMemoria()){   
+  		  setValorC(celda_pc,programa.instrucciones(x).representacionHexadecimal())
+  		}
+	   celda_pc= celda_pc + 1
+  	}	
+  }
+   //tuve que agregar este metodo para agilizar las cosas pero habria que pensar que seria lo mejor. 
+   def setValorC(celda: Int, valor: String) =
+  {  celdas(celda) = valor}
+    
   
   def setValor(celda: String, valor: String) =
   {
@@ -38,11 +57,6 @@ object Testing extends App{
   var memory = Memoria(65536)
   var a = 0
    memory.initialize
-  do{
-         memory.celdas+= ("0000")
-         a = a + 1
-      }while( a < 65536 )
-  
   println(memory.celdas)
    println(memory.celdas.size)
   /*memory.cells = ArrayBuffer("1000","1200","1300","1400","1000","1200","1300","1400")

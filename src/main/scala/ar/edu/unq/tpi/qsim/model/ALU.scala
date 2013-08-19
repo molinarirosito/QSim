@@ -3,6 +3,8 @@ import ar.edu.unq.tpi.qsim.utils.Util
 
 class ALU {
   
+  // para mi la alu deberia de devolver una tupla con los flags modificados de haber realizado cada operacion :D
+  
  /* def execute(add : ADD) :String = {
     val value_destiny = add.destiny.value_saved
     val value_origin = add.origin.value_saved
