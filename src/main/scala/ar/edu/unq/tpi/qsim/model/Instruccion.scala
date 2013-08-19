@@ -1,4 +1,4 @@
-package ar.edu.unq.tpi.qsim.beans
+package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tpi.qsim.utils._
 
 class Instruccion(val codigoDeOperacion: String, var operacion: String, var destino: ModoDireccionamiento, var origen: ModoDireccionamiento){

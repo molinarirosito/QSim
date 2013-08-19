@@ -4,9 +4,9 @@ import scala.util.parsing.combinator.syntactical.StdTokenParsers
 import scala.util.parsing.combinator.ImplicitConversions
 import scala.util.parsing.combinator.token.StdTokens
 import scala.util.parsing.combinator.lexical.StdLexical
-import ar.edu.unq.tpi.qsim.beans._
+import ar.edu.unq.tpi.qsim.model._
 import scala.collection.mutable.ArrayBuffer
-import ar.edu.unq.tpi.qsim.beans.Programa
+import ar.edu.unq.tpi.qsim.model.Programa
 
 trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   type Tokens = StdTokens
@@ -25,7 +25,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   
   def register = registers //^^ { case id => Class.forName(s"ar.edu.unq.tpi.qsim.parser.$id").newInstance().asInstanceOf[R] }
   
-  def inmediate = numericLit ^^ {case direction => Immediate(direction)}
+  def inmediate = numericLit ^^ {case direction => Inmediato(direction)}
   
   //def directionDirect = "[" ~> direction <~ "]" ^^ {case direction => DirectionDirect(direction)}
   
@@ -41,12 +41,12 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   //def instruccions1 = "Jump"  
 
   def instruction2 = instruccions2 ~ asignable ~ ("," ~> directionable <~";") ^^
-    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.beans.$ins").getConstructor(classOf[ModoDireccionamiento],classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento],classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion] }
 
 //  def instruction1 = instruccions1 ~ (asignable <~";") ^^
 //    { case ins ~ dir1 => Class.forName(s"parser.$ins").getConstructor(classOf[Directionable]).newInstance(dir1).asInstanceOf[Instruction] }
   
-  def program = rep(instruction2) ^^ {case instructions => Program(ArrayBuffer()++instructions)}
+  def program = rep(instruction2) ^^ {case instructions => Programa(ArrayBuffer()++instructions)}
 
   def parse(input: String) = phrase(program)(new lexical.Scanner(input))
 }

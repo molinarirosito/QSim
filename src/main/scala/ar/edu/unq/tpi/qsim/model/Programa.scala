@@ -1,4 +1,4 @@
-package ar.edu.unq.tpi.qsim.beans
+package ar.edu.unq.tpi.qsim.model
 
 import scala.collection.mutable.Buffer
 import scala.collection.mutable.ArrayBuffer

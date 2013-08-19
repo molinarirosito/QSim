@@ -1,4 +1,4 @@
-package ar.edu.unq.tpi.qsim.beans
+package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tpi.qsim.utils.Util
 
 class ALU {

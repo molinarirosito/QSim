@@ -1,4 +1,4 @@
-package ar.edu.unq.tpi.qsim.beans;
+package ar.edu.unq.tpi.qsim.model;
 
 object Prueba extends App{
   //susy
