@@ -11,11 +11,11 @@ case class Memoria(var tamanio: Int) {
   
   def initialize() = {
     celdas = new ArrayBuffer[String](tamanio)
-    var a = 0
+    var contador = 0
     do{
        celdas+= ("0000")
-         a = a + 1
-      }while( a < 65536 )
+         contador = contador + 1
+      }while( contador < 65536 )
   }
   
   def getValor(pc : String) : String = {

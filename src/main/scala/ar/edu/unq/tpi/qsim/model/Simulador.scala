@@ -1,12 +1,10 @@
 package ar.edu.unq.tpi.qsim.model
 
-import ar.edu.unq.tip.qsim.state.Estado
-import ar.edu.unq.tip.qsim.state.Carga
+import ar.edu.unq.tip.qsim.state._
+
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tip.qsim.state.Inicial
-import ar.edu.unq.tip.qsim.state.Carga
-import ar.edu.unq.tip.qsim.state.Carga
-import ar.edu.unq.tip.qsim.state.Ejecucion
+
 
 case class Simulador(var programa: Programa) {
 
