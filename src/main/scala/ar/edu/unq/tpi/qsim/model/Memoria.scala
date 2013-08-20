@@ -28,20 +28,22 @@ case class Memoria(var tamanio: Int) {
     	"Esta no es una celda de memoria valida!!"
   }
   
-  def cargarPrograma(programa: Programa, pc:String){
+  def cargarPrograma(programa: Programa, inicio:String){
    //Quiero hacerlo de esta forma pero tengo que pensar bien las cosas
     //programa.instrucciones.foreach(instruccion => setValor(pc, instruccion.representacionHexadecimal()))
-    var celda_pc = Util.hexToInteger(pc)
+  
+    var celda_inicio = Util.hexToInteger(inicio)
+    val celda_fin = celda_inicio + programa.tamanioDelPrograma
+    if (celda_fin < Memoria.this.tamanioMemoria()){
     for (x <- 0 to programa.instrucciones.size - 1){
-  		if(celda_pc < Memoria.this.tamanioMemoria()){   
-  		  setValorC(celda_pc,programa.instrucciones(x).representacionHexadecimal())
-  		}
-	   celda_pc= celda_pc + 1
+  	  setValorC(celda_inicio,programa.instrucciones(x).representacionHexadecimal()) }
+	   celda_inicio= celda_inicio + 1
   	}	
   }
-   //tuve que agregar este metodo para agilizar las cosas pero habria que pensar que seria lo mejor. 
-   def setValorC(celda: Int, valor: String) =
-  {  celdas(celda) = valor}
+   
+  
+  def setValorC(celda: Int, valor: String) =
+  {  celdas(celda) = valor }
     
   
   def setValor(celda: String, valor: String) =
