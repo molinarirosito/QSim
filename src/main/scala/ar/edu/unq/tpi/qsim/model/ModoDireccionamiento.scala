@@ -20,6 +20,9 @@ def numero(): Int
 def representacionString() :String = "R" + numero
 override def bits() : Int = 6
 override def getValorString() : String = ""
+def setValue(value : String){
+  valor = value
+}
 
 def codigo() :String =
 { 
