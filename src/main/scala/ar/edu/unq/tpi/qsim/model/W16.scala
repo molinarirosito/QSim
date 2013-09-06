@@ -1,4 +1,6 @@
-package ar.edu.unq.tpi.qsim.utils
+package ar.edu.unq.tpi.qsim.model
+
+import ar.edu.unq.tpi.qsim.utils.Util
 
 
 class W16(var hex: String) {
