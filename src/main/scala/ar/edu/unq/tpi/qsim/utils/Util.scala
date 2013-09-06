@@ -86,6 +86,17 @@ object Util {
      val value = binaryToInteger(binaryNumber)
      toHex(value)
    }
+   
+    /**
+   * Transforma una cadena hexadecimal en una cadena binaria.
+   * @param number: String
+   * @return String
+   */
+   def hexToBinary(binaryNumber:String) :String =
+   {
+     val value = hexToInteger(binaryNumber)
+     toBinary4B(value)
+   }
 
 
   def IntSumToHex(number: Int): String = toHex(number)
