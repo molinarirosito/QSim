@@ -5,36 +5,20 @@ class ALU {
   
   // para mi la alu deberia de devolver una tupla con los flags modificados de haber realizado cada operacion :D
   
- /* def execute(add : ADD) :String = {
-    val value_destiny = add.destiny.value_saved
-    val value_origin = add.origin.value_saved
-    val result = Util.toInteger(value_destiny) + Util.toInteger(value_origin)
-    Util.toHex(result)
-    
+  def execute_add(op1: W16, op2: W16 ) :W16 = {
+   op1 + op2
   }
   
-  def execute(mul : MUL) :String = {
-    val value_destiny = mul.destiny.value_saved
-    val value_origin = mul.origin.value_saved
-    val result = Util.toInteger(value_destiny)*Util.toInteger(value_origin)
-    Util.toHex(result)
-    
+  def execute_mul(op1: W16, op2: W16 ) :W16 = {
+   op1 * op2
   }
   
-  def execute(sub : SUB) :String = {
-    val value_destiny = sub.destiny.value_saved
-    val value_origin = sub.origin.value_saved
-    val result = Util.toInteger(value_destiny) - Util.toInteger(value_origin)
-    Util.toHex(result)
-    
+  def execute_sub(op1: W16, op2: W16 ) :W16 = {
+   op1 - op2
   }
-  
-  def execute(div : DIV) :String = {
-    val value_destiny = div.destiny.value_saved
-    val value_origin = div.origin.value_saved
-    val result = Util.toInteger(value_destiny)/Util.toInteger(value_origin)
-    Util.toHex(result)
-    
+ 
+  def execute_div(op1: W16, op2: W16 ) :W16 = {
+   op1 / op2
   }
-*/
+
 }

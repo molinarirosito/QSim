@@ -45,10 +45,10 @@ case class Simulador() {
   
   def execute(instruccion: Instruccion)= instruccion  match {
     
-  case ADD(op1,op2) => cpu.alu
-  case MUL(op1,op2) => cpu.alu
-  case DIV(op1,op2) => cpu.alu
-  case SUB(op1,op2) => cpu.alu
+  case ADD(op1,op2) => cpu.alu.execute_add(op1.getValor,op2.getValor)
+  case MUL(op1,op2) => cpu.alu.execute_mul(op1.getValor,op2.getValor)
+  case DIV(op1,op2) => cpu.alu.execute_div(op1.getValor,op2.getValor)
+  case SUB(op1,op2) => cpu.alu.execute_sub(op1.getValor,op2.getValor)
   case MOV(op1:Registro,op2) => op1.setValor(obtenerValor(op2))
     
   }
