@@ -39,8 +39,8 @@ case class Simulador() {
   }
   
   
-  def obtenerValor(modoDir : ModoDireccionamiento) : String= modoDir match {
-    case _ => modoDir.getValorString    
+  def obtenerValor(modoDir : ModoDireccionamiento) : W16= modoDir match {
+    case _ => modoDir.getValor    
   }
   
   def execute(instruccion: Instruccion)= instruccion  match {
@@ -49,7 +49,7 @@ case class Simulador() {
   case MUL(op1,op2) => cpu.alu
   case DIV(op1,op2) => cpu.alu
   case SUB(op1,op2) => cpu.alu
-  case MOV(op1:Registro,op2) => op1.setValue(obtenerValor(op2))
+  case MOV(op1:Registro,op2) => op1.setValor(obtenerValor(op2))
     
   }
   

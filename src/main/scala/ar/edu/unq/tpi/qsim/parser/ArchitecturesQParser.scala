@@ -25,7 +25,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   
   def register = registers //^^ { case id => Class.forName(s"ar.edu.unq.tpi.qsim.parser.$id").newInstance().asInstanceOf[R] }
   
-  def inmediate = numericLit ^^ {case direction => Inmediato(direction)}
+  def inmediate = numericLit ^^ {case direction => Inmediato(new W16(direction))}
   
   //def directionDirect = "[" ~> direction <~ "]" ^^ {case direction => DirectionDirect(direction)}
   

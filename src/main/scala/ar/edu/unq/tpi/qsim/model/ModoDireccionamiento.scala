@@ -5,6 +5,7 @@ import ar.edu.unq.tpi.qsim.utils.Util
 trait ModoDireccionamiento {
   //DELEGAR CAMBIO A EXADECIMAL A LA INSTRUCCION, SE SOLAPAN LOS MODOS DE DIRECCIONAMIENTO!!!
 
+  def getValor() : W16
   def codigo() : String
   def representacionString() : String
   override def toString() =  this.representacionString()
@@ -14,14 +15,15 @@ trait ModoDireccionamiento {
 
 abstract class Registro() extends ModoDireccionamiento{
 
-var valor : String = "0000"
+var valor : W16 = new W16("0000")
 
 def numero(): Int
 def representacionString() :String = "R" + numero
 override def bits() : Int = 6
-override def getValorString() : String = ""
-def setValue(value : String){
-  valor = value
+override def getValorString() : String = valor.toString
+def getValor() : W16 = valor
+def setValor(un_valor : W16){
+  valor = un_valor
 }
 
 def codigo() :String =
@@ -64,9 +66,10 @@ object R7 extends Registro()
 }
 
 
-case class Inmediato (valor : String) extends ModoDireccionamiento{
-  override def getValorString() : String = valor
-  def representacionString() :String = valor
+case class Inmediato (valor : W16) extends ModoDireccionamiento{
+  def getValor() : W16 = valor
+  override def getValorString() : String = valor.toString
+  def representacionString() :String = valor.toString
   def codigo() :String  = "000000"
  // override def bits() : Int = this.toBinaryString.size - 1
 }

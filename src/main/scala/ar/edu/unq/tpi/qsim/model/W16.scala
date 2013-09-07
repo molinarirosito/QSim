@@ -5,6 +5,7 @@ import ar.edu.unq.tpi.qsim.utils.Util
 
 class W16(var hex: String) {
   
+  override def toString() =  this.hex
   def value : Int = Util.toInteger(this.hex)
   def toBinary: String = Util.hexToBinary(this.hex)
   
