@@ -8,7 +8,7 @@ object Util {
    * @param number: Int
    * @return String
    */
-  def toHex(number: Int): String = to(Integer.toHexString(number), 3)
+  def toHex(number: Int): String = to(Integer.toHexString(number), 0).toUpperCase()
 
   /**
    * Interpreta una cadena hexadecimal en numero.
@@ -98,6 +98,22 @@ object Util {
      toHex(value)
    }
    
+   /**
+   * Transforma una cadena binaria de 16 bits en una cadena hexadecimal de 4 bits.
+   * @param number: String
+   * @return String
+   */
+   def binary16ToHex(binaryChain:String) :String =
+   {
+     var chain_hex = ""
+     var chain_binary = binaryChain
+     for (x <- 0 to 3) {
+      chain_hex = binaryToHex(chain_binary.takeRight(4)) + chain_hex
+      chain_binary=chain_binary.dropRight(4)
+    }
+     chain_hex
+   }
+   
     /**
    * Transforma una cadena hexadecimal en una cadena binaria de 16 bits.
    * @param number: String
@@ -118,6 +134,6 @@ object Util {
 
 object Test extends App {
 
-  val t = Util.toBinary3B(3)
+  val t = Util.binary16ToHex("1111000011001010")
   print(t)
 }
