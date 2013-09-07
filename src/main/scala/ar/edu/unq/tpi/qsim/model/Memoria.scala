@@ -2,65 +2,94 @@ package ar.edu.unq.tpi.qsim.model
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.utils._
 
-
 case class Memoria(var tamanio: Int) {
-  
-  var celdas : ArrayBuffer[String] = _
-  
-  def tamanioMemoria() : Int = tamanio
-  
+
+  var celdas: ArrayBuffer[String] = _
+
+  def tamanioMemoria(): Int = tamanio
+
   def initialize() = {
     celdas = new ArrayBuffer[String](tamanio)
     var contador = 0
-    do{
-       celdas+= ("0000")
-         contador = contador + 1
-      }while( contador < 65536 )
+    do {
+      celdas += ("0000")
+      contador = contador + 1
+    } while (contador < 24)
   }
-  
-  def getValor(pc : String) : String = {
+
+  def getValor(pc: String): String = {
     var celda_actual = Util.hexToInteger(pc)
-    if(celda_actual< Memoria.this.tamanioMemoria())
-    {   var value = celdas(celda_actual)
-    	//pc = Util.toHex(current_cel + 1)
-    	value    }
-    else
-    	"Esta no es una celda de memoria valida!!"
+    if (celda_actual < Memoria.this.tamanioMemoria()) {
+      var value = celdas(celda_actual)
+      //pc = Util.toHex(current_cel + 1)
+      value
+    } else
+      "Esta no es una celda de memoria valida!!"
   }
-  
-  def cargarPrograma(programa: Programa, inicio:String){
-   //Quiero hacerlo de esta forma pero tengo que pensar bien las cosas
+
+  def cargarPrograma(programa: Programa, inicio: String) {
+    //Quiero hacerlo de esta forma pero tengo que pensar bien las cosas
     //programa.instrucciones.foreach(instruccion => setValor(pc, instruccion.representacionHexadecimal()))
-  
+
     var celda_inicio = Util.hexToInteger(inicio)
     val celda_fin = celda_inicio + programa.tamanioDelPrograma
-    if (celda_fin < Memoria.this.tamanioMemoria()){
-    for (x <- 0 to programa.instrucciones.size - 1){
-  	  setValorC(celda_inicio,programa.instrucciones(x).representacionHexadecimal()) }
-	   celda_inicio= celda_inicio + 1
-  	}	
+    if (celda_fin < Memoria.this.tamanioMemoria()) {
+      for (x ← 0 to programa.instrucciones.size - 1) {
+        setValorC(celda_inicio, programa.instrucciones(x).representacionHexadecimal())
+      }
+      celda_inicio = celda_inicio + 1
+    }
   }
-   
-  
+
   def setValorC(celda: Int, valor: String) =
-  {  celdas(celda) = valor }
-    
-  
+    { celdas(celda) = valor }
+
   def setValor(celda: String, valor: String) =
-  {
-    val numero_celda = Util.hexToInteger(celda)
-    celdas(numero_celda) = valor
+    {
+      val numero_celda = Util.hexToInteger(celda)
+      celdas(numero_celda) = valor
+
+    }
+
+  def show(pc: W16): String = {
+    var memoria_view = ""
+    var pcActual: W16 = pc
     
+    for (x <- pcActual.value to tamanioMemoria() - 1) {
+       // aca indico el limite de celdas por linea en el print
+       //Pasado este limite escribe en la liniea siguiente.
+      if (x % 7 == 0) {
+    	memoria_view = memoria_view + "\n"
+      }
+      // busco el valor de la celda
+      var value = getValor(pcActual.toString)
+      // Agrego la celda junto con su valor
+      memoria_view = memoria_view + s"[ $value ],"
+      // paso a la celda siguiente
+      pcActual = pcActual.+(new W16("0001"))
+    }
+    // Devuelvo la memoria armada.
+    memoria_view
   }
-  
+
 }
 
-object Testing extends App{
-  var memory = Memoria(65536)
-  var a = 0
-   memory.initialize
-  println(memory.celdas)
-   println(memory.celdas.size)
+object Testing extends App {
+  var numero = 10 % 10 
+  var memory = Memoria(14)
+  memory.initialize
+  memory.setValor("0000", "3456")
+  memory.setValor("0001", "A222")
+  memory.setValor("0002", "0004")
+  memory.setValor("0003", "8996")
+  memory.setValor("0004", "1234")
+  println(s"" + memory.show(new W16("0000")))
+  
+  //  var a = 0
+  //   memory.initialize
+  //  println(memory.celdas)
+  //   println(memory.celdas.size)
+  //  
   /*memory.cells = ArrayBuffer("1000","1200","1300","1400","1000","1200","1300","1400")
   
   var value = memory.getValue("0001")
@@ -71,7 +100,5 @@ object Testing extends App{
   memory.cells(1)= "ola"
     print("\n")
     print(memory.cells)*/
-  
-  
 
 }
