@@ -14,7 +14,7 @@ case class Memoria(var tamanio: Int) {
     do {
       celdas += ("0000")
       contador = contador + 1
-    } while (contador < 24)
+    } while (contador < tamanioMemoria())
   }
 
   def getValor(pc: String): String = {
