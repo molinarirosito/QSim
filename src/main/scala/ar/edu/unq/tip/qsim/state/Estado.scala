@@ -18,7 +18,7 @@ class Inicial(var cpu: CPU) extends Estado {
     for (x <- 0 to 7) {
       if (registros.contains("R" + x)) {
         var registro = cpu.registros(x)
-        registro.valor = registros("R" + x).asInstanceOf[String]
+      //  registro.valor = registros("R" + x).asInstanceOf[String]
         cpu.registros(x) = registro
       }
     }

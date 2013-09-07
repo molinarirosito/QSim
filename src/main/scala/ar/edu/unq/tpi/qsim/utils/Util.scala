@@ -42,6 +42,17 @@ object Util {
     to(Integer.toBinaryString(number),3)
   }
   
+   /**
+   * Representa un numero en una cadena binaria de 16 bit.
+   * 
+   * @param number: Int
+   * @return String
+   */
+  def toBinary16B(number:Int): String = 
+  {
+    to(Integer.toBinaryString(number),15)
+  }
+  
   /**
    * Representa un numero dependiendo de la funcion que se le pasa por parametro.
    * functions: toHex o toBinary 
@@ -88,15 +99,16 @@ object Util {
    }
    
     /**
-   * Transforma una cadena hexadecimal en una cadena binaria.
+   * Transforma una cadena hexadecimal en una cadena binaria de 16 bits.
    * @param number: String
    * @return String
    */
    def hexToBinary(binaryNumber:String) :String =
    {
      val value = hexToInteger(binaryNumber)
-     toBinary4B(value)
+     toBinary16B(value)
    }
+
 
 
   def IntSumToHex(number: Int): String = toHex(number)
