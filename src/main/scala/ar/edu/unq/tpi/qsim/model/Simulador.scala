@@ -14,11 +14,11 @@ case class Simulador() {
 
   def inicializarSim() {
     cpu = CPU()
-    memoria = Memoria(65536)
+    memoria = Memoria(25)
     memoria.initialize()
   }
 
-  def cargarProgramaYRegistros(programa: Programa, pc: String, registros: Map[String,Any]) {
+  def cargarProgramaYRegistros(programa: Programa, pc: String, registros: Map[String,W16]) {
     programaActual = programa
     cpu.cargarPc(pc) 
     cpu.inicializar(registros)

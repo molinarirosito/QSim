@@ -36,7 +36,7 @@ case class CPU() {
     
   }
 
-  def inicializar(registros: Map[String, Any]) {
+  def inicializar(registros: Map[String, W16]) {
     cambiarEstado(new Inicial(this))
     estado.actualizarRegistros(registros)
   }
