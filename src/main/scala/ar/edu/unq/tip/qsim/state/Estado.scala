@@ -12,7 +12,7 @@ abstract class Estado {
 class Inicial(var cpu: CPU) extends Estado {
 
   def actualizarRegistros(registros: Map[String, W16]) {
-    for (x ← 0 to 7) {
+    for (x <- 0 to 7) {
       if (registros.contains("R" + x))
     	  cpu.registros(x).valor = registros("R" + x)
        
