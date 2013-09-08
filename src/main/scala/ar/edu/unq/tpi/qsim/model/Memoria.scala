@@ -34,7 +34,7 @@ case class Memoria(var tamanio: Int) {
     var celda_inicio = Util.hexToInteger(inicio)
     val celda_fin = celda_inicio + programa.tamanioDelPrograma
     if (celda_fin < Memoria.this.tamanioMemoria()) {
-      for (x ← 0 to programa.instrucciones.size - 1) {
+      for (x <- 0 to programa.instrucciones.size - 1) {
         setValorC(celda_inicio, programa.instrucciones(x).representacionHexadecimal())
       }
       celda_inicio = celda_inicio + 1

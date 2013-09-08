@@ -38,7 +38,7 @@ case class MOV(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends I
 }
 
 
-object Testudd extends App{
+object Testuds extends App{
 
 
   val e = ADD(R1,R5)

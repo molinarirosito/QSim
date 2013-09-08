@@ -20,7 +20,7 @@ var valor : W16 = new W16("0000")
 def numero(): Int
 def representacionString() :String = "R" + numero
 override def bits() : Int = 6
-override def getValorString() : String = valor.toString
+override def getValorString() : String = ""
 def getValor() : W16 = valor
 def setValor(un_valor : W16){
   valor = un_valor
