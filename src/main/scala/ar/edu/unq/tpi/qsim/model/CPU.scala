@@ -12,7 +12,7 @@ case class CPU() {
   var v = 0
   var z = 0
   var c = 0
-  var pc = Util.toHex(0)
+  var pc = new W16("0000")
   var ir = ""
   var alu = new ALU()
   var uc = new UnidadControl(this)
@@ -20,14 +20,17 @@ case class CPU() {
   var irDecode = ""
 
   def incrementarPc() {
-    pc = Util.toHex(Util.hexToInteger(pc) + 1)
+    // observar bien la compativilidad y funcionalidad de w16() con Utils. 
+    // Ver cosas en comun y diferencias que hagan que uno sea mas utilizado que otro.
+    pc = pc.+(new W16("0001"))
   }
 
   def cambiarEstado(estadoACambiar: Estado) {
     estado = estadoACambiar
   }
+  
   def cargarPc(valor: String) {
-    pc = valor
+    pc = new W16(valor)
   }
 
   def ejecutarPrograma(programa: Programa) {

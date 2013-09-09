@@ -31,8 +31,24 @@ class W16(var hex: String) {
    val result_value = Util.toHex(this.value/w16.value)
    new W16(result_value)
   }
-  
+  def operacion_matematica(op : (Int,Int)=>Int, op1 : Int, op2 : Int)
+  {
+    println(op(op1, op2))
+    
+  }
 
+}
+
+object prueba extends App() {
+
+  var w = new W16("0001")
+  var w2 = new W16("0010")
+  
+ 
+  println(w2-w2)
+  println(w2-w)
+  w.operacion_matematica(_+_, 1, 2)
+  
 }
   
 

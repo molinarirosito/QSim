@@ -134,6 +134,6 @@ object Util {
 
 object Test extends App {
 
-  val t = Util.binary16ToHex("1111000011001010")
+  val t = Util.toInteger("FFFFFFFF")
   print(t)
 }

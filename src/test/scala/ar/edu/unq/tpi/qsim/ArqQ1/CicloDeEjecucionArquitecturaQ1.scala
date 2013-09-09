@@ -31,6 +31,8 @@ class CicloDeEjecucionArquitecturaQ1  extends FlatSpec with Matchers {
   it should "cargar un programa en la memoria desde la posicion que indica pc y actualizar los registros de cpu" in {
 	val f  = fixture
 	f.simulador.cargarProgramaYRegistros(f.programa,"0000" ,f.registrosParaActualizar)
+	f.simulador.cpu.pc should be (new W16("0000"))
+	
 	
   }
 

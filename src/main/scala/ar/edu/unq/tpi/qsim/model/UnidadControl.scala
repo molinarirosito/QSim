@@ -13,14 +13,14 @@ class UnidadControl(var cpu: CPU) {
 
   def fetch(instruccion: Instruccion) {
     cpu.cambiarEstado(new Fetch(cpu))
-    cpu.estado.actualizarRegistros(Map("ir" -> instruccion.representacionHexadecimal().asInstanceOf[Any]))
+//    cpu.estado.actualizarRegistros(Map("ir" -> instruccion.()))
     cpu.incrementarPc()
 
   }
 
   def decode(instruccion: Instruccion) {
     cpu.cambiarEstado(new Decode())
-    cpu.estado.actualizarRegistros(Map("irDecode" -> instruccion.decode().asInstanceOf[Any]))
+//    cpu.estado.actualizarRegistros(Map("irDecode" -> instruccion.decode()))
   }
 
   def execute(instruccion: Instruccion) {
@@ -31,7 +31,7 @@ class UnidadControl(var cpu: CPU) {
     // necesariamente necesitamos algo que conecte la cpu con la memoria y para eso estan los buses :D
     // aca le tiene que decir el destino de la instruccion que se actualice con el valor resultante de la operacion de la alu.
     cpu.cambiarEstado(new Execute())
-    cpu.estado.actualizarRegistros(Map("R0" -> "0009"))// el map que recibe este metodo lo saca de a alu
+   // cpu.estado.actualizarRegistros(Map("R0" -> "0009"))// el map que recibe este metodo lo saca de a alu
     
 
   }
