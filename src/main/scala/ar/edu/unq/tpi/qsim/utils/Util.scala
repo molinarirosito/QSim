@@ -2,6 +2,15 @@ package ar.edu.unq.tpi.qsim.utils
 
 object Util {
 	
+  	
+  /**
+   * Representa un numero en una cadena hexacimal de 4 digitos.
+   *
+   * @param number: Int
+   * @return String
+   */
+  def toHex4(number: Int): String = to(Integer.toHexString(number), 3).toUpperCase()
+  
   /**
    * Representa un numero en una cadena hexacimal.
    *
@@ -51,6 +60,17 @@ object Util {
   def toBinary16B(number:Int): String = 
   {
     to(Integer.toBinaryString(number),15)
+  }
+  
+  /**
+   * Representa un numero en una cadena binaria de 16 bit más uno de overflow.
+   * 
+   * @param number: Int
+   * @return String
+   */
+  def toBinary16BOverflow(number:Int): String = 
+  {
+    to(Integer.toBinaryString(number),16)
   }
   
   /**

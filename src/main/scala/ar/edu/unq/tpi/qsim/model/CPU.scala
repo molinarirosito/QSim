@@ -14,7 +14,7 @@ case class CPU() {
   var c = 0
   var pc = new W16("0000")
   var ir = ""
-  var alu = new ALU()
+  var alu = ALU
   var uc = new UnidadControl(this)
   var estado: Estado = _
   var irDecode = ""
