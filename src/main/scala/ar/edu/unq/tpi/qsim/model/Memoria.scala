@@ -30,9 +30,6 @@ case class Memoria(var tamanio: Int) {
 
 
   def cargarPrograma(programa: Programa, inicio: String) {
-    //Quiero hacerlo de esta forma pero tengo que pensar bien las cosas
-    //programa.instrucciones.foreach(instruccion => setValor(pc, instruccion.representacionHexadecimal()))
-
     var celda_inicio = Util.hexToInteger(inicio)
     val celda_fin = celda_inicio + programa.tamanioDelPrograma
     if (celda_fin < Memoria.this.tamanioMemoria()) {
