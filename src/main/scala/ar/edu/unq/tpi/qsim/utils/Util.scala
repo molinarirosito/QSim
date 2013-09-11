@@ -128,10 +128,10 @@ object Util {
      var chain_hex = ""
      var chain_binary = binaryChain
      for (x <- 0 to 3) {
-      chain_hex = binaryToHex(chain_binary.takeRight(4)) + chain_hex
+      chain_hex = binaryToHex(chain_binary.takeRight(4)) +" " + chain_hex
       chain_binary=chain_binary.dropRight(4)
     }
-     chain_hex
+     chain_hex.trim
    }
    
     /**
@@ -154,6 +154,7 @@ object Util {
 
 object Test extends App {
 
-  val t = Util.toInteger("FFFFFFFF")
-  print(t)
+  val t = Util.toInteger("FF")
+  println(t)
+  println(" hola si ".trim)
 }

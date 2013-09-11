@@ -40,7 +40,7 @@ case class Simulador() {
   
   
   def obtenerValor(modoDir : ModoDireccionamiento) : W16= modoDir match {
-    case Directo(inmediato:Inmediato) => new W16(memoria.getValor(inmediato.getValorString))
+    case Directo(inmediato:Inmediato) => memoria.getValor(inmediato.getValorString)
   	case _ => modoDir.getValor
   }
   

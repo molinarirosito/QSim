@@ -4,20 +4,20 @@ import ar.edu.unq.tpi.qsim.utils._
 
 case class Memoria(var tamanio: Int) {
 
-  var celdas: ArrayBuffer[String] = _
+  var celdas: ArrayBuffer[W16] = _
 
   def tamanioMemoria(): Int = tamanio
 
   def initialize() = {
-    celdas = new ArrayBuffer[String](tamanio)
+    celdas = new ArrayBuffer[W16](tamanio)
     var contador = 0
     do {
-      celdas += ("0000")
+      celdas += (new W16("0000"))
       contador = contador + 1
     } while (contador < tamanioMemoria())
   }
   
-  def getValor(pc: String): String = {
+  def getValor(pc: String): W16 = {
     var celda_actual = Util.hexToInteger(pc)
     if (celda_actual < Memoria.this.tamanioMemoria()) {
       var value = celdas(celda_actual)
@@ -25,6 +25,7 @@ case class Memoria(var tamanio: Int) {
       value
     } else
       "Esta no es una celda de memoria valida!!"
+      new W16("0000")
   }
 
 
@@ -36,16 +37,27 @@ case class Memoria(var tamanio: Int) {
     val celda_fin = celda_inicio + programa.tamanioDelPrograma
     if (celda_fin < Memoria.this.tamanioMemoria()) {
       for (x <- 0 to programa.instrucciones.size - 1) {
-        setValorC(celda_inicio, programa.instrucciones(x).representacionHexadecimal())
+        val instruccion_actual = programa.instrucciones(x)
+        insertarInstruccion(celda_inicio, instruccion_actual)
+        celda_inicio = celda_inicio + instruccion_actual.cantidadCeldas
       }
-      celda_inicio = celda_inicio + 1
     }
   }
 
-  def setValorC(celda: Int, valor: String) =
+  def insertarInstruccion (celda:Int, instruccion: Instruccion)  =
+  {
+    val string_split = instruccion.representacionHexadecimal().split(" ")
+    var celda_actual = celda
+    for (x <- 0 to instruccion.cantidadCeldas - 1) {
+       setValorC(celda_actual, new W16(string_split(x)))
+       celda_actual = celda_actual + 1
+      }
+    
+  }
+  def setValorC(celda: Int, valor: W16) =
     { celdas(celda) = valor }
 
-  def setValor(celda: String, valor: String) =
+  def setValor(celda: String, valor: W16) =
     {
       val numero_celda = Util.hexToInteger(celda)
       celdas(numero_celda) = valor
@@ -79,11 +91,11 @@ object Testing extends App {
   var numero = 10 % 10 
   var memory = Memoria(14)
   memory.initialize
-  memory.setValor("0000", "3456")
-  memory.setValor("0001", "A222")
-  memory.setValor("0002", "0004")
-  memory.setValor("0003", "8996")
-  memory.setValor("0004", "1234")
+  memory.setValor("0000", new W16("3456"))
+  memory.setValor("0001", new W16("A222"))
+  memory.setValor("0002", new W16("0004"))
+  memory.setValor("0003", new W16("8996"))
+  memory.setValor("0004", new W16("1234"))
   println(s"" + memory.show(new W16("0000")))
   
   //  var a = 0
