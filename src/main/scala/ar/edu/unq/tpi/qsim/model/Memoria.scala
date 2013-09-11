@@ -16,7 +16,7 @@ case class Memoria(var tamanio: Int) {
       contador = contador + 1
     } while (contador < tamanioMemoria())
   }
-
+  
   def getValor(pc: String): String = {
     var celda_actual = Util.hexToInteger(pc)
     if (celda_actual < Memoria.this.tamanioMemoria()) {
@@ -26,6 +26,7 @@ case class Memoria(var tamanio: Int) {
     } else
       "Esta no es una celda de memoria valida!!"
   }
+
 
   def cargarPrograma(programa: Programa, inicio: String) {
     //Quiero hacerlo de esta forma pero tengo que pensar bien las cosas

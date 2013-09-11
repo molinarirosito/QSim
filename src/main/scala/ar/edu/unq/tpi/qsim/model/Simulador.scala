@@ -40,16 +40,16 @@ case class Simulador() {
   
   
   def obtenerValor(modoDir : ModoDireccionamiento) : W16= modoDir match {
-    case Directo(inmediato:Inmediato) => this.obtenerValor(inmediato)
-  	case _ => modoDir.getValor    
+    case Directo(inmediato:Inmediato) => new W16(memoria.getValor(inmediato.getValorString))
+  	case _ => modoDir.getValor
   }
   
   def execute(instruccion: Instruccion)= instruccion  match {
    
-  case ADD(op1,op2) => cpu.alu.execute_add(op1.getValor,op2.getValor)
-  case MUL(op1,op2) => cpu.alu.execute_mul(op1.getValor,op2.getValor)
-  case DIV(op1,op2) => cpu.alu.execute_div(op1.getValor,op2.getValor)
-  case SUB(op1,op2) => cpu.alu.execute_sub(op1.getValor,op2.getValor)
+  case ADD(op1,op2) => cpu.alu.execute_add(obtenerValor(op1),obtenerValor(op1))
+  case MUL(op1,op2) => cpu.alu.execute_mul(obtenerValor(op1),obtenerValor(op1))
+  case DIV(op1,op2) => cpu.alu.execute_div(obtenerValor(op1),obtenerValor(op1))
+  case SUB(op1,op2) => cpu.alu.execute_sub(obtenerValor(op1),obtenerValor(op1))
   case MOV(op1:Registro,op2) => op1.setValor(obtenerValor(op2))
     
   }
