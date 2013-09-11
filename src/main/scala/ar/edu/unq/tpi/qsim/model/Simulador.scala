@@ -40,7 +40,8 @@ case class Simulador() {
   
   
   def obtenerValor(modoDir : ModoDireccionamiento) : W16= modoDir match {
-    case _ => modoDir.getValor    
+    case Directo(inmediato:Inmediato) => this.obtenerValor(inmediato)
+  	case _ => modoDir.getValor    
   }
   
   def execute(instruccion: Instruccion)= instruccion  match {
@@ -53,7 +54,9 @@ case class Simulador() {
     
   }
   
+  
 }
+
 
 object tt extends App {
   var array = ArrayBuffer[Instruccion]()

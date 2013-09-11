@@ -73,3 +73,11 @@ case class Inmediato (valor : W16) extends ModoDireccionamiento{
   def codigo() :String  = "000000"
  // override def bits() : Int = this.toBinaryString.size - 1
 }
+
+case class Directo (inmediato : Inmediato) extends ModoDireccionamiento{
+  def getValor() : W16 = inmediato.getValor
+  override def getValorString() : String = inmediato.getValorString
+  def representacionString() :String = "[" + inmediato.representacionString + "]"
+  def codigo() :String  = "000000"
+ // override def bits() : Int = this.toBinaryString.size - 1
+}
