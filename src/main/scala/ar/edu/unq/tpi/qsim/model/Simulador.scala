@@ -11,7 +11,7 @@ case class Simulador() {
   var cpu: CPU = _
   var memoria: Memoria = _
   var programaActual : Programa = _
-  var instruccionActual: Instruccion_DosOperandos = _
+  var instruccionActual: Instruccion = _
 
   def inicializarSim() {
     println("--------INIT------")
@@ -40,7 +40,7 @@ case class Simulador() {
    println("Finalizo la ejecucion") 
   }
   
-  def buscarInstruccion(): Instruccion_DosOperandos = 
+  def buscarInstruccion(): Instruccion = 
   {
 	 programaActual.obtenerInstruccion()
   }
@@ -67,6 +67,10 @@ case class Simulador() {
   	 case _ => modoDir.getValor
   }
 
+  def execute_instruccionDosOperandos() = {
+    
+    
+  }
   
   def execute_instruccion_matematica() : W16 = {
     println("--------INSTRUCCION PARA ALU------")
@@ -89,7 +93,7 @@ case class Simulador() {
      case _ => resultado = execute_instruccion_matematica()
 	 }   
     println("Ejecuta la instruccion!!!")
-    store(instruccionActual.destino, resultado)
+   // store(instruccionActual.destino, resultado)
   }
   
   def store(modoDir :ModoDireccionamiento, un_valor : W16) = modoDir match {
@@ -102,7 +106,7 @@ case class Simulador() {
 }
 
 object tt extends App {
-  var array = ArrayBuffer[Instruccion_DosOperandos]()
+  var array = ArrayBuffer[Instruccion]()
   array += (SUB(R1, R4))
   var programa = Programa(array)
 //  var sim = Simulador(programa)

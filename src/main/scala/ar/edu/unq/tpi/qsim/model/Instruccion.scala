@@ -3,7 +3,7 @@ import ar.edu.unq.tpi.qsim.utils._
 
 abstract class Instruccion(val codigoDeOperacion: String, var operacion: String)
 {
-  
+
   def representacionHexadecimal() : String
   def decode() : String = this.toString 
   def tamanioHex() : Int = this.representacionHexadecimal.replace(" ", "").size

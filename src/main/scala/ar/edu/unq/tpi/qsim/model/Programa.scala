@@ -3,7 +3,7 @@ package ar.edu.unq.tpi.qsim.model
 import scala.collection.mutable.Buffer
 import scala.collection.mutable.ArrayBuffer
 
-case class Programa(var instrucciones:ArrayBuffer[Instruccion_DosOperandos]) {
+case class Programa(var instrucciones:ArrayBuffer[Instruccion]) {
   
 var indice = 0
 
@@ -14,7 +14,7 @@ def actualizarIndice(){
   indice = indice + 1
 }
 
-def obtenerInstruccion():Instruccion_DosOperandos = {
+def obtenerInstruccion():Instruccion = {
   var siguienteInstruccion = instrucciones(indice)
   actualizarIndice()
   siguienteInstruccion
