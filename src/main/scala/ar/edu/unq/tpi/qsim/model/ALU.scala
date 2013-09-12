@@ -10,10 +10,11 @@ object ALU {
     val n = actualizarNegative(valor)
     val z = actualizarZero(valor)
     val c = actualizarCarryBorrow(resultado_binario, valor)
-    val o = actualizarOverflow(resultado_binario, op1, op2)
+    val v = actualizarOverflow(resultado_binario, op1, op2)
     
     val resultado = new W16(Util.toHex4(valor.abs))
-    Map(("resultado",resultado),("n",n),("z",z),("c",c),("o",o))
+    Map(("resultado",resultado),("n",n),("z",z),("c",c),("v",v))
+    
   }
   
   def execute_add(op1: W16, op2: W16 ) : Map[String,Any] = {

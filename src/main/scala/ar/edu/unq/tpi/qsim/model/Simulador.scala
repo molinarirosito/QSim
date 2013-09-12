@@ -66,17 +66,34 @@ case class Simulador() {
   	 case Directo(inmediato:Inmediato) => memoria.getValor(inmediato.getValorString())
   	 case _ => modoDir.getValor
   }
+
+  
+  def execute_instruccion_matematica() : W16 = {
+    println("--------INSTRUCCION PARA ALU------")
+    var resultado : Map[String,Any] = Map[String, Any](("", ""))
+    instruccionActual match {
+	 case ADD(op1,op2) => resultado = ALU.execute_add(obtenerValor(op1),obtenerValor(op2))
+	 case MUL(op1,op2) => resultado = ALU.execute_mul(obtenerValor(op1),obtenerValor(op2))
+	 case DIV(op1,op2) => resultado = ALU.execute_div(obtenerValor(op1),obtenerValor(op2))
+	 case SUB(op1,op2) => resultado = ALU.execute_sub(obtenerValor(op1),obtenerValor(op2))
+	 }
+    cpu.actualizarFlags(resultado)
+    resultado("resultado").asInstanceOf[W16]
+  }
   
   def execute() {
     println("-------------EXECUTE---------")
-	 instruccionActual match {
-	 case ADD(op1,op2) => cpu.alu.execute_add(op1.getValor,op2.getValor)
-	 case MUL(op1,op2) => cpu.alu.execute_mul(op1.getValor,op2.getValor)
-	 case DIV(op1,op2) => cpu.alu.execute_div(op1.getValor,op2.getValor)
-	 case SUB(op1,op2) => cpu.alu.execute_sub(op1.getValor,op2.getValor)
+    instruccionActual match {
      case MOV(op1:Registro,op2) => op1.setValor(obtenerValor(op2))
+     case _ => execute_instruccion_matematica()
 	 }   
+    
     println("Ejecuta la instruccion!!!")
+  }
+  
+  def store(modoDir :ModoDireccionamiento, un_valor : W16) = modoDir match {
+  	 case Directo(inmediato:Inmediato) => memoria.setValor(inmediato.getValorString(),un_valor)
+  	 case r: Registro => r.valor=un_valor
   }
 
   

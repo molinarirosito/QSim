@@ -69,7 +69,7 @@ object Util {
    */
   def toBinary16BOverflow(number:Int): String = 
   {
-    to(Integer.toBinaryString(number),16)
+    to(Integer.toBinaryString(number),16).takeRight(17)
   }
   
   /**

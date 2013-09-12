@@ -32,11 +32,18 @@ case class CPU() {
   }
 
   def actualizarRegistros(registrosAct: Map[String, W16]) {
-    for (x ← 0 to 7) {
+    for (x <- 0 to 7) {
       if (registrosAct.contains(s"R$x")) {
         this.registros(x).setValor(registrosAct(s"R$x"))
       }
     }
+  }
+
+def actualizarFlags(flags: Map[String, Any]) {
+    v = flags("v").asInstanceOf[Int]
+    z = flags("z").asInstanceOf[Int]
+    c = flags("c").asInstanceOf[Int]
+    n = flags("n").asInstanceOf[Int]
   }
 }
 
