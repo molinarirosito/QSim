@@ -6,44 +6,38 @@ import ar.edu.unq.tip.qsim.state.Estado
 import ar.edu.unq.tip.qsim.state.Inicial
 
 case class CPU() {
-
+	// VER SI VAMOS A MODELAR EL ESTADO O NO DE LA CPU
   var registros = ArrayBuffer[Registro](R0, R1, R2, R3, R4, R5, R6, R7)
+  var pc = new W16("0000")
+  var ir = ""
+  var alu = ALU
+
   var n = 0
   var v = 0
   var z = 0
   var c = 0
-  var pc = new W16("0000")
-  var ir = ""
-  var alu = ALU
-  var uc = new UnidadControl(this)
-  var estado: Estado = _
-  var irDecode = ""
-
-  def incrementarPc() {
-    // observar bien la compativilidad y funcionalidad de w16() con Utils. 
-    // Ver cosas en comun y diferencias que hagan que uno sea mas utilizado que otro.
-    pc = pc.+(new W16("0001"))
-  }
-
-  def cambiarEstado(estadoACambiar: Estado) {
-    estado = estadoACambiar
-  }
   
+  def registro(registroString:String) = registros.find(_.representacionString == registroString)
+
+  def incrementarPc(cantidad: Int) = {
+      println("se incrementa!!")
+      pc.++(cantidad)
+    }
+
   def cargarPc(valor: String) {
+    //esperar que Tati cambie lo de w16
+    println("valor a cargar" + valor)
     pc = new W16(valor)
+    println("valor cargado" + pc.toString)
   }
 
-  def ejecutarPrograma(programa: Programa) {
-    var instrucciones = programa.instrucciones
-    instrucciones.foreach(instruccion => uc.ejecutarCicloInstruccion(instruccion))		
-    
+  def actualizarRegistros(registrosAct: Map[String, W16]) {
+    for (x ← 0 to 7) {
+      if (registrosAct.contains(s"R$x")) {
+        this.registros(x).setValor(registrosAct(s"R$x"))
+      }
+    }
   }
-
-  def inicializar(registros: Map[String, W16]) {
-    cambiarEstado(new Inicial(this))
-    estado.actualizarRegistros(registros)
-  }
-
 }
 
 object pur extends App() {

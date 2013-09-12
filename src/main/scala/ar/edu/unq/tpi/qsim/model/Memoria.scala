@@ -9,10 +9,10 @@ case class Memoria(var tamanio: Int) {
   def tamanioMemoria(): Int = tamanio
 
   def initialize() = {
-    celdas = new ArrayBuffer[W16](tamanio)
+    celdas = new ArrayBuffer[W16]()
     var contador = 0
     do {
-      celdas += (new W16("0000"))
+      celdas.append(new W16("0000"))
       contador = contador + 1
     } while (contador < tamanioMemoria())
   }
@@ -21,14 +21,15 @@ case class Memoria(var tamanio: Int) {
     var celda_actual = Util.hexToInteger(pc)
     if (celda_actual < Memoria.this.tamanioMemoria()) {
       var value = celdas(celda_actual)
-      //pc = Util.toHex(current_cel + 1)
       value
-    } else
-      "Esta no es una celda de memoria valida!!"
+    } else{
+      println("Esta no es una celda de memoria valida!!")
       new W16("0000")
+      }
   }
+    
 
-
+  
   def cargarPrograma(programa: Programa, inicio: String) {
     var celda_inicio = Util.hexToInteger(inicio)
     val celda_fin = celda_inicio + programa.tamanioDelPrograma
@@ -43,16 +44,15 @@ case class Memoria(var tamanio: Int) {
 
   def insertarInstruccion (celda:Int, instruccion: Instruccion)  =
   {
-    val string_split = instruccion.representacionHexadecimal().split(" ")
+    var string_split = instruccion.representacionHexadecimal().split(" ")
     var celda_actual = celda
     for (x <- 0 to instruccion.cantidadCeldas - 1) {
        setValorC(celda_actual, new W16(string_split(x)))
        celda_actual = celda_actual + 1
       }
-    
   }
-  def setValorC(celda: Int, valor: W16) =
-    { celdas(celda) = valor }
+  
+  def setValorC(celda: Int,dato: W16) = celdas(celda) = dato
 
   def setValor(celda: String, valor: W16) =
     {
@@ -61,24 +61,19 @@ case class Memoria(var tamanio: Int) {
 
     }
 
-  def show(pc: W16): String = {
+  def show(pc: String): String = {
     var memoria_view = ""
-    var pcActual: W16 = pc
+    var pcActual :Int = Util.toInteger(pc)
     
-    for (x <- pcActual.value to tamanioMemoria() - 1) {
-       // aca indico el limite de celdas por linea en el print
-       //Pasado este limite escribe en la liniea siguiente.
+    for (x <- pcActual to tamanioMemoria() - 1) {
+
       if (x % 7 == 0) {
     	memoria_view = memoria_view + "\n"
       }
-      // busco el valor de la celda
-      var value = getValor(pcActual.toString)
-      // Agrego la celda junto con su valor
+      var value = getValor(Util.toHex(pcActual))
       memoria_view = memoria_view + s"[ $value ],"
-      // paso a la celda siguiente
-      pcActual = pcActual.+(new W16("0001"))
+      pcActual = pcActual + 1
     }
-    // Devuelvo la memoria armada.
     memoria_view
   }
 
@@ -88,11 +83,21 @@ object Testing extends App {
   var numero = 10 % 10 
   var memory = Memoria(14)
   memory.initialize
-  memory.setValor("0000", new W16("3456"))
-  memory.setValor("0001", new W16("A222"))
-  memory.setValor("0002", new W16("0004"))
-  memory.setValor("0003", new W16("8996"))
-  memory.setValor("0004", new W16("1234"))
-  println(s"" + memory.show(new W16("0000")))
+  //var string = "2354 4567 0000"
+  //var prueba = string.split(" ")
+  //println(prueba.toList.toString())
+  
+  memory.setValorC(0, new W16("3456"))
+  memory.setValorC(1, new W16("3456"))
+  memory.setValorC(2, new W16("3456"))
+  memory.setValorC(3, new W16("3456"))
+  println(memory.celdas)
+  //println(memory.celdas(0))
+  //println(memory.getValor("0000"))
+  //memory.setValorC(1, new W16("A222"))
+  //memory.setValorC(2, new W16("0004"))
+  //memory.setValorC(3, new W16("8996"))
+  //memory.setValorC(4, new W16("1234"))
+  println(s"" + memory.show("0000"))
   
 }

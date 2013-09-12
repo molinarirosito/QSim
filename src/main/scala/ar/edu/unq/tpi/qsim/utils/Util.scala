@@ -1,7 +1,6 @@
 package ar.edu.unq.tpi.qsim.utils
 
 object Util {
-	
   	
   /**
    * Representa un numero en una cadena hexacimal de 4 digitos.
@@ -63,7 +62,7 @@ object Util {
   }
   
   /**
-   * Representa un numero en una cadena binaria de 16 bit más uno de overflow.
+   * Representa un numero en una cadena binaria de 16 bit mas uno de overflow.
    * 
    * @param number: Int
    * @return String
@@ -128,7 +127,8 @@ object Util {
      var chain_hex = ""
      var chain_binary = binaryChain
      for (x <- 0 to 3) {
-      chain_hex = binaryToHex(chain_binary.takeRight(4)) +" " + chain_hex
+      // saque el espacio entre los numeros 
+      chain_hex = binaryToHex(chain_binary.takeRight(4)) + chain_hex
       chain_binary=chain_binary.dropRight(4)
     }
      chain_hex.trim
@@ -154,7 +154,6 @@ object Util {
 
 object Test extends App {
 
-  val t = Util.toInteger("FF")
+  val t = Util.binary16ToHex("0010100000000000")
   println(t)
-  println(" hola si ".trim)
 }

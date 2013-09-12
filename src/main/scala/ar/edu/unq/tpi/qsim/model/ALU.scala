@@ -3,12 +3,10 @@ import ar.edu.unq.tpi.qsim.utils.Util
 
 object ALU {
   
-  
-  
   def execute_operacion_matematica(operacion:(Int,Int)=>Int,op1: W16, op2: W16 ) : Map[String,Any] = {
+   
     val valor = operacion(op1.value,op2.value)
     val resultado_binario = Util.toBinary16BOverflow(valor)
-    
     val n = actualizarNegative(valor)
     val z = actualizarZero(valor)
     val c = actualizarCarryBorrow(resultado_binario, valor)

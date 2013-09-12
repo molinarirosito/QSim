@@ -6,11 +6,11 @@ import ar.edu.unq.tpi.qsim.utils.Util
 class W16(var hex: String) {
   
   override def toString() =  this.hex
-  def equals(w16:W16): Boolean =  this.value == w16.value 
+  def equals(w16:W16): Boolean =  this.value == w16.value
   def value : Int = Util.toInteger(this.hex)
   def toBinary: String = Util.hexToBinary(this.hex)
-  def ++ = hex=Util.toHex(this.value + 1)
-  def ++(salto:Int) = hex=Util.toHex(this.value + salto)
+  def ++ = hex = Util.toHex4(this.value + 1)
+  def ++(salto:Int) = hex= Util.toHex4(this.value + salto)
   
   def +(w16 : W16) :W16 = {
    val result_value = Util.toHex(this.value+w16.value)
