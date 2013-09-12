@@ -27,13 +27,13 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   
   def inmediate = "0x" ~> numericLit ^^ {case direction => Inmediato(new W16(direction))}
   
-  //def directionDirect = "[" ~> direction <~ "]" ^^ {case direction => DirectionDirect(direction)}
+  def direct = "[" ~> inmediate <~ "]" ^^ {case direction => Directo(direction)}
   
   //def directionIndirect = "[" ~>directionDirect  <~ "]" ^^ {case direction => DirectionIndirect(direction)}
   
-  def directionable = register | inmediate //directionDirect | directionIndirect
+  def directionable = register | inmediate | direct //directionDirect | directionIndirect
   
-  def asignable = register
+  def asignable = register | direct
 
   //operacion
   def instruccions2 = "MOV" | "SUB" | "DIV" | "ADD" | "MUL"
