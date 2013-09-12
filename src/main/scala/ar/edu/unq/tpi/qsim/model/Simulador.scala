@@ -70,7 +70,7 @@ case class Simulador() {
   
   def execute_instruccion_matematica() : W16 = {
     println("--------INSTRUCCION PARA ALU------")
-    var resultado : Map[String,Any] = Map[String, Any](("", ""))
+    var resultado : Map[String,Any] = null
     instruccionActual match {
 	 case ADD(op1,op2) => resultado = ALU.execute_add(obtenerValor(op1),obtenerValor(op2))
 	 case MUL(op1,op2) => resultado = ALU.execute_mul(obtenerValor(op1),obtenerValor(op2))
@@ -83,17 +83,19 @@ case class Simulador() {
   
   def execute() {
     println("-------------EXECUTE---------")
+    var resultado : W16 = null
     instruccionActual match {
-     case MOV(op1:Registro,op2) => op1.setValor(obtenerValor(op2))
-     case _ => execute_instruccion_matematica()
+     case MOV(op1,op2) => resultado = obtenerValor(op2)
+     case _ => resultado = execute_instruccion_matematica()
 	 }   
-    
     println("Ejecuta la instruccion!!!")
+    store(instruccionActual.destino, resultado)
   }
   
   def store(modoDir :ModoDireccionamiento, un_valor : W16) = modoDir match {
   	 case Directo(inmediato:Inmediato) => memoria.setValor(inmediato.getValorString(),un_valor)
   	 case r: Registro => r.valor=un_valor
+  	 println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
   }
 
   

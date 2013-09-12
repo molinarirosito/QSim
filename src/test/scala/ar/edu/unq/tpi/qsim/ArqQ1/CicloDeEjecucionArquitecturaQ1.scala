@@ -29,7 +29,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
       var instrucciones = new ArrayBuffer[Instruccion]()
       instrucciones.append(ADD(R0, new Inmediato("0002")), MUL(R4, new Inmediato("0001")),
         SUB(R5, new Inmediato("000A")), MOV(R5, new Inmediato("0005")),
-        MOV(R2, R3), ADD(R1, R7))
+        MOV(R2, R3), ADD(R1, R7), MOV(new Directo(new Inmediato("0005")),R5))
 
       var programa = new Programa(instrucciones)
       var registrosParaActualizar = Map[String, W16](("R5", "0010"), ("R0", "0010"), ("R2", "9800"),
@@ -72,6 +72,8 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var spc = simuladorConProgramaCargado
     var pcAnteriorAEjecucion = spc.simulador.cpu.pc
     spc.simulador.ejecucion()
-    assert(pcAnteriorAEjecucion.equals(new W16("000A")))
+    assert(pcAnteriorAEjecucion.equals(new W16("000C")))
+    println(spc.simulador.memoria.show("0000"))
+    println(spc.simulador.cpu.registros)
   }
 }
