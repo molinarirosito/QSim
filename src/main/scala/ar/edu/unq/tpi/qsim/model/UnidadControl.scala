@@ -6,24 +6,24 @@ import ar.edu.unq.tip.qsim.state.Execute
 
 class UnidadControl(var cpu: CPU) {
 
-  def ejecutarCicloInstruccion(instruccion: Instruccion) {
+  def ejecutarCicloInstruccion(instruccion: Instruccion_DosOperandos) {
     fetch(instruccion)
     decode(instruccion)
   }
 
-  def fetch(instruccion: Instruccion) {
+  def fetch(instruccion: Instruccion_DosOperandos) {
  //   cpu.cambiarEstado(new Fetch(cpu))
 //    cpu.estado.actualizarRegistros(Map("ir" -> instruccion.()))
     //cpu.incrementarPc()
 
   }
 
-  def decode(instruccion: Instruccion) {
+  def decode(instruccion: Instruccion_DosOperandos) {
   //  cpu.cambiarEstado(new Decode())
 //    cpu.estado.actualizarRegistros(Map("irDecode" -> instruccion.decode()))
   }
 
-  def execute(instruccion: Instruccion) {
+  def execute(instruccion: Instruccion_DosOperandos) {
     if(!(instruccion.operacion.equals("MOV"))){
     	// llamar a la alu para que realice la operacion
     } 

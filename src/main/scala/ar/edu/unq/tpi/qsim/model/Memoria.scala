@@ -42,7 +42,7 @@ case class Memoria(var tamanio: Int) {
     }
   }
 
-  def insertarInstruccion (celda:Int, instruccion: Instruccion)  =
+  def insertarInstruccion (celda:Int, instruccion: Instruccion_DosOperandos)  =
   {
     var string_split = instruccion.representacionHexadecimal().split(" ")
     var celda_actual = celda

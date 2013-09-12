@@ -11,6 +11,7 @@ class W16(var hex: String) {
   def toBinary: String = Util.hexToBinary(this.hex)
   def ++ = hex = Util.toHex4(this.value + 1)
   def ++(salto:Int) = hex= Util.toHex4(this.value + salto)
+  def --(salto:Int) = hex= Util.toHex4(this.value -1)
   
   def :=(w16 : String) = hex = w16
   

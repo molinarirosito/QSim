@@ -41,7 +41,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   //def instruccions1 = "Jump"  
 
   def instruction2 = instruccions2 ~ asignable ~ ("," ~> directionable <~";") ^^
-    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento],classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento],classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
 //  def instruction1 = instruccions1 ~ (asignable <~";") ^^
 //    { case ins ~ dir1 => Class.forName(s"parser.$ins").getConstructor(classOf[Directionable]).newInstance(dir1).asInstanceOf[Instruction] }

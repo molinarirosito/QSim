@@ -11,7 +11,7 @@ case class Simulador() {
   var cpu: CPU = _
   var memoria: Memoria = _
   var programaActual : Programa = _
-  var instruccionActual: Instruccion = _
+  var instruccionActual: Instruccion_DosOperandos = _
 
   def inicializarSim() {
     println("--------INIT------")
@@ -40,7 +40,7 @@ case class Simulador() {
    println("Finalizo la ejecucion") 
   }
   
-  def buscarInstruccion(): Instruccion = 
+  def buscarInstruccion(): Instruccion_DosOperandos = 
   {
 	 programaActual.obtenerInstruccion()
   }
@@ -102,7 +102,7 @@ case class Simulador() {
 }
 
 object tt extends App {
-  var array = ArrayBuffer[Instruccion]()
+  var array = ArrayBuffer[Instruccion_DosOperandos]()
   array += (SUB(R1, R4))
   var programa = Programa(array)
 //  var sim = Simulador(programa)
