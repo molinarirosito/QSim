@@ -25,12 +25,39 @@ case class Simulador() {
     memoria.cargarPrograma(programaActual, pc)
   }
 
-  def fetch(instruccion: Instruccion){
+  def buscarInstruccion(): Instruccion = 
+  {
+	 programaActual.obtenerInstruccion()
+  }
+ 	
+def fetch(){
+  instruccionActual = buscarInstruccion()  
+  val instruccion_fech = instruccionActual.representacionHexadecimal
+  cpu.incrementarPc
+  cpu.ir= instruccion_fech  
     
+} 
+  
+def decode() : String =
+{
+  instruccionActual.toString    
+}
+  
+def execute() {
+  (ojo esto no se si funciona)
+  instruccionActual match {
+  case ADD(op1,op2) => cpu.alu.execute_add(op1.getValor,op2.getValor)
+  case MUL(op1,op2) => cpu.alu.execute_mul(op1.getValor,op2.getValor)
+  case DIV(op1,op2) => cpu.alu.execute_div(op1.getValor,op2.getValor)
+  case SUB(op1,op2) => cpu.alu.execute_sub(op1.getValor,op2.getValor)
+  case MOV(op1:Registro,op2) => op1.setValor(obtenerValor(op2))
+  }   
+}
+
+  def fetch(instruccion: Instruccion){
 	  val instruccion_fech = instruccion.representacionHexadecimal
 	  cpu.incrementarPc
 	  cpu.ir= instruccion_fech  
-    
   }
   
   def decode(instruccion: Instruccion) : String =
@@ -53,11 +80,7 @@ case class Simulador() {
   case MOV(op1:Registro,op2) => op1.setValor(obtenerValor(op2))
     
   }
-  
-  
 }
-
-
 object tt extends App {
   var array = ArrayBuffer[Instruccion]()
   array += (SUB(R1, R4))

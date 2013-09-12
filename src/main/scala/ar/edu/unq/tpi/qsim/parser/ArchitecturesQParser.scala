@@ -12,7 +12,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   type Tokens = StdTokens
   val lexical = new StdLexical
   lexical.reserved ++= List("MOV", "SUB", "ADD", "DIV", "MUL", "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7")
-  lexical.delimiters ++= List(",", ";", "[",  "]")
+  lexical.delimiters ++= List(",", ";", "[",  "]","0x")
   
   def registers = "R0" ^^^ R0 |    
   				  "R1" ^^^ R1 | 
@@ -25,7 +25,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   
   def register = registers //^^ { case id => Class.forName(s"ar.edu.unq.tpi.qsim.parser.$id").newInstance().asInstanceOf[R] }
   
-  def inmediate = numericLit ^^ {case direction => Inmediato(new W16(direction))}
+  def inmediate = "0x" ~> numericLit ^^ {case direction => Inmediato(new W16(direction))}
   
   //def directionDirect = "[" ~> direction <~ "]" ^^ {case direction => DirectionDirect(direction)}
   

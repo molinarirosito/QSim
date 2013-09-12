@@ -1,6 +1,6 @@
 package ar.edu.unq.tpi.qsim.model
 import scala.collection.mutable.ArrayBuffer
-import ar.edu.unq.tpi.qsim.utils._
+import ar.edu.unq.tpi.qsim.utils.Util
 
 case class Memoria(var tamanio: Int) {
 
@@ -95,20 +95,4 @@ object Testing extends App {
   memory.setValor("0004", new W16("1234"))
   println(s"" + memory.show(new W16("0000")))
   
-  //  var a = 0
-  //   memory.initialize
-  //  println(memory.celdas)
-  //   println(memory.celdas.size)
-  //  
-  /*memory.cells = ArrayBuffer("1000","1200","1300","1400","1000","1200","1300","1400")
-  
-  var value = memory.getValue("0001")
-  print("el valor es" )
-  print("\n")
-  print(value)
-  value = memory.getValue("0002")
-  memory.cells(1)= "ola"
-    print("\n")
-    print(memory.cells)*/
-
 }
