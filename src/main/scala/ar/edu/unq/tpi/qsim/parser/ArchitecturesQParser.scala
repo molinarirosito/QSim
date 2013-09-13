@@ -12,7 +12,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   type Tokens = StdTokens
   val lexical = new StdLexical
   lexical.reserved ++= List("MOV", "SUB", "ADD", "DIV", "MUL", "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7")
-  lexical.delimiters ++= List(",", ";", "[",  "]","0x")
+  lexical.delimiters ++= List(",", "[",  "]","0x")
   
   def registers = "R0" ^^^ R0 |    
   				  "R1" ^^^ R1 | 
@@ -52,7 +52,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   def instruction0 = instruccions0 ^^
     { case ins => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
   
-  def instructions = instruction0 | instruction1 | instruction2
+  def instructions = instruction2 //instruction0 | instruction1 | 
   
   def program = rep(instructions) ^^ {case instructions => Programa(ArrayBuffer()++instructions)}
 
@@ -62,11 +62,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
 object QuarqExample extends App with ArchitecturesQParser {
 
   val theCode = """
-		MOV R1, R2;				
-	    SUB R2, 0x0023;
-	    ADD R0, 0x0255;
-	    DIV R3, R0;	 
-	    DIV R3, R0;	 
+		SUB R2, 0x0023  
     """
 
   parse(theCode) match {
