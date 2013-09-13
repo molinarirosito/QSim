@@ -17,6 +17,28 @@ case class Memoria(var tamanio: Int) {
     } while (contador < tamanioMemoria())
   }
   
+  def getValor(pc: Int): W16 = {
+    var celda_actual = pc
+    if (celda_actual < Memoria.this.tamanioMemoria()) {
+      var value = celdas(celda_actual)
+      value
+    } else{
+      println("Esta no es una celda de memoria valida!!")
+      null
+      }
+  }
+  
+  def getValor(pc: W16): W16 = {
+    var celda_actual = Util.hexToInteger(pc.hex)
+    if (celda_actual < Memoria.this.tamanioMemoria()) {
+      var value = celdas(celda_actual)
+      value
+    } else{
+      println("Esta no es una celda de memoria valida!!")
+      null
+      }
+  }
+  
   def getValor(pc: String): W16 = {
     var celda_actual = Util.hexToInteger(pc)
     if (celda_actual < Memoria.this.tamanioMemoria()) {

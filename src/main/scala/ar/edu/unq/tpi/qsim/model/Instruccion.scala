@@ -53,7 +53,7 @@ class Instruccion_DosOperandos(codigoDeOperacion: String, operacion: String, var
 
 case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1011","CALL",orig, "000000"){}
 
-case class RET() extends Instruccion_SinOperandos("1011","RET", "000000000000"){}
+case class RET() extends Instruccion_SinOperandos("1100","RET", "000000000000"){}
 
 case class MUL(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0000","MUL",dest,orig){}
 

@@ -45,6 +45,19 @@ case class Simulador() {
       programaActual.obtenerInstruccion()
     }
 
+  def obtenerProximaInstruccionBinario() : String =
+  {
+    val int_pc = cpu.pc.value
+    memoria.getValor(int_pc).toBinary + memoria.getValor(int_pc+1).toBinary + memoria.getValor(int_pc+2).toBinary    
+  }
+ 
+  
+  def new_fech(){
+    
+    
+    
+  }
+  
   def fetch() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
@@ -64,8 +77,8 @@ case class Simulador() {
     }
 
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
-    case Directo(inmediato: Inmediato) ⇒ memoria.getValor(inmediato.getValorString())
-    case _ ⇒ modoDir.getValor
+    case Directo(inmediato: Inmediato)=> memoria.getValor(inmediato.getValorString())
+    case _ => modoDir.getValor
   }
 
   def execute_instruccionDosOperandos() = {
@@ -76,10 +89,10 @@ case class Simulador() {
     println("--------INSTRUCCION PARA ALU------")
     var resultado: Map[String, Any] = null
     instruccionActual match {
-      case ADD(op1, op2) ⇒ resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
-      case MUL(op1, op2) ⇒ resultado = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
-      case DIV(op1, op2) ⇒ resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
-      case SUB(op1, op2) ⇒ resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
+      case ADD(op1, op2) => resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
+      case MUL(op1, op2) => resultado = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
+      case DIV(op1, op2) => resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
+      case SUB(op1, op2) => resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
     }
     cpu.actualizarFlags(resultado)
     resultado("resultado").asInstanceOf[W16]
