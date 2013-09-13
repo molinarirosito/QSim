@@ -9,7 +9,7 @@ case class CPU() {
 	// VER SI VAMOS A MODELAR EL ESTADO O NO DE LA CPU
   var registros = ArrayBuffer[Registro](R0, R1, R2, R3, R4, R5, R6, R7)
   var pc = new W16("0000")
-  var sp = new W16("FFFF")
+  var sp = new W16("FFEF")
   var ir = ""
   var alu = ALU
 
