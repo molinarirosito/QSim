@@ -23,7 +23,7 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   				  "R6" ^^^ R6 | 
   				  "R7" ^^^ R7
   
-  def register = registers //^^ { case id => Class.forName(s"ar.edu.unq.tpi.qsim.parser.$id").newInstance().asInstanceOf[R] }
+  def register = registers 
   
   def inmediate = "0x" ~> numericLit ^^ {case direction => Inmediato(new W16(direction))}
   
@@ -31,22 +31,30 @@ trait ArchitecturesQParser extends StdTokenParsers  with ImplicitConversions {
   
   //def directionIndirect = "[" ~>directionDirect  <~ "]" ^^ {case direction => DirectionIndirect(direction)}
   
-  def directionable = register | inmediate | direct //directionDirect | directionIndirect
+  def directionable = register | inmediate | direct 
   
   def asignable = register | direct
 
-  //operacion
-  def instruccions2 = "MOV" | "SUB" | "DIV" | "ADD" | "MUL"
+  //operaciones
+  def instruccions2 = "MOV" | "SUB" | "DIV" | "ADD" | "MUL" 
   
-  //def instruccions1 = "Jump"  
+  def instruccions1 = "CALL"
+    
+  def instruccions0 = "RET"
+    
 
-  def instruction2 = instruccions2 ~ asignable ~ ("," ~> directionable <~";") ^^
+  def instruction2 = instruccions2 ~ asignable ~ ("," ~> directionable ) ^^
     { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento],classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
-//  def instruction1 = instruccions1 ~ (asignable <~";") ^^
-//    { case ins ~ dir1 => Class.forName(s"parser.$ins").getConstructor(classOf[Directionable]).newInstance(dir1).asInstanceOf[Instruction] }
+  def instruction1 = instruccions1 ~ asignable  ^^
+    { case ins ~ dir1 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir1).asInstanceOf[Instruccion_UnOperando] }
   
-  def program = rep(instruction2) ^^ {case instructions => Programa(ArrayBuffer()++instructions)}
+  def instruction0 = instruccions0 ^^
+    { case ins => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
+  
+  def instructions = instruction0 | instruction1 | instruction2
+  
+  def program = rep(instructions) ^^ {case instructions => Programa(ArrayBuffer()++instructions)}
 
   def parse(input: String) = phrase(program)(new lexical.Scanner(input))
 }
@@ -55,8 +63,8 @@ object QuarqExample extends App with ArchitecturesQParser {
 
   val theCode = """
 		MOV R1, R2;				
-	    SUB R2, 0023;
-	    ADD R0, 0255;
+	    SUB R2, 0x0023;
+	    ADD R0, 0x0255;
 	    DIV R3, R0;	 
 	    DIV R3, R0;	 
     """
