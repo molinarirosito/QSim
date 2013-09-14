@@ -26,7 +26,7 @@ object Ensamblador {
    {
      var bits_primerOperando = cadena_binaria.substring(0, 6) + cadena_binaria.substring(12, 29)
      primer_operando = ensamblar_operando(bits_primerOperando)
-     bits_segundoOperando = cadena_binaria.substring(6, 13) + cadena_binaria.takeRight(16)
+     bits_segundoOperando = cadena_binaria.substring(6, 12) + cadena_binaria.takeRight(16)
    }
    segundo_operando = ensamblar_operando(bits_segundoOperando)
     Map(("op1",primer_operando),("op2",segundo_operando))
@@ -35,9 +35,9 @@ object Ensamblador {
   
   
   def ensamblar_operando(cadena_binaria : String): ModoDireccionamiento = {
-    println(cadena_binaria)
+ //   println(cadena_binaria)
    val code_modo =  cadena_binaria.substring(0, 6)
-   var resto =  cadena_binaria.takeRight(cadena_binaria.size - 7)
+   var resto =  cadena_binaria.takeRight(cadena_binaria.size - 6) 
    if(resto.size>16) {resto = Util.binary16ToHex(resto.substring(0, 16))}
    else {resto = Util.binary16ToHex(resto.takeRight(16))}
 
@@ -61,17 +61,24 @@ object Ensamblador {
     resultado
   }
   
+  def construir_instruccionDosOperandos(constructor:(ModoDireccionamiento,ModoDireccionamiento)=>Instruccion,map : Map[String,ModoDireccionamiento] ) : Instruccion = {
+    val op1 = map("op1")
+    val op2 = map("op2")
+    constructor(op1,op2)    
+  }
+  
   def ensamblarInstruccion(cadena_binaria : String): Instruccion = {
     val bits : String =  cadena_binaria.substring(0, 4)
+    val resto : String = cadena_binaria.takeRight(cadena_binaria.size - 4) 
     var resultado: Instruccion = null
     bits match {
       case "1011" => resultado //call
       case "1100" => resultado = RET()
-      case "0001" => resultado //mov
-      case "0000" => resultado //mul
-      case "0010" => resultado //add
-      case "0011" => resultado //sub
-      case "0111" => resultado //div
+      case "0001" => resultado //MOV
+      case "0000" => construir_instruccionDosOperandos(MUL(_,_),ensamblarDosOperandos(resto)) //mul
+      case "0010" => construir_instruccionDosOperandos(ADD(_,_),ensamblarDosOperandos(resto)) //add
+      case "0011" => construir_instruccionDosOperandos(SUB(_,_),ensamblarDosOperandos(resto)) //sub
+      case "0111" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto)) //div
       case _ => null
     }
     resultado
@@ -110,16 +117,17 @@ object Ensamblador {
 object pruebados extends App() {
 
  
-  val d = "1001110000000000000000000001" + "11110000111100001111" //R7, 0001
-  val b = "100111100011" + "11110000111100001111" + "11110000111100001111"//R7, R3  
-  val a = "1001110010000000000000001111" + "11110000111100001111"//R7, [000F]
-  val c = "0010001001110001000111100010" + "11110000111100001111" // [000F],R7 relleno
+  val d = "100111" + "000000" + "0000000000000001" + "1111110000000001" //R7, 0001
+  val b = "100111" + "100011" + "1111000011110000" + "1111111000011110"//R7, R3  
+  val a = "100111" + "001000" + "0000000000001111" + "1111000011110000"//R7, [000F]
+  val c = "001000" + "100111" + "0000000000001111" + "1111000011110000" // [000F],R7 relleno
   val co= "001000" + "001000" + "0001000111100001" + "1111111111111111"
 
-  println(Ensamblador.ensamblarDosOperandos(d))
-  println(Ensamblador.ensamblarDosOperandos(b))
-  println(Ensamblador.ensamblarDosOperandos(a))
-  println(Ensamblador.ensamblarDosOperandos(c))
-  println(Ensamblador.ensamblarDosOperandos(co))
+  println("R7, 0001      " + Ensamblador.ensamblarDosOperandos(d))
+  println("R7, R3        " + Ensamblador.ensamblarDosOperandos(b))
+  println("R7, [000F]    " + Ensamblador.ensamblarDosOperandos(a))
+  println("[000F], R7    " + Ensamblador.ensamblarDosOperandos(c))
+  println("[11E1],[FFFF] " + Ensamblador.ensamblarDosOperandos(co))
+
   
 }

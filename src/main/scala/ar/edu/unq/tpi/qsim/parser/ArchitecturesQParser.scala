@@ -27,10 +27,10 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
 
   def register = registers
 
-  def inmediate = "0x" ~> "[0-9A-Z]+".r ^^ { case direction ⇒ Inmediato(new W16(direction)) }
+  def inmediate = "0x" ~> "[0-9A-Z]+".r ^^ { case direction => Inmediato(new W16(direction)) }
 
 
-  def direct = "[" ~> inmediate <~ "]" ^^ { case direction ⇒ Directo(direction) }
+  def direct = "[" ~> inmediate <~ "]" ^^ { case direction => Directo(direction) }
 
   //def directionIndirect = "[" ~>directionDirect  <~ "]" ^^ {case direction => DirectionIndirect(direction)}
 
@@ -46,17 +46,17 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
   def instruccions0 = "RET"
 
   def instruction2 = instruccions2 ~ asignable ~ ("," ~> directionable) ^^
-    { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
   def instruction1 = instruccions1 ~ asignable ^^
-    { case ins ~ dir1 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir1).asInstanceOf[Instruccion_UnOperando] }
+    { case ins ~ dir1 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir1).asInstanceOf[Instruccion_UnOperando] }
 
   def instruction0 = instruccions0 ^^
-    { case ins ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
+    { case ins => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
 
   def instructions = instruction2 //instruction0 | instruction1 | 
 
-  def program = rep(instructions) ^^ { case instructions ⇒ Programa(ArrayBuffer() ++ instructions) }
+  def program = rep(instructions) ^^ { case instructions => Programa(ArrayBuffer() ++ instructions) }
 
   def parse(input: String) = parseAll(program, input)
 }
@@ -68,8 +68,8 @@ object QuarqExample extends App with ArchitecturesQParser {
     """
 
   parse(theCode) match {
-    case Success(result, _) ⇒ println(result)
-    case Failure(msg, i) ⇒ println("[Failure] " + s" $msg in $i")
-    case Error(msg, i) ⇒ println("[Error] " + s" $msg in $i")
+    case Success(result, _) => println(result)
+    case Failure(msg, i) => println("[Failure] " + s" $msg in $i")
+    case Error(msg, i) => println("[Error] " + s" $msg in $i")
   }
 }
