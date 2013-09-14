@@ -49,7 +49,7 @@ object Ensamblador {
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
     relleno match {
       case "000000" => JMP(ensamblar_operando(resto))
-      case _ =>  throw new InvalidCodeException("Podría haber sido un JMP pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+      case _ =>  throw new InvalidCodeException("Podria haber sido un JMP pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
     }
    }
   
@@ -58,7 +58,7 @@ object Ensamblador {
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
     relleno match {
       case "000000" => CALL(ensamblar_operando(resto))
-      case _ =>  throw new InvalidCodeException("Podría haber sido un CALL pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+      case _ =>  throw new InvalidCodeException("Podria haber sido un CALL pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
     }
 
   }

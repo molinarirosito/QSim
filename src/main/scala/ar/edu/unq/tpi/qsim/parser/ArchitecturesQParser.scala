@@ -50,7 +50,6 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
 
   def instruccions0 = "RET"
 
-<<<<<<< HEAD
   def instruction2Q1 = instruccions2 ~ asignableQ1 ~ ("," ~> directionableQ1) ^^
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
