@@ -8,6 +8,7 @@ import ar.edu.unq.tpi.qsim.model._
 import ar.edu.unq.tpi.qsim.utils._
 
 class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
+ 
 
   def simuladorInicializado =
     new {
@@ -39,7 +40,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   "Un Simulador" should "inicializar la cpu y la memoria cuando se crea" in {
     var ci = simuladorInicializado
     ci.simulador.cpu should be(CPU())
-    ci.simulador.memoria should be(Memoria(25))
+    ci.simulador.memoria should be(Memoria(30))
   }
 
   it should "cargar un programa en la memoria desde la posicion que indica pc y actualizar los registros de cpu" in {
@@ -71,7 +72,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   it should "ejecutar un programa que se encuentra en memoria " in {
     var spc = simuladorConProgramaCargado
     var pcAnteriorAEjecucion = spc.simulador.cpu.pc
-    spc.simulador.ejecucion()
+    spc.simulador.ejecucion(programaCreado.programa)
     assert(pcAnteriorAEjecucion.equals(new W16("000C")))
     println(spc.simulador.memoria.show("0000"))
     println(spc.simulador.cpu.registros)
