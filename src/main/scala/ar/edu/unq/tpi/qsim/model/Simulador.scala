@@ -1,6 +1,7 @@
 package ar.edu.unq.tpi.qsim.model
 
 import ar.edu.unq.tip.qsim.state._
+import ar.edu.unq.tpi.qsim.exeptions._
 
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tip.qsim.state.Inicial
@@ -10,58 +11,47 @@ case class Simulador() {
 
   var cpu: CPU = _
   var memoria: Memoria = _
-  var programaActual: Programa = _
   var instruccionActual: Instruccion = _
 
   def inicializarSim() {
     println("--------INIT------")
     cpu = CPU()
-    memoria = Memoria(25)
+    memoria = Memoria(30)
     memoria.initialize()
   }
 
   def cargarProgramaYRegistros(programa: Programa, pc: String, registros: Map[String, W16]) {
-    programaActual = programa
     cpu.cargarPc(pc)
     cpu.actualizarRegistros(registros)
-    memoria.cargarPrograma(programaActual, pc)
+    memoria.cargarPrograma(programa, pc)
     println("Ver el programa cargado en Memoria: \n" + memoria.show(pc))
 
   }
 
-  def ejecucion() {
-    println("Empezando con la Ejecucion")
+  def ejecucion(programa: Programa) {
+    var n = 1
+    println("Empezando con la Ejecucion") 
     do {
       fetch()
       decode()
       execute()
-    } while (!(programaActual.finalizo))
-
+      n=n+1
+    } while (n<=programa.instrucciones.size)
     println("Finalizo la ejecucion")
   }
 
-  def buscarInstruccion(): Instruccion =
-    {
-      programaActual.obtenerInstruccion()
-    }
 
   def obtenerProximaInstruccionBinario() : String =
   {
     val int_pc = cpu.pc.value
     memoria.getValor(int_pc).toBinary + memoria.getValor(int_pc+1).toBinary + memoria.getValor(int_pc+2).toBinary    
   }
- 
-  
-  def new_fech(){
-    
-    
-    
-  }
   
   def fetch() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
-    instruccionActual = buscarInstruccion()
+    val cadena_binaria = obtenerProximaInstruccionBinario()
+    instruccionActual = Ensamblador.ensamblarInstruccion(cadena_binaria)
     val instruccion_fech = instruccionActual.representacionHexadecimal()
     println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
@@ -81,9 +71,6 @@ case class Simulador() {
     case _ => modoDir.getValor
   }
 
-  def execute_instruccionDosOperandos() = {
-
-  }
 
   def execute_instruccion_matematica(): W16 = {
     println("--------INSTRUCCION PARA ALU------")
@@ -100,7 +87,6 @@ case class Simulador() {
 
   def execute() {
     println("-------------EXECUTE---------")
-    var resultado: W16 = null
     instruccionActual match {
       // te gusta que sea de esta forma??
       case RET() => executeRet()

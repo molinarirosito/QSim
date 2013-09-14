@@ -28,9 +28,10 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
 
   def register = registers
 
-  def inmediate = "0x" ~> "[0-9A-Z]+".r ^^ { case direction ⇒ Inmediato(new W16(direction)) }
+  def inmediate = "0x" ~> "[0-9A-Z]+".r ^^ { case direction => Inmediato(new W16(direction)) }
 
-  def direct = "[" ~> inmediate <~ "]" ^^ { case direction ⇒ Directo(direction) }
+  def direct = "[" ~> inmediate <~ "]" ^^ { case direction => Directo(direction) }
+
 
   //def directionIndirect = "[" ~>directionDirect  <~ "]" ^^ {case direction => DirectionIndirect(direction)}
 
@@ -49,6 +50,7 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
 
   def instruccions0 = "RET"
 
+<<<<<<< HEAD
   def instruction2Q1 = instruccions2 ~ asignableQ1 ~ ("," ~> directionableQ1) ^^
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
@@ -72,7 +74,8 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
   def programQ2 = program(instructionsQ2)
   def programQ3 = program(instructionsQ3)
 
-  def program(parser:Parser[Instruccion]) = rep(parser) ^^ { case instructions ⇒ Programa(ArrayBuffer() ++ instructions) }
+  def program(parser:Parser[Instruccion]) = rep(parser) ^^ { case instructions => Programa(ArrayBuffer() ++ instructions) }
+
 
  // def program = programQ1 | programQ2 | programQ3
   
@@ -86,8 +89,8 @@ object QuarqExample extends App with ArchitecturesQParser {
     """
 
   parse(theCode) match {
-    case Success(result, _) ⇒ println(result)
-    case Failure(msg, i) ⇒ println("[Failure] " + s" $msg in $i")
-    case Error(msg, i) ⇒ println("[Error] " + s" $msg in $i")
+    case Success(result, _) => println(result)
+    case Failure(msg, i) => println("[Failure] " + s" $msg in $i")
+    case Error(msg, i) => println("[Error] " + s" $msg in $i")
   }
 }

@@ -2,13 +2,18 @@ package ar.edu.unq.tpi.qsim.model
 
 import ar.edu.unq.tpi.qsim.utils.Util
 
+class W8(var hex: String) {
+	override def toString() =  hex
+	def toBinary: String = Util.toBinary8B(this.value)
+	def value : Int = Util.toInteger(hex)
+}
 
 class W16(var hex: String) {
   
-  override def toString() =  this.hex
+  override def toString() =  hex
   def equals(w16:W16): Boolean =  this.value == w16.value
-  def value : Int = Util.toInteger(this.hex)
-  def toBinary: String = Util.hexToBinary(this.hex)
+  def value : Int = Util.toInteger(hex)
+  def toBinary: String = Util.hexToBinary(hex)
   def ++ = hex = Util.toHex4(this.value + 1)
   def ++(salto:Int) = hex= Util.toHex4(this.value + salto)
   def -- = hex= Util.toHex4(this.value -1)

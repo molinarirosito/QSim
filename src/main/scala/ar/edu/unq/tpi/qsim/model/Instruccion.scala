@@ -17,7 +17,7 @@ class Instruccion_SinOperandos(codigoDeOperacion: String, operacion: String, val
  
   val operations_code_binary = Util.binary16ToHex(codigoDeOperacion + relleno )
    
-  (operations_code_binary + " ").replace("  "," ")
+  (operations_code_binary).replace("  "," ")
   }
   override def toString() =  operacion 
 }
@@ -51,9 +51,24 @@ class Instruccion_DosOperandos(codigoDeOperacion: String, operacion: String, var
 	override def toString() =  operacion + " " + destino.toString() + " " + origen.toString() 
 }
 
+class JUMP_condicional(codigoDeOperacion: String, operacion: String, val desplazamiento: W8) extends Instruccion(codigoDeOperacion, operacion){
+  val prefijo = "1111"
+  var destino : ModoDireccionamiento = _ 
+  override def representacionHexadecimal() : String  =  {
+ 
+  val operations_code_binary = Util.binary16ToHex(prefijo + codigoDeOperacion + desplazamiento.toBinary )
+   
+  (operations_code_binary).replace("  "," ")
+  }
+  override def toString() =  operacion + desplazamiento.toString
+}
+
+
 case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1011","CALL",orig, "000000"){}
 
 case class RET() extends Instruccion_SinOperandos("1100","RET", "000000000000"){}
+
+case class JMP(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1010","JMP",orig, "000000"){}
 
 case class MUL(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0000","MUL",dest,orig){}
 
