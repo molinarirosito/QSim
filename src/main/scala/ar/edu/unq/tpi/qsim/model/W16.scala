@@ -2,6 +2,11 @@ package ar.edu.unq.tpi.qsim.model
 
 import ar.edu.unq.tpi.qsim.utils.Util
 
+class W8(var hex: String) {
+	override def toString() =  hex
+	def toBinary: String = Util.toBinary8B(this.value)
+	def value : Int = Util.toInteger(hex)
+}
 
 class W16(var hex: String) {
   

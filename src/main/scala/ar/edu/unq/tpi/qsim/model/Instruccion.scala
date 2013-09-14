@@ -51,16 +51,16 @@ class Instruccion_DosOperandos(codigoDeOperacion: String, operacion: String, var
 	override def toString() =  operacion + " " + destino.toString() + " " + origen.toString() 
 }
 
-class JUMP_condicional(codigoDeOperacion: String, operacion: String, val desplazamiento: String) extends Instruccion(codigoDeOperacion, operacion){
+class JUMP_condicional(codigoDeOperacion: String, operacion: String, val desplazamiento: W8) extends Instruccion(codigoDeOperacion, operacion){
   val prefijo = "1111"
   var destino : ModoDireccionamiento = _ 
   override def representacionHexadecimal() : String  =  {
  
-  val operations_code_binary = Util.binary16ToHex(prefijo + codigoDeOperacion + desplazamiento )
+  val operations_code_binary = Util.binary16ToHex(prefijo + codigoDeOperacion + desplazamiento.toBinary )
    
   (operations_code_binary).replace("  "," ")
   }
-  override def toString() =  operacion
+  override def toString() =  operacion + desplazamiento.toString
 }
 
 

@@ -61,6 +61,18 @@ object Util {
     to(Integer.toBinaryString(number),15)
   }
   
+  
+   /**
+   * Representa un numero en una cadena binaria de 8 bit.
+   * 
+   * @param number: Int
+   * @return String
+   */
+  def toBinary8B(number:Int): String = 
+  {
+    to(Integer.toBinaryString(number),7)
+  }
+  
   /**
    * Representa un numero en una cadena binaria de 16 bit mas uno de overflow.
    * 
