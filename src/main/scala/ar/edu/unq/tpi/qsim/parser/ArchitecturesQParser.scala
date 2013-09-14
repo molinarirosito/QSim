@@ -9,34 +9,38 @@ import scala.util.parsing.combinator.token.StdTokens
 import scala.util.parsing.input._
 import ar.edu.unq.tpi.qsim.model._
 import scala.collection.mutable.ArrayBuffer
+import ar.edu.unq.tpi.qsim.model.Programa
 
 trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
   type Tokens = StdTokens
   val lexical = new StdLexical
   lexical.reserved ++= List("MOV", "SUB", "ADD", "DIV", "MUL", "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7")
-  lexical.delimiters ++= List(",", "[", "]", "0x")
+  lexical.delimiters ++= List(",", "[", "]", "0x", ":")
 
   def registers = "R0" ^^^ R0 |
-    "R1" ^^^ R1 |
-    "R2" ^^^ R2 |
-    "R3" ^^^ R3 |
-    "R4" ^^^ R4 |
-    "R5" ^^^ R5 |
-    "R6" ^^^ R6 |
-    "R7" ^^^ R7
+    			  "R1" ^^^ R1 |
+    			  "R2" ^^^ R2 |
+    			  "R3" ^^^ R3 |
+    			  "R4" ^^^ R4 |
+    			  "R5" ^^^ R5 |
+    			  "R6" ^^^ R6 |
+    			  "R7" ^^^ R7
 
   def register = registers
 
   def inmediate = "0x" ~> "[0-9A-Z]+".r ^^ { case direction ⇒ Inmediato(new W16(direction)) }
 
-
   def direct = "[" ~> inmediate <~ "]" ^^ { case direction ⇒ Directo(direction) }
 
   //def directionIndirect = "[" ~>directionDirect  <~ "]" ^^ {case direction => DirectionIndirect(direction)}
 
-  def directionable = register | inmediate //| direct 
+  def directionableQ1 = register | inmediate
+  
+  def directionableQ2 = directionableQ1 | direct 
 
-  def asignable = register //| direct
+  def asignableQ1 = register 
+  
+  def asignableQ2 = asignableQ1 | direct
 
   //operaciones
   def instruccions2 = "MOV" | "SUB" | "DIV" | "ADD" | "MUL"
@@ -45,26 +49,40 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
 
   def instruccions0 = "RET"
 
-  def instruction2 = instruccions2 ~ asignable ~ ("," ~> directionable) ^^
+  def instruction2Q1 = instruccions2 ~ asignableQ1 ~ ("," ~> directionableQ1) ^^
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
-  def instruction1 = instruccions1 ~ asignable ^^
+  def instruction2Q2 = instruccions2 ~ asignableQ2 ~ ("," ~> directionableQ2) ^^
+    { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
+
+  // TODO Preguntar a Mara sobre el modo de orgen de CALL !!!
+  def instruction1Q3 = instruccions1 ~ asignableQ2 ^^
     { case ins ~ dir1 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir1).asInstanceOf[Instruccion_UnOperando] }
 
-  def instruction0 = instruccions0 ^^
+  def instruction0Q3 = instruccions0 ^^
     { case ins ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
 
-  def instructions = instruction2 //instruction0 | instruction1 | 
+  def instructionsQ1 = instruction2Q1
+  
+  def instructionsQ2 = instruction2Q2
+  
+  def instructionsQ3 = instructionsQ2 | instruction0Q3 | instruction1Q3 
 
-  def program = rep(instructions) ^^ { case instructions ⇒ Programa(ArrayBuffer() ++ instructions) }
+  def programQ1 = program(instructionsQ1)
+  def programQ2 = program(instructionsQ2)
+  def programQ3 = program(instructionsQ3)
 
-  def parse(input: String) = parseAll(program, input)
+  def program(parser:Parser[Instruccion]) = rep(parser) ^^ { case instructions ⇒ Programa(ArrayBuffer() ++ instructions) }
+
+ // def program = programQ1 | programQ2 | programQ3
+  
+  def parse(input: String) = parseAll(programQ1, input)
 }
 
 object QuarqExample extends App with ArchitecturesQParser {
 
   val theCode = """
-		SUB R0, 0x023  
+		SUB R0, 0x0023  
     """
 
   parse(theCode) match {
