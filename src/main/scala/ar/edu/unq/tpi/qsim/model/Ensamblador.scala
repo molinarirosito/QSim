@@ -1,5 +1,6 @@
 package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tpi.qsim.utils.Util
+import ar.edu.unq.tpi.qsim.exeptions._
 
 object Ensamblador {
   
@@ -36,7 +37,7 @@ object Ensamblador {
     code_modo match {
       case "000000" => Inmediato(new W16(resto)) 
       case "001000" => Directo(Inmediato(new W16(resto)))
-      case _ => ensamblarRegistro(code_modo.takeRight(3))
+      case _ => ensamblarRegistro(code_modo)
     }
 
   }
@@ -47,7 +48,7 @@ object Ensamblador {
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
     relleno match {
       case "000000" => CALL(ensamblar_operando(resto))
-      case _ =>  null //ES ERROR PORQUE NO TIENE RELLENO
+      case _ =>  throw new InvalidCodeException("Podría haber sido un CALL pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
     }
 
   }
@@ -69,25 +70,24 @@ object Ensamblador {
       case "0010" => construir_instruccionDosOperandos(ADD(_,_),ensamblarDosOperandos(resto)) //add
       case "0011" => construir_instruccionDosOperandos(SUB(_,_),ensamblarDosOperandos(resto)) //sub
       case "0111" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto)) //div
-      case _ => null
+      case _ => throw new InvalidCodeException("No hay ninguna instruccion con ese codigo de operacion")
     }
 
   }
   
   
   def ensamblarRegistro(cadena_binaria : String): ModoDireccionamiento = {
-   val bits : String =  cadena_binaria.substring(0, 3)
    
-    bits match {
-      case "000" => R0 
-      case "001" => R1 
-      case "010" => R2 
-      case "011" => R3 
-      case "100" => R4 
-      case "101" => R5 
-      case "110" => R6 
-      case "111" => R7 
-      case _ => null
+    cadena_binaria match {
+      case "100000" => R0 
+      case "100001" => R1 
+      case "100010" => R2 
+      case "100011" => R3 
+      case "100100" => R4 
+      case "100101" => R5 
+      case "100110" => R6 
+      case "100111" => R7 
+      case _ => throw new InvalidCodeException("No hay modos de direccionamiento con ese codigo")
     }
 
   }
@@ -103,6 +103,7 @@ object pruebados extends App() {
   val a = "100111" + "001000" + "0000000000001111" + "1111000011110000"//R7, [000F]
   val c = "001000" + "100111" + "0000000000001111" + "1111000011110000" // [000F],R7 relleno
   val co= "001000" + "001000" + "0001000111100001" + "1111111111111111"
+  val p = "111111" + "011100" + "0011111000000001" + "1111110000000001" //R7, 0001
 
   println("R7, 0001      " + Ensamblador.ensamblarDosOperandos(d))
   println("R7, R3        " + Ensamblador.ensamblarDosOperandos(b))
@@ -117,6 +118,8 @@ object pruebados extends App() {
   println("SUB => " + Ensamblador.ensamblarInstruccion("0011" + co))
   println("CALL => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + d))
   println("RET => " + Ensamblador.ensamblarInstruccion("1100" + d))
+  println("PORQUERIA => " + Ensamblador.ensamblarInstruccion("1111" + p))
+  println("PORQUERIA DOS => " + Ensamblador.ensamblarInstruccion("0001" + p))
 
   
 }
