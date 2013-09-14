@@ -44,6 +44,14 @@ object Ensamblador {
 
   }
   
+   def ensamblar_JMP (cadena_binaria : String): Instruccion = {
+    val relleno =  cadena_binaria.substring(0, 6)
+    val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
+    relleno match {
+      case "000000" => JMP(ensamblar_operando(resto))
+      case _ =>  throw new InvalidCodeException("Podría haber sido un JMP pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+    }
+   }
   
   def ensamblar_CALL (cadena_binaria : String): Instruccion = {
     val relleno =  cadena_binaria.substring(0, 6)
@@ -66,13 +74,14 @@ object Ensamblador {
     val bits : String =  cadena_binaria.substring(0, 4)
     val resto : String = cadena_binaria.takeRight(cadena_binaria.size - 4) 
     bits match {
+      case "1100" => RET()  
       case "1011" => ensamblar_CALL(resto)
-      case "1100" => RET()
-      case "0001" => construir_instruccionDosOperandos(MOV(_,_),ensamblarDosOperandos(resto)) //mov
-      case "0000" => construir_instruccionDosOperandos(MUL(_,_),ensamblarDosOperandos(resto)) //mul
-      case "0010" => construir_instruccionDosOperandos(ADD(_,_),ensamblarDosOperandos(resto)) //add
-      case "0011" => construir_instruccionDosOperandos(SUB(_,_),ensamblarDosOperandos(resto)) //sub
-      case "0111" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto)) //div
+      case "1010" => ensamblar_JMP(resto)
+      case "0001" => construir_instruccionDosOperandos(MOV(_,_),ensamblarDosOperandos(resto)) 
+      case "0000" => construir_instruccionDosOperandos(MUL(_,_),ensamblarDosOperandos(resto)) 
+      case "0010" => construir_instruccionDosOperandos(ADD(_,_),ensamblarDosOperandos(resto)) 
+      case "0011" => construir_instruccionDosOperandos(SUB(_,_),ensamblarDosOperandos(resto)) 
+      case "0111" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto)) 
       case _ => throw new InvalidCodeException("No hay ninguna instruccion con ese codigo de operacion")
     }
 
@@ -125,8 +134,9 @@ object pruebados extends App() {
   println("MOV => " + Ensamblador.ensamblarInstruccion("0001" + c))
   println("SUB => " + Ensamblador.ensamblarInstruccion("0011" + co))
   println("CALL => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + d))
-  println("CALL REGISTRO => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + "100111"))
-  println("CALL DIRECTO => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + directo))
+  println("JMP => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + d))
+  println("JMP REGISTRO => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + "100111"))
+  println("JMP DIRECTO => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + directo))
    //println("CALL INCOMPLETO=> " + Ensamblador.ensamblarInstruccion("1011" + "000000" + ""))
   println("RET => " + Ensamblador.ensamblarInstruccion("1100" + d))
  // println("PORQUERIA => " + Ensamblador.ensamblarInstruccion("1111" + p))
