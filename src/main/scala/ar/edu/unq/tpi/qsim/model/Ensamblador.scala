@@ -24,19 +24,21 @@ object Ensamblador {
     Map(("op1",primer_operando),("op2",segundo_operando))
     }
     
-  
+  def extraerValor(cadena_binaria : String) : W16 = {
+    
+    if(cadena_binaria.size>16) {new W16(Util.binary16ToHex(cadena_binaria.substring(0, 16)))}
+    else {new W16(Util.binary16ToHex(cadena_binaria.takeRight(16)))}
+  } 
   
   def ensamblar_operando(cadena_binaria : String): ModoDireccionamiento = {
 
    val code_modo =  cadena_binaria.substring(0, 6)
    var resto =  cadena_binaria.takeRight(cadena_binaria.size - 6) 
-   if(resto.size>16) {resto = Util.binary16ToHex(resto.substring(0, 16))}
-   else {resto = Util.binary16ToHex(resto.takeRight(16))}
 
    var modo: ModoDireccionamiento = null
     code_modo match {
-      case "000000" => Inmediato(new W16(resto)) 
-      case "001000" => Directo(Inmediato(new W16(resto)))
+      case "000000" => Inmediato(extraerValor(resto)) 
+      case "001000" => Directo(Inmediato(extraerValor(resto)))
       case _ => ensamblarRegistro(code_modo)
     }
 
@@ -104,6 +106,9 @@ object pruebados extends App() {
   val c = "001000" + "100111" + "0000000000001111" + "1111000011110000" // [000F],R7 relleno
   val co= "001000" + "001000" + "0001000111100001" + "1111111111111111"
   val p = "111111" + "011100" + "0011111000000001" + "1111110000000001" //R7, 0001
+   val registro = "100111" + "100011"
+   val directo = "001000" + "0000000000001111"
+   val directo_registro = "001000" + "100111" + "0000000000001111" + "1111000011110000" // [000F],R7 
 
   println("R7, 0001      " + Ensamblador.ensamblarDosOperandos(d))
   println("R7, R3        " + Ensamblador.ensamblarDosOperandos(b))
@@ -113,13 +118,18 @@ object pruebados extends App() {
   
   println("MUL => " + Ensamblador.ensamblarInstruccion("0000" + d))
   println("ADD => " + Ensamblador.ensamblarInstruccion("0010" + b))
+  println("ADD SOLO REGISTROS=> " + Ensamblador.ensamblarInstruccion("0010" + registro))
+  println("ADD directo registro=> " + Ensamblador.ensamblarInstruccion("0010" + directo_registro))
   println("DIV => " + Ensamblador.ensamblarInstruccion("0111" + a))
   println("MOV => " + Ensamblador.ensamblarInstruccion("0001" + c))
   println("SUB => " + Ensamblador.ensamblarInstruccion("0011" + co))
   println("CALL => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + d))
+  println("CALL REGISTRO => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + "100111"))
+  println("CALL DIRECTO => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + directo))
+   //println("CALL INCOMPLETO=> " + Ensamblador.ensamblarInstruccion("1011" + "000000" + ""))
   println("RET => " + Ensamblador.ensamblarInstruccion("1100" + d))
-  println("PORQUERIA => " + Ensamblador.ensamblarInstruccion("1111" + p))
-  println("PORQUERIA DOS => " + Ensamblador.ensamblarInstruccion("0001" + p))
+ // println("PORQUERIA => " + Ensamblador.ensamblarInstruccion("1111" + p))
+  //println("PORQUERIA DOS => " + Ensamblador.ensamblarInstruccion("0001" + p))
 
   
 }
