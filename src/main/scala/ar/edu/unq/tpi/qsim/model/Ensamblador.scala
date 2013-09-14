@@ -3,15 +3,6 @@ import ar.edu.unq.tpi.qsim.utils.Util
 
 object Ensamblador {
   
-  def ensamblar_call() (cadena_binaria : String): Instruccion = {
-    val bits : String =  cadena_binaria.substring(0, 6)
-    var resultado: Instruccion = null
-    bits match {
-      case "000000" => resultado //call
-      case _ =>  null //ES ERROR PORQUE NO TIENE RELLENO
-    }
-    resultado
-  }
   
   def ensamblarDosOperandos(cadena_binaria : String) : Map[String,ModoDireccionamiento] = {
    
@@ -35,7 +26,7 @@ object Ensamblador {
   
   
   def ensamblar_operando(cadena_binaria : String): ModoDireccionamiento = {
- //   println(cadena_binaria)
+
    val code_modo =  cadena_binaria.substring(0, 6)
    var resto =  cadena_binaria.takeRight(cadena_binaria.size - 6) 
    if(resto.size>16) {resto = Util.binary16ToHex(resto.substring(0, 16))}
@@ -51,14 +42,14 @@ object Ensamblador {
   }
   
   
-  def ensamblar_MOV() (cadena_binaria : String): Instruccion = {
-    val bits : String =  cadena_binaria.substring(0, 6)
-    var resultado: Instruccion = null
-    bits match {
-      case "000000" => resultado //call
+  def ensamblar_CALL (cadena_binaria : String): Instruccion = {
+    val relleno =  cadena_binaria.substring(0, 6)
+    val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
+    relleno match {
+      case "000000" => CALL(ensamblar_operando(resto))
       case _ =>  null //ES ERROR PORQUE NO TIENE RELLENO
     }
-    resultado
+
   }
   
   def construir_instruccionDosOperandos(constructor:(ModoDireccionamiento,ModoDireccionamiento)=>Instruccion,map : Map[String,ModoDireccionamiento] ) : Instruccion = {
@@ -70,30 +61,20 @@ object Ensamblador {
   def ensamblarInstruccion(cadena_binaria : String): Instruccion = {
     val bits : String =  cadena_binaria.substring(0, 4)
     val resto : String = cadena_binaria.takeRight(cadena_binaria.size - 4) 
-    var resultado: Instruccion = null
     bits match {
-      case "1011" => resultado //call
-      case "1100" => resultado = RET()
-      case "0001" => resultado //MOV
+      case "1011" => ensamblar_CALL(resto)
+      case "1100" => RET()
+      case "0001" => construir_instruccionDosOperandos(MOV(_,_),ensamblarDosOperandos(resto)) //mov
       case "0000" => construir_instruccionDosOperandos(MUL(_,_),ensamblarDosOperandos(resto)) //mul
       case "0010" => construir_instruccionDosOperandos(ADD(_,_),ensamblarDosOperandos(resto)) //add
       case "0011" => construir_instruccionDosOperandos(SUB(_,_),ensamblarDosOperandos(resto)) //sub
       case "0111" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto)) //div
       case _ => null
     }
-    resultado
+
   }
   
-  def ensamblarModoDireccionamiento(cadena_binaria : String): ModoDireccionamiento = {
-   val bits : String =  cadena_binaria.substring(0, 6)
-   var modo: ModoDireccionamiento = null
-    bits match {
-      case "000000" => modo //inmediato
-      case "001000" => modo //directo
-      case _ => ensamblarRegistro(bits.takeRight(3))
-    }
-    modo
-  }
+  
   def ensamblarRegistro(cadena_binaria : String): ModoDireccionamiento = {
    val bits : String =  cadena_binaria.substring(0, 3)
    
@@ -128,6 +109,14 @@ object pruebados extends App() {
   println("R7, [000F]    " + Ensamblador.ensamblarDosOperandos(a))
   println("[000F], R7    " + Ensamblador.ensamblarDosOperandos(c))
   println("[11E1],[FFFF] " + Ensamblador.ensamblarDosOperandos(co))
+  
+  println("MUL => " + Ensamblador.ensamblarInstruccion("0000" + d))
+  println("ADD => " + Ensamblador.ensamblarInstruccion("0010" + b))
+  println("DIV => " + Ensamblador.ensamblarInstruccion("0111" + a))
+  println("MOV => " + Ensamblador.ensamblarInstruccion("0001" + c))
+  println("SUB => " + Ensamblador.ensamblarInstruccion("0011" + co))
+  println("CALL => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + d))
+  println("RET => " + Ensamblador.ensamblarInstruccion("1100" + d))
 
   
 }
