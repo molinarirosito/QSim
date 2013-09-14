@@ -51,7 +51,7 @@ class Instruccion_DosOperandos(codigoDeOperacion: String, operacion: String, var
 	override def toString() =  operacion + " " + destino.toString() + " " + origen.toString() 
 }
 
-class JUMP_condicional(codigoDeOperacion: String, operacion: String, val desplazamiento: W8) extends Instruccion(codigoDeOperacion, operacion){
+class JUMP_condicional(codigoDeOperacion: String, operacion: String, var desplazamiento: W8) extends Instruccion(codigoDeOperacion, operacion){
   val prefijo = "1111"
   var destino : ModoDireccionamiento = _ 
   override def representacionHexadecimal() : String  =  {
@@ -62,6 +62,18 @@ class JUMP_condicional(codigoDeOperacion: String, operacion: String, val desplaz
   }
   override def toString() =  operacion + desplazamiento.toString
 }
+
+case class JE(desp: W8) extends JUMP_condicional("0001","JE", desp){}
+case class JNE(desp: W8) extends JUMP_condicional("1001","JNE", desp){}
+case class JLE(desp: W8) extends JUMP_condicional("0010","JLE", desp){}
+case class JG(desp: W8) extends JUMP_condicional("1010","JG", desp){}
+case class JL(desp: W8) extends JUMP_condicional("0011","JL", desp){}
+case class JGE(desp: W8) extends JUMP_condicional("1011","JGE", desp){}
+case class JLEU(desp: W8) extends JUMP_condicional("0100","JLEU", desp){}
+case class JGU(desp: W8) extends JUMP_condicional("1100","JGU", desp){}
+case class JCS(desp: W8) extends JUMP_condicional("0101","JCS", desp){}
+case class JNEG(desp: W8) extends JUMP_condicional("0110","JNEG", desp){}
+case class JVS(desp: W8) extends JUMP_condicional("0111","JVS", desp){}
 
 
 case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1011","CALL",orig, "000000"){}
