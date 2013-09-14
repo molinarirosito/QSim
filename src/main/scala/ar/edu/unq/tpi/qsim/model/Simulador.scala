@@ -100,7 +100,7 @@ case class Simulador() {
 
   def execute() {
     println("-------------EXECUTE---------")
-    var resultado: W16 = null
+
     instruccionActual match {
       // te gusta que sea de esta forma??
       case RET() => executeRet()

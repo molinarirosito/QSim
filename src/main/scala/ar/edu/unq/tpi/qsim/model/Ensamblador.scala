@@ -62,6 +62,7 @@ object Ensamblador {
   }
   
   def ensamblarInstruccion(cadena_binaria : String): Instruccion = {
+    
     val bits : String =  cadena_binaria.substring(0, 4)
     val resto : String = cadena_binaria.takeRight(cadena_binaria.size - 4) 
     bits match {
