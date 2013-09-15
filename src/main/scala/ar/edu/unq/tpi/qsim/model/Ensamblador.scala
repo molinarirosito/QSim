@@ -72,6 +72,16 @@ object Ensamblador {
     }
    }
   
+   def ensamblar_NOT (cadena_binaria : String): Instruccion = {
+    val relleno =  cadena_binaria.substring(0, 6)
+    val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
+    relleno match {
+      case "000000" => NOT(ensamblar_operando(resto))
+      case _ =>  throw new InvalidCodeException("Podria haber sido un NOT pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+    }
+
+  }
+   
   def ensamblar_CALL (cadena_binaria : String): Instruccion = {
     val relleno =  cadena_binaria.substring(0, 6)
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
@@ -95,13 +105,17 @@ object Ensamblador {
     bits match {
       case "1100" => RET()  
       case "1011" => ensamblar_CALL(resto)
-      case "1010" => ensamblar_JMP(resto) 
+      case "1010" => ensamblar_JMP(resto)
+      case "1001" => ensamblar_NOT(resto)
       case "1111" => ensamblar_JumpCondicional(resto) 
       case "0001" => construir_instruccionDosOperandos(MOV(_,_),ensamblarDosOperandos(resto)) 
       case "0000" => construir_instruccionDosOperandos(MUL(_,_),ensamblarDosOperandos(resto)) 
       case "0010" => construir_instruccionDosOperandos(ADD(_,_),ensamblarDosOperandos(resto)) 
       case "0011" => construir_instruccionDosOperandos(SUB(_,_),ensamblarDosOperandos(resto)) 
       case "0111" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto))
+      case "0100" => construir_instruccionDosOperandos(AND(_,_),ensamblarDosOperandos(resto))
+      case "0101" => construir_instruccionDosOperandos(OR(_,_),ensamblarDosOperandos(resto))
+      case "0110" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto))
       case _ => throw new InvalidCodeException("No hay ninguna instruccion con ese codigo de operacion")
     }
 
