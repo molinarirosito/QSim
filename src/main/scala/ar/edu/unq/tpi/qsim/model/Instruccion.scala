@@ -11,8 +11,15 @@ abstract class Instruccion(val codigoDeOperacion: String, var operacion: String)
   
 }
 
-class Instruccion_SinOperandos(codigoDeOperacion: String, operacion: String, val relleno: String) extends Instruccion(codigoDeOperacion, operacion){
+trait InstruccionConEtiqueta {
   
+  def etiqueta(): String  
+}
+
+class Instruccion_SinOperandos(codigoDeOperacion: String, operacion: String, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) with InstruccionConEtiqueta {
+  
+  override def etiqueta() = "" 
+    
   override def representacionHexadecimal() : String  =  {
  
   val operations_code_binary = Util.binary16ToHex(codigoDeOperacion + relleno )
@@ -22,7 +29,9 @@ class Instruccion_SinOperandos(codigoDeOperacion: String, operacion: String, val
   override def toString() =  operacion 
 }
 
-class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var origen: ModoDireccionamiento, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) {
+class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var origen: ModoDireccionamiento, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) with InstruccionConEtiqueta  {
+  
+  override def etiqueta() = ""
   
   override def representacionHexadecimal() : String  =  {
  

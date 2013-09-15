@@ -27,8 +27,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
   def programaCreado =
     new {
-      var instrucciones = new ArrayBuffer[Instruccion]()
-      instrucciones.append(ADD(R0, new Inmediato("0002")), MUL(R4, new Inmediato("0001")),
+      var instrucciones = List(ADD(R0, new Inmediato("0002")), MUL(R4, new Inmediato("0001")),
         SUB(R5, new Inmediato("000A")), MOV(R5, new Inmediato("0056")),
         MOV(R2, R3), ADD(R1, R7), MOV(new Directo(new Inmediato("0005")),R5))
 

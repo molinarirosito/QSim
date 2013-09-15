@@ -120,9 +120,7 @@ case class Simulador() {
 }
 
 object tt extends App {
-  var array = ArrayBuffer[Instruccion]()
-  array += (SUB(R1, R4))
-  var programa = Programa(array)
+  var programa = new Programa(List(SUB(R1, R4)))
   //  var sim = Simulador(programa)
   // sim.inicializarSim()
   // sim.cargarPrograma("0003")
