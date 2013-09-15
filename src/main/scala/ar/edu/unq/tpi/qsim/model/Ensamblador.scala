@@ -44,6 +44,25 @@ object Ensamblador {
 
   }
   
+   def ensamblar_JumpCondicional (cadena_binaria : String): Instruccion = {
+    val codOp =  cadena_binaria.substring(0, 4)
+    val resto =  cadena_binaria.takeRight(cadena_binaria.size - 4).reverse.takeRight(8).reverse
+    codOp match {
+      case "0001" => JE(new Salto(resto))
+      case "1001" => JNE(new Salto(resto))
+      case "0010" => JLE(new Salto(resto))
+      case "1010" => JG(new Salto(resto))
+      case "0011" => JL(new Salto(resto))
+      case "1011" => JGE(new Salto(resto))
+      case "0100" => JLEU(new Salto(resto))
+      case "1100" => JGU(new Salto(resto))
+      case "0101" => JCS(new Salto(resto))
+      case "0110" => JNEG(new Salto(resto))
+      case "0111" => JVS(new Salto(resto))
+      case _ =>  throw new InvalidCodeException("Podria haber sido un Jump Condicional pero no coincide con ningun codigo de operacion") 
+    }
+   }
+  
    def ensamblar_JMP (cadena_binaria : String): Instruccion = {
     val relleno =  cadena_binaria.substring(0, 6)
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
@@ -76,12 +95,13 @@ object Ensamblador {
     bits match {
       case "1100" => RET()  
       case "1011" => ensamblar_CALL(resto)
-      case "1010" => ensamblar_JMP(resto)
+      case "1010" => ensamblar_JMP(resto) 
+      case "1111" => ensamblar_JumpCondicional(resto) 
       case "0001" => construir_instruccionDosOperandos(MOV(_,_),ensamblarDosOperandos(resto)) 
       case "0000" => construir_instruccionDosOperandos(MUL(_,_),ensamblarDosOperandos(resto)) 
       case "0010" => construir_instruccionDosOperandos(ADD(_,_),ensamblarDosOperandos(resto)) 
       case "0011" => construir_instruccionDosOperandos(SUB(_,_),ensamblarDosOperandos(resto)) 
-      case "0111" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto)) 
+      case "0111" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto))
       case _ => throw new InvalidCodeException("No hay ninguna instruccion con ese codigo de operacion")
     }
 
@@ -137,9 +157,23 @@ object pruebados extends App() {
   println("JMP => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + d))
   println("JMP REGISTRO => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + "100111"))
   println("JMP DIRECTO => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + directo))
-   //println("CALL INCOMPLETO=> " + Ensamblador.ensamblarInstruccion("1011" + "000000" + ""))
+  println("JE => " + Ensamblador.ensamblarInstruccion("1111" + "0001" + "00000000" ))
+  println("JG => " + Ensamblador.ensamblarInstruccion("1111" + "1010" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JLE => " + Ensamblador.ensamblarInstruccion("1111" + "0010" + "00000000" +  "1111000011110000"))
+  println("JL => " + Ensamblador.ensamblarInstruccion("1111" + "0011" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JGE => " + Ensamblador.ensamblarInstruccion("1111" + "1011" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JLEU => " + Ensamblador.ensamblarInstruccion("1111" + "0100" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JGU => " + Ensamblador.ensamblarInstruccion("1111" + "1100" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JCS => " + Ensamblador.ensamblarInstruccion("1111" + "0101" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JNEG => " + Ensamblador.ensamblarInstruccion("1111" + "0110" + "10000000" + "1111000011110000" +  "1111000011110000"))
+  println("JVS => " + Ensamblador.ensamblarInstruccion("1111" + "0111" + "00000011" + "1111000011110000" +  "1111000011110000"))
+  println("JNE => " + Ensamblador.ensamblarInstruccion("1111" + "1001" + "00110000" + "1111000011110000" +  "1111000011110000"))
+ 
+
   println("RET => " + Ensamblador.ensamblarInstruccion("1100" + d))
- // println("PORQUERIA => " + Ensamblador.ensamblarInstruccion("1111" + p))
+ 
+  
+  // println("PORQUERIA => " + Ensamblador.ensamblarInstruccion("1111" + p))
   //println("PORQUERIA DOS => " + Ensamblador.ensamblarInstruccion("0001" + p))
 
   
