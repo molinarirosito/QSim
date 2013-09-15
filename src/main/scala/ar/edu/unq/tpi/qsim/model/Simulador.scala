@@ -22,8 +22,8 @@ case class Simulador() {
   }
 
   def etiquetasInvalidas(programa: Programa): Boolean = {
-    programa.instrucciones.exists(instr ⇒ instr match {
-      case inst_up: Instruccion_UnOperando ⇒ (!programa.etiquetas.contains(inst_up.origen.representacionString()))
+    programa.instrucciones.exists(instr => instr match {
+      case inst_up: Instruccion_UnOperando => (!programa.etiquetas.contains(inst_up.origen.representacionString()))
       case _=>false
       
     })
