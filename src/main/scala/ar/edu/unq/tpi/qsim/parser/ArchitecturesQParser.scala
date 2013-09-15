@@ -83,11 +83,10 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
 
 object QuarqExample extends App with ArchitecturesQParser {
 
-  val theCode = """
-		SUB R0, 0x0023  
-    """
+  val input = io.Source.fromFile("src/main/resources/programa.qsim")
+  val str = input.mkString
 
-  parse(theCode) match {
+  parse(str) match {
     case Success(result, _) => println(result)
     case Failure(msg, i) => println("[Failure] " + s" $msg in $i")
     case Error(msg, i) => println("[Error] " + s" $msg in $i")
