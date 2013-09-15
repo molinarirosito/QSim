@@ -1,5 +1,6 @@
 package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tpi.qsim.utils.Util
+import scala.collection.mutable.Map
 
 object ALU {
   

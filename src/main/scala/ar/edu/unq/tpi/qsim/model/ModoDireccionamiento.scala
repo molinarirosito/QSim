@@ -83,8 +83,9 @@ case class Directo (inmediato : Inmediato) extends ModoDireccionamiento{
 }
 
 case class Etiqueta (etiqueta : String) extends ModoDireccionamiento {
+  
   def getValor() : W16 = null
   override def getValorString() : String = ""
   def representacionString() :String = etiqueta
-  def codigo() :String  = ""
+  def codigo() :String  = "001000"
 }

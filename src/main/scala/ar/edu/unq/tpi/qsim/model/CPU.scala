@@ -4,6 +4,7 @@ import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tip.qsim.state.Estado
 import ar.edu.unq.tip.qsim.state.Inicial
+import scala.collection.mutable.Map
 
 case class CPU() {
 	// VER SI VAMOS A MODELAR EL ESTADO O NO DE LA CPU

@@ -2,6 +2,7 @@ package ar.edu.unq.tpi.qsim.model
 
 import ar.edu.unq.tip.qsim.state._
 import ar.edu.unq.tpi.qsim.exeptions._
+import scala.collection.mutable.Map
 
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tip.qsim.state.Inicial
@@ -23,14 +24,24 @@ case class Simulador() {
   def etiquetasInvalidas(programa: Programa): Boolean = {
     programa.instrucciones.exists(instr ⇒ instr match {
       case inst_up: Instruccion_UnOperando ⇒ (!programa.etiquetas.contains(inst_up.origen.representacionString()))
+      case _=>false
+      
+    })
+  }
+  def linkearEtiquetas(programa: Programa) {
+    programa.instrucciones.foreach(instr ⇒ instr match {
+      case inst_up: Instruccion_UnOperando ⇒ 
+      case _=>false
+      
     })
   }
 
   def asignarPosiciones(pc:W16, programa:Programa):Programa = {
-	var pcAsignar = pc	
+	var pcAsignar : W16 = pc	
     programa.instrucciones.foreach(inst => {
     	inst.position = pcAsignar
-    	pcAsignar.++(inst.cantidadCeldas())
+    	println(inst.position)
+    	pcAsignar = pcAsignar.ss(inst.cantidadCeldas())
     })
     programa
   }
@@ -39,7 +50,8 @@ case class Simulador() {
 		programa.instrucciones.foreach(inst => {
     	   inst match {
     	     case inst_up : Instruccion_UnOperando => inst_up.origen = new Inmediato(programa.etiquetas(inst_up.origen.representacionString).position)
-    	    }
+    	     case _ =>  		
+    	   }
        })
     programa
   }
@@ -105,7 +117,7 @@ case class Simulador() {
 
   def execute_instruccion_matematica(): W16 = {
     println("--------INSTRUCCION PARA ALU------")
-    var resultado: Map[String, Any] = null
+    var resultado = Map[String, Any]()
     instruccionActual match {
       case ADD(op1, op2) ⇒ resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
       case MUL(op1, op2) ⇒ resultado = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
