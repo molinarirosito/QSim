@@ -1,2 +1,1 @@
-pepe: MOV R0,R1
-SUB R1, 0x0023
+CALL susan

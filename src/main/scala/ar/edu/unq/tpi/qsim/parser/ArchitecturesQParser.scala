@@ -32,6 +32,7 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
 
   def direct = "[" ~> inmediate <~ "]" ^^ { case direction ⇒ Directo(direction) }
 
+  def etiqueta = ident ^^ {case etiqueta => Etiqueta(etiqueta)}
   //def directionIndirect = "[" ~>directionDirect  <~ "]" ^^ {case direction => DirectionIndirect(direction)}
 
   def directionableQ1 = register | inmediate
@@ -44,9 +45,13 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
 
   //operaciones
   def instruccions2 = "MOV" | "SUB" | "DIV" | "ADD" | "MUL"
-
-  def instruccions1 = "CALL"
-
+  
+  def instruccions2l = instruccions2 |"CMP"| "AND" |"OR" 
+  
+  def instruccions1o = "CALL" | "JUMP"
+  
+  def instruccions1d = "NOT" 
+ 
   def instruccions0 = "RET"
 
   def instruction2Q1 = instruccions2 ~ asignableQ1 ~ ("," ~> directionableQ1) ^^
@@ -55,28 +60,31 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
   def instruction2Q2 = instruccions2 ~ asignableQ2 ~ ("," ~> directionableQ2) ^^
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
-  def instruction1Q3 = instruccions1 ~ asignableQ2 ^^
-    { case ins ~ dir1 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir1).asInstanceOf[Instruccion_UnOperando] }
+  def instruction1Q3 = instruccions1o ~ etiqueta ^^
+    { case ins ~ etiq ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(etiq).asInstanceOf[Instruccion_UnOperando] }
 
   def instruction0Q3 = instruccions0 ^^
     { case ins ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
-
+  
+  
   def instructionsQ1 = ((ident <~ ":")?) ~ instruction2Q1
  
   def instructionsQ2 = ((ident <~ ":")?) ~ instruction2Q2
 
-  def instructionsQ3 = ((ident <~ ":")?) ~ instruction2Q2 | instruction0Q3 | instruction1Q3
-
+ // def instructionsQ3 = ((ident <~ ":")?) ~ instruction2Q2 | instruction0Q3 | instruction1Q3
+  
+  def instructionsQ3 = ((ident <~ ":")?) ~ instruction1Q3 	
+  
   def programQ1 = program(instructionsQ1)
   def programQ2 = program(instructionsQ2)
-  //  def programQ3 = program(instructionsQ3)
+  def programQ3 = program(instructionsQ3)
 
   def program(parser: Parser[Option[String] ~ Instruccion]) = rep(parser) ^^
     { case instructions ⇒ Programa(instructions.map(p ⇒ (p._1, p._2))) }
 
   // def program = programQ1 | programQ2 | programQ3
 
-  def parse(input: String) = parseAll(programQ1, input)
+  def parse(input: String) = parseAll(programQ3, input)
 }
 
 object QuarqExample extends App with ArchitecturesQParser {

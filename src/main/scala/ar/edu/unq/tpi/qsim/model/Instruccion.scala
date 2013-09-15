@@ -3,7 +3,9 @@ import ar.edu.unq.tpi.qsim.utils._
 
 abstract class Instruccion(val codigoDeOperacion: String, var operacion: String)
 {
-
+  var position : W16 = null
+  def posicionEnMemoria() : W16 = position
+  
   def representacionHexadecimal() : String
   def decode() : String = this.toString 
   def tamanioHex() : Int = this.representacionHexadecimal.replace(" ", "").size
@@ -11,15 +13,8 @@ abstract class Instruccion(val codigoDeOperacion: String, var operacion: String)
   
 }
 
-trait InstruccionConEtiqueta {
-  
-  def etiqueta(): String  
-}
-
-class Instruccion_SinOperandos(codigoDeOperacion: String, operacion: String, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) with InstruccionConEtiqueta {
-  
-  override def etiqueta() = "" 
-    
+class Instruccion_SinOperandos(codigoDeOperacion: String, operacion: String, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) {
+ 
   override def representacionHexadecimal() : String  =  {
  
   val operations_code_binary = Util.binary16ToHex(codigoDeOperacion + relleno )
@@ -29,10 +24,9 @@ class Instruccion_SinOperandos(codigoDeOperacion: String, operacion: String, val
   override def toString() =  operacion 
 }
 
-class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var origen: ModoDireccionamiento, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) with InstruccionConEtiqueta  {
+class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var origen: ModoDireccionamiento, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) {
   
-  override def etiqueta() = ""
-  
+	
   override def representacionHexadecimal() : String  =  {
  
   val operations_code_binary = Util.binary16ToHex(codigoDeOperacion + relleno + origen.codigo )
