@@ -28,13 +28,6 @@ case class Simulador() {
       
     })
   }
-  def linkearEtiquetas(programa: Programa) {
-    programa.instrucciones.foreach(instr ⇒ instr match {
-      case inst_up: Instruccion_UnOperando ⇒ 
-      case _=>false
-      
-    })
-  }
 
   def asignarPosiciones(pc:W16, programa:Programa):Programa = {
 	var pcAsignar : W16 = pc	
@@ -111,18 +104,18 @@ case class Simulador() {
     }
 
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
-    case Directo(inmediato: Inmediato) ⇒ memoria.getValor(inmediato.getValorString())
-    case _ ⇒ modoDir.getValor
+    case Directo(inmediato: Inmediato) => memoria.getValor(inmediato.getValorString())
+    case _ => modoDir.getValor
   }
 
   def execute_instruccion_matematica(): W16 = {
     println("--------INSTRUCCION PARA ALU------")
     var resultado = Map[String, Any]()
     instruccionActual match {
-      case ADD(op1, op2) ⇒ resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
-      case MUL(op1, op2) ⇒ resultado = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
-      case DIV(op1, op2) ⇒ resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
-      case SUB(op1, op2) ⇒ resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
+      case ADD(op1, op2) => resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
+      case MUL(op1, op2) => resultado = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
+      case DIV(op1, op2) => resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
+      case SUB(op1, op2) => resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
     }
     cpu.actualizarFlags(resultado)
     resultado("resultado").asInstanceOf[W16]
@@ -132,17 +125,17 @@ case class Simulador() {
     println("-------------EXECUTE---------")
     instruccionActual match {
       // te gusta que sea de esta forma??
-      case RET() ⇒ executeRet()
-      case CALL(op1) ⇒ executeCall(op1)
-      case MOV(op1, op2) ⇒ store(op1, obtenerValor(op2))
-      case iOp2: Instruccion_DosOperandos ⇒ store(iOp2.destino, execute_instruccion_matematica())
+      case RET() => executeRet()
+      case CALL(op1) => executeCall(op1)
+      case MOV(op1, op2) => store(op1, obtenerValor(op2))
+      case iOp2: Instruccion_DosOperandos => store(iOp2.destino, execute_instruccion_matematica())
     }
     println("Ejecuta la instruccion!!!")
   }
 
   def store(modoDir: ModoDireccionamiento, un_valor: W16) = modoDir match {
-    case Directo(inmediato: Inmediato) ⇒ memoria.setValor(inmediato.getValorString(), un_valor)
-    case r: Registro ⇒
+    case Directo(inmediato: Inmediato) => memoria.setValor(inmediato.getValorString(), un_valor)
+    case r: Registro =>
       r.valor = un_valor
       println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
   }

@@ -81,6 +81,8 @@ case class JVS(desp: Salto) extends JUMP_condicional("0111","JVS", desp){}
 
 case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1011","CALL",orig, "000000"){}
 
+case class NOT(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1001","NOT",orig, "000000"){}
+
 case class RET() extends Instruccion_SinOperandos("1100","RET", "000000000000"){}
 
 case class JMP(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1010","JMP",orig, "000000"){}
@@ -94,6 +96,14 @@ case class SUB(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends I
 case class DIV(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0111","DIV",dest,orig){}
 
 case class MOV(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0001","MOV",dest,orig){}
+
+case class AND(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0100","AND",dest,orig){}
+
+case class OR(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0101","OR",dest,orig){}
+
+case class CMP(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0110","CMP",dest,orig){}
+
+
 
 
 object Testuds extends App{
