@@ -7,9 +7,9 @@ object Programa {
 
   def apply(datas: List[(Option[String], Instruccion)]):Programa = {
     var etiquetas = Map[String, Instruccion]()
-    datas.foreach(entry ⇒ {
+    datas.foreach(entry => {
       entry match {
-        case (Some(etiqueta), i) ⇒ etiquetas(etiqueta) = i
+        case (Some(etiqueta), i) => etiquetas(etiqueta) = i
          case _ =>
       }
 
@@ -22,7 +22,7 @@ class Programa(var instrucciones: List[Instruccion], var etiquetas: Map[String, 
 
   var indice = 0
 
-  def tamanioDelPrograma(): Int = (instrucciones.map(i ⇒ i.tamanioHex).fold(0)(_ + _)) / 4
+  def tamanioDelPrograma(): Int = (instrucciones.map(i => i.tamanioHex).fold(0)(_ + _)) / 4
 
   def actualizarIndice() {
     indice = indice + 1
