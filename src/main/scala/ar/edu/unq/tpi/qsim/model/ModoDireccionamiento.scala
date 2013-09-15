@@ -82,6 +82,14 @@ case class Directo (inmediato : Inmediato) extends ModoDireccionamiento{
  // override def bits() : Int = this.toBinaryString.size - 1
 }
 
+case class Indirecto (directo : Directo) extends ModoDireccionamiento{
+  def getValor() : W16 = directo.getValor
+  override def getValorString() : String = directo.getValorString
+  def representacionString() :String = "[" + directo.representacionString + "]"
+  def codigo() :String  = "011000"
+ // override def bits() : Int = this.toBinaryString.size - 1
+}
+
 case class Etiqueta (etiqueta : String) extends ModoDireccionamiento {
   
   def getValor() : W16 = null
