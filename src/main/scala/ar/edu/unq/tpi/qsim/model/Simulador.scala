@@ -22,9 +22,9 @@ case class Simulador() {
   }
 
   def etiquetasInvalidas(programa: Programa): Boolean = {
-    programa.instrucciones.exists(instr => instr match {
-      case inst_up: Instruccion_UnOperando => (!programa.etiquetas.contains(inst_up.origen.representacionString()))
-      case _ => false
+    programa.instrucciones.exists(instr ⇒ instr match {
+      case inst_up: Instruccion_UnOperando ⇒ (!programa.etiquetas.contains(inst_up.origen.representacionString()))
+      case _ ⇒ false
     })
   }
 
@@ -103,10 +103,10 @@ case class Simulador() {
     }
 
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
-    case Directo(inmediato: Inmediato) => memoria.getValor(inmediato.getValorString())
-    case Indirecto(directo: Directo) => memoria.getValor(obtenerValor(directo))
-    case RegistroIndirecto(registro: Registro) => memoria.getValor(obtenerValor(registro))
-    case _ => modoDir.getValor
+    case Directo(inmediato: Inmediato) ⇒ memoria.getValor(inmediato.getValorString())
+    case Indirecto(directo: Directo) ⇒ memoria.getValor(obtenerValor(directo))
+    case RegistroIndirecto(registro: Registro) ⇒ memoria.getValor(obtenerValor(registro))
+    case _ ⇒ modoDir.getValor
   }
 
   def execute_instruccion_matematica(): W16 = {
@@ -131,16 +131,17 @@ case class Simulador() {
       case MOV(op1, op2) ⇒ store(op1, obtenerValor(op2))
       //case JMP
       // case Jxx
+      case CMP(op1, op2) ⇒ executeCmp(obtenerValor(op1),obtenerValor(op2))
       case iOp2: Instruccion_DosOperandos ⇒ store(iOp2.destino, execute_instruccion_matematica())
     }
     println("Ejecuta la instruccion!!!")
   }
 
   def store(modoDir: ModoDireccionamiento, un_valor: W16) = modoDir match {
-    case Directo(inmediato: Inmediato) => memoria.setValor(inmediato.getValorString(), un_valor)
-    case Indirecto(directo: Directo) => memoria.setValor(obtenerValor(directo).hex, un_valor)
-    case RegistroIndirecto(registro: Registro) => memoria.setValor(obtenerValor(registro).hex, un_valor)
-    case r: Registro =>
+    case Directo(inmediato: Inmediato) ⇒ memoria.setValor(inmediato.getValorString(), un_valor)
+    case Indirecto(directo: Directo) ⇒ memoria.setValor(obtenerValor(directo).hex, un_valor)
+    case RegistroIndirecto(registro: Registro) ⇒ memoria.setValor(obtenerValor(registro).hex, un_valor)
+    case r: Registro ⇒
       r.valor = un_valor
       println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
   }
@@ -148,6 +149,10 @@ case class Simulador() {
   def executeRet() {
     cpu.sp.++
     cpu.pc.:=(memoria.getValor(cpu.sp.toString).toString)
+  }
+  def executeCmp(op1: W16, op2: W16) {
+    var resultados = ALU.execute_cmp(op1, op2)
+    cpu.actualizarFlags(resultados)
   }
 
   def executeCall(modoDir: ModoDireccionamiento) {

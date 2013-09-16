@@ -48,6 +48,12 @@ object ALU {
     //   carry 0
   }
 
+  def execute_cmp(op1: W16, op2: W16): Map[String, Any] = {
+    var resultados = execute_operacion_matematica(_-_, op1, op2)
+    val v = verificarCondicionOverflowResta(resultados("resultado").asInstanceOf[W16], op1, op2)
+    resultados("v") = v.asInstanceOf[Any]
+    resultados
+  }
   def actualizarNegative(resultado: Int): Int = resultado match {
     case r if (r < 0) ⇒ 1
     case _ ⇒ 0
