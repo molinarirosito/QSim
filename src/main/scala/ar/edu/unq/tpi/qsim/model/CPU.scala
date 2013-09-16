@@ -36,14 +36,14 @@ case class CPU() {
   def actualizarR7(registroValue: Map[String, Any]) {
     if (registroValue.contains("R7")) {
       registro("R7") match {
-        case Some(reg) ⇒ reg.setValor(registroValue("R7").asInstanceOf[W16])
-        case None ⇒
+        case Some(reg) => reg.setValor(registroValue("R7").asInstanceOf[W16])
+        case None =>
       }
     }
   }
 
   def actualizarRegistros(registrosAct: Map[String, W16]) {
-    for (x ← 0 to 7) {
+    for (x <- 0 to 7) {
       if (registrosAct.contains(s"R$x")) {
         this.registros(x).setValor(registrosAct(s"R$x"))
       }

@@ -22,15 +22,15 @@ case class Simulador() {
   }
 
   def etiquetasInvalidas(programa: Programa): Boolean = {
-    programa.instrucciones.exists(instr ⇒ instr match {
-      case inst_up: Instruccion_UnOperando ⇒ (!programa.etiquetas.contains(inst_up.origen.representacionString()))
-      case _ ⇒ false
+    programa.instrucciones.exists(instr => instr match {
+      case inst_up: Instruccion_UnOperando => (!programa.etiquetas.contains(inst_up.origen.representacionString()))
+      case _ => false
     })
   }
 
   def asignarPosiciones(pc: W16, programa: Programa): Programa = {
     var pcAsignar: W16 = pc
-    programa.instrucciones.foreach(inst ⇒ {
+    programa.instrucciones.foreach(inst => {
       inst.position = pcAsignar
       println(inst.position)
       pcAsignar = pcAsignar.ss(inst.cantidadCeldas())
@@ -39,10 +39,10 @@ case class Simulador() {
   }
 
   def calcularEtiquetas(programa: Programa): Programa = {
-    programa.instrucciones.foreach(inst ⇒ {
+    programa.instrucciones.foreach(inst => {
       inst match {
-        case inst_up: Instruccion_UnOperando ⇒ inst_up.origen = new Inmediato(programa.etiquetas(inst_up.origen.representacionString).position)
-        case _ ⇒
+        case inst_up: Instruccion_UnOperando => inst_up.origen = new Inmediato(programa.etiquetas(inst_up.origen.representacionString).position)
+        case _ =>
       }
     })
     programa
@@ -103,24 +103,24 @@ case class Simulador() {
     }
 
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
-    case Directo(inmediato: Inmediato) ⇒ memoria.getValor(inmediato.getValorString())
-    case Indirecto(directo: Directo) ⇒ memoria.getValor(obtenerValor(directo))
-    case RegistroIndirecto(registro: Registro) ⇒ memoria.getValor(obtenerValor(registro))
-    case _ ⇒ modoDir.getValor
+    case Directo(inmediato: Inmediato) => memoria.getValor(inmediato.getValorString())
+    case Indirecto(directo: Directo) => memoria.getValor(obtenerValor(directo))
+    case RegistroIndirecto(registro: Registro) => memoria.getValor(obtenerValor(registro))
+    case _ => modoDir.getValor
   }
 
   def execute_instruccion_matematica(): W16 = {
     println("--------INSTRUCCION PARA ALU------")
     var resultado = Map[String, Any]()
     instruccionActual match {
-      case ADD(op1, op2) ⇒ resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
-      case MUL(op1, op2) ⇒ {
+      case ADD(op1, op2) => resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
+      case MUL(op1, op2) => {
         var result_mult = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
         cpu.actualizarR7(result_mult)
         result_mult
       }
-      case DIV(op1, op2) ⇒ resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
-      case SUB(op1, op2) ⇒ resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
+      case DIV(op1, op2) => resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
+      case SUB(op1, op2) => resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
     }
     cpu.actualizarFlags(resultado)
     resultado("resultado").asInstanceOf[W16]
@@ -130,22 +130,22 @@ case class Simulador() {
     println("-------------EXECUTE---------")
     instruccionActual match {
       // te gusta que sea de esta forma??
-      case RET() ⇒ executeRet()
-      case CALL(op1) ⇒ executeCall(op1)
-      case MOV(op1, op2) ⇒ store(op1, obtenerValor(op2))
+      case RET() => executeRet()
+      case CALL(op1) => executeCall(op1)
+      case MOV(op1, op2) => store(op1, obtenerValor(op2))
       //case JMP
       // case Jxx
-      case CMP(op1, op2) ⇒ executeCmp(obtenerValor(op1),obtenerValor(op2))
-      case iOp2: Instruccion_DosOperandos ⇒ store(iOp2.destino, execute_instruccion_matematica())
+      case CMP(op1, op2) => executeCmp(obtenerValor(op1),obtenerValor(op2))
+      case iOp2: Instruccion_DosOperandos => store(iOp2.destino, execute_instruccion_matematica())
     }
     println("Ejecuta la instruccion!!!")
   }
 
   def store(modoDir: ModoDireccionamiento, un_valor: W16) = modoDir match {
-    case Directo(inmediato: Inmediato) ⇒ memoria.setValor(inmediato.getValorString(), un_valor)
-    case Indirecto(directo: Directo) ⇒ memoria.setValor(obtenerValor(directo).hex, un_valor)
-    case RegistroIndirecto(registro: Registro) ⇒ memoria.setValor(obtenerValor(registro).hex, un_valor)
-    case r: Registro ⇒
+    case Directo(inmediato: Inmediato) => memoria.setValor(inmediato.getValorString(), un_valor)
+    case Indirecto(directo: Directo) => memoria.setValor(obtenerValor(directo).hex, un_valor)
+    case RegistroIndirecto(registro: Registro) => memoria.setValor(obtenerValor(registro).hex, un_valor)
+    case r: Registro =>
       r.valor = un_valor
       println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
   }

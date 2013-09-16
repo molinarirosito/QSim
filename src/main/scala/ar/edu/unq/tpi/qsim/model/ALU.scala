@@ -4,7 +4,7 @@ import scala.collection.mutable.Map
 
 object ALU {
 
-  def execute_operacion_matematica(operacion: (Int, Int) ⇒ Int, op1: W16, op2: W16): Map[String, Any] = {
+  def execute_operacion_matematica(operacion: (Int, Int) => Int, op1: W16, op2: W16): Map[String, Any] = {
 
     val valor = operacion(op1.value, op2.value)
     val resultado_binario = Util.toBinary16BOverflow(valor)
@@ -64,7 +64,7 @@ object ALU {
     resultados
   }
 
-  def execute_operacion_mul(operacion: (Int, Int) ⇒ Int, op1: W16, op2: W16): Map[String, Any] = {
+  def execute_operacion_mul(operacion: (Int, Int) => Int, op1: W16, op2: W16): Map[String, Any] = {
 
     val valor = operacion(op1.value, op2.value)
     val resultado_binario = Util.toBinary32B(valor)
@@ -77,13 +77,13 @@ object ALU {
   }
 
   def actualizarNegative(resultado: Int): Int = resultado match {
-    case r if (r < 0) ⇒ 1
-    case _ ⇒ 0
+    case r if (r < 0) => 1
+    case _ => 0
   }
 
   def actualizarZero(resultado: Int): Int = resultado match {
-    case r if (r == 0) ⇒ 1
-    case _ ⇒ 0
+    case r if (r == 0) => 1
+    case _ => 0
   }
 
   def actualizarCarryBorrow(resultado_binario: W16): Int = Integer.parseInt(resultado_binario.toBinary.charAt(0).toString)
