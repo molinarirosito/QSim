@@ -27,7 +27,11 @@ object Util {
   {
     Integer.parseInt(chain,16)
   }
-  
+  def fromBinaryToHex4(chain:String) :String = {
+	  var chainInBinary = chain.takeRight(16)
+	  var interpretacionHex = Integer.parseInt(chainInBinary,2)
+	  toHex4(interpretacionHex)
+  }
   /**
    * Representa un numero en una cadena binaria de 3 bit.
    * 

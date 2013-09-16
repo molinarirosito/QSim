@@ -12,6 +12,8 @@ class W16(var hex: String) {
   def ++(salto:Int) = hex= Util.toHex4(this.value + salto)
   def -- = hex= Util.toHex4(this.value -1)
   
+  var signo: Int = 0
+  
   def ss(salto:Int) : W16 = new W16(Util.toHex4(this.value + salto))
 
   def :=(w16 : String) = hex = w16
@@ -37,12 +39,7 @@ class W16(var hex: String) {
    val result_value = Util.toHex(this.value/w16.value)
    new W16(result_value)
   }
-  def operacion_matematica(op : (Int,Int)=>Int, op1 : Int, op2 : Int)
-  {
-    println(op(op1, op2))
-    
-  }
-
+  
 }
 
 object prueba extends App() {
