@@ -106,6 +106,7 @@ case class Simulador() {
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
     case Directo(inmediato: Inmediato) => memoria.getValor(inmediato.getValorString())
     case Indirecto(directo: Directo) => memoria.getValor(obtenerValor(directo))
+    case RegistroIndirecto(registro: Registro) => memoria.getValor(obtenerValor(registro))
     case _ => modoDir.getValor
   }
 
@@ -137,6 +138,7 @@ case class Simulador() {
   def store(modoDir: ModoDireccionamiento, un_valor: W16) = modoDir match {
     case Directo(inmediato: Inmediato) => memoria.setValor(inmediato.getValorString(), un_valor)
     case Indirecto(directo: Directo) => memoria.setValor(obtenerValor(directo).hex, un_valor)
+    case RegistroIndirecto(registro: Registro) => memoria.setValor(obtenerValor(registro).hex, un_valor)
     case r: Registro =>
       r.valor = un_valor
       println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
