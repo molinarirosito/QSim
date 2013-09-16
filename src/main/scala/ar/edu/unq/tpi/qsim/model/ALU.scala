@@ -9,8 +9,6 @@ object ALU {
     val valor = operacion(op1.value, op2.value)
 
     val resultado_binario = Util.toBinary16BOverflow(valor)
-    println("resultado " + resultado_binario)
-    println("valor" + valor)
     val n = actualizarNegative(valor)
     val z = actualizarZero(valor)
     // val c = 0
@@ -18,11 +16,10 @@ object ALU {
     val v = 0
 
     var resultado = new W16(Util.fromBinaryToHex4(resultado_binario))
-    // resultado.signo = signo
     Map(("resultado", resultado), ("n", n), ("z", z), ("c", c), ("v", v))
 
   }
-
+  
   def execute_add(op1: W16, op2: W16): Map[String, Any] = {
     var resultados = execute_operacion_matematica(_ + _, op1, op2)
     val v = verificarCondicionOverflowSuma(resultados("resultado").asInstanceOf[W16], op1, op2)
@@ -39,8 +36,7 @@ object ALU {
   }
 
   def execute_mul(op1: W16, op2: W16): Map[String, Any] = {
-    execute_operacion_matematica(_ * _, op1, op2)
-    // carry 0
+    execute_operacion_mul(_*_, op1, op2)
   }
 
   def execute_div(op1: W16, op2: W16): Map[String, Any] = {
@@ -54,6 +50,23 @@ object ALU {
     resultados("v") = v.asInstanceOf[Any]
     resultados
   }
+  
+  def execute_operacion_mul(operacion: (Int, Int) ⇒ Int, op1: W16, op2: W16): Map[String, Any] = {
+
+    val valor = operacion(op1.value, op2.value)
+    val resultado_binario = Util.toBinary32B(valor)
+    val n = actualizarNegative(valor)
+    val z = actualizarZero(valor)
+    val c = 0
+    val v = 0
+    
+    var resultadoMenosSignificativo = new W16(Util.fromBinaryToHex4(resultado_binario._2))
+    var resultadoMasSignificativo = new W16(Util.fromBinaryToHex4(resultado_binario._1))
+    
+    Map(("R7", resultadoMasSignificativo),("resultado", resultadoMenosSignificativo), ("n", n), ("z", z), ("c", c), ("v", v))
+
+  }
+
   def actualizarNegative(resultado: Int): Int = resultado match {
     case r if (r < 0) ⇒ 1
     case _ ⇒ 0

@@ -16,9 +16,12 @@ class AluAplicadoTodasLasOretacionesMatematicas extends FlatSpec with Matchers {
 	  //var lala = new W16("FFFF").signo
 	  //lala = -(lala)
 	 //println(lala)
-	 println(alu.execute_sub(new W16("F000"), new W16("0001")))
+	//  alu.execute_operacion_mul(_*_, new W16("F000"), new W16("0001"))
+	 //println()
 	  //println(Util.fromBinaryToHex4("11111111100001101"))
+	  println(utl.toBinary32B(61440))
   }
 
+  
 
 }

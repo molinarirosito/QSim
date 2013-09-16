@@ -88,6 +88,14 @@ object Util {
     to(Integer.toBinaryString(number),16).takeRight(17)
   }
   
+  def toBinary32B(number:Int): (String,String) = 
+  {
+    var binary32 = to(Integer.toBinaryString(number),32).takeRight(32)
+    var bitsMenosSignificativos = binary32.takeRight(16)  		
+    var bitsMasSignificativos = binary32.take(16)
+    (bitsMasSignificativos, bitsMenosSignificativos)
+  }
+  
   /**
    * Representa un numero dependiendo de la funcion que se le pasa por parametro.
    * functions: toHex o toBinary 

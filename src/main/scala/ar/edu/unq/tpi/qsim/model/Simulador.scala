@@ -114,7 +114,11 @@ case class Simulador() {
     var resultado = Map[String, Any]()
     instruccionActual match {
       case ADD(op1, op2) ⇒ resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
-      case MUL(op1, op2) ⇒ resultado = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
+      case MUL(op1, op2) ⇒ {
+        var result_mult = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
+        cpu.actualizarR7(result_mult)
+        result_mult
+      }
       case DIV(op1, op2) ⇒ resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
       case SUB(op1, op2) ⇒ resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
     }
