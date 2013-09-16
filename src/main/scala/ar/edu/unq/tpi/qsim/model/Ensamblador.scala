@@ -39,6 +39,7 @@ object Ensamblador {
     code_modo match {
       case "000000" => Inmediato(extraerValor(resto)) 
       case "001000" => Directo(Inmediato(extraerValor(resto)))
+      case "011000" => Indirecto(Directo(Inmediato(extraerValor(resto))))
       case _ => ensamblarRegistro(code_modo)
     }
 

@@ -74,11 +74,27 @@ case class Inmediato (valor : W16) extends ModoDireccionamiento{
  // override def bits() : Int = this.toBinaryString.size - 1
 }
 
+case class RegistroIndirecto (registro : Registro) extends ModoDireccionamiento{
+  def getValor() : W16 = registro.getValor
+  override def getValorString() : String = registro.getValorString
+  def representacionString() :String = "[" + registro.representacionString + "]"
+  def codigo() :String  = "110" +  Util.toBinary3B(registro.numero)
+ // override def bits() : Int = this.toBinaryString.size - 1
+}
+
 case class Directo (inmediato : Inmediato) extends ModoDireccionamiento{
   def getValor() : W16 = inmediato.getValor
   override def getValorString() : String = inmediato.getValorString
   def representacionString() :String = "[" + inmediato.representacionString + "]"
   def codigo() :String  = "001000"
+ // override def bits() : Int = this.toBinaryString.size - 1
+}
+
+case class Indirecto (directo : Directo) extends ModoDireccionamiento{
+  def getValor() : W16 = directo.getValor
+  override def getValorString() : String = directo.getValorString
+  def representacionString() :String = "[" + directo.representacionString + "]"
+  def codigo() :String  = "011000"
  // override def bits() : Int = this.toBinaryString.size - 1
 }
 
