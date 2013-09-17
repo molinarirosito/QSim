@@ -11,7 +11,7 @@ object Ensamblador {
    var primer_operando : ModoDireccionamiento = null
    var segundo_operando : ModoDireccionamiento = null
    
-   if(cadena_binaria.startsWith("100"))
+   if(cadena_binaria.startsWith("100") || cadena_binaria.startsWith("110"))
    {  primer_operando = ensamblar_operando(cadena_binaria)
       bits_segundoOperando = cadena_binaria.takeRight(cadena_binaria.size - 6)   }
    else
@@ -40,7 +40,7 @@ object Ensamblador {
       case "000000" => Inmediato(extraerValor(resto)) 
       case "001000" => Directo(Inmediato(extraerValor(resto)))
       case "011000" => Indirecto(Directo(Inmediato(extraerValor(resto))))
-      case _ => ensamblarRegistro(code_modo)
+      case _ => ensamblarPosibleRegistro(code_modo)
     }
 
   }
@@ -122,18 +122,29 @@ object Ensamblador {
 
   }
   
+   def ensamblarPosibleRegistro(cadena_binaria : String): ModoDireccionamiento = {
+   val bits =  cadena_binaria.substring(0, 3)  
+   val resto = cadena_binaria.takeRight(3)
+    bits match {
+      case "100" => ensamblarRegistro(resto) 
+      case "110" =>  RegistroIndirecto(ensamblarRegistro(resto))  
+      case _ => throw new InvalidCodeException("No hay modos de direccionamiento con ese codigo")
+    }
+
+  }
   
-  def ensamblarRegistro(cadena_binaria : String): ModoDireccionamiento = {
+  
+  def ensamblarRegistro(cadena_binaria : String): Registro = {
    
     cadena_binaria match {
-      case "100000" => R0 
-      case "100001" => R1 
-      case "100010" => R2 
-      case "100011" => R3 
-      case "100100" => R4 
-      case "100101" => R5 
-      case "100110" => R6 
-      case "100111" => R7 
+      case "000" => R0 
+      case "001" => R1 
+      case "010" => R2 
+      case "011" => R3 
+      case "100" => R4 
+      case "101" => R5 
+      case "110" => R6 
+      case "111" => R7 
       case _ => throw new InvalidCodeException("No hay modos de direccionamiento con ese codigo")
     }
 
@@ -151,6 +162,7 @@ object pruebados extends App() {
   val c = "001000" + "100111" + "0000000000001111" + "1111000011110000" // [000F],R7 relleno
   val co= "001000" + "001000" + "0001000111100001" + "1111111111111111"
   val p = "111111" + "011100" + "0011111000000001" + "1111110000000001" //R7, 0001
+  val inregistro = "110111" + "110011"
    val registro = "100111" + "100011"
    val directo = "001000" + "0000000000001111"
    val directo_registro = "001000" + "100111" + "0000000000001111" + "1111000011110000" // [000F],R7 
@@ -164,6 +176,7 @@ object pruebados extends App() {
   println("MUL => " + Ensamblador.ensamblarInstruccion("0000" + d))
   println("ADD => " + Ensamblador.ensamblarInstruccion("0010" + b))
   println("ADD SOLO REGISTROS=> " + Ensamblador.ensamblarInstruccion("0010" + registro))
+  println("ADD SOLO REGISTROS INDIRECTOS=> " + Ensamblador.ensamblarInstruccion("0010" + inregistro))
   println("ADD directo registro=> " + Ensamblador.ensamblarInstruccion("0010" + directo_registro))
   println("DIV => " + Ensamblador.ensamblarInstruccion("0111" + a))
   println("MOV => " + Ensamblador.ensamblarInstruccion("0001" + c))
