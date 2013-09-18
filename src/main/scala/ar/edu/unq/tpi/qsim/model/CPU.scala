@@ -63,4 +63,5 @@ object pur extends App() {
   var cpu = CPU()
   print(cpu.registros + "\n")
   print(cpu.pc)
+  
 }

@@ -104,4 +104,59 @@ object ALU {
     var bits = obtenerBitsParaAnalizarOverflow(resultado_binario, op1, op2)
     if ((bits._1 != bits._2) && (bits._2 == bits._3)) { 1 } else { 0 }
   }
+  
+  def AND(un_bit: Int, otro_bit: Int) : Int =
+  {
+    val result = (un_bit,otro_bit) match {
+    	case (1, 1) => 1
+    	case  _ => 0
+   }
+    result
+  }
+  
+  def OR(un_bit: Int, otro_bit: Int) : Int =
+  {
+    val result = (un_bit,otro_bit) match {
+    	case (1,_) => 1
+    	case (_,1) => 1
+    	case  _ => 0
+   }
+    result
+  }
+
+
+ def XOR(un_bit: Int, otro_bit: Int) : Int =
+  {
+    val result = (un_bit,otro_bit) match {
+    	case (1,0) => 1
+    	case (0,1) => 1
+    	case _ => 0
+   }
+    result
+  }
+ 
+ def NOT(un_bit: Int) : Int =
+  {
+    un_bit match {
+    	case 1  =>0
+    	case  _ => 1
+   }
+    
+  }
+ 
+ def interpretarBit(un_bit: Int) : Boolean =
+  {
+    un_bit match {
+    	case 1  =>true
+    	case  _ => false
+   }
+    
+  }
+}
+ 
+ object ttaa extends App {
+
+  //  var sim = Simulador(programa)
+  // sim.inicializarSim()
+  // sim.cargarPrograma("0003")
 }

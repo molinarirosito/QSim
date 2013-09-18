@@ -131,10 +131,11 @@ case class Simulador() {
     instruccionActual match {
       // te gusta que sea de esta forma??
       case RET() => executeRet()
-      case CALL(op1) => executeCall(op1)
+      case CALL(op1) => executeCall(obtenerValor(op1))
       case MOV(op1, op2) => store(op1, obtenerValor(op2))
-      //case JMP
-      // case Jxx
+      case JMP(op1) =>  executeJMP(obtenerValor(op1))
+      case JE(salto) =>  executeJMPCondicional(salto.value,ALU.interpretarBit(cpu.z))
+      case JNE(salto) =>  executeJMPCondicional(salto.value,ALU.interpretarBit(ALU.NOT(cpu.z)))
       case CMP(op1, op2) => executeCmp(obtenerValor(op1),obtenerValor(op2))
       case iOp2: Instruccion_DosOperandos => store(iOp2.destino, execute_instruccion_matematica())
     }
@@ -158,15 +159,29 @@ case class Simulador() {
     var resultados = ALU.execute_cmp(op1, op2)
     cpu.actualizarFlags(resultados)
   }
+  
+  def executeJMP(valor:W16)
+  {
+   cpu.pc.:=(valor.hex)
+  }
+  
+   
+  def executeJMPCondicional(salto:Int,condicion:Boolean)
+  {
+    if(condicion)
+    {cpu.incrementarPc(salto)}
+  }
 
-  def executeCall(modoDir: ModoDireccionamiento) {
+
+  def executeCall(valor:W16) {
     // guarda [SP] <- PC
     memoria.setValor(cpu.sp.toString, cpu.pc)
     // subimos el sp
     cpu.sp.--
     // guarda pc <- origen
-    cpu.pc.:=(modoDir.getValor.toString)
+    cpu.pc.:=(valor.hex)
   }
+
 
 }
 
