@@ -105,6 +105,40 @@ object ALU {
     if ((bits._1 != bits._2) && (bits._2 == bits._3)) { 1 } else { 0 }
   }
   
+  def aplicarOperacionBooleana(una_cadena: String, otra_cadena: String, operacion: (Int, Int) => Int) : String = 
+  {
+   var result = ""
+   var n = 0
+    do {
+      val bit_a = (una_cadena.charAt(n).toString).toInt
+      val bit_b =(otra_cadena.charAt(n).toString).toInt
+     result = result + operacion(bit_a,bit_b).toString
+
+      n = n + 1
+    } while (n < otra_cadena.size && n < una_cadena.size )
+  
+
+   result 
+    
+  }
+  def AND(una_cadena: String, otra_cadena: String) : String = aplicarOperacionBooleana(una_cadena, otra_cadena, AND(_,_))
+  def XOR(una_cadena: String, otra_cadena: String) : String = aplicarOperacionBooleana(una_cadena, otra_cadena, XOR(_,_))
+  def OR(una_cadena: String, otra_cadena: String) : String = aplicarOperacionBooleana(una_cadena, otra_cadena, OR(_,_))
+  def NOT(una_cadena: String) : String =  {
+   var result = ""
+   var n = 0
+    do {
+      val bit_a = (una_cadena.charAt(n).toString).toInt
+     result = result + NOT(bit_a).toString 
+
+      n = n + 1
+    } while (n < una_cadena.size )
+  
+
+   result 
+    
+  }
+  
   def AND(un_bit: Int, otro_bit: Int) : Int =
   {
     val result = (un_bit,otro_bit) match {
@@ -155,6 +189,8 @@ object ALU {
 }
  
  object ttaa extends App {
+
+   println(ALU.AND("101111", "111110"))
 
   //  var sim = Simulador(programa)
   // sim.inicializarSim()
