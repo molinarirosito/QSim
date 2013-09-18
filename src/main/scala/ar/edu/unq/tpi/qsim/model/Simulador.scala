@@ -129,13 +129,22 @@ case class Simulador() {
   def execute() {
     println("-------------EXECUTE---------")
     instruccionActual match {
-      // te gusta que sea de esta forma??
+
       case RET() => executeRet()
       case CALL(op1) => executeCall(obtenerValor(op1))
       case MOV(op1, op2) => store(op1, obtenerValor(op2))
       case JMP(op1) =>  executeJMP(obtenerValor(op1))
-      case JE(salto) =>  executeJMPCondicional(salto.value,ALU.interpretarBit(cpu.z))
-      case JNE(salto) =>  executeJMPCondicional(salto.value,ALU.interpretarBit(ALU.NOT(cpu.z)))
+      case JE(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.z))
+      case JNE(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.NOT(cpu.z)))
+      case JLE(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.OR(cpu.z,ALU.XOR(cpu.n,cpu.v))))
+      case JG(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.z,ALU.XOR(cpu.n,cpu.v)))))
+      case JL(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.XOR(cpu.n,cpu.v)))
+      case JGE(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.NOT(ALU.XOR(cpu.n,cpu.v))))
+      case JLEU(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.OR(cpu.c,cpu.z)))
+      case JGU(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.c,cpu.z))))
+      case JCS(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.c))
+      case JNEG(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.n))
+      case JVS(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.v))
       case CMP(op1, op2) => executeCmp(obtenerValor(op1),obtenerValor(op2))
       case iOp2: Instruccion_DosOperandos => store(iOp2.destino, execute_instruccion_matematica())
     }
@@ -166,10 +175,10 @@ case class Simulador() {
   }
   
    
-  def executeJMPCondicional(salto:Int,condicion:Boolean)
+  def executeJMPCondicional(salto:Salto,condicion:Boolean)
   {
     if(condicion)
-    {cpu.incrementarPc(salto)}
+    {cpu.incrementarPc(salto.value)}
   }
 
 
