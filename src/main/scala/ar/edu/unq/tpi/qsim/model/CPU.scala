@@ -7,7 +7,7 @@ import ar.edu.unq.tip.qsim.state.Inicial
 import scala.collection.mutable.Map
 
 case class CPU() {
-  // VER SI VAMOS A MODELAR EL ESTADO O NO DE LA CPU
+
   var registros = ArrayBuffer[Registro](R0, R1, R2, R3, R4, R5, R6, R7)
   var pc = new W16("0000")
   var sp = new W16("FFEF")
@@ -19,20 +19,35 @@ case class CPU() {
   var z = 0
   var c = 0
 
+  /**
+   * Encuentra un registro por medio de su representacion en String
+   * @params registroString: String
+   */
   def registro(registroString: String) = registros.find(_.representacionString == registroString)
 
+  /**
+   * Incrementa el pc en una cantidad que se se pasa por parametro
+   * @params cantidad: Int
+   */
   def incrementarPc(cantidad: Int) = {
     println("se incrementa!!")
     pc.++(cantidad)
   }
 
+  /**
+   * Carga un valor hexadecimal en el pc pasado por parametro.
+   * @parameters valor: String
+   */
   def cargarPc(valor: String) {
-    //esperar que Tati cambie lo de w16
     println("valor a cargar" + valor)
     pc = new W16(valor)
     println("valor cargado" + pc.toString)
   }
 
+  /**
+   * Actualiza R7 con un valor pasado en un Map.
+   * @parameters registroValue: Map[String, Any]
+   */
   def actualizarR7(registroValue: Map[String, Any]) {
     if (registroValue.contains("R7")) {
       registro("R7") match {
@@ -42,6 +57,10 @@ case class CPU() {
     }
   }
 
+  /**
+   * Actualiza los registros por medio de un Map que recibe por parametro.
+   * @parameters registrosAct: Map[String, W16]
+   */
   def actualizarRegistros(registrosAct: Map[String, W16]) {
     for (x <- 0 to 7) {
       if (registrosAct.contains(s"R$x")) {
@@ -50,6 +69,10 @@ case class CPU() {
     }
   }
 
+  /**
+   * Actualiza los flags por medio de un Map que recibe por parametro.
+   * @parameters flags: Map[String, Any]
+   */
   def actualizarFlags(flags: Map[String, Any]) {
     v = flags("v").asInstanceOf[Int]
     z = flags("z").asInstanceOf[Int]

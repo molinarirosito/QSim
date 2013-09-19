@@ -11,7 +11,6 @@ object ALU {
    * @return Map[String, Any]
    */
   def execute_operacion_matematica(operacion: (Int, Int) => Int, op1: W16, op2: W16): Map[String, Any] = {
-
     val valor = operacion(op1.value, op2.value)
     val resultado_binario = Util.toBinary16BOverflow(valor)
     println("resultado " + valor )
