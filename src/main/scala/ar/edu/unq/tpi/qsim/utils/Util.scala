@@ -169,6 +169,7 @@ object Util {
      toBinary16B(value)
    }
 
+   def rep[A](n: Int)(f: => A) { if (n > 0) { f; rep(n-1)(f) } }
 
 
   def IntSumToHex(number: Int): String = toHex(number)

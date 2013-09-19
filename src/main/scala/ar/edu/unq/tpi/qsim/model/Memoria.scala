@@ -1,6 +1,8 @@
 package ar.edu.unq.tpi.qsim.model
+
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.utils.Util
+import ar.edu.unq.tpi.qsim.exeptions._
 
 case class Memoria(var tamanio: Int) {
 
@@ -35,8 +37,7 @@ case class Memoria(var tamanio: Int) {
       var value = celdas(pc)
       value
     } else{
-      println("Esta no es una celda de memoria valida!!")
-      null
+      throw new CeldaFueraDeMemoriaException("La memoria no tiene ese numero de celda")
       }
   }
   
@@ -102,7 +103,7 @@ case class Memoria(var tamanio: Int) {
   def setValor(celda: String, valor: W16) = celdas(Util.hexToInteger(celda)) = valor
 
   /**
-   * Muestra la memoria a partir de un numero de celda en hexadecimal.
+   * Muestra la memoria imprimiendola a partir de un numero de celda en hexadecimal.
    * @param String
    */
   def show(pc: String): String = {

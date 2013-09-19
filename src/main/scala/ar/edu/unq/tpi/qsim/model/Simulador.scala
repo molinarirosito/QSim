@@ -79,9 +79,20 @@ case class Simulador() {
 
   def obtenerProximaInstruccionBinario(): String =
     {
-      val int_pc = cpu.pc.value
-      memoria.getValor(int_pc).toBinary + memoria.getValor(int_pc + 1).toBinary + memoria.getValor(int_pc + 2).toBinary
-    }
+
+     var int_pc = cpu.pc.value
+     var celdas_binario = memoria.getValor(int_pc).toBinary
+    
+    try
+        {
+    	Util.rep(2) { celdas_binario = memoria.getValor(int_pc + 1).toBinary; int_pc=int_pc+1 }   
+        }
+        catch        { 
+           case cfme: CeldaFueraDeMemoriaException => celdas_binario
+        }   
+    celdas_binario 
+      
+  }
 
   def fetch() {
     println("----------FETCH ---------")

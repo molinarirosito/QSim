@@ -60,7 +60,7 @@ object Ensamblador {
       case "0101" => JCS(new Salto(resto))
       case "0110" => JNEG(new Salto(resto))
       case "0111" => JVS(new Salto(resto))
-      case _ =>  throw new InvalidCodeException("Podria haber sido un Jump Condicional pero no coincide con ningun codigo de operacion") 
+      case _ =>  throw new CodigoInvalidoException("Podria haber sido un Jump Condicional pero no coincide con ningun codigo de operacion") 
     }
    }
   
@@ -69,7 +69,7 @@ object Ensamblador {
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
     relleno match {
       case "000000" => JMP(ensamblar_operando(resto))
-      case _ =>  throw new InvalidCodeException("Podria haber sido un JMP pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+      case _ =>  throw new CodigoInvalidoException("Podria haber sido un JMP pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
     }
    }
   
@@ -78,7 +78,7 @@ object Ensamblador {
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
     relleno match {
       case "000000" => NOT(ensamblar_operando(resto))
-      case _ =>  throw new InvalidCodeException("Podria haber sido un NOT pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+      case _ =>  throw new CodigoInvalidoException("Podria haber sido un NOT pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
     }
 
   }
@@ -88,7 +88,7 @@ object Ensamblador {
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
     relleno match {
       case "000000" => CALL(ensamblar_operando(resto))
-      case _ =>  throw new InvalidCodeException("Podria haber sido un CALL pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+      case _ =>  throw new CodigoInvalidoException("Podria haber sido un CALL pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
     }
 
   }
@@ -117,7 +117,7 @@ object Ensamblador {
       case "0100" => construir_instruccionDosOperandos(AND(_,_),ensamblarDosOperandos(resto))
       case "0101" => construir_instruccionDosOperandos(OR(_,_),ensamblarDosOperandos(resto))
       case "0110" => construir_instruccionDosOperandos(DIV(_,_),ensamblarDosOperandos(resto))
-      case _ => throw new InvalidCodeException("No hay ninguna instruccion con ese codigo de operacion")
+      case _ => throw new CodigoInvalidoException("No hay ninguna instruccion con ese codigo de operacion")
     }
 
   }
@@ -128,7 +128,7 @@ object Ensamblador {
     bits match {
       case "100" => ensamblarRegistro(resto) 
       case "110" =>  RegistroIndirecto(ensamblarRegistro(resto))  
-      case _ => throw new InvalidCodeException("No hay modos de direccionamiento con ese codigo")
+      case _ => throw new CodigoInvalidoException("No hay modos de direccionamiento con ese codigo")
     }
 
   }
@@ -145,7 +145,7 @@ object Ensamblador {
       case "101" => R5 
       case "110" => R6 
       case "111" => R7 
-      case _ => throw new InvalidCodeException("No hay modos de direccionamiento con ese codigo")
+      case _ => throw new CodigoInvalidoException("No hay modos de direccionamiento con ese codigo")
     }
 
   }
