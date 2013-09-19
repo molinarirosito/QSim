@@ -14,6 +14,9 @@ case class Simulador() {
   var memoria: Memoria = _
   var instruccionActual: Instruccion = _
 
+  /**
+   * Inicializa el sumulador, crea la memoria y el CPU.
+   */
   def inicializarSim() {
     println("--------INIT------")
     cpu = CPU()
@@ -21,6 +24,11 @@ case class Simulador() {
     memoria.initialize()
   }
 
+  /**
+   * Toma un programa y devuelve si tiene alguna etiqueta invalida
+   * @param Programa
+   * @return Boolean
+   */
   def etiquetasInvalidas(programa: Programa): Boolean = {
     programa.instrucciones.exists(instr => instr match {
       case inst_up: Instruccion_UnOperando => (!programa.etiquetas.contains(inst_up.origen.representacionString()))
@@ -28,6 +36,11 @@ case class Simulador() {
     })
   }
 
+  /**
+   * Toma un pc de inicio (W16) y un programa y le asigna a cada instruccion una posicion
+   * @param W16, Programa
+   * @return Programa
+   */
   def asignarPosiciones(pc: W16, programa: Programa): Programa = {
     var pcAsignar: W16 = pc
     programa.instrucciones.foreach(inst => {
@@ -48,6 +61,10 @@ case class Simulador() {
     programa
   }
 
+  /**
+   * Carga el programa en memoria, a partir de un pc hexadecimal (String) y los registros que recibe dentro de un map
+   * @param Programa, String, Map[String,W16]
+   */
   def cargarProgramaYRegistros(programa: Programa, pc: String, registros: Map[String, W16]) {
     var pcInicial = new W16(pc)
     cpu.cargarPc(pc)
@@ -65,6 +82,10 @@ case class Simulador() {
     //    memoria.cargarPrograma(programa, pc)
   }
 
+  /**
+   * Simula la ejecucion de un programa en memoria
+   * @param Programa
+   */
   def ejecucion(programa: Programa) {
     var n = 1
     println("Empezando con la Ejecucion")
@@ -76,7 +97,12 @@ case class Simulador() {
     } while (n <= programa.instrucciones.size)
     println("Finalizo la ejecucion")
   }
-
+  /**
+   * Obtiene la proxima instruccion en representacion binaria. Toma tres celdas (ya que es el maximo que pueda ocupar una instruccion), si en la
+   * memoria no quedan tantas, toma las que quedan nada mas. De no haber ninguna lanza una exepcion.
+   * @throws CeldaFueraDeMemoriaExeption
+   * @return String 
+   */
   def obtenerProximaInstruccionBinario(): String =
     {
 
@@ -94,6 +120,10 @@ case class Simulador() {
       
   }
 
+  /**
+   * Simula el fech de la instruccion. La obtiene de memoria segun marque el pc, la ensambla y aumenta el pc.
+   * 
+   */
   def fetch() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
@@ -106,6 +136,10 @@ case class Simulador() {
     println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
   }
 
+  /**
+   * Simula el decode de la instruccion. Simplemente muestra lo que ensamblo.
+   * 
+   */
   def decode(): String =
     {
       println("----------DECODE------------")
@@ -113,6 +147,11 @@ case class Simulador() {
       instruccionActual.toString
     }
 
+  /**
+   * Obtiene el valor alojado en el modo de direccionamiento que es pasado por parametro
+   * @param ModoDireccionamiento
+   * @return W16
+   */
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
     case Directo(inmediato: Inmediato) => memoria.getValor(inmediato.getValorString())
     case Indirecto(directo: Directo) => memoria.getValor(obtenerValor(directo))
@@ -120,6 +159,11 @@ case class Simulador() {
     case _ => modoDir.getValor
   }
 
+  /**
+   * Delega en la ALU la ejecucion de una instruccion matematica. Recibe el resutlado y lo guarda en
+   * el primer operando.
+   * 
+   */
   def execute_instruccion_matematica(): W16 = {
     println("--------INSTRUCCION PARA ALU------")
     var resultado = Map[String, Any]()
@@ -137,6 +181,9 @@ case class Simulador() {
     resultado("resultado").asInstanceOf[W16]
   }
 
+  /**
+   * Simula el execute. Ejecuta la instruccion actual anteriormente ensamblada.
+   */
   def execute() {
     println("-------------EXECUTE---------")
     instruccionActual match {
@@ -165,6 +212,10 @@ case class Simulador() {
     println("Ejecuta la instruccion!!!")
   }
 
+  /**
+   * Simula el store. Recibe un valor que es guardado en el modo de direccionamiento enviado por parametro.
+   * @param ModoDireccionamento, W16
+   */
   def store(modoDir: ModoDireccionamiento, un_valor: W16) = modoDir match {
     case Directo(inmediato: Inmediato) => memoria.setValor(inmediato.getValorString(), un_valor)
     case Indirecto(directo: Directo) => memoria.setValor(obtenerValor(directo).hex, un_valor)
@@ -174,34 +225,49 @@ case class Simulador() {
       println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
   }
 
+  /**
+   * Ejecuta la instruccion RET. Aumenta el stack pointer (sp) y setea en el pc el valor que este tenia al momento del CALL previo.
+   * 
+   */
   def executeRet() {
     cpu.sp.++
     cpu.pc.:=(memoria.getValor(cpu.sp.toString).toString)
   }
+  /**
+   * Delega en la ALU la ejecucion del CMP y luego actualiza los flags.
+   */
   def executeCmp(op1: W16, op2: W16) {
     var resultados = ALU.execute_cmp(op1, op2)
     cpu.actualizarFlags(resultados)
   }
   
+  /**
+   * Ejecuta el JMP, es decir, cambia el valor del pc por el que recibe por parametro que es el que tiene el JMP.
+   * @param W16 
+   */
   def executeJMP(valor:W16)
   {
    cpu.pc.:=(valor.hex)
   }
   
-   
+  /**
+   *  Ejecuta el JUMP condicional. Recibe el valor de la condicion y si este es verdadero, incrementa el pc segun lo indique el salto.
+   *  @param Salto, Boolean
+   */ 
   def executeJMPCondicional(salto:Salto,condicion:Boolean)
   {
     if(condicion)
     {cpu.incrementarPc(salto.value)}
   }
 
-
+/**
+ * Ejecuta el CALL. Guarda el pc segund donde aputa el stack pointer (sp), decrementa el stack pointer y 
+ * pone en el pc el valor que tiene el CALL para llamar a la subrutina correspondiente.
+ * @param W16
+ */
   def executeCall(valor:W16) {
-    // guarda [SP] <- PC
     memoria.setValor(cpu.sp.toString, cpu.pc)
-    // subimos el sp
     cpu.sp.--
-    // guarda pc <- origen
     cpu.pc.:=(valor.hex)
   }
 
