@@ -6,8 +6,16 @@ case class Memoria(var tamanio: Int) {
 
   var celdas: ArrayBuffer[W16] = _
 
+/**
+ * Devuelve el tamanio de la memoria
+ * 
+ */
   def tamanioMemoria(): Int = tamanio
 
+/**
+ * Inicializa cada celda de la memoria con W16 de valor hexadecimal 0000.
+ * 
+ */
   def initialize() = {
     celdas = new ArrayBuffer[W16]()
     var contador = 0
@@ -17,10 +25,14 @@ case class Memoria(var tamanio: Int) {
     } while (contador < tamanioMemoria())
   }
   
+  /**
+   * Recibe un entero y devuelve el valor de la celda en memoria en esa posicion.
+   * @param Int
+   * @return W16
+   */
   def getValor(pc: Int): W16 = {
-    var celda_actual = pc
-    if (celda_actual < Memoria.this.tamanioMemoria()) {
-      var value = celdas(celda_actual)
+    if (pc < Memoria.this.tamanioMemoria()) {
+      var value = celdas(pc)
       value
     } else{
       println("Esta no es una celda de memoria valida!!")
@@ -28,30 +40,29 @@ case class Memoria(var tamanio: Int) {
       }
   }
   
+   /**
+   * Recibe un W16 y devuelve el valor de la celda en memoria en esa posicion.
+   * @param W16
+   * @return W16
+   */
   def getValor(pc: W16): W16 = {
-    var celda_actual = Util.hexToInteger(pc.hex)
-    if (celda_actual < Memoria.this.tamanioMemoria()) {
-      var value = celdas(celda_actual)
-      value
-    } else{
-      println("Esta no es una celda de memoria valida!!")
-      null
-      }
+    getValor(pc.value)
   }
   
+  /**
+   * Recibe un String en Hexadecimal y devuelve el valor de la celda en memoria en esa posicion.
+   * @param String
+   * @return W16
+   */
   def getValor(pc: String): W16 = {
-    var celda_actual = Util.hexToInteger(pc)
-    if (celda_actual < Memoria.this.tamanioMemoria()) {
-      var value = celdas(celda_actual)
-      value
-    } else{
-      println("Esta no es una celda de memoria valida!!")
-      new W16("0000")
-      }
+    getValor(Util.hexToInteger(pc))
   }
     
 
-  
+  /**
+   * Carga un programa en memoria desde el numero de celda en Hexadecimal que se le envie como inicio.
+   * @param String, Programa
+   */
   def cargarPrograma(programa: Programa, inicio: String) {
     var celda_inicio = Util.hexToInteger(inicio)
     val celda_fin = celda_inicio + programa.tamanioDelPrograma
@@ -64,6 +75,10 @@ case class Memoria(var tamanio: Int) {
     }
   }
 
+  /**
+   * Inserta una instruccion en memoria a partir de la celda que se le indica.
+   * @param Int, Instruccion
+   */
   def insertarInstruccion (celda:Int, instruccion: Instruccion)  =
   {
     var string_split = instruccion.representacionHexadecimal().split(" ")
@@ -74,15 +89,22 @@ case class Memoria(var tamanio: Int) {
       }
   }
   
+  /**
+   * Pone un valor (W16) en la celda que se le indica por parametro.
+   * @param Int, W16
+   */
   def setValorC(celda: Int,dato: W16) = celdas(celda) = dato
 
-  def setValor(celda: String, valor: W16) =
-    {
-      val numero_celda = Util.hexToInteger(celda)
-      celdas(numero_celda) = valor
+   /**
+   * Pone un valor (W16) en la celda que se le indica por parametro en valor hexadecimal.
+   * @param String, W16
+   */
+  def setValor(celda: String, valor: W16) = celdas(Util.hexToInteger(celda)) = valor
 
-    }
-
+  /**
+   * Muestra la memoria a partir de un numero de celda en hexadecimal.
+   * @param String
+   */
   def show(pc: String): String = {
     var memoria_view = ""
     var pcActual :Int = Util.toInteger(pc)
