@@ -4,6 +4,12 @@ import scala.collection.mutable.Map
 
 object ALU {
 
+  /**
+   * Ejecuta la operacion matematica pasada por parametro como funcion de dos operandos y 
+   * obtiene el resultado que devuelve en un map junto con los flags comunes a todas las operaciones actualizados.
+   * @params operacion: (Int, Int) => Int, op1: W16, op2: W16.
+   * @return Map[String, Any]
+   */
   def execute_operacion_matematica(operacion: (Int, Int) => Int, op1: W16, op2: W16): Map[String, Any] = {
 
     val valor = operacion(op1.value, op2.value)
@@ -16,20 +22,41 @@ object ALU {
     Map(("resultado", resultado), ("n", flags._1), ("z",flags._2), ("c",0), ("v",0))
 
   }
+  
+  /**
+   * Devuelve los Flags Negative y Zero en respectivo orden tomando un valor entero.
+   * @params valor: Int
+   * @return (Int, Int)
+   */
   def takeFlags(valor: Int): (Int, Int) = (actualizarNegative(valor), actualizarZero(valor))
 
+  /**
+   * Devuelve los Flags Carry y Overflow en la suma, en respectivo orden tomando un valor W16.
+   * @params resultado_binario: W16, op1: W16, op2: W16
+   * @return (Int, Int)
+   */
   def takeFlagsSum(resultado_binario: W16, op1: W16, op2: W16): (Int, Int) = {
     val c = actualizarCarryBorrow(resultado_binario)
     val v = verificarCondicionOverflowSuma(resultado_binario, op1, op2)
     (c, v)
   }
 
+  /**
+   * Devuelve los Flags Carry y Overflow en la resta, en respectivo orden tomando un valor W16.
+   * @params resultado_binario: W16, op1: W16, op2: W16
+   * @return (Int, Int)
+   */
   def takeFlagsRest(resultado_binario: W16, op1: W16, op2: W16): (Int, Int) = {
     val c = actualizarCarryBorrow(resultado_binario)
     val v = verificarCondicionOverflowResta(resultado_binario, op1, op2)
     (c, v)
   }
 
+  /**
+   * Simula la ejecucion del ADD con dos W16 y actualiza los flags
+   * @params op1: W16, op2: W16
+   * @return Map[String, Any]
+   */
   def execute_add(op1: W16, op2: W16): Map[String, Any] = {
     var resultados = execute_operacion_matematica(_ + _, op1, op2)
     val carryOverflow = takeFlagsSum(resultados("resultado").asInstanceOf[W16], op1, op2)
@@ -39,6 +66,11 @@ object ALU {
     resultados
   }
 
+  /**
+   * Simula la ejecucion del SUB con dos W16 y actualiza los flags
+   * @params op1: W16, op2: W16
+   * @return Map[String, Any]
+   */
   def execute_sub(op1: W16, op2: W16): Map[String, Any] = {
     var resultados = execute_operacion_matematica(_ - _, op1, op2)
     val carryOverflow = takeFlagsRest(resultados("resultado").asInstanceOf[W16], op1, op2)
@@ -47,15 +79,29 @@ object ALU {
     resultados
 
   }
-
+  /**
+   * Simula la ejecucion del MUL con dos W16 y actualiza los flags
+   * @params op1: W16, op2: W16
+   * @return Map[String, Any]
+   */
   def execute_mul(op1: W16, op2: W16): Map[String, Any] = {
     execute_operacion_mul(_ * _, op1, op2)
   }
 
+  /**
+   * Simula la ejecucion del DIV con dos W16 y actualiza los flags
+   * @params op1: W16, op2: W16
+   * @return Map[String, Any]
+   */
   def execute_div(op1: W16, op2: W16): Map[String, Any] = {
     execute_operacion_matematica(_ / _, op1, op2)
   }
 
+  /**
+   * Simula la ejecucion del CMP con dos W16 y actualiza los flags
+   * @params op1: W16, op2: W16
+   * @return Map[String, Any]
+   */
   def execute_cmp(op1: W16, op2: W16): Map[String, Any] = {
     var resultados = execute_operacion_matematica(_ - _, op1, op2)
     val carryOverflow = takeFlagsRest(resultados("resultado").asInstanceOf[W16], op1, op2)
@@ -64,6 +110,11 @@ object ALU {
     resultados
   }
 
+  /**
+   * Simula la ejecucion del MUL con dos W16 y actualiza los flags, separando el resultado en dos.
+   * @params op1: W16, op2: W16
+   * @return Map[String, Any]
+   */
   def execute_operacion_mul(operacion: (Int, Int) => Int, op1: W16, op2: W16): Map[String, Any] = {
 
     val valor = operacion(op1.value, op2.value)
@@ -76,18 +127,38 @@ object ALU {
 
   }
 
+  /**
+   * Devuelve el valor del flag Negative segun el entero que recibe. 
+   * @params resultado: Int
+   * @return Int
+   */
   def actualizarNegative(resultado: Int): Int = resultado match {
     case r if (r < 0) => 1
     case _ => 0
   }
 
+  /**
+   * Devuelve el valor del flag Zero segun el entero que recibe. 
+   * @params resultado: Int
+   * @return Int
+   */
   def actualizarZero(resultado: Int): Int = resultado match {
     case r if (r == 0) => 1
     case _ => 0
   }
 
+   /**
+   * Devuelve el valor del flag Negative segun el entero que recibe. 
+   * @params resultado: Int
+   * @return Int
+   */
   def actualizarCarryBorrow(resultado_binario: W16): Int = Integer.parseInt(resultado_binario.toBinary.charAt(0).toString)
 
+  /**
+   * Obtiene los bits para analizar Overflow. 
+   * @params resultado_binario: W16, op1: W16, op2: W16
+   * @return (Int, Int, Int)
+   */
   def obtenerBitsParaAnalizarOverflow(resultado_binario: W16, op1: W16, op2: W16): (Int, Int, Int) = {
     val bit_significativo_resultado = Integer.parseInt(resultado_binario.toBinary.charAt(0).toString)
     val bit_significativo_op1 = Integer.parseInt(op1.toBinary.charAt(0).toString)
@@ -95,16 +166,31 @@ object ALU {
     (bit_significativo_op1, bit_significativo_op2, bit_significativo_resultado)
   }
 
+  /**
+   * Verifica la condicion de overflow en la suma segun los perandos que recibe y el resultado binario.
+   * @params resultado_binario: W16, op1: W16, op2: W16
+   * @return Int 
+   */
   def verificarCondicionOverflowSuma(resultado_binario: W16, op1: W16, op2: W16): Int = {
     var bits = obtenerBitsParaAnalizarOverflow(resultado_binario, op1, op2)
     if ((bits._1 == bits._2) && (bits._2 != bits._3)) { 1 } else { 0 }
   }
 
+  /**
+   * Verifica la condicion de overflow en la resta segun los perandos que recibe y el resultado binario.
+   * @params resultado_binario: W16, op1: W16, op2: W16
+   * @return Int 
+   */
   def verificarCondicionOverflowResta(resultado_binario: W16, op1: W16, op2: W16): Int = {
     var bits = obtenerBitsParaAnalizarOverflow(resultado_binario, op1, op2)
     if ((bits._1 != bits._2) && (bits._2 == bits._3)) { 1 } else { 0 }
   }
-  
+ 
+  /**
+   * Aplica una operacion booleana pasada como funcion por paramentro a dos W16 
+   * @params op1: W16, op2: W16, operacion: (Int, Int) => Int
+   * @return W16
+   */
   def aplicarOperacionBooleana(op1: W16, op2: W16, operacion: (Int, Int) => Int) : W16 = 
   {
    val una_cadena = op1.toBinary
@@ -124,9 +210,33 @@ object ALU {
    
     
   }
+  
+   /**
+   * Simula la ejecucion de AND a dos W16 pasados por parametro 
+   * @params op1: W16, op2: W16
+   * @return W16
+   */
   def AND(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, AND(_,_))
+  
+  /**
+   * Simula la ejecucion de XOR a dos W16 pasados por parametro 
+   * @params op1: W16, op2: W16
+   * @return W16
+   */
   def XOR(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, XOR(_,_))
+  
+  /**
+   * Simula la ejecucion de OR a dos W16 pasados por parametro 
+   * @params op1: W16, op2: W16
+   * @return W16
+   */
   def OR(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, OR(_,_))
+  
+  /**
+   * Simula la ejecucion de NOT a un W16 pasado por parametro 
+   * @params op1: W16
+   * @return W16
+   */
   def NOT(op: W16) : W16 =  {
    var result = ""
    val una_cadena = op.toBinary
@@ -143,6 +253,11 @@ object ALU {
     
   }
   
+  /**
+   * Realiza el AND de dos bits (Int) y devuelve el resultado en entero
+   * @params un_bit: Int, otro_bit: Int
+   * @return Int
+   */
   def AND(un_bit: Int, otro_bit: Int) : Int =
   {
     val result = (un_bit,otro_bit) match {
@@ -152,6 +267,11 @@ object ALU {
     result
   }
   
+  /**
+   * Realiza el OR de dos bits (Int) y devuelve el resultado en entero
+   * @params un_bit: Int, otro_bit: Int
+   * @return Int
+   */
   def OR(un_bit: Int, otro_bit: Int) : Int =
   {
     val result = (un_bit,otro_bit) match {
@@ -162,7 +282,11 @@ object ALU {
     result
   }
 
-
+  /**
+   * Realiza el XOR de dos bits (Int) y devuelve el resultado en entero
+   * @params un_bit: Int, otro_bit: Int
+   * @return Int
+   */
  def XOR(un_bit: Int, otro_bit: Int) : Int =
   {
     val result = (un_bit,otro_bit) match {
@@ -173,6 +297,11 @@ object ALU {
     result
   }
  
+ /**
+   * Realiza el NOT de dos bits (Int) y devuelve el resultado en entero 
+   * @params un_bit: Int
+   * @return Int
+   */
  def NOT(un_bit: Int) : Int =
   {
     un_bit match {
@@ -181,7 +310,12 @@ object ALU {
    }
     
   }
- 
+ /**
+   * Intrepreta un bit pasado por parametro, si recibe un uno devuelve un true
+   * de lo contrario devuelve cero. 
+   * @params un_bit: Int
+   * @return Boolean
+   */
  def interpretarBit(un_bit: Int) : Boolean =
   {
     un_bit match {
