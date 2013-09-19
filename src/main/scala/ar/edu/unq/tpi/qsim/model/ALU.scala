@@ -105,8 +105,10 @@ object ALU {
     if ((bits._1 != bits._2) && (bits._2 == bits._3)) { 1 } else { 0 }
   }
   
-  def aplicarOperacionBooleana(una_cadena: String, otra_cadena: String, operacion: (Int, Int) => Int) : String = 
+  def aplicarOperacionBooleana(op1: W16, op2: W16, operacion: (Int, Int) => Int) : W16 = 
   {
+   val una_cadena = op1.toBinary
+   val otra_cadena = op2.toBinary
    var result = ""
    var n = 0
     do {
@@ -118,14 +120,16 @@ object ALU {
     } while (n < otra_cadena.size && n < una_cadena.size )
   
 
-   result 
+   new W16(Util.binary16ToHex(result)) 
+   
     
   }
-  def AND(una_cadena: String, otra_cadena: String) : String = aplicarOperacionBooleana(una_cadena, otra_cadena, AND(_,_))
-  def XOR(una_cadena: String, otra_cadena: String) : String = aplicarOperacionBooleana(una_cadena, otra_cadena, XOR(_,_))
-  def OR(una_cadena: String, otra_cadena: String) : String = aplicarOperacionBooleana(una_cadena, otra_cadena, OR(_,_))
-  def NOT(una_cadena: String) : String =  {
+  def AND(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, AND(_,_))
+  def XOR(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, XOR(_,_))
+  def OR(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, OR(_,_))
+  def NOT(op: W16) : W16 =  {
    var result = ""
+   val una_cadena = op.toBinary
    var n = 0
     do {
       val bit_a = (una_cadena.charAt(n).toString).toInt
@@ -135,7 +139,7 @@ object ALU {
     } while (n < una_cadena.size )
   
 
-   result 
+   new W16(Util.binary16ToHex(result)) 
     
   }
   
@@ -190,7 +194,8 @@ object ALU {
  
  object ttaa extends App {
 
-   println(ALU.AND("101111", "111110"))
+   println(ALU.XOR(new W16(1), new W16("FFF0")))
+   println(ALU.NOT(new W16("FF01")))
 
   //  var sim = Simulador(programa)
   // sim.inicializarSim()

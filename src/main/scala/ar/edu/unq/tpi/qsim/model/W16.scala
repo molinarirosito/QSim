@@ -12,6 +12,12 @@ class W16(var hex: String) {
   def ++(salto:Int) = hex= Util.toHex4(this.value + salto)
   def -- = hex= Util.toHex4(this.value -1)
   
+  
+	def this(value: Int) {
+    this(Util.toHex4(value));
+
+  }
+  
   var signo: Int = 0
   
   def ss(salto:Int) : W16 = new W16(Util.toHex4(this.value + salto))

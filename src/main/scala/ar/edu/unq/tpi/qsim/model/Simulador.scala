@@ -146,6 +146,9 @@ case class Simulador() {
       case JNEG(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.n))
       case JVS(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.v))
       case CMP(op1, op2) => executeCmp(obtenerValor(op1),obtenerValor(op2))
+      case AND(op1, op2)  => store(op1,ALU.AND(obtenerValor(op1), obtenerValor(op2)))
+      case OR(op1, op2)  => store(op1,ALU.OR(obtenerValor(op1), obtenerValor(op2)))
+      case NOT(op1)  => store(op1,ALU.NOT(obtenerValor(op1)))
       case iOp2: Instruccion_DosOperandos => store(iOp2.destino, execute_instruccion_matematica())
     }
     println("Ejecuta la instruccion!!!")

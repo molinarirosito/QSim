@@ -163,9 +163,9 @@ object Util {
    * @param number: String
    * @return String
    */
-   def hexToBinary(binaryNumber:String) :String =
+   def hexToBinary(hexNumber:String) :String =
    {
-     val value = hexToInteger(binaryNumber)
+     val value = hexToInteger(hexNumber)
      toBinary16B(value)
    }
 
@@ -176,8 +176,11 @@ object Util {
 
 }
 
-object Test extends App {
+object Testha extends App {
 
   val t = Util.binary16ToHex("0010100000000000")
   println(t)
+  val a = Util.toHex4(1)
+  println(a)
+
 }
