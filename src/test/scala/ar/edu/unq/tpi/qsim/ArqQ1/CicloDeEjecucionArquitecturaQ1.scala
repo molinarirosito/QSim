@@ -39,7 +39,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   "Un Simulador" should "inicializar la cpu y la memoria cuando se crea" in {
     var ci = simuladorInicializado
     ci.simulador.cpu should be(CPU())
-    ci.simulador.memoria should be(Memoria(30))
+    ci.simulador.busIO.memoria should be(Memoria(30))
   }
 
   it should "cargar un programa en la memoria desde la posicion que indica pc y actualizar los registros de cpu" in {

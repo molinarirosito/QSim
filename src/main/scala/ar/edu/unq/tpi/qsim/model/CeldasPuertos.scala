@@ -1,6 +1,6 @@
 package ar.edu.unq.tpi.qsim.model
 
-class CeldasPuertos {  
+case class CeldasPuertos {  
   
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.utils.Util
@@ -13,7 +13,7 @@ import ar.edu.unq.tpi.qsim.exeptions._
  * Devuelve el tamanio de las celdas reservadas a los puertos
  * @return Int 
  */
-  def tamanioMemoria(): Int = 239
+  def tamanioCeldas(): Int = 239
 
 /**
  * Inicializa cada celda de los puertos con W16 de valor hexadecimal 0000.
@@ -21,7 +21,7 @@ import ar.edu.unq.tpi.qsim.exeptions._
  */
   def initialize() = {
     celdas = new ArrayBuffer[W16]()
-    Util.rep(tamanioMemoria()){
+    Util.rep(tamanioCeldas()){
       celdas.append(new W16("0000"))
     } 
   }
@@ -33,7 +33,7 @@ import ar.edu.unq.tpi.qsim.exeptions._
    * @return W16
    */
   def getValor(pc: Int): W16 = {
-    if ((pc - 6580) < tamanioMemoria()) {
+    if ((pc - 6580) < tamanioCeldas()) {
       var value = celdas(pc)
       value
     } else{
@@ -80,7 +80,7 @@ import ar.edu.unq.tpi.qsim.exeptions._
     var celdas_view = ""
     var pcActual :Int = Util.toInteger(pc)
     
-    for (x <- pcActual to tamanioMemoria() - 1) {
+    for (x <- pcActual to tamanioCeldas() - 1) {
 
       if (x % 7 == 0) {
     	celdas_view = celdas_view + "\n"
