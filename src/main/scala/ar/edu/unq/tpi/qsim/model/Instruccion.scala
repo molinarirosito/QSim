@@ -1,68 +1,141 @@
 package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tpi.qsim.utils._
 
+
 abstract class Instruccion(val codigoDeOperacion: String, var operacion: String)
 {
   var position : W16 = null
+  
+  /**
+   * Devuelve la posicion en memoria
+   * @return W16
+   */
   def posicionEnMemoria() : W16 = position
   
+  
   def representacionHexadecimal() : String
-  def decode() : String = this.toString 
+  
+  /**
+   * Devuelve la simulación del decode
+   * @return String
+   */
+  def decode() : String = this.toString
+  
+  /**
+   * Devuelve el tamaño que ocupa la instruccion en tamanio hexadecimal
+   * @return Int
+   */
   def tamanioHex() : Int = this.representacionHexadecimal.replace(" ", "").size
+  
+  /**
+   * Devuelve la cantidad de celdas que ocupa la instruccion en tamanio hexadecimal
+   * @return Int
+   */
   def cantidadCeldas() : Int = this.tamanioHex/4
   
 }
 
+
+/** INSTRUCCIONES SIN OPERANDOS **/
 class Instruccion_SinOperandos(codigoDeOperacion: String, operacion: String, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) {
  
-  override def representacionHexadecimal() : String  =  {
- 
+  /**
+   * Redefine la representacion hexadecimal para obtener la correspondiente a 
+   * una instruccion sin operandos devolviendo un String hexadecimal
+   * @return String
+   */
+  override def representacionHexadecimal() : String  =  { 
   val operations_code_binary = Util.binary16ToHex(codigoDeOperacion + relleno )
-   
-  (operations_code_binary).replace("  "," ")
-  }
+     (operations_code_binary).replace("  "," ")   }
+  
+  /**
+   * Redefine la representacion Hexadecimal para mostrar la instruccion 
+   * de la siguiente manera:  *OPERACION*
+   * @return String
+   */
   override def toString() =  operacion 
 }
 
+case class RET() extends Instruccion_SinOperandos("1100","RET", "000000000000"){}
+
+
+/** INSTRUCCIONES CON OPERANDO **/
 class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var origen: ModoDireccionamiento, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) {
   
-	
+  /**
+   * Redefine la representacion hexadecimal para obtener la correspondiente a 
+   * una instruccion de un operando devolviendo un String hexadecimal
+   * @return String
+   */
   override def representacionHexadecimal() : String  =  {
- 
-  val operations_code_binary = Util.binary16ToHex(codigoDeOperacion + relleno + origen.codigo )
-   
+  val operations_code_binary = Util.binary16ToHex(codigoDeOperacion + relleno + origen.codigo )  
   val origen_value = origen.getValorString
-    
-  (operations_code_binary + " " + origen_value).replace("  "," ")
-  }
+  (operations_code_binary + " " + origen_value).replace("  "," ")   }
   
+  /**
+   * Redefine la representacion en String para mostrar la instruccion 
+   * de la siguiente manera:  *OPERACION* *MODODIRECCIONAMIENTO*
+   * @return String
+   */
   override def toString() =  operacion + " " + origen.toString()
 }
 
+case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1011","CALL",orig, "000000"){}
+case class NOT(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1001","NOT",orig, "000000"){}
+
+
+/** INSTRUCCIONES CON DOS OPERANDOS **/
 class Instruccion_DosOperandos(codigoDeOperacion: String, operacion: String, var destino: ModoDireccionamiento, var origen: ModoDireccionamiento) extends Instruccion(codigoDeOperacion, operacion)
 {
+  /**
+   * Redefine la representacion hexadecimal para obtener la correspondiente a 
+   * una instruccion de dos operando devolviendo un String hexadecimal
+   * @return String
+   */
 	override def representacionHexadecimal() : String  =  {
-			
 		val operations_code_binary = Util.binary16ToHex(codigoDeOperacion + destino.codigo + origen.codigo)
-				
 		val destiny_value = destino.getValorString
-		val origin_value = origen.getValorString
-					
-		(operations_code_binary + " " + destiny_value + " " + origin_value).replace("  "," ")
-	}
+		val origin_value = origen.getValorString			
+		(operations_code_binary + " " + destiny_value + " " + origin_value).replace("  "," ") 	}
 	
+ /**
+   * Redefine la representacion en String para mostrar la instruccion 
+   * de la siguiente manera:  *OPERACION* *MODODIRECCIONAMIENTO DESTINO* *MODODIRECCIONAMIENTO ORIGEN*
+   * @return String
+   */
 	override def toString() =  operacion + " " + destino.toString() + " " + origen.toString() 
 }
 
+case class JMP(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1010","JMP",orig, "000000"){}
+case class MUL(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0000","MUL",dest,orig){}
+case class ADD(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0010","ADD",dest,orig){}
+case class SUB(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0011","SUB",dest,orig){}
+case class DIV(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0111","DIV",dest,orig){}
+case class MOV(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0001","MOV",dest,orig){}
+case class AND(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0100","AND",dest,orig){}
+case class OR(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0101","OR",dest,orig){}
+case class CMP(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0110","CMP",dest,orig){}
+
+
+/** JUMPS CONDICIONALES **/
 class JUMP_condicional(codigoDeOperacion: String, operacion: String, var desplazamiento: Salto) extends Instruccion(codigoDeOperacion, operacion){
   val prefijo = "1111"
   var destino : ModoDireccionamiento = _ 
+  
+  /**
+   * Redefine la representacion hexadecimal para obtener la correspondiente a 
+   * un salto condicional devolviendo un String hexadecimal
+   * @return String
+   */
   override def representacionHexadecimal() : String  =  {
- 
-  val operations_code_binary = Util.binary16ToHex(prefijo + codigoDeOperacion + desplazamiento.toBinary )
-   
-  (operations_code_binary).replace("  "," ")
-  }
+    val operations_code_binary = Util.binary16ToHex(prefijo + codigoDeOperacion + desplazamiento.toBinary )
+   (operations_code_binary).replace("  "," ")   }
+  
+  /**
+   * Redefine la representacion en String para mostrar la instruccion 
+   * de la siguiente manera:  *OPERACION* *DESPLAZAMIENTO*
+   * @return String
+   */
   override def toString() =  operacion +" " +  desplazamiento.toString
 }
 
@@ -79,29 +152,9 @@ case class JNEG(desp: Salto) extends JUMP_condicional("0110","JNEG", desp){}
 case class JVS(desp: Salto) extends JUMP_condicional("0111","JVS", desp){}
 
 
-case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1011","CALL",orig, "000000"){}
 
-case class NOT(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1001","NOT",orig, "000000"){}
 
-case class RET() extends Instruccion_SinOperandos("1100","RET", "000000000000"){}
 
-case class JMP(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1010","JMP",orig, "000000"){}
-
-case class MUL(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0000","MUL",dest,orig){}
-
-case class ADD(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0010","ADD",dest,orig){}
-
-case class SUB(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0011","SUB",dest,orig){}
-
-case class DIV(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0111","DIV",dest,orig){}
-
-case class MOV(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0001","MOV",dest,orig){}
-
-case class AND(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0100","AND",dest,orig){}
-
-case class OR(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0101","OR",dest,orig){}
-
-case class CMP(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0110","CMP",dest,orig){}
 
 
 
