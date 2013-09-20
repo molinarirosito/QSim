@@ -105,20 +105,13 @@ case class Simulador() {
    */
   def obtenerProximaInstruccionBinario(): String =
     {
-
      var int_pc = cpu.pc.value
      var celdas_binario = memoria.getValor(int_pc).toBinary
-    
     try
-        {
-    	Util.rep(2) { celdas_binario = memoria.getValor(int_pc + 1).toBinary; int_pc=int_pc+1 }   
-        }
-        catch        { 
-           case cfme: CeldaFueraDeMemoriaException => celdas_binario
-        }   
-    celdas_binario 
-      
-  }
+        { Util.rep(2) { celdas_binario = memoria.getValor(int_pc + 1).toBinary; int_pc=int_pc+1 }  }
+        catch  { 
+           case cfme: CeldaFueraDeMemoriaException => celdas_binario }   
+    celdas_binario  }
 
   /**
    * Simula el fech de la instruccion. La obtiene de memoria segun marque el pc, la ensambla y aumenta el pc.
@@ -245,10 +238,7 @@ case class Simulador() {
    * Ejecuta el JMP, es decir, cambia el valor del pc por el que recibe por parametro que es el que tiene el JMP.
    * @param W16 
    */
-  def executeJMP(valor:W16)
-  {
-   cpu.pc.:=(valor.hex)
-  }
+  def executeJMP(valor:W16) = cpu.pc.:=(valor.hex) 
   
   /**
    *  Ejecuta el JUMP condicional. Recibe el valor de la condicion y si este es verdadero, incrementa el pc segun lo indique el salto.
@@ -270,8 +260,6 @@ case class Simulador() {
     cpu.sp.--
     cpu.pc.:=(valor.hex)
   }
-
-
 }
 
 object tt extends App {
