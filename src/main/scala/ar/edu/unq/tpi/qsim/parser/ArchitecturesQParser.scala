@@ -16,27 +16,33 @@ trait ArchitecturesQParser extends JavaTokenParsers with ImplicitConversions {
   val lexical = new StdLexical
   lexical.reserved ++= List("MOV", "SUB", "ADD", "DIV", "MUL", "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7")
   lexical.delimiters ++= List(",", "[", "]", "0x", ":")
-
-  def registers = "R0" ^^^ R0 |
-    "R1" ^^^ R1 |
-    "R2" ^^^ R2 |
-    "R3" ^^^ R3 |
-    "R4" ^^^ R4 |
-    "R5" ^^^ R5 |
-    "R6" ^^^ R6 |
-    "R7" ^^^ R7
-
+  /**
+   * Estos son los 8 registros que se van a usar.
+   * Lo que hace este parser es reemplazar el valor del (string) por el objeto (registro) correspondiente.
+   */
+  def registers = "R0" ^^^ R0 | "R1" ^^^ R1 | "R2" ^^^ R2 | "R3" ^^^ R3 |
+    			  "R4" ^^^ R4 | "R5" ^^^ R5 | "R6" ^^^ R6 | "R7" ^^^ R7
+  /**
+   * Defino el parser para cualquiera de esos registros
+   */
   def register = registers
-
+  /**
+   * Este parser interpreta un registro indirecto.
+   * Lo que hace es tomar lo que realmente importa que es el contenido del (registro)
+   */
+  def registerIndirect = "[" ~> register <~ "]" ^^ { case register => RegistroIndirecto(register) }
+  
   def inmediate = "0x" ~> "[0-9A-Z]+".r ^^ { case direction => Inmediato(new W16(direction)) }
 
   def direct = "[" ~> inmediate <~ "]" ^^ { case direction => Directo(direction) }
 
+  def indirect = "[" ~> direct <~ "]" ^^ {case direction => Indirecto(direction)}
+  
   def etiqueta = ident ^^ {case etiqueta => Etiqueta(etiqueta)}
-  //def directionIndirect = "[" ~>directionDirect  <~ "]" ^^ {case direction => DirectionIndirect(direction)}
-
+  
+  // modos de direccionamiento que puede tomar origen
   def directionableQ1 = register | inmediate
-
+  // modos de direccionamiento que p
   def directionableQ2 = directionableQ1 | direct
 
   def asignableQ1 = register

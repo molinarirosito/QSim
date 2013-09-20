@@ -27,7 +27,7 @@ class Programa(var instrucciones: List[Instruccion], var etiquetas: Map[String, 
   var indice = 0
   
   /**
-   * Devuelve el tamaño del programa
+   * Devuelve el tamanio del programa
    * @return Int
    */
   def tamanioDelPrograma(): Int = (instrucciones.map(i => i.tamanioHex).fold(0)(_ + _)) / 4

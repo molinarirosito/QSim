@@ -16,13 +16,13 @@ abstract class Instruccion(val codigoDeOperacion: String, var operacion: String)
   def representacionHexadecimal() : String
   
   /**
-   * Devuelve la simulación del decode
+   * Devuelve la simulacion del decode
    * @return String
    */
   def decode() : String = this.toString
   
   /**
-   * Devuelve el tamaño que ocupa la instruccion en tamanio hexadecimal
+   * Devuelve el tamanio que ocupa la instruccion en tamanio hexadecimal
    * @return Int
    */
   def tamanioHex() : Int = this.representacionHexadecimal.replace(" ", "").size
