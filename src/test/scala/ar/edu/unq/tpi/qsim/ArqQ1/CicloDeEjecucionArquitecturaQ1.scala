@@ -61,16 +61,16 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var map = pc.registrosParaActualizar
 
     for {
-      key ← map.keys
+      key <- map.keys
       value = map(key)
     } yield {
       f.simulador.cpu.registro(key) match {
-        case Some(registro) ⇒ {
+        case Some(registro) => {
           println("valor del registro " + registro.valor.toString)
           println("valor a actualizar " + value.toString)
           assert(registro.valor.equals(value))
         }
-        case _ ⇒
+        case _ =>
       }
     }
 
