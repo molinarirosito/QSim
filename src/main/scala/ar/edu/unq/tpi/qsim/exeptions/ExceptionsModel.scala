@@ -9,3 +9,7 @@ case class CodigoInvalidoException(smth:String) extends Exception {
 case class CeldaFueraDeMemoriaException(smth:String) extends Exception {
 
 }
+
+case class CeldaFueraDePuertosException(smth:String) extends Exception {
+
+}

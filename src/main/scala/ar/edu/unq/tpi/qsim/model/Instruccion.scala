@@ -82,6 +82,7 @@ class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var o
 
 case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1011","CALL",orig, "000000"){}
 case class NOT(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1001","NOT",orig, "000000"){}
+case class JMP(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1010","JMP",orig, "000000"){}
 
 
 /** INSTRUCCIONES CON DOS OPERANDOS **/
@@ -106,7 +107,7 @@ class Instruccion_DosOperandos(codigoDeOperacion: String, operacion: String, var
 	override def toString() =  operacion + " " + destino.toString() + " " + origen.toString() 
 }
 
-case class JMP(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1010","JMP",orig, "000000"){}
+
 case class MUL(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0000","MUL",dest,orig){}
 case class ADD(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0010","ADD",dest,orig){}
 case class SUB(dest: ModoDireccionamiento, orig: ModoDireccionamiento) extends Instruccion_DosOperandos("0011","SUB",dest,orig){}
