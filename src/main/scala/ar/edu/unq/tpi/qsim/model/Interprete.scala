@@ -112,10 +112,26 @@ object Interprete {
    * @return Instruccion
    */ 
    def interpretar_NOT (cadena_binaria : String): Instruccion = {
-    val relleno =  cadena_binaria.substring(0, 6)
-    val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
+    val relleno =  cadena_binaria.substring(6, 12)
+    val resto = cadena_binaria.substring(0, 6) + cadena_binaria.takeRight(cadena_binaria.size - 12)
     relleno match {
       case "000000" => NOT(interpretar_operando(resto))
+      case _ =>  throw new CodigoInvalidoException("Podria haber sido un NOT pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+    }
+
+  }
+   
+   /**
+   * Este mensaje recibe una cadena binaria pasada por parametro en forma de String 
+   * y devuelve un POP fijandose que tenga el relleno correspondiente.
+   * @parameters cadena_binaria : String
+   * @return Instruccion
+   */ 
+   def interpretar_POP (cadena_binaria : String): Instruccion = {
+    val relleno =  cadena_binaria.substring(6, 12)
+    val resto = cadena_binaria.substring(0, 6) + cadena_binaria.takeRight(cadena_binaria.size - 12)
+    relleno match {
+      case "000000" => POP(interpretar_operando(resto))
       case _ =>  throw new CodigoInvalidoException("Podria haber sido un NOT pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
     }
 
@@ -137,6 +153,23 @@ object Interprete {
 
   }
   
+  /**
+   * Este mensaje recibe una cadena binaria pasada por parametro en forma de String 
+   * y devuelve un PUSH fijandose que tenga el relleno correspondiente.
+   * @parameters cadena_binaria : String
+   * @return Instruccion
+   */  
+  def interpretar_PUSH(cadena_binaria : String): Instruccion = {
+    val relleno =  cadena_binaria.substring(0, 6)
+    val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
+    relleno match {
+      case "000000" => PUSH(interpretar_operando(resto))
+      case _ =>  throw new CodigoInvalidoException("Podria haber sido un PUSH pero no posee relleno") //ES ERROR PORQUE NO TIENE RELLENO
+    }
+
+  }
+  
+  
   def construir_instruccionDosOperandos(constructor:(ModoDireccionamiento,ModoDireccionamiento)=>Instruccion,map : Map[String,ModoDireccionamiento] ) : Instruccion = {
     val op1 = map("op1")
     val op2 = map("op2")
@@ -151,6 +184,8 @@ object Interprete {
       case "1100" => RET()  
       case "1011" => interpretar_CALL(resto)
       case "1010" => interpretar_JMP(resto)
+      case "1110" => interpretar_PUSH(resto)
+      case "1101" => interpretar_POP(resto)
       case "1001" => interpretar_NOT(resto)
       case "1111" => interpretar_JumpCondicional(resto) 
       case "0001" => construir_instruccionDosOperandos(MOV(_,_),InterpretarDosOperandos(resto)) 
@@ -243,6 +278,8 @@ object pruebados extends App() {
  
 
   println("RET => " + Interprete.interpretarInstruccion("1100" + d))
+  println("NOT => " + Interprete.interpretarInstruccion("1001" + "110110" +"000000" + "1111111111111111"))
+  println("NOT => " + Interprete.interpretarInstruccion("1001" + "110110" +"000000" + "1111111111111111"))
  
   
   // println("PORQUERIA => " + Ensamblador.ensamblarInstruccion("1111" + p))
