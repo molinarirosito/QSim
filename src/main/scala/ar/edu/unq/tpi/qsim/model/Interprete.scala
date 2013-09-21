@@ -32,7 +32,7 @@ object Interprete {
     
   /**
    * Este mensaje extrae el valor de la cadena binaria pasada por parametro en forma de String 
-   * segun el tamaño que tenga y devuelve el valor.
+   * segun el tamanio que tenga y devuelve el valor.
    * respectivos
    * @parameters cadena_binaria : String
    * @return W16
