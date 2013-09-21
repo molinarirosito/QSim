@@ -45,10 +45,10 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   it should "cargar un programa en la memoria desde la posicion que indica pc y actualizar los registros de cpu" in {
     var f = simuladorInicializado
     var pc = programaCreado
-    // expect(false){
-    // f.simulador.etiquetasInvalidas(pc.programa) 
-    //}
-    //pc.programa = f.simulador.asignarPosiciones("0000", pc.programa)
+     expect(false){
+     f.simulador.etiquetasInvalidas(pc.programa) 
+    }
+     pc.programa = f.simulador.asignarPosiciones("0000", pc.programa)
     // verificar que las instrucciones tienen la posicion correcta en la memoria
     //pc.programa.instrucciones.foreach(inst => println("nombre de la Inst " + inst + " posicion de la instruccion = " +   inst.position))
     //pc.programa = f.simulador.calcularEtiquetas(pc.programa)
