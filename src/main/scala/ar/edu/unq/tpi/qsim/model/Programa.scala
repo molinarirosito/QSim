@@ -6,7 +6,7 @@ import scala.collection.mutable.Map
 object Programa {
 
   /**
-   * Aplica los datos pasados por una lista de que contiene opcciones e instrucciones 
+   * Aplica los datos pasados por una lista de que contiene opciones e instrucciones 
    * relacionadas y devuelve un programa.
    * @parameters datas: List[(Option[String], Instruccion)]
    * @return Programa
@@ -58,6 +58,8 @@ class Programa(var instrucciones: List[Instruccion], var etiquetas: Map[String, 
     indice == (instrucciones.length)
   }
   
+  def equals(programa:Programa): Boolean =  this.tamanioDelPrograma == programa.tamanioDelPrograma 
+
   /**
    * Devuelve el String que representa el programa de una manera mas amigable.
    * @return String

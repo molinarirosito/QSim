@@ -1,8 +1,8 @@
 package ar.edu.unq.tpi.qsim.parser
 
-class Parser(var path: String) extends ParserEnsamblador {
+object Parser extends ParserEnsamblador {
 
-  def parsear() = {
+  def parsear(path: String) = {
     val input = io.Source.fromFile(path)
     val str = input.mkString
 

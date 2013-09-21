@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.model.Programa
 import scala.io.Source
 
-
+// TODO Hasta que Tati no cambie el nombre de la clase Ensamblador voy a seguir con este nombre
 trait ParserEnsamblador extends JavaTokenParsers with ImplicitConversions {
   type Tokens = StdTokens
   val lexical = new StdLexical
@@ -157,15 +157,3 @@ trait ParserEnsamblador extends JavaTokenParsers with ImplicitConversions {
 
   def parse(input: String) = parseAll(programQ1, input)
 }
-
-//object QuarqExample extends App with ParserEnsambador {
-//
-//  val input = io.Source.fromFile("src/main/resources/programa.qsim")
-//  val str = input.mkString
-// 
-//  parse(str) match {
-//    case Success(result, _) => println(result)
-//    case Failure(msg, i) => println("[Failure] " + s" $msg in $i")
-//    case Error(msg, i) => println("[Error] " + s" $msg in $i")
-//  }
-//}
