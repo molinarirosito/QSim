@@ -1,1 +1,4 @@
-CALL susan
+MOV R0, 0x0005
+SUB R0, 0x0001
+ADD R0, R1
+
