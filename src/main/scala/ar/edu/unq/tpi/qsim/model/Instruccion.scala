@@ -60,7 +60,7 @@ case class RET() extends Instruccion_SinOperandos("1100","RET", "000000000000"){
 
 
 /** INSTRUCCIONES CON UN OPERANDO **/
-class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var operando: ModoDireccionamiento, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) {
+abstract class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var operando: ModoDireccionamiento, val relleno: String) extends Instruccion(codigoDeOperacion, operacion) {
   
   
   /**
@@ -72,7 +72,7 @@ class Instruccion_UnOperando(codigoDeOperacion: String, operacion: String, var o
 }
 
 /** INSTRUCCIONES CON UN OPERANDO ORIGEN**/
-class Instruccion_UnOperando_Origen(codigoDeOperacion: String, operacion: String, var operando: ModoDireccionamiento, val relleno: String) extends Instruccion_UnOperando(codigoDeOperacion, operacion, operando, relleno)
+class Instruccion_UnOperando_Origen(codigoDeOperacion: String, operacion: String, operando: ModoDireccionamiento, relleno: String) extends Instruccion_UnOperando(codigoDeOperacion, operacion, operando, relleno)
 {
    /**
    * Redefine la representacion hexadecimal para obtener la correspondiente a 
@@ -86,12 +86,12 @@ class Instruccion_UnOperando_Origen(codigoDeOperacion: String, operacion: String
 
 }
 
-case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1011","CALL",orig, "000000"){}
-case class PUSH(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1110","PUSH",orig, "000000"){}
-case class JMP(orig: ModoDireccionamiento) extends Instruccion_UnOperando("1010","JMP",orig, "000000"){}
+case class CALL(orig: ModoDireccionamiento) extends Instruccion_UnOperando_Origen("1011","CALL",orig, "000000"){}
+case class PUSH(orig: ModoDireccionamiento) extends Instruccion_UnOperando_Origen("1110","PUSH",orig, "000000"){}
+case class JMP(orig: ModoDireccionamiento) extends Instruccion_UnOperando_Origen("1010","JMP",orig, "000000"){}
 
 /** INSTRUCCIONES CON UN DESTINO **/
-class Instruccion_UnOperando_Destino(codigoDeOperacion: String, operacion: String, var operando: ModoDireccionamiento, val relleno: String) extends Instruccion_UnOperando(codigoDeOperacion, operacion, operando, relleno)
+class Instruccion_UnOperando_Destino(codigoDeOperacion: String, operacion: String, operando: ModoDireccionamiento, relleno: String) extends Instruccion_UnOperando(codigoDeOperacion, operacion, operando, relleno)
 {
    /**
    * Redefine la representacion hexadecimal para obtener la correspondiente a 

@@ -32,7 +32,7 @@ case class Simulador() {
    */
   def etiquetasInvalidas(programa: Programa): Boolean = {
     programa.instrucciones.exists(instr => instr match {
-      case inst_up: Instruccion_UnOperando => (!programa.etiquetas.contains(inst_up.origen.representacionString()))
+      case inst_up: Instruccion_UnOperando => (!programa.etiquetas.contains(inst_up.operando.representacionString()))
       case _ => false
     })
   }
@@ -55,7 +55,7 @@ case class Simulador() {
   def calcularEtiquetas(programa: Programa): Programa = {
     programa.instrucciones.foreach(inst => {
       inst match {
-        case inst_up: Instruccion_UnOperando => inst_up.origen = new Inmediato(programa.etiquetas(inst_up.origen.representacionString).position)
+        case inst_up: Instruccion_UnOperando => inst_up.operando = new Inmediato(programa.etiquetas(inst_up.operando.representacionString).position)
         case _ =>
       }
     })
