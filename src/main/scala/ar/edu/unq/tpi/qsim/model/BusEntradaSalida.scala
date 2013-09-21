@@ -13,6 +13,7 @@ case class BusEntradaSalida {
     memoria.initialize
     puertos = CeldasPuertos()
     puertos.initialize
+    println("--------TERMINO------")
   }
   
   /**
@@ -21,7 +22,7 @@ case class BusEntradaSalida {
    * @return W16
    */
   def getValor(pc: Int): W16 = {
-    if ((pc > this.memoria.tamanioMemoria) && (pc < puertos.tamanioCeldas)) {
+    if ((pc >= 65520) && (pc <= 65535)) {
     	this.puertos.getValor(pc)
   }
     else { this.memoria.getValor(pc) }
@@ -50,7 +51,7 @@ case class BusEntradaSalida {
    * @param Int, W16
    */
   def setValorC(celda: Int,dato: W16) = {
-    if ((celda > this.memoria.tamanioMemoria) && (celda < puertos.tamanioCeldas)) {
+    if ((celda >= 65520) && (celda <= 65535)) {
     	this.puertos.setValorC(celda,dato)
   }
     else { this.memoria.setValorC(celda,dato) }
@@ -62,4 +63,17 @@ case class BusEntradaSalida {
    */
   def setValor(celda: String, valor: W16) = setValorC(Util.hexToInteger(celda),valor)
 
+}
+
+object purr extends App() {
+
+  var bus = BusEntradaSalida()
+  bus.initialize
+  println(bus.getValor("FFF0"))
+  println(bus.getValor("FFFF"))
+  println(bus.getValor("FFF4"))
+  println(bus.getValor("000F")) 
+  println(bus.getValor("FFEF"))
+     
+  
 }

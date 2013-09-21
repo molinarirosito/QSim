@@ -22,19 +22,20 @@ import ar.edu.unq.tpi.qsim.exeptions._
   def initialize() = {
     celdas = new ArrayBuffer[W16]()
     Util.rep(tamanioCeldas()){
-      celdas.append(new W16("0000"))
+      celdas.append(new W16("F000"))
     } 
   }
   
   /**
-   * Recibe un entero que debe ser mayor o igual a 65280 ya que a partir de ese numero seria
+   * Recibe un entero que debe ser mayor o igual a 65519 ya que a partir de ese numero seria
    * una celda reservada para puertas y retornal el valor de la celda en esa posicion.
    * @param Int
    * @return W16
    */
   def getValor(pc: Int): W16 = {
-    if ((pc - 6580) < tamanioCeldas()) {
-      var value = celdas(pc)
+    val celda_puerto = pc - 65520 
+    if (celda_puerto < tamanioCeldas()) {
+      var value = celdas(celda_puerto)
       value
     } else{
       throw new CeldaFueraDePuertosException("Las celdas reservadas para puertos no llegan a es numero")
@@ -64,7 +65,16 @@ import ar.edu.unq.tpi.qsim.exeptions._
    * Pone un valor (W16) en la celda reservada para puertos que se le indica por parametro.
    * @param Int, W16
    */
-  def setValorC(celda: Int,dato: W16) = celdas(celda) = dato
+  def setValorC(celda: Int,dato: W16) = {
+      val celda_puerto = celda - 65520 
+      if (celda_puerto <  tamanioCeldas()) {
+      celdas(celda_puerto) = dato
+
+    } else{
+      throw new CeldaFueraDePuertosException("Las celdas reservadas para puertos no llegan a es numero")
+      }
+     }
+    
 
    /**
    * Pone un valor (W16) en la celda reservada para puertos que se le indica por parametro en valor hexadecimal.
