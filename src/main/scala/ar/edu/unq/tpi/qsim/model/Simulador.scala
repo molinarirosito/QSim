@@ -12,7 +12,6 @@ case class Simulador() {
 
   var cpu: CPU = _
   var busIO : BusEntradaSalida = _
-  //var memoria: Memoria = _
   var instruccionActual: Instruccion = _
 
   /**
@@ -184,8 +183,10 @@ case class Simulador() {
 
       case RET() => executeRet()
       case CALL(op1) => executeCall(obtenerValor(op1))
-      case MOV(op1, op2) => store(op1, obtenerValor(op2))
       case JMP(op1) =>  executeJMP(obtenerValor(op1))
+      case PUSH(op1) => executePUSH(obtenerValor(op1))
+      case POP(op1) => executePOP(op1)
+      case NOT(op1)  => store(op1,ALU.NOT(obtenerValor(op1)))
       case JE(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.z))
       case JNE(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.NOT(cpu.z)))
       case JLE(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(ALU.OR(cpu.z,ALU.XOR(cpu.n,cpu.v))))
@@ -198,9 +199,9 @@ case class Simulador() {
       case JNEG(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.n))
       case JVS(salto) =>  executeJMPCondicional(salto,ALU.interpretarBit(cpu.v))
       case CMP(op1, op2) => executeCmp(obtenerValor(op1),obtenerValor(op2))
+      case MOV(op1, op2) => store(op1, obtenerValor(op2))
       case AND(op1, op2)  => store(op1,ALU.AND(obtenerValor(op1), obtenerValor(op2)))
       case OR(op1, op2)  => store(op1,ALU.OR(obtenerValor(op1), obtenerValor(op2)))
-      case NOT(op1)  => store(op1,ALU.NOT(obtenerValor(op1)))
       case iOp2: Instruccion_DosOperandos => store(iOp2.destino, execute_instruccion_matematica())
     }
     println("Ejecuta la instruccion!!!")
@@ -261,7 +262,29 @@ case class Simulador() {
     cpu.sp.--
     cpu.pc.:=(valor.hex)
   }
+  
+  /**
+ * Ejecuta el PUSH. 
+ * @param W16
+ */
+  def executePUSH(valor:W16) {
+    busIO.memoria.setValor(cpu.sp.toString, valor)
+    cpu.sp.--
+  }
+
+ /**
+ * Ejecuta el POP aumenta el stack pointer (sp), y guarda en el modo de direccionamiento
+ * recibido por parametro el valor que se encuetra en el en esa celda a la que apunta el sp. 
+ * @param W16
+ */
+  def executePOP(modoDir : ModoDireccionamiento) {
+    cpu.sp.++
+    store(modoDir,busIO.memoria.getValor(cpu.sp.toString))
+  }
 }
+
+
+
 
 object tt extends App {
   var programa = new Programa(List(SUB(R1, R4)))
