@@ -4,7 +4,13 @@ import ar.edu.unq.tpi.qsim.exeptions._
 
 object Interprete {
   
-  
+  /**
+   * Este mensaje interpreta dos operandos tomando los bits necesarios de la cadena binaria
+   * pasada por parametro en forma de String y devuelve un map a op1 y op2 con sus valores
+   * respectivos
+   * @parameters cadena_binaria : String
+   * @return Map[String,ModoDireccionamiento]
+   */
   def InterpretarDosOperandos(cadena_binaria : String) : Map[String,ModoDireccionamiento] = {
    
    var bits_segundoOperando : String = ""
@@ -24,12 +30,25 @@ object Interprete {
     Map(("op1",primer_operando),("op2",segundo_operando))
     }
     
+  /**
+   * Este mensaje extrae el valor de la cadena binaria pasada por parametro en forma de String 
+   * segun el tamaño que tenga y devuelve el valor.
+   * respectivos
+   * @parameters cadena_binaria : String
+   * @return W16
+   */
   def extraerValor(cadena_binaria : String) : W16 = {
     
     if(cadena_binaria.size>16) {new W16(Util.binary16ToHex(cadena_binaria.substring(0, 16)))}
     else {new W16(Util.binary16ToHex(cadena_binaria.takeRight(16)))}
   } 
   
+  /**
+   * Este mensaje interpreta un operando tomando los bits necesarios de la cadena binaria
+   * pasada por parametro en forma de String y devuelve un modo de direccionamiento 
+   * @parameters cadena_binaria : String
+   * @return ModoDireccionamiento
+   */
   def interpretar_operando(cadena_binaria : String): ModoDireccionamiento = {
 
    val code_modo =  cadena_binaria.substring(0, 6)
@@ -45,6 +64,13 @@ object Interprete {
 
   }
   
+  /**
+   * Este mensaje recibe una cadena binaria pasada por parametro en forma de String 
+   * y devuelve un jump condicional fijandose segun el comienzo de la cadena a que
+   * jump condicional corresponde.
+   * @parameters cadena_binaria : String
+   * @return Instruccion
+   */
    def interpretar_JumpCondicional (cadena_binaria : String): Instruccion = {
     val codOp =  cadena_binaria.substring(0, 4)
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 4).reverse.takeRight(8).reverse
@@ -64,6 +90,12 @@ object Interprete {
     }
    }
   
+   /**
+   * Este mensaje recibe una cadena binaria pasada por parametro en forma de String 
+   * y devuelve un JUMP fijandose que tenga el relleno correspondiente.
+   * @parameters cadena_binaria : String
+   * @return Instruccion
+   */
    def interpretar_JMP (cadena_binaria : String): Instruccion = {
     val relleno =  cadena_binaria.substring(0, 6)
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
@@ -73,6 +105,12 @@ object Interprete {
     }
    }
   
+  /**
+   * Este mensaje recibe una cadena binaria pasada por parametro en forma de String 
+   * y devuelve un NOT fijandose que tenga el relleno correspondiente.
+   * @parameters cadena_binaria : String
+   * @return Instruccion
+   */ 
    def interpretar_NOT (cadena_binaria : String): Instruccion = {
     val relleno =  cadena_binaria.substring(0, 6)
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
@@ -82,7 +120,13 @@ object Interprete {
     }
 
   }
-   
+  
+ /**
+   * Este mensaje recibe una cadena binaria pasada por parametro en forma de String 
+   * y devuelve un CALL fijandose que tenga el relleno correspondiente.
+   * @parameters cadena_binaria : String
+   * @return Instruccion
+   */  
   def interpretar_CALL (cadena_binaria : String): Instruccion = {
     val relleno =  cadena_binaria.substring(0, 6)
     val resto =  cadena_binaria.takeRight(cadena_binaria.size - 6)
