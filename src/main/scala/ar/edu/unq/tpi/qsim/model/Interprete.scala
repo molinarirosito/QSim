@@ -2,7 +2,7 @@ package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tpi.qsim.exeptions._
 
-object Ensamblador {
+object Interprete {
   
   
   def ensamblarDosOperandos(cadena_binaria : String) : Map[String,ModoDireccionamiento] = {
@@ -167,38 +167,38 @@ object pruebados extends App() {
    val directo = "001000" + "0000000000001111"
    val directo_registro = "001000" + "100111" + "0000000000001111" + "1111000011110000" // [000F],R7 
 
-  println("R7, 0001      " + Ensamblador.ensamblarDosOperandos(d))
-  println("R7, R3        " + Ensamblador.ensamblarDosOperandos(b))
-  println("R7, [000F]    " + Ensamblador.ensamblarDosOperandos(a))
-  println("[000F], R7    " + Ensamblador.ensamblarDosOperandos(c))
-  println("[11E1],[FFFF] " + Ensamblador.ensamblarDosOperandos(co))
+  println("R7, 0001      " + Interprete.ensamblarDosOperandos(d))
+  println("R7, R3        " + Interprete.ensamblarDosOperandos(b))
+  println("R7, [000F]    " + Interprete.ensamblarDosOperandos(a))
+  println("[000F], R7    " + Interprete.ensamblarDosOperandos(c))
+  println("[11E1],[FFFF] " + Interprete.ensamblarDosOperandos(co))
   
-  println("MUL => " + Ensamblador.ensamblarInstruccion("0000" + d))
-  println("ADD => " + Ensamblador.ensamblarInstruccion("0010" + b))
-  println("ADD SOLO REGISTROS=> " + Ensamblador.ensamblarInstruccion("0010" + registro))
-  println("ADD SOLO REGISTROS INDIRECTOS=> " + Ensamblador.ensamblarInstruccion("0010" + inregistro))
-  println("ADD directo registro=> " + Ensamblador.ensamblarInstruccion("0010" + directo_registro))
-  println("DIV => " + Ensamblador.ensamblarInstruccion("0111" + a))
-  println("MOV => " + Ensamblador.ensamblarInstruccion("0001" + c))
-  println("SUB => " + Ensamblador.ensamblarInstruccion("0011" + co))
-  println("CALL => " + Ensamblador.ensamblarInstruccion("1011" + "000000" + d))
-  println("JMP => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + d))
-  println("JMP REGISTRO => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + "100111"))
-  println("JMP DIRECTO => " + Ensamblador.ensamblarInstruccion("1010" + "000000" + directo))
-  println("JE => " + Ensamblador.ensamblarInstruccion("1111" + "0001" + "00000000" ))
-  println("JG => " + Ensamblador.ensamblarInstruccion("1111" + "1010" + "00000000" + "1111000011110000" +  "1111000011110000"))
-  println("JLE => " + Ensamblador.ensamblarInstruccion("1111" + "0010" + "00000000" +  "1111000011110000"))
-  println("JL => " + Ensamblador.ensamblarInstruccion("1111" + "0011" + "00000000" + "1111000011110000" +  "1111000011110000"))
-  println("JGE => " + Ensamblador.ensamblarInstruccion("1111" + "1011" + "00000000" + "1111000011110000" +  "1111000011110000"))
-  println("JLEU => " + Ensamblador.ensamblarInstruccion("1111" + "0100" + "00000000" + "1111000011110000" +  "1111000011110000"))
-  println("JGU => " + Ensamblador.ensamblarInstruccion("1111" + "1100" + "00000000" + "1111000011110000" +  "1111000011110000"))
-  println("JCS => " + Ensamblador.ensamblarInstruccion("1111" + "0101" + "00000000" + "1111000011110000" +  "1111000011110000"))
-  println("JNEG => " + Ensamblador.ensamblarInstruccion("1111" + "0110" + "10000000" + "1111000011110000" +  "1111000011110000"))
-  println("JVS => " + Ensamblador.ensamblarInstruccion("1111" + "0111" + "00000011" + "1111000011110000" +  "1111000011110000"))
-  println("JNE => " + Ensamblador.ensamblarInstruccion("1111" + "1001" + "00110000" + "1111000011110000" +  "1111000011110000"))
+  println("MUL => " + Interprete.ensamblarInstruccion("0000" + d))
+  println("ADD => " + Interprete.ensamblarInstruccion("0010" + b))
+  println("ADD SOLO REGISTROS=> " + Interprete.ensamblarInstruccion("0010" + registro))
+  println("ADD SOLO REGISTROS INDIRECTOS=> " + Interprete.ensamblarInstruccion("0010" + inregistro))
+  println("ADD directo registro=> " + Interprete.ensamblarInstruccion("0010" + directo_registro))
+  println("DIV => " + Interprete.ensamblarInstruccion("0111" + a))
+  println("MOV => " + Interprete.ensamblarInstruccion("0001" + c))
+  println("SUB => " + Interprete.ensamblarInstruccion("0011" + co))
+  println("CALL => " + Interprete.ensamblarInstruccion("1011" + "000000" + d))
+  println("JMP => " + Interprete.ensamblarInstruccion("1010" + "000000" + d))
+  println("JMP REGISTRO => " + Interprete.ensamblarInstruccion("1010" + "000000" + "100111"))
+  println("JMP DIRECTO => " + Interprete.ensamblarInstruccion("1010" + "000000" + directo))
+  println("JE => " + Interprete.ensamblarInstruccion("1111" + "0001" + "00000000" ))
+  println("JG => " + Interprete.ensamblarInstruccion("1111" + "1010" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JLE => " + Interprete.ensamblarInstruccion("1111" + "0010" + "00000000" +  "1111000011110000"))
+  println("JL => " + Interprete.ensamblarInstruccion("1111" + "0011" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JGE => " + Interprete.ensamblarInstruccion("1111" + "1011" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JLEU => " + Interprete.ensamblarInstruccion("1111" + "0100" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JGU => " + Interprete.ensamblarInstruccion("1111" + "1100" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JCS => " + Interprete.ensamblarInstruccion("1111" + "0101" + "00000000" + "1111000011110000" +  "1111000011110000"))
+  println("JNEG => " + Interprete.ensamblarInstruccion("1111" + "0110" + "10000000" + "1111000011110000" +  "1111000011110000"))
+  println("JVS => " + Interprete.ensamblarInstruccion("1111" + "0111" + "00000011" + "1111000011110000" +  "1111000011110000"))
+  println("JNE => " + Interprete.ensamblarInstruccion("1111" + "1001" + "00110000" + "1111000011110000" +  "1111000011110000"))
  
 
-  println("RET => " + Ensamblador.ensamblarInstruccion("1100" + d))
+  println("RET => " + Interprete.ensamblarInstruccion("1100" + d))
  
   
   // println("PORQUERIA => " + Ensamblador.ensamblarInstruccion("1111" + p))

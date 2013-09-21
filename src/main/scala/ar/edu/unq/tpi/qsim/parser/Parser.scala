@@ -7,9 +7,9 @@ object Parser extends ParserEnsamblador {
     val str = input.mkString
 
     parse(str) match {
-      case Success(result, _) ⇒ (result)
-      case Failure(msg, i) ⇒ println("[Failure] " + s" $msg in $i")
-      case Error(msg, i) ⇒ println("[Error] " + s" $msg in $i")
+      case Success(result, _) => (result)
+      case Failure(msg, i) => println("[Failure] " + s" $msg in $i")
+      case Error(msg, i) => println("[Error] " + s" $msg in $i")
     }
   }
 

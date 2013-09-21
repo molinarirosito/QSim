@@ -122,7 +122,7 @@ case class Simulador() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
     val cadena_binaria = obtenerProximaInstruccionBinario()
-    instruccionActual = Ensamblador.ensamblarInstruccion(cadena_binaria)
+    instruccionActual = Interprete.ensamblarInstruccion(cadena_binaria)
     val instruccion_fech = instruccionActual.representacionHexadecimal()
     println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
