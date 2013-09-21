@@ -152,14 +152,6 @@ case class JCS(desp: Salto) extends JUMP_condicional("0101","JCS", desp){}
 case class JNEG(desp: Salto) extends JUMP_condicional("0110","JNEG", desp){}
 case class JVS(desp: Salto) extends JUMP_condicional("0111","JVS", desp){}
 
-
-
-
-
-
-
-
-
 object Testuds extends App{
 
 
