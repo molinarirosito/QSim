@@ -39,7 +39,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   "Un Simulador" should "inicializar la cpu y la memoria cuando se crea" in {
     var ci = simuladorInicializado
     ci.simulador.cpu should be(CPU())
-    ci.simulador.memoria should be(Memoria(30))
+    ci.simulador.busIO.memoria should be(Memoria(30))
   }
 
   it should "cargar un programa en la memoria desde la posicion que indica pc y actualizar los registros de cpu" in {
@@ -61,16 +61,16 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var map = pc.registrosParaActualizar
 
     for {
-      key ← map.keys
+      key <- map.keys
       value = map(key)
     } yield {
       f.simulador.cpu.registro(key) match {
-        case Some(registro) ⇒ {
+        case Some(registro) => {
           println("valor del registro " + registro.valor.toString)
           println("valor a actualizar " + value.toString)
           assert(registro.valor.equals(value))
         }
-        case _ ⇒
+        case _ =>
       }
     }
 

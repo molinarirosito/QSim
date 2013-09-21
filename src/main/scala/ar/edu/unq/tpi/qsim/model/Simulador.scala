@@ -11,7 +11,8 @@ import ar.edu.unq.tpi.qsim.utils._
 case class Simulador() {
 
   var cpu: CPU = _
-  var memoria: Memoria = _
+  var busIO : BusEntradaSalida = _
+  //var memoria: Memoria = _
   var instruccionActual: Instruccion = _
 
   /**
@@ -20,8 +21,8 @@ case class Simulador() {
   def inicializarSim() {
     println("--------INIT------")
     cpu = CPU()
-    memoria = Memoria(30)
-    memoria.initialize()
+    busIO = BusEntradaSalida()
+    busIO.initialize
   }
 
   /**
@@ -74,8 +75,8 @@ case class Simulador() {
       var programaConPosiciones = asignarPosiciones(pcInicial, programa)
       var programaSinEtiquetas = calcularEtiquetas(programa)
 
-      memoria.cargarPrograma(programaSinEtiquetas, pc)
-      println("Ver el programa cargado en Memoria: \n" + memoria.show(pc))
+      busIO.memoria.cargarPrograma(programaSinEtiquetas, pc)
+      println("Ver el programa cargado en Memoria: \n" + busIO.memoria.show(pc))
     } else {
       println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
@@ -106,9 +107,9 @@ case class Simulador() {
   def obtenerProximaInstruccionBinario(): String =
     {
      var int_pc = cpu.pc.value
-     var celdas_binario = memoria.getValor(int_pc).toBinary
+     var celdas_binario = busIO.memoria.getValor(int_pc).toBinary
     try
-        { Util.rep(2) { celdas_binario = memoria.getValor(int_pc + 1).toBinary; int_pc=int_pc+1 }  }
+        { Util.rep(2) { celdas_binario = busIO.memoria.getValor(int_pc + 1).toBinary; int_pc=int_pc+1 }  }
         catch  { 
            case cfme: CeldaFueraDeMemoriaException => celdas_binario }   
     celdas_binario  }
@@ -146,9 +147,9 @@ case class Simulador() {
    * @return W16
    */
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
-    case Directo(inmediato: Inmediato) => memoria.getValor(inmediato.getValorString())
-    case Indirecto(directo: Directo) => memoria.getValor(obtenerValor(directo))
-    case RegistroIndirecto(registro: Registro) => memoria.getValor(obtenerValor(registro))
+    case Directo(inmediato: Inmediato) => busIO.getValor(inmediato.getValorString())
+    case Indirecto(directo: Directo) => busIO.getValor(obtenerValor(directo))
+    case RegistroIndirecto(registro: Registro) => busIO.getValor(obtenerValor(registro))
     case _ => modoDir.getValor
   }
 
@@ -210,9 +211,9 @@ case class Simulador() {
    * @param ModoDireccionamento, W16
    */
   def store(modoDir: ModoDireccionamiento, un_valor: W16) = modoDir match {
-    case Directo(inmediato: Inmediato) => memoria.setValor(inmediato.getValorString(), un_valor)
-    case Indirecto(directo: Directo) => memoria.setValor(obtenerValor(directo).hex, un_valor)
-    case RegistroIndirecto(registro: Registro) => memoria.setValor(obtenerValor(registro).hex, un_valor)
+    case Directo(inmediato: Inmediato) => busIO.setValor(inmediato.getValorString(), un_valor)
+    case Indirecto(directo: Directo) => busIO.setValor(obtenerValor(directo).hex, un_valor)
+    case RegistroIndirecto(registro: Registro) => busIO.setValor(obtenerValor(registro).hex, un_valor)
     case r: Registro =>
       r.valor = un_valor
       println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
@@ -224,7 +225,7 @@ case class Simulador() {
    */
   def executeRet() {
     cpu.sp.++
-    cpu.pc.:=(memoria.getValor(cpu.sp.toString).toString)
+    cpu.pc.:=(busIO.memoria.getValor(cpu.sp.toString).toString)
   }
   /**
    * Delega en la ALU la ejecucion del CMP y luego actualiza los flags.
@@ -256,7 +257,7 @@ case class Simulador() {
  * @param W16
  */
   def executeCall(valor:W16) {
-    memoria.setValor(cpu.sp.toString, cpu.pc)
+    busIO.memoria.setValor(cpu.sp.toString, cpu.pc)
     cpu.sp.--
     cpu.pc.:=(valor.hex)
   }
