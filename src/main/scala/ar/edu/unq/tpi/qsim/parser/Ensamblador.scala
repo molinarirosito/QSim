@@ -13,7 +13,7 @@ import ar.edu.unq.tpi.qsim.model.Programa
 import scala.io.Source
 
 // TODO Hasta que Tati no cambie el nombre de la clase Ensamblador voy a seguir con este nombre
-trait ParserEnsamblador extends JavaTokenParsers with ImplicitConversions {
+trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   type Tokens = StdTokens
   val lexical = new StdLexical
   lexical.reserved ++= List("MOV", "SUB", "ADD", "DIV", "MUL", "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7")
