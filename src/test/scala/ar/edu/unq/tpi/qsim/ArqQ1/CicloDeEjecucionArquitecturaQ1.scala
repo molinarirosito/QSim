@@ -10,40 +10,37 @@ import ar.edu.unq.tpi.qsim.utils._
 
 class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
-  def parserEnsamblador = new {
+  def parsers_resultados = new {
     var parser = Parser
-    var result = parser.parsear("src/main/resources/programaQ1.qsim")
+    var resultadoQ1 = parser.ensamblar("src/main/resources/programaQ1.qsim") 		
   }
 
-  def programaCreado = new {
+  def programas = new {
     var instrucciones = List(ADD(R0, new Inmediato("0002")), MUL(R4, new Inmediato("0001")), SUB(R5, new Inmediato("000A")),
-      MOV(R5, new Inmediato("0056")), MOV(R2, R3), ADD(R1, R7))
-    //      var instrucciones = List(ADD(R0, new Inmediato("0002")), JMP(new Etiqueta("ppp")))
-    //     var etiquetas = Map[String, Instruccion](("ppp" -> instrucciones(0)))
-    var programa = new Programa(instrucciones)
-    //    programa.etiquetas = etiquetas
-    //  var registrosParaActualizar = Map[String, W16](("R5", "0010"), ("R0", "0010"), ("R2", "9800"),
-    //   ("R1", "0009"), ("R7", "0001"))
+    						 MOV(R5, new Inmediato("0056")), MOV(R2, R3), ADD(R1, R7))
+    var programaQ1 = new Programa(instrucciones)
   }
   
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
   
-  "Un Parser" should "parsear bien un programa " in {
-    var pe = parserEnsamblador
-    var pc = programaCreado
-    pe.result
-    // TODO para poder hacer este assert necesito que el programa tenga un metodo equals para poder comparar
-    assert(pe.result.asInstanceOf[Programa].equals(pc.programa))
+  "Un Parser" should "parsear exitosamente un programa " in {
+    var set_parser = parsers_resultados
+    var set_programas = programas
+    
+    println(set_parser.resultadoQ1)
+    
+    //assert(set_parser.resultadoQ1.asInstanceOf[Programa].equals(set_programas.programaQ1))
   }
 
-  it should "tirar un Failure si la sintaxis no es correcta cuando parsea un programa" in {
-    var pe = parserEnsamblador
-    pe.result
-  }
-  it should "tirar un Error --- " in {
-    var pe = parserEnsamblador
-    pe.result
-  }
+//  it should "tirar un Failure si la sintaxis no es correcta cuando parsea un programa" in {
+//    var pe = ensamblador
+//    pe.result
+//  }
+//  it should "tirar un Error --- " in {
+//    var pe = ensamblador
+//    pe.result
+//  }
+  
   //----------------------------------------------------------------------------------------------------------//
 
   def simuladorInicializado = new {

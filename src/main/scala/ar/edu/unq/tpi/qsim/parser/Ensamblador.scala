@@ -11,8 +11,7 @@ import ar.edu.unq.tpi.qsim.model._
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.model.Programa
 import scala.io.Source
-
-// TODO Hasta que Tati no cambie el nombre de la clase Ensamblador voy a seguir con este nombre
+// TODO Comentar a Tati sobre el Error y si le parece correcto o no dejarlo asi !! o restringir que toma solamente 4 digitos hexa
 trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   type Tokens = StdTokens
   val lexical = new StdLexical
