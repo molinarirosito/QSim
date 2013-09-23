@@ -40,7 +40,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Este parser ensambla el modo de direccionamiento inmediato.
    * Toma el valor del inmediato.
    */
-  def inmediate = "0x" ~> "[0-9A-Z]+".r ^^ { case direction => Inmediato(new W16(direction)) }
+  def inmediate = "0x" ~> "[0-9A-F]{4}".r ^^ { case direction => Inmediato(new W16(direction)) }
   
   /**
    * Este parser ensambla el modo de direcciomaiento directo.

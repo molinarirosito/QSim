@@ -10,7 +10,8 @@ object Parser extends Ensamblador {
 
     parse(str) match {
       case Success(result, _) =>  OK(result)
-      case Failure(msg, i) => FAILURE("[Failure] " + s" $msg in $i")
+      case Failure(msg, i) => 
+        FAILURE(s" $msg in $i")
       case Error(msg, i) => FAILURE("[Error] " + s" $msg in $i")
     }
   }
