@@ -4,7 +4,7 @@ import ar.edu.unq.tpi.qsim.model.Programa
 
 object Parser extends Ensamblador {
 
-  def ensamblar(path: String) = {
+  def ensamblar(path: String) :Result = {
     val input = io.Source.fromFile(path)
     val str = input.mkString
 
@@ -14,7 +14,6 @@ object Parser extends Ensamblador {
       case Error(msg, i) => FAILURE("[Error] " + s" $msg in $i")
     }
   }
-// TODO ver si se puede agregar un metodo para saber el estado de salida que tuvo el parser!!
 }
 
 abstract class Result{}

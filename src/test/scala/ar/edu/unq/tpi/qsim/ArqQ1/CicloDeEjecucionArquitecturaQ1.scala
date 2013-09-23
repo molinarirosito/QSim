@@ -12,35 +12,38 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
-    var resultadoQ1 = parser.ensamblar("src/main/resources/programaQ1.qsim") 		
+    var resultadoQ1 = parser.ensamblar("src/main/resources/programaQ1.qsim")
   }
 
   def programas = new {
     var instrucciones = List(ADD(R0, new Inmediato("0002")), MUL(R4, new Inmediato("0001")), SUB(R5, new Inmediato("000A")),
-    						 MOV(R5, new Inmediato("0056")), MOV(R2, R3), ADD(R1, R7))
+      MOV(R5, new Inmediato("0056")), MOV(R2, R3), ADD(R1, R7))
     var programaQ1 = new Programa(instrucciones)
   }
-  
+
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
-  
+
   "Un Parser" should "parsear exitosamente un programa " in {
     var set_parser = parsers_resultados
     var set_programas = programas
-    
-    println(set_parser.resultadoQ1)
-    
-    //assert(set_parser.resultadoQ1.asInstanceOf[Programa].equals(set_programas.programaQ1))
+
+    // verificando si el resultado dio Ok!!!
+    set_parser.resultadoQ1 should be(OK)
+
+    // verificando que el programa parseado sea el esperado
+    assert(set_parser.resultadoQ1.asInstanceOf[Programa].equals(set_programas.programaQ1))
   }
 
 //  it should "tirar un Failure si la sintaxis no es correcta cuando parsea un programa" in {
 //    var pe = ensamblador
 //    pe.result
 //  }
-//  it should "tirar un Error --- " in {
-//    var pe = ensamblador
-//    pe.result
-//  }
   
+  //  it should "tirar un Error --- " in {
+  //    var pe = ensamblador
+  //    pe.result
+  //  }
+
   //----------------------------------------------------------------------------------------------------------//
 
   def simuladorInicializado = new {
