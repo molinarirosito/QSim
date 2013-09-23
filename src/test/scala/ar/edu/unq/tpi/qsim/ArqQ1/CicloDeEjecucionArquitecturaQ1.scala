@@ -28,17 +28,17 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var set_programas = programas
 
     // verificando si el resultado dio Ok!!!
-    set_parser.resultadoQ1 should be(OK)
+    set_parser.resultadoQ1.estado should be("OK")
 
     // verificando que el programa parseado sea el esperado
-    assert(set_parser.resultadoQ1.asInstanceOf[Programa].equals(set_programas.programaQ1))
+    assert(set_parser.resultadoQ1.asInstanceOf[OK].resultado.equals(set_programas.programaQ1))
   }
 
 //  it should "tirar un Failure si la sintaxis no es correcta cuando parsea un programa" in {
 //    var pe = ensamblador
 //    pe.result
 //  }
-  
+ 
   //  it should "tirar un Error --- " in {
   //    var pe = ensamblador
   //    pe.result

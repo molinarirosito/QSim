@@ -16,9 +16,9 @@ object Parser extends Ensamblador {
   }
 }
 
-abstract class Result{}
+abstract class Result(var estado: String){}
 
-case class OK(var resultado: Programa) extends Result {}
+case class OK(var resultado: Programa) extends Result("OK") {}
 
-case class FAILURE(var mensaje: String) extends Result {}
+case class FAILURE(var mensaje: String) extends Result("FAILURE") {}
   
