@@ -45,7 +45,7 @@ case class Simulador() {
     var pcAsignar: W16 = pc
     programa.instrucciones.foreach(inst => {
       inst.position = pcAsignar
-      println(inst.position)
+     // println(inst.position)
       pcAsignar = pcAsignar.ss(inst.cantidadCeldas())
     })
     programa
@@ -108,7 +108,7 @@ case class Simulador() {
      var int_pc = cpu.pc.value
      var celdas_binario = busIO.memoria.getValor(int_pc).toBinary
     try
-        { Util.rep(2) { celdas_binario = busIO.memoria.getValor(int_pc + 1).toBinary; int_pc=int_pc+1 }  }
+        { Util.rep(2) { celdas_binario += busIO.memoria.getValor(int_pc + 1).toBinary; int_pc=int_pc+1 }  }
         catch  { 
            case cfme: CeldaFueraDeMemoriaException => celdas_binario }   
     celdas_binario  }
@@ -165,7 +165,7 @@ case class Simulador() {
       case MUL(op1, op2) => {
         var result_mult = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
         cpu.actualizarR7(result_mult)
-        result_mult
+        resultado = result_mult
       }
       case DIV(op1, op2) => resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
       case SUB(op1, op2) => resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))

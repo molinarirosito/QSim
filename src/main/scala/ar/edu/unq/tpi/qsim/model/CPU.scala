@@ -30,7 +30,6 @@ case class CPU() {
    * @params cantidad: Int
    */
   def incrementarPc(cantidad: Int) = {
-    println("se incrementa!!")
     pc.++(cantidad)
   }
 
@@ -39,9 +38,7 @@ case class CPU() {
    * @parameters valor: String
    */
   def cargarPc(valor: String) {
-    println("valor a cargar" + valor)
     pc = new W16(valor)
-    println("valor cargado" + pc.toString)
   }
 
   /**
