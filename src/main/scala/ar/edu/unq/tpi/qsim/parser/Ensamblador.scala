@@ -183,5 +183,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
   // def program = programQ1 | programQ2 | programQ3
 
-  def parse(input: String) = parseAll(programQ1, input)
+  // def parse(input: String) = parseAll(programQ1, input)
+  def parse(input: String) = parseAll(programQ2, input)
+  // def parse(input: String) = parseAll(programQ1, input)
 }

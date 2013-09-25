@@ -1,4 +1,4 @@
-package ar.edu.unq.tpi.qsim.ArqQ1
+package ar.edu.unq.tpi.qsim.arq
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Map
@@ -91,7 +91,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     }
   }
   //-----------------------------------------------------EJECUCION PASO A PASO -----------------------------------------//
-
+  		// TODO deberia de crear 3 test mas probando por separado el paso Fetch/decode/execute
   it should "ejecutar el ciclo de instruccion (Paso-a-Paso) al programa que esta cargado en la memoria " in {
 	 var set_simuladores = simuladores
 	 var set_parser = parsers_resultados

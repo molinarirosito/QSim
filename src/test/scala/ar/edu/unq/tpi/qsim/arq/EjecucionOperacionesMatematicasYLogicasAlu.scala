@@ -1,4 +1,4 @@
-package ar.edu.unq.tpi.qsim.ArqQ1
+package ar.edu.unq.tpi.qsim.arq
 
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
