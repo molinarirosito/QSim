@@ -12,8 +12,8 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
-    var resultadoQ1 = parser.ensamblar("src/main/resources/programaQ1.qsim")
-    var resultadoQ1SintaxError = parser.ensamblar("src/main/resources/programaQ1SintaxError.qsim")
+    var resultadoQ1 = parser.ensamblarQ1("src/main/resources/programaQ1.qsim")
+    var resultadoQ1SintaxError = parser.ensamblarQ1("src/main/resources/programaQ1SintaxError.qsim")
   }
 
   def programas = new {

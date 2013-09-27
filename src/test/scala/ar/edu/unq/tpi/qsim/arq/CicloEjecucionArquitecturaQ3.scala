@@ -1,13 +1,13 @@
 package ar.edu.unq.tpi.qsim.arq
 
-import org.scalatest.FlatSpec
 import org.scalatest.Matchers
+import org.scalatest.FlatSpec
 import ar.edu.unq.tpi.qsim.model._
 import ar.edu.unq.tpi.qsim.parser._
 import ar.edu.unq.tpi.qsim.utils._
 import scala.collection.mutable.Map
 
-class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
+class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
@@ -116,5 +116,4 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
   //    println(spc.simulador.memoria.show("0000"))
   //    println(spc.simulador.cpu.registros)
   //  }
-
 }

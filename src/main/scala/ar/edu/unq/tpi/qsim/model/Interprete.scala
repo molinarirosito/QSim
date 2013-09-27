@@ -195,7 +195,7 @@ object Interprete {
       case "0111" => construir_instruccionDosOperandos(DIV(_,_),InterpretarDosOperandos(resto))
       case "0100" => construir_instruccionDosOperandos(AND(_,_),InterpretarDosOperandos(resto))
       case "0101" => construir_instruccionDosOperandos(OR(_,_),InterpretarDosOperandos(resto))
-      case "0110" => construir_instruccionDosOperandos(DIV(_,_),InterpretarDosOperandos(resto))
+      case "0110" => construir_instruccionDosOperandos(CMP(_,_),InterpretarDosOperandos(resto))
       case _ => throw new CodigoInvalidoException("No hay ninguna instruccion con ese codigo de operacion")
     }
 
