@@ -37,7 +37,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var set_parser = parsers_resultados
     var set_programas = programas
 
-    var mensaje_esperado = "string matching regex `[0-9A-F]{4}' expected but `0' found"
+    var mensaje_esperado = "A ocurrido un error en la linea 2 MUL R4, 0x01"
 
     set_parser.resultadoQ1SintaxError.estado should be("FAILURE")
 
@@ -52,10 +52,10 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var parser = parsers_resultados
     var programa = parser.resultadoQ1.asInstanceOf[OK].resultado
     var registros_actualizar = registros_a_actualizar
-    
+
     var simulador = new Simulador()
     simulador.inicializarSim()
-    
+
     var simulador_con_programa = new Simulador()
     simulador_con_programa.inicializarSim()
     simulador_con_programa.cargarProgramaYRegistros(programa, "0000", registros_actualizar.registros)
@@ -91,14 +91,14 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     }
   }
   //-----------------------------------------------------EJECUCION PASO A PASO -----------------------------------------//
-  		// TODO deberia de crear 3 test mas probando por separado el paso Fetch/decode/execute
+  // TODO deberia de crear 3 test mas probando por separado el paso Fetch/decode/execute
   it should "ejecutar el ciclo de instruccion (Paso-a-Paso) al programa que esta cargado en la memoria " in {
-	 var set_simuladores = simuladores
-	 var set_parser = parsers_resultados
-	 var programa = set_parser.resultadoQ1.asInstanceOf[OK].resultado
+    var set_simuladores = simuladores
+    var set_parser = parsers_resultados
+    var programa = set_parser.resultadoQ1.asInstanceOf[OK].resultado
 
-	 set_simuladores.simulador_con_programa.ejecucion(programa)
-	 
+    set_simuladores.simulador_con_programa.ejecucion(programa)
+
   }
 
   //expect(false) {

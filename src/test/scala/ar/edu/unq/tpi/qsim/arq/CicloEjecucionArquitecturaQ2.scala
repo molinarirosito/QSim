@@ -36,7 +36,7 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var set_parser = parsers_resultados
     var set_programas = programas
 
-    var mensaje_esperado = "`0x' expected but `]' found"
+    var mensaje_esperado = "A ocurrido un error en la linea 3 SUB [], 0x000A"
 
     set_parser.resultadoQ2SintaxError.estado should be("FAILURE")
 

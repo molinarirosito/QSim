@@ -1,6 +1,7 @@
 package ar.edu.unq.tpi.qsim.parser
 
 import ar.edu.unq.tpi.qsim.model.Programa
+import scala.util.parsing.input.CharSequenceReader
 
 object Parser extends Ensamblador {
 
@@ -20,8 +21,25 @@ object Parser extends Ensamblador {
 
   def result(resultado: ParseResult[Programa]): Result = resultado match {
     case Success(result, _) ⇒ OK(result)
-    case Failure(msg, i) ⇒ FAILURE(s"$msg") //in $i")
-    case Error(msg, i) ⇒ FAILURE(s"$msg") //in $i")
+    case Failure(msg, i) ⇒ {
+      var mensaje = definirMensajeError(i)
+      FAILURE(s"$mensaje")
+    }
+    case Error(msg, i) ⇒ FAILURE(s"$msg")
+  }
+  def definirMensajeError(output: Input): String = {
+    var characterCount = output.offset
+    var lineOfProgram = output.source.toString().split("\n")
+    var mensaje = ""
+    var countCharaters = 0
+    lineOfProgram.foreach(line ⇒ {
+      if (characterCount >= countCharaters && characterCount <= countCharaters + line.length()) {
+        var countLine = (lineOfProgram.indexOf(line) + 1).toString
+        mensaje = s"A ocurrido un error en la linea $countLine $line"
+      }
+      countCharaters += line.length()
+    })
+    return mensaje
   }
 }
 
