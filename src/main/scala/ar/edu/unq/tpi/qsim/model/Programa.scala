@@ -90,9 +90,7 @@ class Programa(var instrucciones: List[Instruccion], var etiquetas: Map[String, 
 
 object dd extends App {
   //print(List(ADD(R1, Inmediato(new W16("0013"))), ADD(R1, Inmediato(new W16("0013")))))
-  var programa1 = new Programa(List(ADD(R0, new Inmediato(new W16("0001")))))
-  var programa2 = new Programa(List(ADD(R0, R2)))
-  
-  println(programa1)
+ var instruccion = MOV(new Directo(new Inmediato(new W16("0005"))), new Etiqueta("etiqueta"))
+ println(instruccion.representacionHexadecimal)  
 }
 	

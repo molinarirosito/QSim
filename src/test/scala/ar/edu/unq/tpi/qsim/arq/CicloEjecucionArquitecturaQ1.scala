@@ -38,7 +38,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var mensaje_esperado = "A ocurrido un error en la linea 2 MUL R4, 0x01"
 
     val exception = intercept[SyntaxErrorException] {
-      set_parser.parser.ensamblarQ1("src/main/resources/programaQ1SintaxError.qsim")
+      set_parser.parser.ensamblarQ1("src/main/resources/programaQ1SyntaxError.qsim")
     }
     assert(exception.getMessage().equals(mensaje_esperado))
   }
