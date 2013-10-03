@@ -161,7 +161,9 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    */
   def instruction0Q3 = instruccionsQ3SinOperando ^^
     { case ins ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
-
+  
+  def instruccionstQ3 = instruction2Q3 | instruction1Q3 | instruction2movQ3 | instruction0Q3
+  
   // def instruction(parser: Parser[ModoDireccionamiento) = rep(parser) ^^
   // { case instructions => Programa(instructions.map(p => (p._1, p._2))) }
 
@@ -172,7 +174,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   // def instructionsQ3 = ((ident <~ ":")?) ~ instruction2Q2 | instruction0Q3 | instruction1Q3
   def instructionsQ1 = ((ident <~ ":")?) ~ instruction2Q1
   def instructionsQ2 = ((ident <~ ":")?) ~ instruction2Q2
-  def instructionsQ3 = ((ident <~ ":")?) ~ instruction1Q3
+  def instructionsQ3 = ((ident <~ ":")?) ~ instruccionstQ3
 
   def programQ1 = program(instructionsQ1)
   def programQ2 = program(instructionsQ2)

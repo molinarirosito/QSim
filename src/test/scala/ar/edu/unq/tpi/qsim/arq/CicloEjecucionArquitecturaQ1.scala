@@ -6,7 +6,7 @@ import org.scalatest._
 import ar.edu.unq.tpi.qsim.parser._
 import ar.edu.unq.tpi.qsim.model._
 import ar.edu.unq.tpi.qsim.utils._
-import ar.edu.unq.tpi.qsim.exeptions.SintaxErrorException
+import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
 
 class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
@@ -37,7 +37,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var set_programas = programas
     var mensaje_esperado = "A ocurrido un error en la linea 2 MUL R4, 0x01"
 
-    val exception = intercept[SintaxErrorException] {
+    val exception = intercept[SyntaxErrorException] {
       set_parser.parser.ensamblarQ1("src/main/resources/programaQ1SintaxError.qsim")
     }
     assert(exception.getMessage().equals(mensaje_esperado))

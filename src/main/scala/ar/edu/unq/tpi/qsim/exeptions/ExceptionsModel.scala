@@ -14,6 +14,6 @@ case class CeldaFueraDePuertosException(smth:String) extends Exception(smth) {
 
 }
 
-case class SintaxErrorException(smth:String) extends Exception(smth) {
+case class SyntaxErrorException(smth:String) extends Exception(smth) {
 
 }
