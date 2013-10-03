@@ -12,8 +12,8 @@ object Interprete {
    * @return Map[String,ModoDireccionamiento]
    */
   def InterpretarDosOperandos(cadena_binaria : String) : Map[String,ModoDireccionamiento] = {
-   
-   var bits_segundoOperando : String = ""
+
+    var bits_segundoOperando: String = ""
    var primer_operando : ModoDireccionamiento = null
    var segundo_operando : ModoDireccionamiento = null
    

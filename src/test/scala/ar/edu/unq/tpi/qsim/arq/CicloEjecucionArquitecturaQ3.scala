@@ -72,7 +72,13 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
     set_simuladores.simulador.cpu.pc.hex should be(pc)
 
     var mapaRegistros = set_registros.registros
+  }
 
+  it should "actualizar los registros de cpu" in {
+    var set_simuladores = simuladores
+    var set_registros = registros_a_actualizar
+    var mapaRegistros = set_registros.registros
+    // verificando que los registros se actualicen bien
     for {
       key ← mapaRegistros.keys
       value = mapaRegistros(key)
@@ -91,8 +97,13 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
     var set_simuladores = simuladores
     var set_parser = parsers_resultados
     var programa = set_parser.resultadoQ2
-
-    set_simuladores.simulador_con_programa.ejecucion(programa)
+    var count = 0
+    do {
+      set_simuladores.simulador_con_programa.fetch()
+      set_simuladores.simulador_con_programa.decode()
+      set_simuladores.simulador_con_programa.execute()
+      count += 1
+    } while (count < programa.instrucciones.length)
 
   }
 

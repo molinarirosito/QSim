@@ -82,21 +82,22 @@ case class Simulador() {
     //    memoria.cargarPrograma(programa, pc)
   }
 
-  /**
-   * Simula la ejecucion de un programa en memoria
-   * @param Programa
-   */
-  def ejecucion(programa: Programa) {
-    var n = 1
-    println("Empezando con la Ejecucion")
-    do {
-      fetch()
-      decode()
-      execute()
-      n = n + 1
-    } while (n <= programa.instrucciones.size)
-    println("Finalizo la ejecucion")
-  }
+//  /**
+//   * Simula la ejecucion de un programa en memoria
+//   * @param Programa
+//   */
+//  def ejecucion(programa: Programa) {
+//    var n = 1
+//    println("Empezando con la Ejecucion")
+//    do {
+//      fetch()
+//      decode()
+//      execute()
+//      n = n + 1
+//    } while (n <= programa.instrucciones.size)
+//    println("Finalizo la ejecucion")
+//  }
+  
   /**
    * Obtiene la proxima instruccion en representacion binaria. Toma tres celdas (ya que es el maximo que pueda ocupar una instruccion), si en la
    * memoria no quedan tantas, toma las que quedan nada mas. De no haber ninguna lanza una exepcion.

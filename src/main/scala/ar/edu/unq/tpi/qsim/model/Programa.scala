@@ -93,6 +93,6 @@ object dd extends App {
   var programa1 = new Programa(List(ADD(R0, new Inmediato(new W16("0001")))))
   var programa2 = new Programa(List(ADD(R0, R2)))
   
-  println(programa1.containsSameInstructions(programa2))
+  println(programa1)
 }
 	

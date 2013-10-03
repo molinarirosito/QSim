@@ -19,6 +19,9 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var instrucciones = List(MOV(R0, new Directo(new Inmediato("0002"))), MUL(R4, new Inmediato("0001")), SUB(new Directo(new Inmediato("0003")), new Inmediato("000A")),
       ADD(R5, new Inmediato("0056")), MOV(new Directo(new Inmediato("000B")), new Directo(new Inmediato("0005"))), ADD(R1, R7))
     var programaQ2 = new Programa(instrucciones)
+    var instruccionesinterpretadas = List("2800 0002", "0900 0001", "3940 000A", "1940 0056", "18A3 ", "2867 ")
+
+    var instruccionesdecodificadas = List("ADD R0 0002", "MUL R4 0001", "SUB R5 000A", "MOV R5 0056", "MOV R2 R3", "ADD R1 R7")
   }
 
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
@@ -60,7 +63,7 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var registros = Map[String, W16](("R5", "0010"), ("R0", "0010"), ("R2", "9800"), ("R1", "0009"), ("R7", "0001"))
   }
 
-  "Un Simulador" should "cargar un programa en la memoria desde la posicion que indica pc y actualizar los registros de cpu" in {
+  "Un Simulador" should "cargar un programa en la memoria desde la posicion que indica pc" in {
     var set_simuladores = simuladores
     var set_registros = registros_a_actualizar
     var set_parser = parsers_resultados
@@ -70,9 +73,13 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     set_simuladores.simulador.cargarProgramaYRegistros(programa, pc, set_registros.registros)
 
     set_simuladores.simulador.cpu.pc.hex should be(pc)
+  }
 
+  it should "actualizar los registros de cpu" in {
+    var set_simuladores = simuladores
+    var set_registros = registros_a_actualizar
     var mapaRegistros = set_registros.registros
-
+    // verificando que los registros se actualicen bien
     for {
       key ← mapaRegistros.keys
       value = mapaRegistros(key)
@@ -86,13 +93,24 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     }
   }
   //-----------------------------------------------------EJECUCION PASO A PASO -----------------------------------------//
-  // TODO deberia de crear 3 test mas probando por separado el paso Fetch/decode/execute
   it should "ejecutar el ciclo de instruccion (Paso-a-Paso) al programa que esta cargado en la memoria " in {
     var set_simuladores = simuladores
     var set_parser = parsers_resultados
     var programa = set_parser.resultadoQ2
-
-    set_simuladores.simulador_con_programa.ejecucion(programa)
+    var instrucciones = programas
+    var count = 0
+    do {
+      //FETCH
+      set_simuladores.simulador_con_programa.fetch()
+      assert(instrucciones.instruccionesinterpretadas(count) === set_simuladores.simulador_con_programa.cpu.ir)
+      //DECODE
+      var decode = set_simuladores.simulador_con_programa.decode()
+      assert(instrucciones.instruccionesdecodificadas(count) === decode)
+      //EXECUTE
+      set_simuladores.simulador_con_programa.execute()
+      count += 1
+      println(count)
+    } while (count < programa.instrucciones.length)
 
   }
 
