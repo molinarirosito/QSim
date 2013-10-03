@@ -111,7 +111,6 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
       //EXECUTE
       set_simuladores.simulador_con_programa.execute()
       count += 1
-      println(count)
     } while (count < programa.instrucciones.length)
   }
 

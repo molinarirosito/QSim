@@ -19,11 +19,10 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var instrucciones = List(MOV(R0, new Directo(new Inmediato("0002"))), MUL(R4, new Inmediato("0001")), SUB(new Directo(new Inmediato("0003")), new Inmediato("000A")),
       ADD(R5, new Inmediato("0056")), MOV(new Directo(new Inmediato("000B")), new Directo(new Inmediato("0005"))), ADD(R1, R7))
     var programaQ2 = new Programa(instrucciones)
-    var instruccionesinterpretadas = List("2800 0002", "0900 0001", "3940 000A", "1940 0056", "18A3 ", "2867 ")
+    var instruccionesinterpretadas = List("1808 0002", "0900 0001", "3200 0003 000A", "2940 0056", "1208 000B 0005", "2867 ")
 
-    var instruccionesdecodificadas = List("ADD R0 0002", "MUL R4 0001", "SUB R5 000A", "MOV R5 0056", "MOV R2 R3", "ADD R1 R7")
+    var instruccionesdecodificadas = List("MOV R0 [0002]", "MUL R4 0001", "SUB [0003] 000A", "ADD R5 0056", "MOV [000B] [0005]", "ADD R1 R7")
   }
-
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
 
   "Un Parser" should "parsear exitosamente un programa " in {
@@ -109,7 +108,6 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
       //EXECUTE
       set_simuladores.simulador_con_programa.execute()
       count += 1
-      println(count)
     } while (count < programa.instrucciones.length)
 
   }
