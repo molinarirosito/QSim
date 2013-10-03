@@ -2,18 +2,17 @@ package ar.edu.unq.tpi.qsim.arq
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Map
-
 import org.scalatest._
 import ar.edu.unq.tpi.qsim.parser._
 import ar.edu.unq.tpi.qsim.model._
 import ar.edu.unq.tpi.qsim.utils._
+import ar.edu.unq.tpi.qsim.exeptions.SintaxErrorException
 
 class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
     var resultadoQ1 = parser.ensamblarQ1("src/main/resources/programaQ1.qsim")
-    var resultadoQ1SintaxError = parser.ensamblarQ1("src/main/resources/programaQ1SintaxError.qsim")
   }
 
   def programas = new {
@@ -28,29 +27,25 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var set_parser = parsers_resultados
     var set_programas = programas
 
-    set_parser.resultadoQ1.estado should be("OK")
-
-    assert(set_parser.resultadoQ1.asInstanceOf[OK].resultado.equals(set_programas.programaQ1))
+    assert(set_parser.resultadoQ1.equals(set_programas.programaQ1))
   }
 
   it should "tirar un Failure cuando parsea un programa con sintaxis invalida" in {
     var set_parser = parsers_resultados
     var set_programas = programas
-
     var mensaje_esperado = "A ocurrido un error en la linea 2 MUL R4, 0x01"
 
-    set_parser.resultadoQ1SintaxError.estado should be("FAILURE")
-
-    //expect(mensaje_esperado) {
-    assert(set_parser.resultadoQ1SintaxError.asInstanceOf[FAILURE].mensaje.equals(mensaje_esperado))
-    //}
+    val exception = intercept[SintaxErrorException] {
+      set_parser.parser.ensamblarQ1("src/main/resources/programaQ1SintaxError.qsim")
+    }
+    assert(exception.getMessage().equals(mensaje_esperado))
   }
 
   //----------------------------------------------TESTS SIMULADOR -----------------------------------------------//
 
   def simuladores = new {
     var parser = parsers_resultados
-    var programa = parser.resultadoQ1.asInstanceOf[OK].resultado
+    var programa = parser.resultadoQ1
     var registros_actualizar = registros_a_actualizar
 
     var simulador = new Simulador()
@@ -70,7 +65,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var set_registros = registros_a_actualizar
     var set_parser = parsers_resultados
     var pc = "0000"
-    var programa = set_parser.resultadoQ1.asInstanceOf[OK].resultado
+    var programa = set_parser.resultadoQ1
 
     set_simuladores.simulador.cargarProgramaYRegistros(programa, pc, set_registros.registros)
 
@@ -95,7 +90,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   it should "ejecutar el ciclo de instruccion (Paso-a-Paso) al programa que esta cargado en la memoria " in {
     var set_simuladores = simuladores
     var set_parser = parsers_resultados
-    var programa = set_parser.resultadoQ1.asInstanceOf[OK].resultado
+    var programa = set_parser.resultadoQ1
 
     set_simuladores.simulador_con_programa.ejecucion(programa)
 
@@ -118,5 +113,5 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   //    assert(pcAnteriorAEjecucion.equals(new W16("000C")))
   //    println(spc.simulador.memoria.show("0000"))
   //    println(spc.simulador.cpu.registros)
-  //  }
+  //  }  
 }

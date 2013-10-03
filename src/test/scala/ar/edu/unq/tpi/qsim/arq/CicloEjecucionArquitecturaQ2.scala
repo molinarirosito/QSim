@@ -6,13 +6,13 @@ import ar.edu.unq.tpi.qsim.model._
 import ar.edu.unq.tpi.qsim.parser._
 import ar.edu.unq.tpi.qsim.utils._
 import scala.collection.mutable.Map
+import ar.edu.unq.tpi.qsim.exeptions.SintaxErrorException
 
 class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
     var resultadoQ2 = parser.ensamblarQ2("src/main/resources/programaQ2.qsim")
-    var resultadoQ2SintaxError = parser.ensamblarQ2("src/main/resources/programaQ2SintaxError.qsim")
   }
 
   def programas = new {
@@ -27,9 +27,7 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var set_parser = parsers_resultados
     var set_programas = programas
 
-    set_parser.resultadoQ2.estado should be("OK")
-
-    assert(set_parser.resultadoQ2.asInstanceOf[OK].resultado.equals(set_programas.programaQ2))
+    assert(set_parser.resultadoQ2.equals(set_programas.programaQ2))
   }
 
   it should "tirar un Failure cuando parsea un programa con sintaxis invalida" in {
@@ -37,17 +35,17 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var set_programas = programas
 
     var mensaje_esperado = "A ocurrido un error en la linea 3 SUB [], 0x000A"
-
-    set_parser.resultadoQ2SintaxError.estado should be("FAILURE")
-
-    assert(set_parser.resultadoQ2SintaxError.asInstanceOf[FAILURE].mensaje.equals(mensaje_esperado))
+    val exception = intercept[SintaxErrorException] {
+      set_parser.parser.ensamblarQ2("src/main/resources/programaQ2SintaxError.qsim")
+    }
+    assert(exception.getMessage().equals(mensaje_esperado))
   }
 
   //----------------------------------------------TESTS SIMULADOR -----------------------------------------------//
 
   def simuladores = new {
     var parser = parsers_resultados
-    var programa = parser.resultadoQ2.asInstanceOf[OK].resultado
+    var programa = parser.resultadoQ2
     var registros_actualizar = registros_a_actualizar
 
     var simulador = new Simulador()
@@ -67,7 +65,7 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var set_registros = registros_a_actualizar
     var set_parser = parsers_resultados
     var pc = "0000"
-    var programa = set_parser.resultadoQ2.asInstanceOf[OK].resultado
+    var programa = set_parser.resultadoQ2
 
     set_simuladores.simulador.cargarProgramaYRegistros(programa, pc, set_registros.registros)
 
@@ -92,7 +90,7 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
   it should "ejecutar el ciclo de instruccion (Paso-a-Paso) al programa que esta cargado en la memoria " in {
     var set_simuladores = simuladores
     var set_parser = parsers_resultados
-    var programa = set_parser.resultadoQ2.asInstanceOf[OK].resultado
+    var programa = set_parser.resultadoQ2
 
     set_simuladores.simulador_con_programa.ejecucion(programa)
 

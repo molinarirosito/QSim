@@ -2,6 +2,7 @@ package ar.edu.unq.tpi.qsim.parser
 
 import ar.edu.unq.tpi.qsim.model.Programa
 import scala.util.parsing.input.CharSequenceReader
+import ar.edu.unq.tpi.qsim.exeptions.SintaxErrorException
 
 object Parser extends Ensamblador {
 
@@ -10,28 +11,33 @@ object Parser extends Ensamblador {
     return input.mkString
   }
 
-  def ensamblarQ1(path: String): Result = {
+  def ensamblarQ1(path: String): Programa = {
     val str = readFile(path)
     result(parse(str, this.programQ1))
   }
-  def ensamblarQ2(path: String): Result = {
+  def ensamblarQ2(path: String): Programa = {
     val str = readFile(path)
     result(parse(str, this.programQ2))
   }
 
-  def result(resultado: ParseResult[Programa]): Result = resultado match {
-    case Success(result, _) ⇒ OK(result)
+  def result(resultado: ParseResult[Programa]): Programa = resultado match {
+    case Success(result, _) ⇒ result
     case Failure(msg, i) ⇒ {
-      var mensaje = definirMensajeError(i)
-      FAILURE(s"$mensaje")
+      var mensaje = createMessage(i)
+      throw new SintaxErrorException(mensaje)
     }
-    case Error(msg, i) ⇒ FAILURE(s"$msg")
+    case Error(msg, i) ⇒ throw new SintaxErrorException(msg)
   }
-  def definirMensajeError(output: Input): String = {
+
+  def createMessage(output: Input): String = {
     var characterCount = output.offset
     var lineOfProgram = output.source.toString().split("\n")
-    var mensaje = ""
+    return searchLineWithError(lineOfProgram, characterCount)
+  }
+  
+  def searchLineWithError(lineOfProgram: Array[String], characterCount: Int): String = {
     var countCharaters = 0
+    var mensaje = ""
     lineOfProgram.foreach(line ⇒ {
       if (characterCount >= countCharaters && characterCount <= countCharaters + line.length()) {
         var countLine = (lineOfProgram.indexOf(line) + 1).toString
@@ -42,10 +48,3 @@ object Parser extends Ensamblador {
     return mensaje
   }
 }
-
-abstract class Result(var estado: String) {}
-
-case class OK(var resultado: Programa) extends Result("OK") {}
-
-case class FAILURE(var mensaje: String) extends Result("FAILURE") {}
-  
