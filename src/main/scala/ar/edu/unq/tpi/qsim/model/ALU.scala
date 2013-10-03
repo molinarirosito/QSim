@@ -13,8 +13,6 @@ object ALU {
   def execute_operacion_matematica(operacion: (Int, Int) => Int, op1: W16, op2: W16): Map[String, Any] = {
     val valor = operacion(op1.value, op2.value)
     val resultado_binario = Util.toBinary16BOverflow(valor)
-    println("resultado " + valor )
-    println("resultado " + resultado_binario )
     val flags = takeFlags(valor)
     
     var resultado = new W16(Util.fromBinaryToHex4(resultado_binario))
@@ -209,27 +207,33 @@ object ALU {
    
     
   }
+  def actualizarFlagsOperacionesLogicas(resultado: W16): Map[String, Any] = {
+    var valor = resultado.value
+    var n = actualizarNegative(valor)
+    var z = actualizarZero(valor)
+    Map(("resultado", resultado),("n", n), ("z",z), ("c", 0), ("v",0))
+  }
   
    /**
    * Simula la ejecucion de AND a dos W16 pasados por parametro 
    * @params op1: W16, op2: W16
    * @return W16
    */
-  def AND(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, AND(_,_))
+  def AND(op1: W16, op2: W16) : Map[String, Any] = actualizarFlagsOperacionesLogicas(aplicarOperacionBooleana(op1, op2, AND(_,_)))
   
   /**
    * Simula la ejecucion de XOR a dos W16 pasados por parametro 
    * @params op1: W16, op2: W16
    * @return W16
    */
-  def XOR(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, XOR(_,_))
+  def XOR(op1: W16, op2: W16) : Map[String, Any] = actualizarFlagsOperacionesLogicas(aplicarOperacionBooleana(op1, op2, XOR(_,_)))
   
   /**
    * Simula la ejecucion de OR a dos W16 pasados por parametro 
    * @params op1: W16, op2: W16
    * @return W16
    */
-  def OR(op1: W16, op2: W16) : W16 = aplicarOperacionBooleana(op1, op2, OR(_,_))
+  def OR(op1: W16, op2: W16) : Map[String, Any] = actualizarFlagsOperacionesLogicas(aplicarOperacionBooleana(op1, op2, OR(_,_)))
   
   /**
    * Simula la ejecucion de NOT a un W16 pasado por parametro 
