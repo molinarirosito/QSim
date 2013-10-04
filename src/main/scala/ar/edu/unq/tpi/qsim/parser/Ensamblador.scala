@@ -34,31 +34,31 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Este parser ensambla el modo de direccionamiento registro indirecto.
    * Lo que hace es tomar lo que realmente importa que es el contenido del (registro)
    */
-  def registerIndirect = "[" ~> register <~ "]" ^^ { case register ⇒ RegistroIndirecto(register) }
+  def registerIndirect = "[" ~> register <~ "]" ^^ { case register => RegistroIndirecto(register) }
 
   /**
    * Este parser ensambla el modo de direccionamiento inmediato.
    * Toma el valor del inmediato.
    */
-  def inmediate = "0x" ~> "[0-9A-F]{4}".r ^^ { case direction ⇒ Inmediato(new W16(direction)) }
+  def inmediate = "0x" ~> "[0-9A-F]{4}".r ^^ { case direction => Inmediato(new W16(direction)) }
 
   /**
    * Este parser ensambla el modo de direcciomaiento directo.
    * Toma el inmediato para poder crear un Directo.
    */
-  def direct = "[" ~> inmediate <~ "]" ^^ { case direction ⇒ Directo(direction) }
+  def direct = "[" ~> inmediate <~ "]" ^^ { case direction => Directo(direction) }
 
   /**
    * Este parser ensambla el modo de direccionamiento Indirecto.
    * Toma el directo para cear un indirecto.
    */
-  def indirect = "[" ~> direct <~ "]" ^^ { case direction ⇒ Indirecto(direction) }
+  def indirect = "[" ~> direct <~ "]" ^^ { case direction => Indirecto(direction) }
 
   /**
    * Este parser ensambla una etiqueta.
    * Toma el nombre de la etiqueta y crea un Modo de direccionamiento Etiqueta.
    */
-  def etiqueta = ident ^^ { case etiqueta ⇒ Etiqueta(etiqueta) }
+  def etiqueta = ident ^^ { case etiqueta => Etiqueta(etiqueta) }
 
   // PARSER ENSAMBLADOR - Q1
 
@@ -82,7 +82,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q1.
    */
   def instruction2Q1 = instruccionsQ1DosOperandos ~ asignableQ1 ~ ("," ~> directionableQ1) ^^
-    { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
   ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -103,7 +103,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q2.
    */
   def instruction2Q2 = instruccionsQ1DosOperandos ~ asignableQ2 ~ ("," ~> directionableQ2) ^^
-    { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
   ///////////////////////////////////////////////////////////////////////////////////
 
@@ -139,28 +139,28 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q3.
    */
   def instruction2Q3 = instruccionsQ3DosOperandos ~ asignableQ2 ~ ("," ~> directionableQ2) ^^
-    { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
   /**
    * Este parser ensambla las instrucciones de un operando en Q3
    * Toma la instruccion y operando origen y crea una una Instruccion de Un operando en Q3
    */
   def instruction1Q3 = instruccionsQ3UnOperando ~ directionable1Q3 ^^
-    { case ins ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir2).asInstanceOf[Instruccion_UnOperando] }
+    { case ins ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir2).asInstanceOf[Instruccion_UnOperando] }
 
   /**
    * Este parser ensambla la instruccion MOV de dos operandos en Q3
    * Toma la instruccion y operando origen y crea una una Instruccion MOV en Q3
    */
   def instruction2movQ3 = movQ3DosOperandos ~ asignableQ2 ~ ("," ~> directionable1Q3) ^^
-    { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
+    { case ins ~ dir1 ~ dir2 => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
 
   /**
    * Este parser ensambla las instrucciones sin operandos en Q3
    * Toma la instruccion y crea una una Instruccion Sin Operandos en Q3
    */
   def instruction0Q3 = instruccionsQ3SinOperando ^^
-    { case ins ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
+    { case ins => Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
   
   def instruccionstQ3 = instruction2Q3 | instruction1Q3 | instruction2movQ3 | instruction0Q3
   
@@ -181,7 +181,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   def programQ3 = program(instructionsQ3)
 
   def program(parser: Parser[Option[String] ~ Instruccion]) = rep(parser) ^^
-    { case instructions ⇒ Programa(instructions.map(p ⇒ (p._1, p._2))) }
+    { case instructions => Programa(instructions.map(p => (p._1, p._2))) }
 
   // def program = programQ1 | programQ2 | programQ3
 

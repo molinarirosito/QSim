@@ -80,14 +80,14 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var mapaRegistros = set_registros.registros
     // verificando que los registros se actualicen bien
     for {
-      key ← mapaRegistros.keys
+      key <- mapaRegistros.keys
       value = mapaRegistros(key)
     } yield {
       set_simuladores.simulador.cpu.registro(key) match {
-        case Some(registro) ⇒ {
+        case Some(registro) => {
           assert(registro.valor.equals(value))
         }
-        case _ ⇒
+        case _ =>
       }
     }
   }

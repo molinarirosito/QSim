@@ -14,10 +14,10 @@ object Programa {
    */
   def apply(datas: List[(Option[String], Instruccion)]): Programa = {
     var etiquetas = Map[String, Instruccion]()
-    datas.foreach(entry ⇒ {
+    datas.foreach(entry => {
       entry match {
-        case (Some(etiqueta), i) ⇒ etiquetas(etiqueta) = i
-        case _ ⇒
+        case (Some(etiqueta), i) => etiquetas(etiqueta) = i
+        case _ =>
       }
     })
     new Programa(datas.map(_._2), etiquetas)
@@ -31,7 +31,7 @@ class Programa(var instrucciones: List[Instruccion], var etiquetas: Map[String, 
    * Devuelve el tamanio del programa
    * @return Int
    */
-  def tamanioDelPrograma(): Int = (instrucciones.map(i ⇒ i.tamanioHex).fold(0)(_ + _)) / 4
+  def tamanioDelPrograma(): Int = (instrucciones.map(i => i.tamanioHex).fold(0)(_ + _)) / 4
 
   /**
    * Actualiza el indice, aumentandolo en uno
