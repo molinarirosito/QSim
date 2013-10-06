@@ -23,10 +23,10 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     var resultado_or = new W16("0006")
   }
   def resultados_flags = new {
-    var v = (0,1)
-    var c = (0,1)
-    var z = (0,1)
-    var n = (0,1)
+    var v = (0, 1)
+    var c = (0, 1)
+    var z = (0, 1)
+    var n = (0, 1)
   }
 
   "Una Alu" should "ejecutar la suma entre dos numeros hexadecimales en el sist CA2 y actualizar todos los flags" in {
@@ -88,6 +88,23 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
 
     // VERIFICA EL RESULTADO
     assert(mapa_resultados("resultado").asInstanceOf[W16].equals(set_resultados.resultado_div))
+
+    // VERIFICA LOS FLAGS
+    assert(mapa_resultados("v") === set_resultados_flags.v._1)
+    assert(mapa_resultados("c") === set_resultados_flags.c._1)
+    assert(mapa_resultados("z") === set_resultados_flags.z._1)
+    assert(mapa_resultados("n") === set_resultados_flags.n._1)
+
+  }
+
+  it should "ejecutar la comparacion entre dos numeros hexadecimales en el sist CA2 y actualizar los flags N y Z con C y N = 0 " in {
+    var ctx = contexto_ejecucion
+    var mapa_resultados = ctx.alu.execute_cmp(ctx.op2, ctx.op1)
+    var set_resultados = resultados_esperados
+    var set_resultados_flags = resultados_flags
+
+    // VERIFICA EL RESULTADO
+    assert(mapa_resultados("resultado").asInstanceOf[W16].equals(set_resultados.resultado_resta))
 
     // VERIFICA LOS FLAGS
     assert(mapa_resultados("v") === set_resultados_flags.v._1)

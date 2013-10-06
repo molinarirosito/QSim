@@ -94,7 +94,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     }
   }
   //-----------------------------------------------------EJECUCION PASO A PASO -----------------------------------------//
-  it should "ejecutar el ciclo de instruccion (Paso-a-Paso) al programa que esta cargado en la memoria " in {
+  it should "ejecutar el ciclo de instruccion FETCH - DECODE (Paso-a-Paso) al programa que esta cargado en la memoria " in {
     var set_simuladores = simuladores
     var set_parser = parsers_resultados
     var programa = set_parser.resultadoQ1
@@ -107,8 +107,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
       //DECODE
       var decode = set_simuladores.simulador_con_programa.decode()
       assert(instrucciones.instruccionesdecodificadas(count) === decode)
-      //EXECUTE
-      set_simuladores.simulador_con_programa.execute()
+      
       count += 1
     } while (count < programa.instrucciones.length)
   }
