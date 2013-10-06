@@ -32,8 +32,8 @@ class EfectoInstrucciones extends FlatSpec with Matchers {
   }
   it should "buscar los datos en los modos de direccionamiento origen -> Registro destino ->RegistroIndirecto" in {
   }
-  it should "buscar los datos en los modos de direccionamiento origen -> Directo destino ->RegistroIndirecto" in {
-  }
+ // it should "buscar los datos en los modos de direccionamiento origen -> Directo destino ->RegistroIndirecto" in {
+ // }
   // -------------------------------------------------------------//
   it should "buscar los datos en los modos de direccionamiento origen -> InDirecto destino ->Inmediato" in {
   }
@@ -49,7 +49,7 @@ class EfectoInstrucciones extends FlatSpec with Matchers {
   }
   it should "buscar los datos en los modos de direccionamiento origen -> Directo destino ->InDirecto" in {
   }
-  it should "buscar los datos en los modos de direccionamiento origen -> Registro destino ->RegistroIndirecto" in {
-  }
+  //it should "buscar los datos en los modos de direccionamiento origen -> Registro destino ->RegistroIndirecto" in {
+  //}
 
 }
