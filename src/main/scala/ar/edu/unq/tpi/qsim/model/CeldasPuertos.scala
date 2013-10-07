@@ -7,7 +7,7 @@ import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tpi.qsim.exeptions._
 
   
-  var celdas: ArrayBuffer[W16] = _
+  var celdas: ArrayBuffer[Celda] = _
 
 /**
  * Devuelve el tamanio de las celdas reservadas a los puertos
@@ -20,9 +20,10 @@ import ar.edu.unq.tpi.qsim.exeptions._
  * 
  */
   def initialize() = {
-    celdas = new ArrayBuffer[W16]()
+    celdas = new ArrayBuffer[Celda]()
     Util.rep(tamanioCeldas()){
-      celdas.append(new W16("F000"))
+      val w16 = new W16("F000")
+      celdas.append(new Celda(w16))
     } 
   }
   
@@ -35,8 +36,8 @@ import ar.edu.unq.tpi.qsim.exeptions._
   def getValor(pc: Int): W16 = {
     val celda_puerto = pc - 65520 
     if (celda_puerto < tamanioCeldas()) {
-      var value = celdas(celda_puerto)
-      value
+      var celda = celdas(celda_puerto)
+      celda.getW16
     } else{
       throw new CeldaFueraDePuertosException("Las celdas reservadas para puertos no llegan a es numero")
       }
@@ -68,7 +69,7 @@ import ar.edu.unq.tpi.qsim.exeptions._
   def setValorC(celda: Int,dato: W16) = {
       val celda_puerto = celda - 65520 
       if (celda_puerto <  tamanioCeldas()) {
-      celdas(celda_puerto) = dato
+      celdas(celda_puerto).setW16(dato)
 
     } else{
       throw new CeldaFueraDePuertosException("Las celdas reservadas para puertos no llegan a es numero")
@@ -80,7 +81,7 @@ import ar.edu.unq.tpi.qsim.exeptions._
    * Pone un valor (W16) en la celda reservada para puertos que se le indica por parametro en valor hexadecimal.
    * @param String, W16
    */
-  def setValor(celda: String, valor: W16) = celdas(Util.hexToInteger(celda)) = valor
+  def setValor(celda: String, valor: W16) = setValorC(Util.hexToInteger(celda), valor)
 
   /**
    * Muestra las celdas de puertos imprimiendola a partir de un numero de celda en hexadecimal.

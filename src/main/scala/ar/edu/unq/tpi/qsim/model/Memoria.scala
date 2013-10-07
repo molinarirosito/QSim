@@ -6,7 +6,7 @@ import ar.edu.unq.tpi.qsim.exeptions._
 
 case class Memoria(var tamanio: Int) {
 
-  var celdas: ArrayBuffer[W16] = _
+  var celdas: ArrayBuffer[Celda] = _
 
 /**
  * Devuelve el tamanio de la memoria
@@ -19,10 +19,11 @@ case class Memoria(var tamanio: Int) {
  * 
  */
   def initialize() = {
-    celdas = new ArrayBuffer[W16]()
+    celdas = new ArrayBuffer[Celda]()
     var contador = 0
     do {
-      celdas.append(new W16("0000"))
+      val w16 = new W16("0000")
+      celdas.append(new Celda(w16))
       contador = contador + 1
     } while (contador < tamanioMemoria())
   }
@@ -34,8 +35,8 @@ case class Memoria(var tamanio: Int) {
    */
   def getValor(pc: Int): W16 = {
     if (pc < Memoria.this.tamanioMemoria()) {
-      var value = celdas(pc)
-      value
+      var celda = celdas(pc)
+      celda.getW16
     } else{
       throw new CeldaFueraDeMemoriaException("La memoria no tiene ese numero de celda")
       }
@@ -94,13 +95,13 @@ case class Memoria(var tamanio: Int) {
    * Pone un valor (W16) en la celda que se le indica por parametro.
    * @param Int, W16
    */
-  def setValorC(celda: Int,dato: W16) = celdas(celda) = dato
+  def setValorC(num_celda: Int,dato: W16) = celdas(num_celda).setW16(dato)
 
    /**
    * Pone un valor (W16) en la celda que se le indica por parametro en valor hexadecimal.
    * @param String, W16
    */
-  def setValor(celda: String, valor: W16) = celdas(Util.hexToInteger(celda)) = valor
+  def setValor(celda: String, valor: W16) = setValorC(Util.hexToInteger(celda),valor)
 
   /**
    * Muestra la memoria imprimiendola a partir de un numero de celda en hexadecimal.
