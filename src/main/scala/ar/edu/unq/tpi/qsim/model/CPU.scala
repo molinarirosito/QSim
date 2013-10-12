@@ -5,7 +5,9 @@ import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tip.qsim.state.Estado
 import ar.edu.unq.tip.qsim.state.Inicial
 import scala.collection.mutable.Map
+import org.uqbar.commons.utils.Observable
 
+@Observable
 case class CPU() {
 
   var registros = ArrayBuffer[Registro](R0, R1, R2, R3, R4, R5, R6, R7)
