@@ -15,7 +15,7 @@ object Parser extends Ensamblador {
     val str = readFile(path)
     result(parse(str, this.programQ1))
   }
-  
+
   def ensamblarQ2(path: String): Programa = {
     val str = readFile(path)
     result(parse(str, this.programQ2))
@@ -26,13 +26,18 @@ object Parser extends Ensamblador {
     result(parse(str, this.programQ3))
   }
 
+  def ensamblarQ4(path: String): Programa = {
+    val str = readFile(path)
+    result(parse(str, this.programQ3))
+  }
+
   def result(resultado: ParseResult[Programa]): Programa = resultado match {
-    case Success(result, _) => result
-    case Failure(msg, i) => {
+    case Success(result, _) ⇒ result
+    case Failure(msg, i) ⇒ {
       var mensaje = createMessage(i)
       throw new SyntaxErrorException(mensaje)
     }
-    case Error(msg, i) => throw new SyntaxErrorException(msg)
+    case Error(msg, i) ⇒ throw new SyntaxErrorException(msg)
   }
 
   def createMessage(output: Input): String = {
@@ -44,7 +49,7 @@ object Parser extends Ensamblador {
   def searchLineWithError(lineOfProgram: Array[String], characterCount: Int): String = {
     var countCharaters = 0
     var mensaje = ""
-    lineOfProgram.foreach(line => {
+    lineOfProgram.foreach(line ⇒ {
       if (characterCount >= countCharaters && characterCount <= countCharaters + line.length()) {
         var countLine = (lineOfProgram.indexOf(line) + 1).toString
         mensaje = s"A ocurrido un error en la linea $countLine $line"

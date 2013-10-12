@@ -193,4 +193,5 @@ case class Etiqueta (etiqueta : String) extends ModoDireccionamiento {
   override def getValorString() : String = ""
   def representacionString() :String = etiqueta
   def codigo() :String  = "000000"
+  def getSalto() : Salto = new Salto(0)
 }
