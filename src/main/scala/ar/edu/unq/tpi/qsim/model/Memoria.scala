@@ -10,6 +10,10 @@ case class Memoria(var tamanio: Int) {
 
   var celdas: ArrayBuffer[Celda] = _
 
+  def celda(pc:Int) = celdas(pc)
+  
+  def celda(pc:Int, w16:W16):Unit = celda(pc).value = w16
+  
 /**
  * Devuelve el tamanio de la memoria
  * 
