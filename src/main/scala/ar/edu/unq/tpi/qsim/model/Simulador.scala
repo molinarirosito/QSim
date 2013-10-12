@@ -7,7 +7,9 @@ import scala.collection.mutable.Map
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tip.qsim.state.Inicial
 import ar.edu.unq.tpi.qsim.utils._
+import org.uqbar.commons.utils.Observable
 
+@Observable
 case class Simulador() {
 
   var cpu: CPU = _

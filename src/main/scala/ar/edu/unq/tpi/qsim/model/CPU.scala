@@ -5,6 +5,7 @@ import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tip.qsim.state.Estado
 import ar.edu.unq.tip.qsim.state.Inicial
 import scala.collection.mutable.Map
+
 import org.uqbar.commons.utils.Observable
 
 @Observable
