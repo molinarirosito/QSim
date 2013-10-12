@@ -1,10 +1,13 @@
 package ar.edu.unq.tpi.qsim.model
 
 import ar.edu.unq.tpi.qsim.utils.Util
+import org.uqbar.commons.utils.Observable
 
+@Observable
 class W16(var hex: String) {
   
   var signo: Int = 0
+  var lala = false
   
   /**
    * Devuelve el valor hexadecimal que contiene
