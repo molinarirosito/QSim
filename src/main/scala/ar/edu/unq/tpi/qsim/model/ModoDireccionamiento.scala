@@ -1,6 +1,7 @@
 package ar.edu.unq.tpi.qsim.model
 
 import ar.edu.unq.tpi.qsim.utils.Util
+import org.uqbar.commons.utils.Observable
 
 trait ModoDireccionamiento {
 
@@ -13,9 +14,11 @@ trait ModoDireccionamiento {
 }
 
 /** REGISTROS **/
+@Observable
 abstract class Registro() extends ModoDireccionamiento{
 
 var valor : W16 = new W16("0000")
+var cambio = false
 
 def numero(): Int
 
