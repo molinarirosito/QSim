@@ -9,7 +9,8 @@ case class BusEntradaSalida {
   
   def initialize() {
     println("--------INIT------")
-    memoria = Memoria(30)
+    //memoria = Memoria(65519)
+    memoria = Memoria(150)
     memoria.initialize
     puertos = CeldasPuertos()
     puertos.initialize
