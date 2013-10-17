@@ -102,5 +102,11 @@ import ar.edu.unq.tpi.qsim.exeptions._
     }
     celdas_view
   }
+  
+   /**
+   * Cambia el estado de una celda reservada para puertos por el pasado por parametro.
+   * @param Int, Int
+   */
+  def setStateCelda(num_celda: Int,state: Int) = celdas(num_celda).state = state
 
 }
