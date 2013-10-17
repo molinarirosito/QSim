@@ -75,6 +75,7 @@ case class BusEntradaSalida {
     else { this.memoria.setStateCelda(num_celda,state) }
   }
 }
+	
 
 object purr extends App() {
 
