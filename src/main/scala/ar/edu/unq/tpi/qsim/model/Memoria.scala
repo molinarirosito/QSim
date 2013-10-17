@@ -12,6 +12,7 @@ case class Memoria(var tamanio: Int) {
   private val PROGRAM = 1
   private val FECH_DECODE = 2
   private val STORE = 3
+  private val EXECUTED = 4
 
   var celdas: ArrayBuffer[Celda] = _
 
