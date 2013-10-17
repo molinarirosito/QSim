@@ -1,6 +1,7 @@
 package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tpi.qsim.utils.Util
 import scala.collection.mutable.Map
+import scala.collection.mutable.ArrayBuffer
 
 object ALU {
 
@@ -16,7 +17,7 @@ object ALU {
     val flags = takeFlags(valor)
 
     var resultado = new W16(Util.fromBinaryToHex4(resultado_binario))
-    Map(("resultado", resultado), ("n", flags._1), ("z", flags._2), ("c", 0), ("v", 0))
+    Map(("resultado", resultado), ("valor", valor), ("resultado_binario", resultado_binario), ("n", flags._1), ("z", flags._2), ("c", 0), ("v", 0))
 
   }
 
@@ -29,23 +30,23 @@ object ALU {
 
   /**
    * Devuelve los Flags Carry y Overflow en la suma, en respectivo orden tomando un valor W16.
-   * @params resultado_binario: W16, op1: W16, op2: W16
+   * @params resultado_binario: W16, resultado_binario: String, valor: Int, op1: W16, op2: W16
    * @return (Int, Int)
    */
-  def takeFlagsSum(resultado_binario: W16, op1: W16, op2: W16): (Int, Int) = {
-    val c = actualizarCarryBorrow(resultado_binario)
-    val v = verificarCondicionOverflowSuma(resultado_binario, op1, op2)
+  def takeFlagsSum(resultado: W16, resultado_binario: String, valor: Int, op1: W16, op2: W16): (Int, Int) = {
+    val c = actualizarCarry(resultado_binario)
+    val v = verificarCondicionOverflowSuma(resultado, op1, op2)
     (c, v)
   }
 
   /**
    * Devuelve los Flags Carry y Overflow en la resta, en respectivo orden tomando un valor W16.
-   * @params resultado_binario: W16, op1: W16, op2: W16
+   * @params resultado_binario: W16, valor Int, op1: W16, op2: W16
    * @return (Int, Int)
    */
-  def takeFlagsRest(resultado_binario: W16, op1: W16, op2: W16): (Int, Int) = {
-    val c = actualizarCarryBorrow(resultado_binario)
-    val v = verificarCondicionOverflowResta(resultado_binario, op1, op2)
+  def takeFlagsRest(resultado: W16, valor: Int, op1: W16, op2: W16): (Int, Int) = {
+    val c = actualizarBorrow(valor)
+    val v = verificarCondicionOverflowResta(resultado, op1, op2)
     (c, v)
   }
 
@@ -56,7 +57,7 @@ object ALU {
    */
   def execute_add(op1: W16, op2: W16): Map[String, Any] = {
     var resultados = execute_operacion_matematica(_ + _, op1, op2)
-    val carryOverflow = takeFlagsSum(resultados("resultado").asInstanceOf[W16], op1, op2)
+    val carryOverflow = takeFlagsSum(resultados("resultado").asInstanceOf[W16], resultados("resultado_binario").asInstanceOf[String], resultados("valor").asInstanceOf[Int], op1, op2)
     guardarResultadosCarryOverflow(resultados, carryOverflow)
   }
 
@@ -67,7 +68,7 @@ object ALU {
    */
   def execute_sub(op1: W16, op2: W16): Map[String, Any] = {
     var resultados = execute_operacion_matematica(_ - _, op1, op2)
-    val carryOverflow = takeFlagsRest(resultados("resultado").asInstanceOf[W16], op1, op2)
+    val carryOverflow = takeFlagsRest(resultados("resultado").asInstanceOf[W16], resultados("valor").asInstanceOf[Int], op1, op2)
     guardarResultadosCarryOverflow(resultados, carryOverflow)
   }
   /**
@@ -95,7 +96,7 @@ object ALU {
    */
   def execute_cmp(op1: W16, op2: W16): Map[String, Any] = {
     var resultados = execute_operacion_matematica(_ - _, op1, op2)
-    val carryOverflow = takeFlagsRest(resultados("resultado").asInstanceOf[W16], op1, op2)
+    val carryOverflow = takeFlagsRest(resultados("resultado").asInstanceOf[W16], resultados("valor").asInstanceOf[Int], op1, op2)
     guardarResultadosCarryOverflow(resultados, carryOverflow)
   }
 
@@ -111,9 +112,7 @@ object ALU {
     val flags = takeFlags(valor)
     var resultadoMenosSignificativo = new W16(Util.fromBinaryToHex4(resultado_binario._2))
     var resultadoMasSignificativo = new W16(Util.fromBinaryToHex4(resultado_binario._1))
-
     Map(("R7", resultadoMasSignificativo), ("resultado", resultadoMenosSignificativo), ("n", flags._1), ("z", flags._2), ("c", 0), ("v", 0))
-
   }
   def guardarResultadosCarryOverflow(resultados: Map[String, Any], map: (Int, Int)): Map[String, Any] = {
     resultados("c") = map._1.asInstanceOf[Any]
@@ -141,11 +140,20 @@ object ALU {
   }
 
   /**
-   * Devuelve el valor del flag Negative segun el entero que recibe.
-   * @params resultado: Int
+   * Devuelve el valor del flag Borrow segun el entero que recibe.
+   * @params valor: Int
    * @return Int
    */
-  def actualizarCarryBorrow(resultado_binario: W16): Int = Integer.parseInt(resultado_binario.toBinary.charAt(0).toString)
+  def actualizarBorrow(valor: Int): Int = valor match {
+    case r if (r < 0) ⇒ 1
+    case _ ⇒ 0
+  }
+  /**
+   * Devuelve el valor del flag Carry segun el entero que recibe.
+   * @params valor: Int
+   * @return Int
+   */
+  def actualizarCarry(resultado_binario: String): Int = Integer.parseInt(resultado_binario.charAt(0).toString)
 
   /**
    * Obtiene los bits para analizar Overflow.
@@ -197,9 +205,7 @@ object ALU {
 
         n = n + 1
       } while (n < otra_cadena.size && n < una_cadena.size)
-
       new W16(Util.binary16ToHex(result))
-
     }
   def actualizarFlagsOperacionesLogicas(resultado: W16): Map[String, Any] = {
     var valor = resultado.value
@@ -228,7 +234,6 @@ object ALU {
    * @return W16
    */
   def OR(op1: W16, op2: W16): Map[String, Any] = actualizarFlagsOperacionesLogicas(aplicarOperacionBooleana(op1, op2, OR(_, _)))
-
   /**
    * Simula la ejecucion de NOT a un W16 pasado por parametro
    * @params op1: W16
@@ -244,9 +249,7 @@ object ALU {
 
       n = n + 1
     } while (n < una_cadena.size)
-
     new W16(Util.binary16ToHex(result))
-
   }
 
   /**
@@ -277,7 +280,6 @@ object ALU {
       }
       result
     }
-
   /**
    * Realiza el OR de dos bits (Int) y devuelve el resultado en entero
    * @params un_bit: Int, otro_bit: Int
@@ -303,7 +305,6 @@ object ALU {
         case 1 ⇒ 0
         case _ ⇒ 1
       }
-
     }
   /**
    * Intrepreta un bit pasado por parametro, si recibe un uno devuelve un true
@@ -317,15 +318,8 @@ object ALU {
         case 1 ⇒ true
         case _ ⇒ false
       }
-
     }
 }
-
 object ttaa extends App {
-
-  println(ALU.NOT(new W16("FF01")))
-
-  //  var sim = Simulador(programa)
-  // sim.inicializarSim()
-  // sim.cargarPrograma("0003")
+  println(ALU.execute_add(new W16("E000"), new W16("F000")))
 }

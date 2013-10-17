@@ -12,7 +12,10 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     val alu = ALU
     var op1 = new W16("0002")
     var op2 = new W16("0006")
+    var opunoresta = new W16("1000")
+    var opdosresta = new W16("F000")
   }
+  
 
   def resultados_esperados = new {
     var resultado_suma = new W16("0008")
@@ -139,6 +142,22 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
 
     // VERIFICA EL RESULTADO
     assert(mapa_resultados("resultado").asInstanceOf[W16].equals(set_resultados.resultado_or))
+
+    // VERIFICA LOS FLAGS
+    assert(mapa_resultados("v") === set_resultados_flags.v._1)
+    assert(mapa_resultados("c") === set_resultados_flags.c._1)
+    assert(mapa_resultados("z") === set_resultados_flags.z._1)
+    assert(mapa_resultados("n") === set_resultados_flags.n._1)
+
+  }
+  it should "executar la operacion logica SUB entre dos numeros hexadecimales en el sist CA2 y actualizar los flags dejando el carry en 1 " in {
+    var ctx = contexto_ejecucion
+    var mapa_resultados = ctx.alu.execute_sub(ctx.opunoresta, ctx.opdosresta)
+    var set_resultados = resultados_esperados
+    var set_resultados_flags = resultados_flags
+    println(mapa_resultados("resultado").asInstanceOf[W16].toString)
+    // VERIFICA EL RESULTADO
+    //assert(mapa_resultados("resultado").asInstanceOf[W16].equals(set_resultados.resultado_or))
 
     // VERIFICA LOS FLAGS
     assert(mapa_resultados("v") === set_resultados_flags.v._1)
