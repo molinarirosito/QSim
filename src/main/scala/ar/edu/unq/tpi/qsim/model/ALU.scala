@@ -66,7 +66,7 @@ object ALU {
    * @return Map[String, Any]
    */
   def execute_sub(op1: W16, op2: W16): Map[String, Any] = {
-    var resultados = execute_operacion_matematica(_ - _, op1, op2)
+    var resultados = execute_operacion_matematica(_-_, op1, op2)
     val carryOverflow = takeFlagsRest(resultados("resultado").asInstanceOf[W16], op1, op2)
     guardarResultadosCarryOverflow(resultados, carryOverflow)
   }
@@ -323,7 +323,7 @@ object ALU {
 
 object ttaa extends App {
 
-  println(ALU.NOT(new W16("FF01")))
+  println(ALU.execute_sub(new W16("E000"), new W16("F000")))
 
   //  var sim = Simulador(programa)
   // sim.inicializarSim()
