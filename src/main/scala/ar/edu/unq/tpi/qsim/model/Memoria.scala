@@ -53,6 +53,29 @@ case class Memoria(var tamanio: Int) {
       }
   }
   
+    /**
+   * Recibe un entero y devuelve el valor de la celda en memoria en esa posicion.
+   * @param Int
+   * @return W16
+   */
+  def getCeldas(pc: Int, cant_celdas: Int): ArrayBuffer[Celda] = {
+    var las_celdas = ArrayBuffer[Celda]()
+    for(i <- 0 to cant_celdas) {
+    las_celdas+=getCelda(pc+i)   }
+    las_celdas
+    }
+    
+    /**
+     * 
+     */
+    def getCelda(pc: Int): Celda = {
+    if (pc < Memoria.this.tamanioMemoria()) {
+      celdas(pc)
+    } else{
+      throw new CeldaFueraDeMemoriaException("La memoria no tiene ese numero de celda")
+      }
+  }
+  
    /**
    * Recibe un W16 y devuelve el valor de la celda en memoria en esa posicion.
    * @param W16

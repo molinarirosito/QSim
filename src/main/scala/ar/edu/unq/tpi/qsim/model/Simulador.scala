@@ -3,11 +3,11 @@ package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tip.qsim.state._
 import ar.edu.unq.tpi.qsim.exeptions._
 import scala.collection.mutable.Map
-
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tip.qsim.state.Inicial
 import ar.edu.unq.tpi.qsim.utils._
 import org.uqbar.commons.utils.Observable
+import org.apache.velocity.runtime.directive.Foreach
 
 @Observable
 case class Simulador() {
@@ -20,6 +20,7 @@ case class Simulador() {
   var cpu: CPU = _
   var busIO: BusEntradaSalida = _
   var instruccionActual: Instruccion = _
+  var celdaInstruccionActual: ArrayBuffer[Celda] = ArrayBuffer[Celda]()
 
   /**
    * Inicializa el sumulador, crea la memoria y el CPU.
@@ -89,22 +90,6 @@ case class Simulador() {
     //    memoria.cargarPrograma(programa, pc)
   }
 
-  //  /**
-  //   * Simula la ejecucion de un programa en memoria
-  //   * @param Programa
-  //   */
-  //  def ejecucion(programa: Programa) {
-  //    var n = 1
-  //    println("Empezando con la Ejecucion")
-  //    do {
-  //      fetch()
-  //      decode()
-  //      execute()
-  //      n = n + 1
-  //    } while (n <= programa.instrucciones.size)
-  //    println("Finalizo la ejecucion")
-  //  }
-
   /**
    * Obtiene la proxima instruccion en representacion binaria. Toma tres celdas (ya que es el maximo que pueda ocupar una instruccion), si en la
    * memoria no quedan tantas, toma las que quedan nada mas. De no haber ninguna lanza una exepcion.
@@ -134,8 +119,23 @@ case class Simulador() {
     val instruccion_fech = instruccionActual.representacionHexadecimal()
     println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
+    cambiarEstadoCeldasInstruccionActual(PROGRAM)
+    celdaInstruccionActual = obtenerCeldasInstruccionActual()
+    cambiarEstadoCeldasInstruccionActual(FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
     println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
+  }
+  
+  def obtenerCeldasInstruccionActual() : ArrayBuffer[Celda] =
+  {
+	 busIO.memoria.getCeldas(cpu.pc.value,instruccionActual.cantidadCeldas())
+   
+  }
+  
+  def cambiarEstadoCeldasInstruccionActual(estado : Int) {
+    
+    celdaInstruccionActual.foreach(celda =>
+      celda.state=estado)
   }
 
   /**
