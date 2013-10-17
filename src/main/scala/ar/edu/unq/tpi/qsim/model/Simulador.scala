@@ -11,6 +11,11 @@ import org.uqbar.commons.utils.Observable
 
 @Observable
 case class Simulador() {
+  
+  private val NONE = 0
+  private val PROGRAM = 1
+  private val FECH_DECODE = 2
+  private val STORE = 3
 
   var cpu: CPU = _
   var busIO: BusEntradaSalida = _
@@ -224,15 +229,16 @@ case class Simulador() {
    * Simula el store. Recibe un valor que es guardado en el modo de direccionamiento enviado por parametro.
    * @param ModoDireccionamento, W16
    */
-  def store(modoDir: ModoDireccionamiento, un_valor: W16) = modoDir match {
-    case Directo(inmediato: Inmediato) => busIO.setValor(inmediato.getValorString(), un_valor)
-    case Indirecto(directo: Directo) => busIO.setValor(obtenerValor(directo).hex, un_valor)
-    case RegistroIndirecto(registro: Registro) => busIO.setValor(obtenerValor(registro).hex, un_valor)
-    case r: Registro =>
-      r.valor = un_valor
-      println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
+  def store(modoDir: ModoDireccionamiento, un_valor: W16) {
+    var direccion : Int = 0
+    modoDir match {
+    	case Directo(inmediato: Inmediato) => {direccion = inmediato.getValor().value; busIO.setStateCelda(direccion,STORE); busIO.setValorC(direccion, un_valor);}
+    	case Indirecto(directo: Directo) => {direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion,STORE); busIO.setValorC(direccion, un_valor);}
+    	case RegistroIndirecto(registro: Registro) => busIO.setValor(obtenerValor(registro).hex, un_valor)
+    	case r: Registro =>	r.valor = un_valor
+    	println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
+    }
   }
-
   /**
    * Ejecuta la instruccion RET. Aumenta el stack pointer (sp) y setea en el pc el valor que este tenia al momento del CALL previo.
    *
