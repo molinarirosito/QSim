@@ -24,6 +24,7 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     var resultado_div = new W16("0003")
     var resultado_and = new W16("0002")
     var resultado_or = new W16("0006")
+    var resultado_sub = new W16("2000")
   }
   def resultados_flags = new {
     var v = (0, 1)
@@ -157,13 +158,13 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     var set_resultados_flags = resultados_flags
     println(mapa_resultados("resultado").asInstanceOf[W16].toString)
     // VERIFICA EL RESULTADO
-    //assert(mapa_resultados("resultado").asInstanceOf[W16].equals(set_resultados.resultado_or))
+    assert(mapa_resultados("resultado").asInstanceOf[W16].equals(set_resultados.resultado_sub))
 
     // VERIFICA LOS FLAGS
     assert(mapa_resultados("v") === set_resultados_flags.v._1)
-    assert(mapa_resultados("c") === set_resultados_flags.c._1)
+    assert(mapa_resultados("c") === set_resultados_flags.c._2)
     assert(mapa_resultados("z") === set_resultados_flags.z._1)
-    assert(mapa_resultados("n") === set_resultados_flags.n._1)
+    assert(mapa_resultados("n") === set_resultados_flags.n._2)
 
   }
 }
