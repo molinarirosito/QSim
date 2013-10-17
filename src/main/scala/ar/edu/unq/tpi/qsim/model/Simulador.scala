@@ -16,6 +16,7 @@ case class Simulador() {
   private val PROGRAM = 1
   private val FECH_DECODE = 2
   private val STORE = 3
+  private val EXECUTED = 4
 
   var cpu: CPU = _
   var busIO: BusEntradaSalida = _
@@ -114,12 +115,12 @@ case class Simulador() {
   def fetch() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
+    cambiarEstadoCeldasInstruccionActual(PROGRAM)
     val cadena_binaria = obtenerProximaInstruccionBinario()
     instruccionActual = Interprete.interpretarInstruccion(cadena_binaria)
     val instruccion_fech = instruccionActual.representacionHexadecimal()
     println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
-    cambiarEstadoCeldasInstruccionActual(PROGRAM)
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
     cambiarEstadoCeldasInstruccionActual(FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
