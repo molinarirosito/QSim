@@ -115,7 +115,7 @@ case class Simulador() {
   def fetch() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
-    cambiarEstadoCeldasInstruccionActual(PROGRAM)
+    cambiarEstadoCeldasInstruccionActual(EXECUTED)
     val cadena_binaria = obtenerProximaInstruccionBinario()
     instruccionActual = Interprete.interpretarInstruccion(cadena_binaria)
     val instruccion_fech = instruccionActual.representacionHexadecimal()
