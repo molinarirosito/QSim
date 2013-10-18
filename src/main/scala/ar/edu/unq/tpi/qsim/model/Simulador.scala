@@ -11,7 +11,7 @@ import org.apache.velocity.runtime.directive.Foreach
 
 @Observable
 case class Simulador() {
-  
+
   private val NONE = 0
   private val PROGRAM = 1
   private val FECH_DECODE = 2
@@ -40,10 +40,24 @@ case class Simulador() {
    * @return Boolean
    */
   def etiquetasInvalidas(programa: Programa): Boolean = {
-    programa.instrucciones.exists(instr => instr match {
-      case inst_up: Instruccion_UnOperando => (!programa.etiquetas.contains(inst_up.operando.representacionString()))
-      case _ => false
+    programa.instrucciones.exists(instr ⇒ instr match {
+      case inst_dp: Instruccion_DosOperandos ⇒ verificarOperandoEtiqueta(inst_dp.origen, programa)
+      case inst_up: Instruccion_UnOperando ⇒ verificarOperandoEtiqueta(inst_up.operando, programa)
+      case _ ⇒ false
     })
+  }
+  /**
+   * Verifica deacuerdo al operando que le pasan si es una etiqueta y si es invalida
+   * @param Operando , Programa
+   * @return Boolean
+   */
+  def verificarOperandoEtiqueta(operando: ModoDireccionamiento, programa: Programa): Boolean = {
+    var respuesta = false
+    if (operando.codigo.equals("111111")) {
+      respuesta = (!programa.etiquetas.contains(operando.representacionString()))
+    }
+
+    respuesta
   }
 
   /**
@@ -53,19 +67,31 @@ case class Simulador() {
    */
   def asignarPosiciones(pc: W16, programa: Programa): Programa = {
     var pcAsignar: W16 = pc
-    programa.instrucciones.foreach(inst => {
+    programa.instrucciones.foreach(inst ⇒ {
       inst.position = pcAsignar
-      // println(inst.position)
       pcAsignar = pcAsignar.ss(inst.cantidadCeldas())
     })
     programa
   }
+   
+  /**
+   * Calcula de acuerdo al operando que le pasan el valor de la etiqueta
+   * @param Operando , Programa
+   * @return W16
+   */
+  def calcularValorOperandoEtiqueta(operando: ModoDireccionamiento, programa: Programa){
+    var op = operando
+    if (operando.codigo.equals("111111")) {
+      op = new Inmediato(programa.etiquetas(op.representacionString).position) 
+    }
+  }
 
   def calcularEtiquetas(programa: Programa): Programa = {
-    programa.instrucciones.foreach(inst => {
+    programa.instrucciones.foreach(inst ⇒ {
       inst match {
-        case inst_up: Instruccion_UnOperando => inst_up.operando = new Inmediato(programa.etiquetas(inst_up.operando.representacionString).position)
-        case _ =>
+        case inst_dp: Instruccion_DosOperandos ⇒ calcularValorOperandoEtiqueta(inst_dp.origen, programa)
+        case inst_up: Instruccion_UnOperando ⇒ calcularValorOperandoEtiqueta(inst_up.operando, programa)
+        case _ ⇒
       }
     })
     programa
@@ -104,7 +130,7 @@ case class Simulador() {
       var celdas_binario = busIO.memoria.getValor(int_pc).toBinary
       try { Util.rep(2) { celdas_binario += busIO.memoria.getValor(int_pc + 1).toBinary; int_pc = int_pc + 1 } }
       catch {
-        case cfme: CeldaFueraDeMemoriaException => celdas_binario
+        case cfme: CeldaFueraDeMemoriaException ⇒ celdas_binario
       }
       celdas_binario
     }
@@ -128,17 +154,17 @@ case class Simulador() {
     mensaje_al_usuario = "Cual es el valor de Pc luego del Fetch: " + cpu.pc
     println(mensaje_al_usuario)
   }
-  
-  def obtenerCeldasInstruccionActual() : ArrayBuffer[Celda] =
-  {
-	 busIO.memoria.getCeldas(cpu.pc.value,instruccionActual.cantidadCeldas())
-   
-  }
-  
-  def cambiarEstadoCeldasInstruccionActual(estado : Int) {
-    
-    celdaInstruccionActual.foreach(celda =>
-      celda.state=estado)
+
+  def obtenerCeldasInstruccionActual(): ArrayBuffer[Celda] =
+    {
+      busIO.memoria.getCeldas(cpu.pc.value, instruccionActual.cantidadCeldas())
+
+    }
+
+  def cambiarEstadoCeldasInstruccionActual(estado: Int) {
+
+    celdaInstruccionActual.foreach(celda ⇒
+      celda.state = estado)
   }
 
   /**
@@ -159,10 +185,10 @@ case class Simulador() {
    * @return W16
    */
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
-    case Directo(inmediato: Inmediato) => busIO.getValor(inmediato.getValorString())
-    case Indirecto(directo: Directo) => busIO.getValor(obtenerValor(directo))
-    case RegistroIndirecto(registro: Registro) => busIO.getValor(obtenerValor(registro))
-    case _ => modoDir.getValor
+    case Directo(inmediato: Inmediato) ⇒ busIO.getValor(inmediato.getValorString())
+    case Indirecto(directo: Directo) ⇒ busIO.getValor(obtenerValor(directo))
+    case RegistroIndirecto(registro: Registro) ⇒ busIO.getValor(obtenerValor(registro))
+    case _ ⇒ modoDir.getValor
   }
 
   /**
@@ -174,14 +200,14 @@ case class Simulador() {
     println("--------INSTRUCCION PARA ALU------")
     var resultado = Map[String, Any]()
     instruccionActual match {
-      case ADD(op1, op2) => resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
-      case MUL(op1, op2) => {
+      case ADD(op1, op2) ⇒ resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
+      case MUL(op1, op2) ⇒ {
         var result_mult = ALU.execute_mul(obtenerValor(op1), obtenerValor(op2))
         cpu.actualizarR7(result_mult)
         resultado = result_mult
       }
-      case DIV(op1, op2) => resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
-      case SUB(op1, op2) => resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
+      case DIV(op1, op2) ⇒ resultado = ALU.execute_div(obtenerValor(op1), obtenerValor(op2))
+      case SUB(op1, op2) ⇒ resultado = ALU.execute_sub(obtenerValor(op1), obtenerValor(op2))
 
     }
     cpu.actualizarFlags(resultado)
@@ -195,36 +221,36 @@ case class Simulador() {
     println("-------------EXECUTE---------")
     instruccionActual match {
 
-      case RET() => executeRet()
-      case CALL(op1) => executeCall(obtenerValor(op1))
-      case JMP(op1) => executeJMP(obtenerValor(op1))
-      case PUSH(op1) => executePUSH(obtenerValor(op1))
-      case POP(op1) => executePOP(op1)
-      case NOT(op1) => store(op1, ALU.NOT(obtenerValor(op1)))
-      case JE(salto) => executeJMPCondicional(salto, ALU.interpretarBit(cpu.z))
-      case JNE(salto) => executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(cpu.z)))
-      case JLE(salto) => executeJMPCondicional(salto, ALU.interpretarBit(ALU.OR(cpu.z, ALU.XOR(cpu.n, cpu.v))))
-      case JG(salto) => executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.z, ALU.XOR(cpu.n, cpu.v)))))
-      case JL(salto) => executeJMPCondicional(salto, ALU.interpretarBit(ALU.XOR(cpu.n, cpu.v)))
-      case JGE(salto) => executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.XOR(cpu.n, cpu.v))))
-      case JLEU(salto) => executeJMPCondicional(salto, ALU.interpretarBit(ALU.OR(cpu.c, cpu.z)))
-      case JGU(salto) => executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.c, cpu.z))))
-      case JCS(salto) => executeJMPCondicional(salto, ALU.interpretarBit(cpu.c))
-      case JNEG(salto) => executeJMPCondicional(salto, ALU.interpretarBit(cpu.n))
-      case JVS(salto) => executeJMPCondicional(salto, ALU.interpretarBit(cpu.v))
-      case CMP(op1, op2) => executeCmp(obtenerValor(op1), obtenerValor(op2))
-      case MOV(op1, op2) => store(op1, obtenerValor(op2))
-      case AND(op1, op2) => {
+      case RET() ⇒ executeRet()
+      case CALL(op1) ⇒ executeCall(obtenerValor(op1))
+      case JMP(op1) ⇒ executeJMP(obtenerValor(op1))
+      case PUSH(op1) ⇒ executePUSH(obtenerValor(op1))
+      case POP(op1) ⇒ executePOP(op1)
+      case NOT(op1) ⇒ store(op1, ALU.NOT(obtenerValor(op1)))
+      case JE(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.z))
+      case JNE(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(cpu.z)))
+      case JLE(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.OR(cpu.z, ALU.XOR(cpu.n, cpu.v))))
+      case JG(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.z, ALU.XOR(cpu.n, cpu.v)))))
+      case JL(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.XOR(cpu.n, cpu.v)))
+      case JGE(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.XOR(cpu.n, cpu.v))))
+      case JLEU(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.OR(cpu.c, cpu.z)))
+      case JGU(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.c, cpu.z))))
+      case JCS(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.c))
+      case JNEG(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.n))
+      case JVS(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.v))
+      case CMP(op1, op2) ⇒ executeCmp(obtenerValor(op1), obtenerValor(op2))
+      case MOV(op1, op2) ⇒ store(op1, obtenerValor(op2))
+      case AND(op1, op2) ⇒ {
         var mapa = ALU.AND(obtenerValor(op1), obtenerValor(op2))
         cpu.actualizarFlags(mapa)
         store(op1, mapa("resultado").asInstanceOf[W16])
       }
-      case OR(op1, op2) => {
+      case OR(op1, op2) ⇒ {
         var mapa = ALU.OR(obtenerValor(op1), obtenerValor(op2))
         cpu.actualizarFlags(mapa)
         store(op1, mapa("resultado").asInstanceOf[W16])
       }
-      case iOp2: Instruccion_DosOperandos => store(iOp2.destino, execute_instruccion_matematica())
+      case iOp2: Instruccion_DosOperandos ⇒ store(iOp2.destino, execute_instruccion_matematica())
     }
     println("Ejecuta la instruccion!!!")
   }
@@ -234,13 +260,14 @@ case class Simulador() {
    * @param ModoDireccionamento, W16
    */
   def store(modoDir: ModoDireccionamiento, un_valor: W16) {
-    var direccion : Int = 0
+    var direccion: Int = 0
     modoDir match {
-    	case Directo(inmediato: Inmediato) => {direccion = inmediato.getValor().value; busIO.setStateCelda(direccion,STORE); busIO.setValorC(direccion, un_valor);}
-    	case Indirecto(directo: Directo) => {direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion,STORE); busIO.setValorC(direccion, un_valor);}
-    	case RegistroIndirecto(registro: Registro) => busIO.setValor(obtenerValor(registro).hex, un_valor)
-    	case r: Registro =>	r.valor = un_valor
-    	println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
+      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, STORE); busIO.setValorC(direccion, un_valor); }
+      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, STORE); busIO.setValorC(direccion, un_valor); }
+      case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
+      case r: Registro ⇒
+        r.valor = un_valor
+        println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
     }
   }
   /**

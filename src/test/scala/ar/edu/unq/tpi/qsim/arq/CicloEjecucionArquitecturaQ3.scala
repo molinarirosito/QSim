@@ -21,6 +21,10 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
       ADD(R0, new Inmediato("0002")), RET())
     var programaQ3 = new Programa(instrucciones)
     programaQ3.etiquetas("etiqueta") = ADD(R0, new Inmediato("0002"))
+    var instruccionesinterpretadas = List("1808 0002", "0900 0001", "3200 0003 000A", "2940 0056", "1208 000B 0005", "2867 ")
+
+    var instruccionesdecodificadas = List("ADD R0 [0002]", "MUL R4 0001", "SUB [0003] 000A", "MOV R5 0056", "MOV [0005] 0010", "CALL [0005]", "MOV R0 R1", "ADD R5 R0", "ADD R0 [0002]", "RET")
+
 
   }
 
@@ -66,48 +70,53 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
     var registros = Map[String, W16](("R5", "0010"), ("R0", "0010"), ("R2", "9800"), ("R1", "0009"), ("R7", "0001"))
   }
 
-  "Un Simulador" should "cargar un programa en la memoria desde la posicion que indica pc y actualizar los registros de cpu" in {
-    var set_simuladores = simuladores
-    var set_registros = registros_a_actualizar
-    var set_parser = parsers_resultados
-    var pc = "0000"
-    var programa = set_parser.resultadoQ3
-
-    set_simuladores.simulador.cargarProgramaYRegistros(programa, pc, set_registros.registros)
-
-    set_simuladores.simulador.cpu.pc.hex should be(pc)
-
-    var mapaRegistros = set_registros.registros
-  }
-
-  it should "actualizar los registros de cpu" in {
-    var set_simuladores = simuladores
-    var set_registros = registros_a_actualizar
-    var mapaRegistros = set_registros.registros
-    // verificando que los registros se actualicen bien
-    for {
-      key ← mapaRegistros.keys
-      value = mapaRegistros(key)
-    } yield {
-      set_simuladores.simulador.cpu.registro(key) match {
-        case Some(registro) ⇒ {
-          assert(registro.valor.equals(value))
-        }
-        case _ ⇒
-      }
-    }
-  }
+//  "Un Simulador" should "cargar un programa en la memoria desde la posicion que indica pc y actualizar los registros de cpu" in {
+//    var set_simuladores = simuladores
+//    var set_registros = registros_a_actualizar
+//    var set_parser = parsers_resultados
+//    var pc = "0000"
+//    var programa = set_parser.resultadoQ3
+//
+//    set_simuladores.simulador.cargarProgramaYRegistros(programa, pc, set_registros.registros)
+//
+//    set_simuladores.simulador.cpu.pc.hex should be(pc)
+//
+//    var mapaRegistros = set_registros.registros
+//  }
+//
+//  it should "actualizar los registros de cpu" in {
+//    var set_simuladores = simuladores
+//    var set_registros = registros_a_actualizar
+//    var mapaRegistros = set_registros.registros
+//    // verificando que los registros se actualicen bien
+//    for {
+//      key ← mapaRegistros.keys
+//      value = mapaRegistros(key)
+//    } yield {
+//      set_simuladores.simulador.cpu.registro(key) match {
+//        case Some(registro) ⇒ {
+//          assert(registro.valor.equals(value))
+//        }
+//        case _ ⇒
+//      }
+//    }
+//  }
   //-----------------------------------------------------EJECUCION PASO A PASO -----------------------------------------//
   // TODO deberia de crear 3 test mas probando por separado el paso Fetch/decode/execute
   it should "ejecutar el ciclo de instruccion (Paso-a-Paso) al programa que esta cargado en la memoria " in {
     var set_simuladores = simuladores
     var set_parser = parsers_resultados
     var programa = set_parser.resultadoQ3
+    var instrucciones = programas
+    println(programa)
     var count = 0
     do {
       set_simuladores.simulador_con_programa.fetch()
-      set_simuladores.simulador_con_programa.decode()
-      set_simuladores.simulador_con_programa.execute()
+       //FETCH
+      assert(instrucciones.instruccionesinterpretadas(count) === set_simuladores.simulador_con_programa.cpu.ir)
+      //DECODE
+      var decode = set_simuladores.simulador_con_programa.decode()
+      assert(instrucciones.instruccionesdecodificadas(count) === decode)
       count += 1
     } while (count < programa.instrucciones.length)
 
