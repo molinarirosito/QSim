@@ -8,6 +8,7 @@ import ar.edu.unq.tip.qsim.state.Inicial
 import ar.edu.unq.tpi.qsim.utils._
 import org.uqbar.commons.utils.Observable
 import org.apache.velocity.runtime.directive.Foreach
+import scala.collection.mutable.ArrayBuffer
 
 @Observable
 case class Simulador() {
@@ -78,21 +79,33 @@ case class Simulador() {
    * @param Operando , Programa
    * @return W16
    */
-  def calcularValorOperandoEtiqueta(operando: ModoDireccionamiento, programa: Programa){
-    var op = operando
-    if (operando.codigo.equals("111111")) {
-      op = new Inmediato(programa.etiquetas(op.representacionString).position) 
+  def calcularValorOrigenEtiqueta(instruccion: Instruccion_DosOperandos, programa: Programa, instrucciones: ArrayBuffer[Instruccion]){
+    if (instruccion.origen.codigo.equals("111111")) {
+      instruccion.origen = new Inmediato(programa.etiquetas(instruccion.origen.representacionString).position) 
     }
+    instrucciones.+=(instruccion)
   }
-
+  /**
+   * Calcula de acuerdo al operando que le pasan el valor de la etiqueta
+   * @param Operando , Programa
+   * @return W16
+   */
+  def calcularValorOperandoEtiqueta(instruccion: Instruccion_UnOperando, programa: Programa, instrucciones: ArrayBuffer[Instruccion]){
+    if (instruccion.operando.codigo.equals("111111")) {
+      instruccion.operando = new Inmediato(programa.etiquetas(instruccion.operando.representacionString).position)
+    }
+    instrucciones.+=(instruccion)
+  }
   def calcularEtiquetas(programa: Programa): Programa = {
+    var instrucciones_sin_etiquetas = ArrayBuffer[Instruccion]()
     programa.instrucciones.foreach(inst ⇒ {
       inst match {
-        case inst_dp: Instruccion_DosOperandos ⇒ calcularValorOperandoEtiqueta(inst_dp.origen, programa)
-        case inst_up: Instruccion_UnOperando ⇒ calcularValorOperandoEtiqueta(inst_up.operando, programa)
+        case inst_dp: Instruccion_DosOperandos ⇒ calcularValorOrigenEtiqueta(inst_dp, programa, instrucciones_sin_etiquetas)
+        case inst_up: Instruccion_UnOperando ⇒ calcularValorOperandoEtiqueta(inst_up, programa, instrucciones_sin_etiquetas)
         case _ ⇒
       }
     })
+    programa.instrucciones = instrucciones_sin_etiquetas.toList
     programa
   }
 
@@ -329,7 +342,10 @@ case class Simulador() {
 }
 
 object tt extends App {
-  var programa = new Programa(List(SUB(R1, R4)))
+  var l = ArrayBuffer[Int]()
+  l.+=(1)
+  l.+=(2)
+  println(l)
   //  var sim = Simulador(programa)
   // sim.inicializarSim()
   // sim.cargarPrograma("0003")
