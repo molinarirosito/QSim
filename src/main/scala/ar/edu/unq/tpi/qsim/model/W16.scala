@@ -81,7 +81,7 @@ class W16(var hex: String) {
    * @return W16
    */
   def +(w16 : W16) :W16 = {
-   val result_value = Util.toHex(this.value+w16.value)
+   val result_value = Util.toHex4(this.value+w16.value)
    new W16(result_value)
   }
   
@@ -92,7 +92,7 @@ class W16(var hex: String) {
    */
   def -(w16 : W16) :W16 = {
     
-   val result_value = Util.toHex(this.value-w16.value)
+   val result_value = Util.toHex4(this.value-w16.value)
    new W16(result_value)
   }
   
@@ -125,13 +125,17 @@ object prueba extends App() {
  /* var w = new W16("0001")
   var w2 = new W16("0010")
   
- 
+ new W16("0000")
   println(w2-w2)
   println(w2-w)
-  w.operacion_matematica(_+_, 1, 2)*/
+  w.operacion_matematica(_+_, 1, 2)
   val d = "0001011".substring(0, 4)
   println(d)
-   println("0001011".replace(d, ""))
+   println("0001011".replace(d, ""))*/
+  var w = new W16("0001")
+  var w2 = new W16("0010")
+  val w3 = w.+(new W16("0010"))
+  println(w3)
   
 }
   

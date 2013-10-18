@@ -18,7 +18,8 @@ case class Simulador() {
   private val FECH_DECODE = 2
   private val STORE = 3
   private val EXECUTED = 4
-
+  
+  var mensaje_al_usuario = ""
   var cpu: CPU = _
   var busIO: BusEntradaSalida = _
   var instruccionActual: Instruccion = _
@@ -163,7 +164,8 @@ case class Simulador() {
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
     cambiarEstadoCeldasInstruccionActual(FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
-    println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
+    mensaje_al_usuario = "Cual es el valor de Pc luego del Fetch: " + cpu.pc
+    println(mensaje_al_usuario)
   }
 
   def obtenerCeldasInstruccionActual(): ArrayBuffer[Celda] =
@@ -182,11 +184,12 @@ case class Simulador() {
    * Simula el decode de la instruccion. Simplemente muestra lo que ensamblo.
    *
    */
-  def decode(): String =
+  def decode() =
     {
       println("----------DECODE------------")
-      println("Que decodifico : " + instruccionActual.toString)
-      instruccionActual.toString
+      mensaje_al_usuario = "Se decodifico la instruccion : " + (instruccionActual.toString)
+      println(mensaje_al_usuario)
+
     }
 
   /**
