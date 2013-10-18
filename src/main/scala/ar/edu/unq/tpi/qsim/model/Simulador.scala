@@ -128,7 +128,6 @@ case class Simulador() {
     } else {
       println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
-    //    memoria.cargarPrograma(programa, pc)
   }
 
   /**
@@ -189,7 +188,7 @@ case class Simulador() {
       println("----------DECODE------------")
       mensaje_al_usuario = "Se decodifico la instruccion : " + (instruccionActual.toString)
       println(mensaje_al_usuario)
-
+      (instruccionActual.toString)	
     }
 
   /**
