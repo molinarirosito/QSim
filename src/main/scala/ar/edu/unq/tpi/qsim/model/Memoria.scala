@@ -12,6 +12,7 @@ case class Memoria(var tamanio: Int) {
   private val PROGRAM = 1
   private val FECH_DECODE = 2
   private val STORE = 3
+  private val EXECUTED = 4
 
   var celdas: ArrayBuffer[Celda] = _
 
@@ -60,7 +61,7 @@ case class Memoria(var tamanio: Int) {
    */
   def getCeldas(pc: Int, cant_celdas: Int): ArrayBuffer[Celda] = {
     var las_celdas = ArrayBuffer[Celda]()
-    for(i <- 0 to cant_celdas) {
+    for(i <- 0 to cant_celdas-1) {
     las_celdas+=getCelda(pc+i)   }
     las_celdas
     }
