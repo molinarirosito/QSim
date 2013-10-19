@@ -4,39 +4,19 @@
 	<groupId>ar.edu.unq.tpi</groupId>
 	<artifactId>QSim</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
-	<properties>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
-		<encoding>UTF-8</encoding>
-		<scala.version>2.10.2</scala.version>
-	</properties>
-
+	
+	<parent>
+		<groupId>org.uqbar-project</groupId>
+		<artifactId>uqbar-scala-parent</artifactId>
+		<version>1.0</version>
+	</parent>
+	
 
 	<dependencies>
-		<!-- SCALA -->
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.scalatest</groupId>
-			<artifactId>scalatest_2.10</artifactId>
-			<version>2.0.M6-SNAP36</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.scala-tools</groupId>
-			<artifactId>maven-scala-plugin</artifactId>
-			<version>2.10</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.uqbar-project</groupId>
 			<artifactId>uqbar-domain</artifactId>
-			<version>3.3</version>
+			<version>3.4-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -49,29 +29,6 @@
 
 	<build>
 		<sourceDirectory>src/main/scala</sourceDirectory>
-		<plugins>
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>scala-compile-first</id>
-						<phase>process-resources</phase>
-						<goals>
-							<!-- <goal>add-source</goal> -->
-							<goal>compile</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>scala-test-compile</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
 	</build>
 
 </project>

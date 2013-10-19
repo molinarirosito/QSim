@@ -7,12 +7,11 @@ import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tip.qsim.state.Inicial
 import ar.edu.unq.tpi.qsim.utils._
 import org.uqbar.commons.utils.Observable
-import org.apache.velocity.runtime.directive.Foreach
 import scala.collection.mutable.ArrayBuffer
 
 @Observable
 case class Simulador() {
-
+  
   private val NONE = 0
   private val PROGRAM = 1
   private val FECH_DECODE = 2
@@ -154,14 +153,14 @@ case class Simulador() {
   def fetch() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
-    cambiarEstadoCeldasInstruccionActual(EXECUTED)
+    cambiarEstadoCeldasInstruccionActual(CeldaState.EXECUTED)
     val cadena_binaria = obtenerProximaInstruccionBinario()
     instruccionActual = Interprete.interpretarInstruccion(cadena_binaria)
     val instruccion_fech = instruccionActual.representacionHexadecimal()
     println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
-    cambiarEstadoCeldasInstruccionActual(FECH_DECODE)
+    cambiarEstadoCeldasInstruccionActual(CeldaState.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
     mensaje_al_usuario = "Cual es el valor de Pc luego del Fetch: " + cpu.pc
     println(mensaje_al_usuario)
@@ -173,7 +172,7 @@ case class Simulador() {
 
     }
 
-  def cambiarEstadoCeldasInstruccionActual(estado: Int) {
+  def cambiarEstadoCeldasInstruccionActual(estado: CeldaState.Type) {
 
     celdaInstruccionActual.foreach(celda ⇒
       celda.state = estado)
@@ -274,8 +273,8 @@ case class Simulador() {
   def store(modoDir: ModoDireccionamiento, un_valor: W16) {
     var direccion: Int = 0
     modoDir match {
-      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, STORE); busIO.setValorC(direccion, un_valor); }
-      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, STORE); busIO.setValorC(direccion, un_valor); }
+      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, CeldaState.STORE); busIO.setValorC(direccion, un_valor); }
+      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, CeldaState.STORE); busIO.setValorC(direccion, un_valor); }
       case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
       case r: Registro ⇒
         r.valor = un_valor

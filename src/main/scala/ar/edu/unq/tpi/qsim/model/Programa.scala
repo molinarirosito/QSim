@@ -2,7 +2,6 @@ package ar.edu.unq.tpi.qsim.model
 
 import scala.collection.mutable.Buffer
 import scala.collection.mutable.Map
-import org.apache.velocity.runtime.directive.Foreach
 
 object Programa {
 
