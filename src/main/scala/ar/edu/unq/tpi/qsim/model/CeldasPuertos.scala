@@ -8,6 +8,8 @@ import ar.edu.unq.tpi.qsim.exeptions._
 
   
   var celdas: ArrayBuffer[Celda] = _
+  
+  def celda(pc:Int) = celdas(pc)
 
 /**
  * Devuelve el tamanio de las celdas reservadas a los puertos
