@@ -193,7 +193,7 @@ case class Indirecto (directo : Directo) extends ModoDireccionamiento{
 case class Etiqueta (etiqueta : String) extends ModoDireccionamiento {
   
   def getValor() : W16 = null
-  override def getValorString() : String = ""
+  override def getValorString() : String = "1111"
   def representacionString() :String = etiqueta
   def codigo() :String  = "111111"
   def getSalto() : Salto = new Salto(0)

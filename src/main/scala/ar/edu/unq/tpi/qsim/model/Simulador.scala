@@ -7,11 +7,11 @@ import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tip.qsim.state.Inicial
 import ar.edu.unq.tpi.qsim.utils._
 import org.uqbar.commons.utils.Observable
-import org.apache.velocity.runtime.directive.Foreach
+import scala.collection.mutable.ArrayBuffer
 
 @Observable
 case class Simulador() {
-
+  
   private val NONE = 0
   private val PROGRAM = 1
   private val FECH_DECODE = 2
@@ -79,21 +79,33 @@ case class Simulador() {
    * @param Operando , Programa
    * @return W16
    */
-  def calcularValorOperandoEtiqueta(operando: ModoDireccionamiento, programa: Programa){
-    var op = operando
-    if (operando.codigo.equals("111111")) {
-      op = new Inmediato(programa.etiquetas(op.representacionString).position) 
+  def calcularValorOrigenEtiqueta(instruccion: Instruccion_DosOperandos, programa: Programa, instrucciones: ArrayBuffer[Instruccion]){
+    if (instruccion.origen.codigo.equals("111111")) {
+      instruccion.origen = new Inmediato(programa.etiquetas(instruccion.origen.representacionString).position) 
     }
+    instrucciones.+=(instruccion)
   }
-
+  /**
+   * Calcula de acuerdo al operando que le pasan el valor de la etiqueta
+   * @param Operando , Programa
+   * @return W16
+   */
+  def calcularValorOperandoEtiqueta(instruccion: Instruccion_UnOperando, programa: Programa, instrucciones: ArrayBuffer[Instruccion]){
+    if (instruccion.operando.codigo.equals("111111")) {
+      instruccion.operando = new Inmediato(programa.etiquetas(instruccion.operando.representacionString).position)
+    }
+    instrucciones.+=(instruccion)
+  }
   def calcularEtiquetas(programa: Programa): Programa = {
+    var instrucciones_sin_etiquetas = ArrayBuffer[Instruccion]()
     programa.instrucciones.foreach(inst ⇒ {
       inst match {
-        case inst_dp: Instruccion_DosOperandos ⇒ calcularValorOperandoEtiqueta(inst_dp.origen, programa)
-        case inst_up: Instruccion_UnOperando ⇒ calcularValorOperandoEtiqueta(inst_up.operando, programa)
+        case inst_dp: Instruccion_DosOperandos ⇒ calcularValorOrigenEtiqueta(inst_dp, programa, instrucciones_sin_etiquetas)
+        case inst_up: Instruccion_UnOperando ⇒ calcularValorOperandoEtiqueta(inst_up, programa, instrucciones_sin_etiquetas)
         case _ ⇒
       }
     })
+    programa.instrucciones = instrucciones_sin_etiquetas.toList
     programa
   }
 
@@ -115,7 +127,6 @@ case class Simulador() {
     } else {
       println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
-    //    memoria.cargarPrograma(programa, pc)
   }
 
   /**
@@ -142,14 +153,14 @@ case class Simulador() {
   def fetch() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
-    cambiarEstadoCeldasInstruccionActual(EXECUTED)
+    cambiarEstadoCeldasInstruccionActual(CeldaState.EXECUTED)
     val cadena_binaria = obtenerProximaInstruccionBinario()
     instruccionActual = Interprete.interpretarInstruccion(cadena_binaria)
     val instruccion_fech = instruccionActual.representacionHexadecimal()
     println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
-    cambiarEstadoCeldasInstruccionActual(FECH_DECODE)
+    cambiarEstadoCeldasInstruccionActual(CeldaState.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
     mensaje_al_usuario = "Cual es el valor de Pc luego del Fetch: " + cpu.pc
     println(mensaje_al_usuario)
@@ -161,7 +172,7 @@ case class Simulador() {
 
     }
 
-  def cambiarEstadoCeldasInstruccionActual(estado: Int) {
+  def cambiarEstadoCeldasInstruccionActual(estado: CeldaState.Type) {
 
     celdaInstruccionActual.foreach(celda ⇒
       celda.state = estado)
@@ -176,7 +187,7 @@ case class Simulador() {
       println("----------DECODE------------")
       mensaje_al_usuario = "Se decodifico la instruccion : " + (instruccionActual.toString)
       println(mensaje_al_usuario)
-
+      (instruccionActual.toString)	
     }
 
   /**
@@ -262,8 +273,8 @@ case class Simulador() {
   def store(modoDir: ModoDireccionamiento, un_valor: W16) {
     var direccion: Int = 0
     modoDir match {
-      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, STORE); busIO.setValorC(direccion, un_valor); }
-      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, STORE); busIO.setValorC(direccion, un_valor); }
+      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, CeldaState.STORE); busIO.setValorC(direccion, un_valor); }
+      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, CeldaState.STORE); busIO.setValorC(direccion, un_valor); }
       case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
       case r: Registro ⇒
         r.valor = un_valor
@@ -332,7 +343,10 @@ case class Simulador() {
 }
 
 object tt extends App {
-  var programa = new Programa(List(SUB(R1, R4)))
+  var l = ArrayBuffer[Int]()
+  l.+=(1)
+  l.+=(2)
+  println(l)
   //  var sim = Simulador(programa)
   // sim.inicializarSim()
   // sim.cargarPrograma("0003")

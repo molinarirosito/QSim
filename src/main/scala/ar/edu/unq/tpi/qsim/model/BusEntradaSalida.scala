@@ -68,7 +68,7 @@ case class BusEntradaSalida {
    * Cambia el estado de una celda de memoria o reservada para puertos por el pasado por parametro.
    * @param Int, Int
    */
-  def setStateCelda(num_celda: Int,state: Int) =  {
+  def setStateCelda(num_celda: Int,state: CeldaState.Type) =  {
     if ((num_celda >= 65520) && (num_celda <= 65535)) {
     	this.puertos.setStateCelda(num_celda,state)
   }
