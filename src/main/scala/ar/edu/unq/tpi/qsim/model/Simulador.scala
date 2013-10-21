@@ -102,7 +102,7 @@ case class Simulador() {
       inst match {
         case inst_dp: Instruccion_DosOperandos ⇒ calcularValorOrigenEtiqueta(inst_dp, programa, instrucciones_sin_etiquetas)
         case inst_up: Instruccion_UnOperando ⇒ calcularValorOperandoEtiqueta(inst_up, programa, instrucciones_sin_etiquetas)
-        case _ ⇒
+        case inst ⇒ instrucciones_sin_etiquetas.+=(inst)
       }
     })
     programa.instrucciones = instrucciones_sin_etiquetas.toList
