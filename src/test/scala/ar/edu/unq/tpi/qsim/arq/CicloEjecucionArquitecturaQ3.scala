@@ -1,33 +1,46 @@
 package ar.edu.unq.tpi.qsim.arq
 
-import org.scalatest.Matchers
-import org.scalatest.FlatSpec
-import ar.edu.unq.tpi.qsim.model._
-import ar.edu.unq.tpi.qsim.parser._
-import ar.edu.unq.tpi.qsim.utils._
 import scala.collection.mutable.Map
-import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
+
+import org.scalatest.FlatSpec
+import org.scalatest.Matchers
+import org.uqbar.commons.utils.Observable
+
+import ar.edu.unq.tpi.qsim.model.ADD
+import ar.edu.unq.tpi.qsim.model.CALL
+import ar.edu.unq.tpi.qsim.model.Directo
+import ar.edu.unq.tpi.qsim.model.Etiqueta
+import ar.edu.unq.tpi.qsim.model.Inmediato
+import ar.edu.unq.tpi.qsim.model.MOV
+import ar.edu.unq.tpi.qsim.model.MUL
+import ar.edu.unq.tpi.qsim.model.Programa
+import ar.edu.unq.tpi.qsim.model.R0
+import ar.edu.unq.tpi.qsim.model.R1
+import ar.edu.unq.tpi.qsim.model.R4
+import ar.edu.unq.tpi.qsim.model.R5
+import ar.edu.unq.tpi.qsim.model.RET
+import ar.edu.unq.tpi.qsim.model.SUB
+import ar.edu.unq.tpi.qsim.model.Simulador
+import ar.edu.unq.tpi.qsim.model.W16
+import ar.edu.unq.tpi.qsim.parser.Parser
+import ar.edu.unq.tpi.qsim.utils.stringToW16
 
 class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
     var resultadoQ3 = parser.ensamblarQ3("src/main/resources/programaQ3.qsim")
-    var resultadoqq3 = parser.ensamblarQ3("src/main/resources/q3prueba.qsim")
-    println(resultadoqq3)
   } 
 
   def programas = new {
-   // var instrucciones = List(ADD(R0, new Directo(new Inmediato("0002"))), MUL(R4, new Inmediato("0001")), SUB(new Directo(new Inmediato("0003")), new Inmediato("000A")),
-   //   MOV(R5, new Inmediato("0056")), MOV(new Directo(new Inmediato("0005")), new Etiqueta("etiqueta")), CALL(new Directo(new Inmediato("0005"))), MOV(R0, R1), ADD(R5, R0),
-   //   ADD(R0, new Inmediato("0002")), RET())
+    var instrucciones = List(ADD(R0, new Directo(new Inmediato("0002"))), MUL(R4, new Inmediato("0001")), SUB(new Directo(new Inmediato("0003")), new Inmediato("000A")),
+      MOV(R5, new Inmediato("0056")), MOV(new Directo(new Inmediato("0005")), new Etiqueta("etiqueta")), CALL(new Directo(new Inmediato("0005"))), MOV(R0, R1), ADD(R5, R0),
+      ADD(R0, new Inmediato("0002")), RET())
       var instruc = List(MOV(R0, R1), RET())
     var programaQ3 = new Programa(instruc)
-    //programaQ3.etiquetas("etiqueta") = ADD(R0, new Inmediato("0002"))
-   // var instruccionesinterpretadas = List("2808 0002", "0900 0001", "3200 0003 000A", "1940 0056", "1200 0005 0010", "B008 0005", "1821 ", "2960 ", "2800 0002", "C000")
-   // var instruccionesdecodificadas = List("ADD R0 [0002]", "MUL R4 0001", "SUB [0003] 000A", "MOV R5 0056", "MOV [0005] 0010", "CALL [0005]", "MOV R0 R1", "ADD R5 R0", "ADD R0 [0002]", "RET")
-    var instruccionesinterpretadas = List("1821 C000")
-    var instruccionesdecodificadas = List("MOV R0 R1 , RET")
+    programaQ3.etiquetas("etiqueta") = ADD(R0, new Inmediato("0002"))
+    var instruccionesinterpretadas = List("2808 0002", "0900 0001", "3200 0003 000A", "1940 0056", "1200 0005 0010", "B008 0005", "1821 ", "2960 ", "2800 0002", "C000")
+    var instruccionesdecodificadas = List("ADD R0 [0002]", "MUL R4 0001", "SUB [0003] 000A", "MOV R5 0056", "MOV [0005] 0010", "CALL [0005]", "MOV R0 R1", "ADD R5 R0", "ADD R0 [0002]", "RET")
   }
 
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
@@ -57,7 +70,7 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
 //
   def simuladores = new {
     var parser = parsers_resultados
-    var programa = parser.resultadoqq3
+    var programa = parser.resultadoQ3
     var registros_actualizar = registros_a_actualizar
 
     var simulador = new Simulador()
@@ -106,22 +119,19 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
   //-----------------------------------------------------EJECUCION PASO A PASO -----------------------------------------//
   // TODO deberia de crear 3 test mas probando por separado el paso Fetch/decode/execute
   it should "ejecutar el ciclo de instruccion (Paso-a-Paso) al programa que esta cargado en la memoria " in {
-	//var set_simuladores = simuladores
+	var set_simuladores = simuladores
     var set_parser = parsers_resultados
-    var programa = set_parser.resultadoqq3
+    var programa = set_parser.resultadoQ3
     var instrucciones = programas
-    var simulador_con_programa = new Simulador()
-    simulador_con_programa.inicializarSim() //registros_actualizar.registros
-    simulador_con_programa.cargarProgramaYRegistros(programa, "0000", Map())
     var count = 0
     do {
       //set_simuladores.simulador_con_programa.fetch()
-      simulador_con_programa.fetch() 
+      set_simuladores.simulador_con_programa.fetch() 
       //FETCH
-      assert(instrucciones.instruccionesinterpretadas(count) === simulador_con_programa.cpu.ir)
+      assert(instrucciones.instruccionesinterpretadas(count) === set_simuladores.simulador_con_programa.cpu.ir)
       //assert(instrucciones.instruccionesinterpretadas(count) === set_simuladores.simulador_con_programa.cpu.ir)
       //DECODE
-      var decode = simulador_con_programa.decode()
+      var decode = set_simuladores.simulador_con_programa.decode()
       //var decode = set_simuladores.simulador_con_programa.decode()
       //assert(instrucciones.instruccionesdecodificadas(count) === decode)
       

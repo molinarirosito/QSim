@@ -20,7 +20,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
       MOV(R5, new Inmediato("0056")), MOV(R2, R3), ADD(R1, R7))
     var programaQ1 = new Programa(instrucciones)
     var instruccionesinterpretadas = List("2800 0002", "0900 0001", "3940 000A", "1940 0056", "18A3 ", "2867 ")
-    var instruccionesdecodificadas = List("ADD R0 0002", "MUL R4 0001", "SUB R5 000A", "MOV R5 0056", "MOV R2 R3", "ADD R1 R7")
+    var instruccionesdecodificadas = List("ADD R0, 0002", "MUL R4, 0001", "SUB R5, 000A", "MOV R5, 0056", "MOV R2, R3", "ADD R1, R7")
 
   }
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
@@ -82,14 +82,14 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var mapaRegistros = set_registros.registros
     // verificando que los registros se actualicen bien
     for {
-      key <- mapaRegistros.keys
+      key ← mapaRegistros.keys
       value = mapaRegistros(key)
     } yield {
       set_simuladores.simulador.cpu.registro(key) match {
-        case Some(registro) => {
+        case Some(registro) ⇒ {
           assert(registro.valor.equals(value))
         }
-        case _ =>
+        case _ ⇒
       }
     }
   }
@@ -107,27 +107,8 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
       //DECODE
       var decode = set_simuladores.simulador_con_programa.decode()
       assert(instrucciones.instruccionesdecodificadas(count) === decode)
-      
+
       count += 1
     } while (count < programa.instrucciones.length)
   }
-
-  //expect(false) {
-  //simulador_iniciado.simulador.etiquetasInvalidas(pc.programa)
-  //}
-  //pc.programa = f.simulador.asignarPosiciones("0000", pc.programa)
-  // verificar que las instrucciones tienen la posicion correcta en la memoria
-  //pc.programa.instrucciones.foreach(inst => println("nombre de la Inst " + inst + " posicion de la instruccion = " +   inst.position))
-  //pc.programa = f.simulador.calcularEtiquetas(pc.programa)
-  //println(pc.programa)
-  // assert(f.simulador.cpu.pc.equals(new W16("0000")))
-
-  //  it should "ejecutar un programa que se encuentra en memoria " in {
-  //    var spc = simuladorConProgramaCargado
-  //    var pcAnteriorAEjecucion = spc.simulador.cpu.pc
-  //    spc.simulador.ejecucion(programaCreado.programa)
-  //    assert(pcAnteriorAEjecucion.equals(new W16("000C")))
-  //    println(spc.simulador.memoria.show("0000"))
-  //    println(spc.simulador.cpu.registros)
-  //  }  
 }
