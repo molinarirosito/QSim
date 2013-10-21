@@ -15,14 +15,14 @@ import scala.collection.JavaConverters._
 
 @Observable
 case class Simulador() {
-  
+
   private val NONE = 0
   private val PROGRAM = 1
   private val FECH_DECODE = 2
   private val STORE = 3
   private val EXECUTED = 4
-  
-  var mensaje_al_usuario:java.util.List[String] = List[String]()
+
+  var mensaje_al_usuario: java.util.List[String] = List[String]()
   var mensaje_al_usuario_actual = ""
   var cpu: CPU = _
   var busIO: BusEntradaSalida = _
@@ -79,15 +79,15 @@ case class Simulador() {
     })
     programa
   }
-   
+
   /**
    * Calcula de acuerdo al operando que le pasan el valor de la etiqueta
    * @param Operando , Programa
    * @return W16
    */
-  def calcularValorOrigenEtiqueta(instruccion: Instruccion_DosOperandos, programa: Programa, instrucciones: ArrayBuffer[Instruccion]){
+  def calcularValorOrigenEtiqueta(instruccion: Instruccion_DosOperandos, programa: Programa, instrucciones: ArrayBuffer[Instruccion]) {
     if (instruccion.origen.codigo.equals("111111")) {
-      instruccion.origen = new Inmediato(programa.etiquetas(instruccion.origen.representacionString).position) 
+      instruccion.origen = new Inmediato(programa.etiquetas(instruccion.origen.representacionString).position)
     }
     instrucciones.+=(instruccion)
   }
@@ -96,7 +96,7 @@ case class Simulador() {
    * @param Operando , Programa
    * @return W16
    */
-  def calcularValorOperandoEtiqueta(instruccion: Instruccion_UnOperando, programa: Programa, instrucciones: ArrayBuffer[Instruccion]){
+  def calcularValorOperandoEtiqueta(instruccion: Instruccion_UnOperando, programa: Programa, instrucciones: ArrayBuffer[Instruccion]) {
     if (instruccion.operando.codigo.equals("111111")) {
       instruccion.operando = new Inmediato(programa.etiquetas(instruccion.operando.representacionString).position)
     }
@@ -129,9 +129,8 @@ case class Simulador() {
       var programaSinEtiquetas = calcularEtiquetas(programa)
 
       busIO.memoria.cargarPrograma(programaSinEtiquetas, pc)
-    } else {
-      println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
+    println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
   }
 
   /**
@@ -187,11 +186,11 @@ case class Simulador() {
    *
    */
   def decode() = {
-      println("----------DECODE------------")
-      agregarMensaje("Se decodifico la instruccion : " + (instruccionActual.toString))
-      println(mensaje_al_usuario)
-      (instruccionActual.toString)	
-    }
+    println("----------DECODE------------")
+    agregarMensaje("Se decodifico la instruccion : " + (instruccionActual.toString))
+    println(mensaje_al_usuario)
+    (instruccionActual.toString)
+  }
 
   /**
    * Obtiene el valor alojado en el modo de direccionamiento que es pasado por parametro
@@ -343,9 +342,9 @@ case class Simulador() {
     cpu.sp.++
     store(modoDir, busIO.memoria.getValor(cpu.sp.toString))
   }
-  
-  def agregarMensaje(mensaje:String){
-    mensaje_al_usuario = mensaje_al_usuario++List(mensaje)
+
+  def agregarMensaje(mensaje: String) {
+    mensaje_al_usuario = mensaje_al_usuario ++ List(mensaje)
     mensaje_al_usuario_actual = mensaje
   }
 }
