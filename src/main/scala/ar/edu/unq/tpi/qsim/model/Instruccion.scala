@@ -130,7 +130,7 @@ class Instruccion_DosOperandos(codigoDeOperacion: String, operacion: String, var
    * de la siguiente manera:  *OPERACION* *MODODIRECCIONAMIENTO DESTINO* *MODODIRECCIONAMIENTO ORIGEN*
    * @return String
    */
-	override def toString() =  operacion + " " + destino.toString() + " " + origen.toString() 
+	override def toString() =  operacion + " " + destino.toString() + ", " + origen.toString() 
 }
 
 
