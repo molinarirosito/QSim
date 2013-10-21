@@ -8,6 +8,7 @@ import ar.edu.unq.tip.qsim.state.Inicial
 import ar.edu.unq.tpi.qsim.utils._
 import org.uqbar.commons.utils.Observable
 import scala.collection.mutable.ArrayBuffer
+import java.util.Date
 
 @Observable
 case class Simulador() {
@@ -32,6 +33,7 @@ case class Simulador() {
     cpu = CPU()
     busIO = BusEntradaSalida()
     busIO.initialize
+    mensaje_al_usuario = ""
   }
 
   /**
