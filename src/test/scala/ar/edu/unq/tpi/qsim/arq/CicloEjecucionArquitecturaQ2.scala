@@ -36,7 +36,7 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var set_parser = parsers_resultados
     var set_programas = programas
 
-    var mensaje_esperado = "A ocurrido un error en la linea 3 SUB [], 0x000A"
+    var mensaje_esperado = "Ha ocurrido un error en la linea 3 SUB [], 0x000A"
     val exception = intercept[SyntaxErrorException] {
       set_parser.parser.ensamblarQ2("src/main/resources/programaQ2SyntaxError.qsim")
     }

@@ -52,7 +52,7 @@ object Parser extends Ensamblador {
     lineOfProgram.foreach(line ⇒ {
       if (characterCount >= countCharaters && characterCount <= countCharaters + line.length()) {
         var countLine = (lineOfProgram.indexOf(line) + 1).toString
-        mensaje = s"A ocurrido un error en la linea $countLine $line"
+        mensaje = s"Ha ocurrido un error en la linea $countLine $line"
       }
       countCharaters += line.length()
     })

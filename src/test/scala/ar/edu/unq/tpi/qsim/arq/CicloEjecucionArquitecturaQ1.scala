@@ -35,7 +35,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   it should "tirar un Failure cuando parsea un programa con sintaxis invalida" in {
     var set_parser = parsers_resultados
     var set_programas = programas
-    var mensaje_esperado = "A ocurrido un error en la linea 2 MUL R4, 0x01"
+    var mensaje_esperado = "Ha ocurrido un error en la linea 2 MUL R4, 0x01"
 
     val exception = intercept[SyntaxErrorException] {
       set_parser.parser.ensamblarQ1("src/main/resources/programaQ1SyntaxError.qsim")

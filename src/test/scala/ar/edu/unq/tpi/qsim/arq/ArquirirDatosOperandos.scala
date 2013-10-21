@@ -14,6 +14,11 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     var inst4 = ADD(new Directo(new Inmediato(new W16("0006"))), R2)
     var inst5 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
     var inst6 = ADD(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
+ //   var inst7 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
+ //   var inst8 = ADD(new Directo(new Inmediato(new W16("0006"))), R2)
+ //   var inst9 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
+ //   var inst101 = ADD(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
+
   }
 
   def simuladores = new {
@@ -60,6 +65,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     simulador6.busIO.setValor("0010", new W16("0002"))
 
   }
+
   "Una Instruccion" should "buscar los datos en los modos de direccionamiento destino ->Registro origen -> Registro y verificar el store" in {
     var ctx = contexto_operandos
     var sim = simuladores
