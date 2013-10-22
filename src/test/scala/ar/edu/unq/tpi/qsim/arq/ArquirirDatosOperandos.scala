@@ -8,12 +8,12 @@ import scala.collection.mutable._
 class ArquirirDatosOperandos extends FlatSpec with Matchers {
 
   def contexto_operandos = new {
-    var inst1 = ADD(R2, R3)
+    var inst1 = MUL(R2, R3)
     var inst2 = ADD(R2, new Inmediato(new W16("4000")))
     var inst3 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
-    var inst4 = ADD(new Directo(new Inmediato(new W16("0006"))), R2)
-    var inst5 = ADD(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
-    var inst6 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
+    var inst4 = SUB(new Directo(new Inmediato(new W16("0006"))), R2)
+    var inst5 = SUB(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
+    var inst6 = DIV(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
     //   var inst7 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
     //   var inst8 = ADD(new Directo(new Inmediato(new W16("0006"))), R2)
     //   var inst9 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
@@ -54,7 +54,6 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     var simulador5 = Simulador()
     simulador5.inicializarSim
     simulador5.busIO.setValor("000B", new W16("0007"))
-    simulador5.busIO.setValor("0010", new W16("0002"))
     simulador5.cargarProgramaYRegistros(programa5, "000C", Map[String, W16]())
 
     var programa6 = new Programa(List(contexto.inst6))
@@ -80,7 +79,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador1.decode()
     sim.simulador1.execute()
 
-    assert(sim.simulador1.cpu.registros(2).getValor().equals(new W16("1238")))
+    assert(sim.simulador1.cpu.registros(2).getValor().equals(new W16("48D0")))
   }
 
   it should "buscar los datos en los modos de direccionamiento destino ->Registro origen -> Inmediato y verificar el store" in {
@@ -136,7 +135,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador4.decode()
     sim.simulador4.execute()
 
-    assert(sim.simulador4.obtenerValor(ctx.inst4.destino).equals(new W16("0005")))
+    assert(sim.simulador4.obtenerValor(ctx.inst4.destino).equals(new W16("FFFD")))
 
   }
   it should "buscar los datos en los modos de direccionamiento destino ->Directo origen -> Directo y verificar el store" in {
@@ -153,7 +152,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador5.decode()
     sim.simulador5.execute()
 
-    assert(sim.simulador5.obtenerValor(ctx.inst5.destino).equals(new W16("0017")))
+    assert(sim.simulador5.obtenerValor(ctx.inst5.destino).equals(new W16("FFF7")))
 
   }
 
@@ -171,7 +170,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador6.decode()
     sim.simulador6.execute()
 
-    assert(sim.simulador6.obtenerValor(ctx.inst6.destino).equals(new W16("0009")))
+    assert(sim.simulador6.obtenerValor(ctx.inst6.destino).equals(new W16("0001")))
 
   }
 
