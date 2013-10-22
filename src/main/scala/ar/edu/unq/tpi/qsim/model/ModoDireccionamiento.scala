@@ -122,7 +122,7 @@ case class Inmediato (valor : W16) extends ModoDireccionamiento{
    * inmediato en String XXXX, un valor hexadecimal.
    * @return W16
    */
-  def representacionString() :String = valor.toString
+  def representacionString() :String = "0x" + valor.toString
   
  /**
    * Devuelve el codigo de modo de direccionamiento del modo de direccionamiento: 

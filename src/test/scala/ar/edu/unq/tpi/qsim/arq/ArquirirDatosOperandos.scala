@@ -12,12 +12,12 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     var inst2 = ADD(R2, new Inmediato(new W16("4000")))
     var inst3 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
     var inst4 = ADD(new Directo(new Inmediato(new W16("0006"))), R2)
-    var inst5 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
-    var inst6 = ADD(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
- //   var inst7 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
- //   var inst8 = ADD(new Directo(new Inmediato(new W16("0006"))), R2)
- //   var inst9 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
- //   var inst101 = ADD(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
+    var inst5 = ADD(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
+    var inst6 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
+    //   var inst7 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
+    //   var inst8 = ADD(new Directo(new Inmediato(new W16("0006"))), R2)
+    //   var inst9 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
+    //   var inst101 = ADD(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
 
   }
 
@@ -53,16 +53,16 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     var programa5 = new Programa(List(contexto.inst5))
     var simulador5 = Simulador()
     simulador5.inicializarSim
-    simulador5.busIO.setValor("0008", new W16("0005"))
-    simulador5.busIO.setValor("000A", new W16("0004"))
+    simulador5.busIO.setValor("000B", new W16("0007"))
+    simulador5.busIO.setValor("0010", new W16("0002"))
     simulador5.cargarProgramaYRegistros(programa5, "000C", Map[String, W16]())
 
     var programa6 = new Programa(List(contexto.inst6))
     var simulador6 = Simulador()
     simulador6.inicializarSim
+    simulador6.busIO.setValor("0008", new W16("0005"))
+    simulador6.busIO.setValor("000A", new W16("0004"))
     simulador6.cargarProgramaYRegistros(programa6, "000C", Map[String, W16]())
-    simulador6.busIO.setValor("000B", new W16("0007"))
-    simulador6.busIO.setValor("0010", new W16("0002"))
 
   }
 
@@ -153,7 +153,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador5.decode()
     sim.simulador5.execute()
 
-    assert(sim.simulador5.obtenerValor(ctx.inst5.destino).equals(new W16("0009")))
+    assert(sim.simulador5.obtenerValor(ctx.inst5.destino).equals(new W16("0017")))
 
   }
 
@@ -171,7 +171,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador6.decode()
     sim.simulador6.execute()
 
-    assert(sim.simulador6.obtenerValor(ctx.inst6.destino).equals(new W16("0017")))
+    assert(sim.simulador6.obtenerValor(ctx.inst6.destino).equals(new W16("0009")))
 
   }
 
