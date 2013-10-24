@@ -9,16 +9,11 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
 
   def contexto_operandos = new {
     var inst1 = MUL(R2, R3)
-    var inst2 = ADD(R2, new Inmediato(new W16("4000")))
+    var inst2 = MOV(R2, new Inmediato(new W16("4000")))
     var inst3 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
     var inst4 = SUB(new Directo(new Inmediato(new W16("0006"))), R2)
     var inst5 = SUB(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
     var inst6 = DIV(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
-    //   var inst7 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
-    //   var inst8 = ADD(new Directo(new Inmediato(new W16("0006"))), R2)
-    //   var inst9 = ADD(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
-    //   var inst101 = ADD(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
-
   }
 
   def simuladores = new {
@@ -97,7 +92,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador2.decode()
     sim.simulador2.execute()
 
-    assert(sim.simulador2.cpu.registros(2).getValor().equals(new W16("4004")))
+    assert(sim.simulador2.cpu.registros(2).getValor().equals(new W16("4000")))
 
   }
 
