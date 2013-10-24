@@ -23,38 +23,49 @@ class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Match
     simulador.fetch()
     simulador.decode()
     simulador.execute()
+
+    var simuladorRET = Simulador()
+    simuladorRET.inicializarSim
+    simuladorRET.cargarProgramaYRegistros(set_contexto_programas.programa, "0000", Map[String, W16]())
+
+    // Ejecuto la primera instruccion para que quede Call para ejecutar
+    for (x ← 0 to 2) {
+      simuladorRET.fetch()
+      simuladorRET.decode()
+      simuladorRET.execute()
+    }
+
   }
 
   "Un CALL" should "guardar el valor del pc actual en la pila y actualizar el valor de pc con el operado origen" in {
     // Ejecutando la segunda instruccion que es el call
     var set_simuladores = simuladores
     var simulador = set_simuladores.simulador
+    var pcActual = new W16("0004")
+    var spActual = new W16("FFEF")
     simulador.fetch()
     var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_UnOperando_Origen]
-    var pcActual = new W16("0004")
-    var spActual = new W16("FFEF") 
     simulador.decode()
     simulador.execute()
-    
-    println (simulador.busIO.getValor(spActual).value)
-    println(pcActual.value)
-    //assert(simulador.busIO.getValor(spActual).value === pcActual.value)
-    //assert(simulador.cpu.pc.equals(instruccion.operando.getValor))
-
+    // probar que la ejecucion de la instruccion Call funciona    
+    assert(simulador.busIO.getValor(spActual).value === pcActual.value)
+    assert(simulador.cpu.pc.equals(instruccion.operando.getValor))
   }
 
-//  "Un RET" should "buscar el valor del tope de la pila y actualizar el pc con ese valor" in {
-//    var count = 0
-//    do {
-//      set_simuladores.simulador_con_programa.fetch()
-//      //FETCH
-//      assert(instrucciones.instruccionesinterpretadas(count) === set_simuladores.simulador_con_programa.cpu.ir)
-//      //DECODE
-//      var decode = set_simuladores.simulador_con_programa.decode()
-//      assert(instrucciones.instruccionesdecodificadas(count) === decode)
-//
-//      count += 1
-//    } while (count < programa.instrucciones.length)
-//  }
+  "Un RET" should "buscar el valor del tope de la pila y actualizar el pc con ese valor" in {
+    var set_simuladores = simuladores
+    var simulador = set_simuladores.simuladorRET
+    var pcActual = new W16("0004")
+    var spActual = new W16("FFEF")
+
+    simulador.fetch()
+    var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_SinOperandos]
+    simulador.decode()
+    simulador.execute()
+    // probar que la ejecucion de la instruccion RET funciona    
+    assert(simulador.cpu.sp.equals(spActual))
+    assert(simulador.cpu.pc.equals(pcActual))
+
+  }
 
 }
