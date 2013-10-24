@@ -85,33 +85,33 @@ case class Simulador() {
    * @param Operando , Programa
    * @return W16
    */
-  def calcularValorOrigenEtiqueta(instruccion: Instruccion_DosOperandos, programa: Programa, instrucciones: ArrayBuffer[Instruccion]) {
+  def calcularValorOrigenEtiqueta(instruccion: Instruccion_DosOperandos, programa: Programa) = {
+    var origen = instruccion.origen
     if (instruccion.origen.codigo.equals("111111")) {
-      instruccion.origen = new Inmediato(programa.etiquetas(instruccion.origen.representacionString).position)
+      origen = new Inmediato(programa.etiquetas(instruccion.origen.representacionString).position)
     }
-    instrucciones.+=(instruccion)
-  }
+    origen
+  }     
   /**
    * Calcula de acuerdo al operando que le pasan el valor de la etiqueta
    * @param Operando , Programa
    * @return W16
    */
-  def calcularValorOperandoEtiqueta(instruccion: Instruccion_UnOperando, programa: Programa, instrucciones: ArrayBuffer[Instruccion]) {
+  def calcularValorOperandoEtiqueta(instruccion: Instruccion_UnOperando, programa: Programa) = {
+    var operando = instruccion.operando
     if (instruccion.operando.codigo.equals("111111")) {
-      instruccion.operando = new Inmediato(programa.etiquetas(instruccion.operando.representacionString).position)
+       operando = new Inmediato(programa.etiquetas(instruccion.operando.representacionString).position)
     }
-    instrucciones.+=(instruccion)
+    operando
   }
   def calcularEtiquetas(programa: Programa): Programa = {
-    var instrucciones_sin_etiquetas = ArrayBuffer[Instruccion]()
     programa.instrucciones.foreach(inst ⇒ {
       inst match {
-        case inst_dp: Instruccion_DosOperandos ⇒ calcularValorOrigenEtiqueta(inst_dp, programa, instrucciones_sin_etiquetas)
-        case inst_up: Instruccion_UnOperando ⇒ calcularValorOperandoEtiqueta(inst_up, programa, instrucciones_sin_etiquetas)
-        case inst ⇒ instrucciones_sin_etiquetas.+=(inst)
+        case inst_dp: Instruccion_DosOperandos ⇒ inst_dp.origen = calcularValorOrigenEtiqueta(inst_dp, programa)
+        case inst_up: Instruccion_UnOperando ⇒ inst_up.operando = calcularValorOperandoEtiqueta(inst_up, programa)
+        case inst ⇒ 
       }
     })
-    programa.instrucciones = instrucciones_sin_etiquetas.toList
     programa
   }
 
@@ -129,8 +129,10 @@ case class Simulador() {
       var programaSinEtiquetas = calcularEtiquetas(programa)
 
       busIO.memoria.cargarPrograma(programaSinEtiquetas, pc)
+    ///  println("la memoria cargada : " + busIO.memoria.show("0000"))
+    } else {
+      println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
-    println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
   }
 
   /**
@@ -167,6 +169,7 @@ case class Simulador() {
     cambiarEstadoCeldasInstruccionActual(CeldaState.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
     println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
+    
   }
 
   def obtenerCeldasInstruccionActual(): ArrayBuffer[Celda] =

@@ -38,7 +38,7 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
     var programaQ3 = new Programa(instrucciones)
     programaQ3.etiquetas("etiqueta") = ADD(R0, new Inmediato("0002"))
     var instruccionesinterpretadas = List("2808 0002", "0900 0001", "3200 0003 000A", "1940 0056", "1200 0005 0010", "B008 0005", "1821 ", "2960 ", "2800 0002", "C000")
-    var instruccionesdecodificadas = List("ADD R0, [0002]", "MUL R4, 0001", "SUB [0003], 000A", "MOV R5, 0056", "MOV [0005], 0010", "CALL [0005]", "MOV R0, R1", "ADD R5, R0", "ADD R0, 0002", "RET")
+    var instruccionesdecodificadas = List("ADD R0, [0x0002]", "MUL R4, 0x0001", "SUB [0x0003], 0x000A", "MOV R5, 0x0056", "MOV [0x0005], 0x0010", "CALL [0x0005]", "MOV R0, R1", "ADD R5, R0", "ADD R0, 0x0002", "RET")
   }
 
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
