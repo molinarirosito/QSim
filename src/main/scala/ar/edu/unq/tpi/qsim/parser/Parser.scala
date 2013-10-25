@@ -25,6 +25,10 @@ object Parser extends Ensamblador {
     val str = readFile(path)
     result(parse(str, this.programQ3))
   }
+  
+  def ensamblarQ3SDFADSDFDSFASFASDFASDFASDFASD(codigo: String): Programa = {
+    result(parse(codigo, this.programQ3))
+  }
 
   def ensamblarQ4(path: String): Programa = {
     val str = readFile(path)

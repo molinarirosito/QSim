@@ -28,7 +28,7 @@ class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Match
     simuladorRET.inicializarSim
     simuladorRET.cargarProgramaYRegistros(set_contexto_programas.programa, "0000", Map[String, W16]())
 
-    // Ejecuto la primera instruccion para que quede Call para ejecutar
+    // Ejecuto la primera instruccion para que quede RET para ejecutar
     for (x ← 0 to 2) {
       simuladorRET.fetch()
       simuladorRET.decode()

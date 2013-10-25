@@ -1,0 +1,6 @@
+inicio: MOV R5, 0x0056
+CMP R5, 0x0000 
+JE salto
+MOV R0, R1  
+salto: ADD R5, R0 
+JMP inicio
