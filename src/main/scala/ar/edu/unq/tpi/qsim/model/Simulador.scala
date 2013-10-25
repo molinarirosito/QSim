@@ -1,7 +1,6 @@
 package ar.edu.unq.tpi.qsim.model
 
 import ar.edu.unq.tip.qsim.state._
-
 import ar.edu.unq.tpi.qsim.exeptions._
 import scala.collection.mutable.Map
 import scala.collection.mutable.ArrayBuffer
@@ -12,6 +11,7 @@ import scala.collection.mutable.ArrayBuffer
 import java.util.Date
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
+import java.util.Calendar
 
 @Observable
 case class Simulador() {
@@ -22,8 +22,7 @@ case class Simulador() {
   private val STORE = 3
   private val EXECUTED = 4
 
-  var mensaje_al_usuario: java.util.List[String] = List[String]()
-  var mensaje_al_usuario_actual = ""
+  var mensaje_al_usuario = ""
   var cpu: CPU = _
   var busIO: BusEntradaSalida = _
   var instruccionActual: Instruccion = _
@@ -346,9 +345,14 @@ case class Simulador() {
     store(modoDir, busIO.memoria.getValor(cpu.sp.toString))
   }
 
+  def obtenerHora() : String = {
+   val hoy = Calendar.getInstance().getTime()
+    
+   "["+hoy.getDate().toString()+"/"+hoy.getMonth().toString+" "+hoy.getHours().toString+":"+hoy.getMinutes().toString+"]"
+  }
   def agregarMensaje(mensaje: String) {
-    mensaje_al_usuario = mensaje_al_usuario ++ List(mensaje)
-    mensaje_al_usuario_actual = mensaje
+    mensaje_al_usuario = mensaje_al_usuario + "\n" + obtenerHora +" "+ mensaje
+
   }
 }
 
