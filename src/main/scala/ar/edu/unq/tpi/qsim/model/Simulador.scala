@@ -36,7 +36,8 @@ case class Simulador() {
     cpu = CPU()
     busIO = BusEntradaSalida()
     busIO.initialize
-    agregarMensaje("LALALA")
+    agregarMensaje("******************INFORMACION*******************")
+    agregarMensaje("El programa compilado ha sido cargado en la memoria con exito")
   }
 
   /**
@@ -164,6 +165,7 @@ case class Simulador() {
     val instruccion_fech = instruccionActual.representacionHexadecimal()
     println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
+    agregarMensaje("La intruccion actual ocupa: " + instruccionActual.cantidadCeldas().toString )
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
     cambiarEstadoCeldasInstruccionActual(CeldaState.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
@@ -282,7 +284,8 @@ case class Simulador() {
       case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
       case r: Registro ⇒
         r.valor = un_valor
-        println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
+    println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
+    agregarMensaje(s"Se guardado el resutado $un_valor en " + modoDir.toString )
     }
   }
   /**
@@ -351,7 +354,7 @@ case class Simulador() {
    "["+hoy.getDate().toString()+"/"+hoy.getMonth().toString+" "+hoy.getHours().toString+":"+hoy.getMinutes().toString+"]"
   }
   def agregarMensaje(mensaje: String) {
-    mensaje_al_usuario = mensaje_al_usuario + "\n" + obtenerHora +" "+ mensaje
+    mensaje_al_usuario = mensaje_al_usuario  + obtenerHora +" "+ mensaje +"\n"
 
   }
 }
