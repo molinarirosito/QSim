@@ -20,7 +20,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
       MOV(R5, new Inmediato("0056")), MOV(R2, R3), ADD(R1, R7))
     var programaQ1 = new Programa(instrucciones)
     var instruccionesinterpretadas = List("2800 0002", "0900 0001", "3940 000A", "1940 0056", "18A3 ", "2867 ")
-    var instruccionesdecodificadas = List("ADD R0, 0002", "MUL R4, 0001", "SUB R5, 000A", "MOV R5, 0056", "MOV R2, R3", "ADD R1, R7")
+    var instruccionesdecodificadas = List("ADD R0, 0x0002", "MUL R4, 0x0001", "SUB R5, 0x000A", "MOV R5, 0x0056", "MOV R2, R3", "ADD R1, R7")
 
   }
   //--------------------------------------------TESTS PARSER -----------------------------------------------//

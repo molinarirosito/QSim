@@ -214,18 +214,22 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
   
   // Agregar a cada Qx la idea de etiqueta :
-  def instructionsQ1 = ((ident <~ ":")?) ~ instruction2Q1
-  def instructionsQ2 = ((ident <~ ":")?) ~ instruction2Q2
+  def instructionsQ1 = instruction2Q1
+  def instructionsQ2 = instruction2Q2
   def instructionsQ3 = ((ident <~ ":")?) ~ instruccionstQ3
   
   // Especificar cada Programa
-  def programQ1 = program(instructionsQ1)
-  def programQ2 = program(instructionsQ2)
+  def programQ1 = programSE(instructionsQ1)
+  def programQ2 = programSE(instructionsQ2)
   def programQ3 = program(instructionsQ3)
   
   // Construccion de un Programa!!!
   def program(parser: Parser[Option[String] ~ Instruccion]) = rep(parser) ^^
     { case instructions ⇒ Programa(instructions.map(p ⇒ (p._1, p._2))) }
+  
+  // Construccion de un Programa Sin Etiquetas!!!
+  def programSE(parser: Parser[Instruccion]) = rep(parser) ^^
+    { case instructions ⇒ Programa(instructions.map(p ⇒ (None, p))) }
   
   // Especificacion del Parser
   def parse(input: String, parserQ: Parser[Programa]) = parseAll(parserQ, input)
