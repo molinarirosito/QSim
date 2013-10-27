@@ -207,23 +207,26 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
   // PARSER ENSAMBLADOR - Q4
 
-  // NOTA no hace falta de que tenga etiqueta las instrucciones de Q1 y Q2, recien las utilizan en Q3
-  //def instructionsQ1 = ((ident <~ ":")?) ~ instruction2Q1
-  //def instructionsQ2 = ((ident <~ ":")?) ~ instruction2Q2
-
+  ///////////////////////////////////////////////////////////////////////////////////
+  
+  // Construccion de Instrucciones de Dos Operandos !!!
   def instruccionesDosOperandos(instrucciones: Parser[String], asignable: Parser[ModoDireccionamiento], direccionable: Parser[ModoDireccionamiento]) = instrucciones ~ asignable ~ ("," ~> direccionable) ^^
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
-
+  
+  // Agregar a cada Qx la idea de etiqueta :
   def instructionsQ1 = ((ident <~ ":")?) ~ instruction2Q1
   def instructionsQ2 = ((ident <~ ":")?) ~ instruction2Q2
   def instructionsQ3 = ((ident <~ ":")?) ~ instruccionstQ3
-
+  
+  // Especificar cada Programa
   def programQ1 = program(instructionsQ1)
   def programQ2 = program(instructionsQ2)
   def programQ3 = program(instructionsQ3)
-
+  
+  // Construccion de un Programa!!!
   def program(parser: Parser[Option[String] ~ Instruccion]) = rep(parser) ^^
     { case instructions ⇒ Programa(instructions.map(p ⇒ (p._1, p._2))) }
-
+  
+  // Especificacion del Parser
   def parse(input: String, parserQ: Parser[Programa]) = parseAll(parserQ, input)
 }
