@@ -49,6 +49,7 @@ case class Simulador() {
     programa.instrucciones.exists(instr ⇒ instr match {
       case inst_dp: Instruccion_DosOperandos ⇒ verificarOperandoEtiqueta(inst_dp.origen, programa)
       case inst_up: Instruccion_UnOperando ⇒ verificarOperandoEtiqueta(inst_up.operando, programa)
+      case inst_sc: JUMP_condicional ⇒ verificarOperandoEtiqueta(inst_sc.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta, programa)
       case _ ⇒ false
     })
   }
@@ -104,11 +105,28 @@ case class Simulador() {
     }
     operando
   }
+  
+  /** Calcula de acuerdo al operando que le pasan el valor de la etiqueta
+   * @param Operando , Programa
+   * @return W16
+   */
+  def calcularValorSaltoEtiqueta(instruccion: JUMP_condicional, programa: Programa) = {
+    var resultado = instruccion.desplazamiento.salto
+    if (instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.codigo.equals("111111")) {
+      instruccion.position.++
+      var posicionActual = instruccion.position
+      var posicionASaltar = programa.etiquetas(instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.representacionString).position
+      resultado = Math.abs((posicionASaltar-posicionActual).value)
+    }
+    resultado
+  }
+ 
   def calcularEtiquetas(programa: Programa): Programa = {
     programa.instrucciones.foreach(inst ⇒ {
       inst match {
         case inst_dp: Instruccion_DosOperandos ⇒ inst_dp.origen = calcularValorOrigenEtiqueta(inst_dp, programa)
         case inst_up: Instruccion_UnOperando ⇒ inst_up.operando = calcularValorOperandoEtiqueta(inst_up, programa)
+        case inst_sc: JUMP_condicional ⇒ inst_sc.desplazamiento.salto = calcularValorSaltoEtiqueta(inst_sc, programa)
         case inst ⇒ 
       }
     })

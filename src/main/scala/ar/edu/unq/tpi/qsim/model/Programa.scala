@@ -88,6 +88,11 @@ class Programa(var instrucciones: List[Instruccion], var etiquetas: Map[String, 
 }
 
 object dd extends App {
+  
+ var inst = JE(new Salto(1))
+ println(inst.representacionHexadecimal)
+ println(inst.toString)
+ 
   //print(List(ADD(R1, Inmediato(new W16("0013"))), ADD(R1, Inmediato(new W16("0013")))))
  var instruccion = MOV(new Directo(new Inmediato(new W16("0005"))), new Etiqueta("etiqueta"))
  println(instruccion.representacionHexadecimal)  

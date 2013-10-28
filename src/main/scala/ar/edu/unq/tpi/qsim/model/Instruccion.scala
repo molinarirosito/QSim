@@ -171,7 +171,10 @@ case class JVS(desp: Salto) extends JUMP_condicional("0111", "JVS", desp) {}
 
 object Testuds extends App {
 
-  val e = ADD(R1, new Inmediato(new W16("0005")))
+  val e = JE(new SaltoEtiqueta(new Etiqueta("salto")))
+  println(e.toString)
+  println(e.representacionHexadecimal)
+  
   println(e.toString())
   println(e.representacionHexadecimal())
   println(e.tamanioHex)

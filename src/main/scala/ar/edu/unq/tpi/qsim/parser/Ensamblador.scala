@@ -158,7 +158,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   def instruction0Q3 = instruccionsQ3SinOperando ^^
     { case ins ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor().newInstance().asInstanceOf[Instruccion_SinOperandos] }
 
-  def instruccionstQ3 = instruction2Q3 | instruction1Q3 | instruction2movQ3 | instruction0Q3
+  def instructionQ3 = instruction2Q3 | instruction1Q3 | instruction2movQ3 | instruction0Q3
 
   //TODO HACER QUE MUL CON R7 como DESTINO NO SE PERMITA
 
@@ -186,7 +186,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Toma la instruccion y la etiqueta y crea un Salto en Q4.
    */
   def instructionQ4Saltos = instruccionsQ4Saltos ~ etiqueta ^^
-    { case ins ~ desp ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[Salto]).newInstance(desp.getSalto()).asInstanceOf[JUMP_condicional] }
+    { case ins ~ desp ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[Salto]).newInstance(new SaltoEtiqueta(desp)).asInstanceOf[JUMP_condicional] }
 
   /**
    * Este parser ensambla las instrucciones de un operando en Q4
@@ -201,11 +201,11 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    */
   def instruction2Q4 = instruccionesDosOperandos(instruccionsQ4DosOperandos, asignableQ2, directionableQ2)
 
-  def instruccionstQ4 = instruction2Q4 | instruction1Q4 | instruction2movQ3 | instruction0Q3
+  def instructionQ4 = instruction2Q4 | instruction1Q4 | instructionQ4Saltos | instruction2movQ3 | instruction0Q3
 
   ///////////////////////////////////////////////////////////////////////////////////
 
-  // PARSER ENSAMBLADOR - Q4
+  // PARSER ENSAMBLADOR - Q5
 
   ///////////////////////////////////////////////////////////////////////////////////
   
@@ -213,15 +213,19 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   def instruccionesDosOperandos(instrucciones: Parser[String], asignable: Parser[ModoDireccionamiento], direccionable: Parser[ModoDireccionamiento]) = instrucciones ~ asignable ~ ("," ~> direccionable) ^^
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
   
-  // Agregar a cada Qx la idea de etiqueta :
+  // Agregar las instrucciones de cada Q:
   def instructionsQ1 = instruction2Q1
   def instructionsQ2 = instruction2Q2
-  def instructionsQ3 = ((ident <~ ":")?) ~ instruccionstQ3
+  
+  // Agregar a partor de Q3 la idea de etiqueta :
+  def instructionsQ3 = ((ident <~ ":")?) ~ instructionQ3
+  def instructionsQ4 = ((ident <~ ":")?) ~ instructionQ4
   
   // Especificar cada Programa
   def programQ1 = programSE(instructionsQ1)
   def programQ2 = programSE(instructionsQ2)
   def programQ3 = program(instructionsQ3)
+  def programQ4 = program(instructionsQ4)
   
   // Construccion de un Programa!!!
   def program(parser: Parser[Option[String] ~ Instruccion]) = rep(parser) ^^

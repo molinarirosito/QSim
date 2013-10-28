@@ -26,3 +26,6 @@ class Salto(var salto: Int) {
 
   }
 }
+
+class SaltoEtiqueta(var etiqueta: ModoDireccionamiento) extends Salto(0){
+}
