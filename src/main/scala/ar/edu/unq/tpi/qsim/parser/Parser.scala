@@ -25,7 +25,7 @@ object Parser extends Ensamblador {
     val str = readFile(path)
     result(parse(str, this.programQ3))
   }
-  
+
   def ensamblarQ3SDFADSDFDSFASFASDFASDFASDFASD(codigo: String): Programa = {
     result(parse(codigo, this.programQ3))
   }
@@ -33,6 +33,11 @@ object Parser extends Ensamblador {
   def ensamblarQ4(path: String): Programa = {
     val str = readFile(path)
     result(parse(str, this.programQ4))
+  }
+
+  def ensamblarQ5(path: String): Programa = {
+    val str = readFile(path)
+    result(parse(str, this.programQ5))
   }
 
   def result(resultado: ParseResult[Programa]): Programa = resultado match {
@@ -46,8 +51,8 @@ object Parser extends Ensamblador {
 
   def createMessage(output: Input): String = {
     var lineOfProgram = output.source.toString().split("\n")
-    var characterCount = output.offset - (lineOfProgram.length -1)
-    
+    var characterCount = output.offset - (lineOfProgram.length - 1)
+
     return searchLineWithError(lineOfProgram, characterCount)
   }
 

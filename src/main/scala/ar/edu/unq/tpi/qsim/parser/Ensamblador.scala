@@ -207,6 +207,42 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
   // PARSER ENSAMBLADOR - Q5
 
+  /**
+   * Este parser indica que parser se van a usar para ensamblar el operando destino de las instrucciones de Q5
+   */
+  def asignableQ5 = asignableQ2 | indirect | registerIndirect
+ 
+   /**
+   * Este parser indica que parser se van a usar para ensamblar el operando destino de las instrucciones de Q5
+   */
+  def directionableQ5 = asignableQ2 | indirect | registerIndirect
+
+  /**
+   * Este parser indica que parser se van a usar para ensamblar el operando origen de la instruccion CALL , JMP y MOV de Q3 
+   */
+  def directionable1Q5 = directionable1Q3 | indirect | registerIndirect
+
+   /**
+   * Este parser ensambla la instruccion MOV de dos operandos en Q5 
+   * Toma la instruccion y operando origen y crea una una Instruccion MOV en Q5
+   */
+  def instruction2movQ5 = instruccionesDosOperandos(movQ3DosOperandos, asignableQ5, directionable1Q5)
+  
+  /**
+   * Este parser ensambla las instrucciones de un operando en Q5
+   * Toma la instruccion y operando origen y crea una una Instruccion de Un operando en Q5
+   */
+  def instruction1Q5 = instruccionsQ4UnOperando ~ directionable1Q5 ^^
+    { case ins ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir2).asInstanceOf[Instruccion_UnOperando] }
+
+  /**
+   * Este parser ensambla las instrucciones de Q5
+   * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q5.
+   */
+  def instruction2Q5 = instruccionesDosOperandos(instruccionsQ4DosOperandos, asignableQ5, directionableQ5)
+ 
+  def instructionQ5 = instructionQ4Saltos | instruction2movQ5 | instruction1Q5 | instruction2Q5 | instruction0Q3
+
   ///////////////////////////////////////////////////////////////////////////////////
   
   // Construccion de Instrucciones de Dos Operandos !!!
@@ -220,12 +256,15 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   // Agregar a partor de Q3 la idea de etiqueta :
   def instructionsQ3 = ((ident <~ ":")?) ~ instructionQ3
   def instructionsQ4 = ((ident <~ ":")?) ~ instructionQ4
+  def instructionsQ5 = ((ident <~ ":")?) ~ instructionQ5
   
   // Especificar cada Programa
   def programQ1 = programSE(instructionsQ1)
   def programQ2 = programSE(instructionsQ2)
   def programQ3 = program(instructionsQ3)
   def programQ4 = program(instructionsQ4)
+  def programQ5 = program(instructionsQ5)
+  
   
   // Construccion de un Programa!!!
   def program(parser: Parser[Option[String] ~ Instruccion]) = rep(parser) ^^
