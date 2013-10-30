@@ -19,9 +19,9 @@ class CicloEjecucionArquitecturaQ5 extends FlatSpec with Matchers {
   def programas = new {
     var instrucciones = List(MOV(R1, new Indirecto(new Directo(new Inmediato("0010")))), CMP(new RegistroIndirecto(R2), new Inmediato("0000")), MOV(new Indirecto(new Directo(new Inmediato("0010"))), R2) )
     var programaQ5 = new Programa(instrucciones)
-    var instruccionesinterpretadas = List("1840 0010", "6C80 0000", "1622")
-    var instruccionesdecodificadas = List("MOV R1, [[0x0056]]", "CMP [R5], 0x0000", "MOV [[0x0010]], R2" )
-  }
+    var instruccionesinterpretadas = List("1858 0010", "6C80 0000", "1622 0010 ")
+    var instruccionesdecodificadas = List("MOV R1, [[0x0010]]", "CMP [R2], 0x0000","MOV [[0x0010]], R2" )
+  } 
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
 
   "Un Parser" should "parsear exitosamente un programa " in {
