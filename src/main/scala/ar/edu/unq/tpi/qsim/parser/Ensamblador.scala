@@ -215,7 +215,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    /**
    * Este parser indica que parser se van a usar para ensamblar el operando destino de las instrucciones de Q5
    */
-  def directionableQ5 = asignableQ2 | indirect | registerIndirect
+  def directionableQ5 = directionableQ2 | indirect | registerIndirect
 
   /**
    * Este parser indica que parser se van a usar para ensamblar el operando origen de la instruccion CALL , JMP y MOV de Q3 
@@ -277,3 +277,11 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   // Especificacion del Parser
   def parse(input: String, parserQ: Parser[Programa]) = parseAll(parserQ, input)
 }
+
+object lala extends App {
+
+println(Parser.parse("""MOV R1, [[0x0010]]
+CMP [R2], 0x0000
+MOV [[0x0011]] , R2""", Parser.programQ5))  
+
+} 
