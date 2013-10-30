@@ -33,8 +33,9 @@ class CicloEjecucionArquitecturaQ5 extends FlatSpec with Matchers {
   it should "tirar un Failure cuando parsea un programa con sintaxis invalida" in {
     var set_parser = parsers_resultados
     var set_programas = programas
-    var mensaje_esperado = "Ha ocurrido un error en la linea 3 MOV [[0x0011] ,  "
+    var mensaje_esperado = "Ha ocurrido un error en la linea 3 MOV [[0x0011] , "
     val exception = intercept[SyntaxErrorException] {
+      
       set_parser.parser.ensamblarQ5("src/main/resources/programaQ5SyntaxError.qsim")
     }
     assert(exception.getMessage().equals(mensaje_esperado))
