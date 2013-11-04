@@ -4,16 +4,25 @@ import org.scalatest.FlatSpec
 import org.scalatest.Matchers
 import ar.edu.unq.tpi.qsim.model._
 import scala.collection.mutable._
+import ar.edu.unq.tpi.qsim.utils._
 
 class ArquirirDatosOperandos extends FlatSpec with Matchers {
 
   def contexto_operandos = new {
+    //////Q1
     var inst1 = MUL(R2, R3)
-    var inst2 = MOV(R2, new Inmediato(new W16("4000")))
-    var inst3 = ADD(R3, new Directo(new Inmediato(new W16("0002"))))
-    var inst4 = SUB(new Directo(new Inmediato(new W16("0006"))), R2)
-    var inst5 = SUB(new Directo(new Inmediato(new W16("000B"))), new Inmediato(new W16("0010")))
-    var inst6 = DIV(new Directo(new Inmediato(new W16("0008"))), new Directo(new Inmediato(new W16("000A"))))
+    var inst2 = MOV(R2, new Inmediato("4000"))
+    //////Q2
+    var inst3 = ADD(R3, new Directo(new Inmediato("0002")))
+    var inst4 = SUB(new Directo(new Inmediato("0006")), R2)
+    var inst5 = SUB(new Directo(new Inmediato("000B")), new Inmediato("0010"))
+    var inst6 = DIV(new Directo(new Inmediato("0008")), new Directo(new Inmediato("000A")))
+    //////Q3
+    var inst7 = CMP(new Indirecto(new Directo(new Inmediato("000E"))), new RegistroIndirecto(R4))
+    var inst8 = JMP(new Indirecto(new Directo(new Inmediato("000C"))))
+    var inst9 = MOV(new Indirecto(new Directo(new Inmediato("000D"))), new RegistroIndirecto(R4))
+    var inst10 = ADD(new RegistroIndirecto(R4), new Indirecto(new Directo(new Inmediato("000F"))))
+
   }
 
   def simuladores = new {
