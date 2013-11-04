@@ -1,0 +1,5 @@
+MOV R0, 0x0002
+CALL lala
+MOV R1, R0
+lala: MUL R0, 0x0004
+RET

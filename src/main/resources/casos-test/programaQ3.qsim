@@ -1,0 +1,10 @@
+ADD R0, [0x0002] 
+MUL R4, 0x0001   
+SUB [0x0003], 0x000A 
+MOV R5, 0x0056 
+MOV [0x0005], etiqueta 
+CALL [0x0005] 
+MOV R0, R1  
+ADD R5, R0 
+etiqueta: ADD R0, 0x0002
+RET 
