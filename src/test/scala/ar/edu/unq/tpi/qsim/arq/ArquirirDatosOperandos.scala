@@ -17,12 +17,9 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     var inst4 = SUB(new Directo(new Inmediato("0006")), R2)
     var inst5 = SUB(new Directo(new Inmediato("000B")), new Inmediato("0010"))
     var inst6 = DIV(new Directo(new Inmediato("0008")), new Directo(new Inmediato("000A")))
-    //////Q3
+    //////Q5
     var inst7 = CMP(new Indirecto(new Directo(new Inmediato("000E"))), new RegistroIndirecto(R4))
-    var inst8 = JMP(new Indirecto(new Directo(new Inmediato("000C"))))
-    var inst9 = MOV(new Indirecto(new Directo(new Inmediato("000D"))), new RegistroIndirecto(R4))
-    var inst10 = ADD(new RegistroIndirecto(R4), new Indirecto(new Directo(new Inmediato("000F"))))
-
+    var inst8 = ADD(new RegistroIndirecto(R0), new Indirecto(new Directo(new Inmediato("000A"))))
   }
 
   def simuladores = new {
@@ -35,39 +32,58 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     registro3.valor = new W16("1234")
     var registro2 = simulador1.cpu.registros(2)
     registro2.valor = new W16("0004")
-    simulador1.cargarProgramaYRegistros(programa1, "000C", Map[String, W16]())
+    simulador1.cargarProgramaYRegistros(programa1, "0010", Map[String, W16]())
 
     var programa2 = new Programa(List(contexto.inst2))
     var simulador2 = Simulador()
     simulador2.inicializarSim
-    simulador2.cargarProgramaYRegistros(programa2, "000C", Map[String, W16]())
+    simulador2.cargarProgramaYRegistros(programa2, "0010", Map[String, W16]())
 
     var programa3 = new Programa(List(contexto.inst3))
     var simulador3 = Simulador()
     simulador3.inicializarSim
     simulador3.busIO.setValor("0002", new W16("0009"))
-    simulador3.cargarProgramaYRegistros(programa3, "000C", Map[String, W16]())
+    simulador3.cargarProgramaYRegistros(programa3, "0010", Map[String, W16]())
 
     var programa4 = new Programa(List(contexto.inst4))
     var simulador4 = Simulador()
     simulador4.inicializarSim
     simulador4.busIO.setValor("0006", new W16("0001"))
-    simulador4.cargarProgramaYRegistros(programa4, "000C", Map[String, W16]())
+    simulador4.cargarProgramaYRegistros(programa4, "0010", Map[String, W16]())
 
     var programa5 = new Programa(List(contexto.inst5))
     var simulador5 = Simulador()
     simulador5.inicializarSim
     simulador5.busIO.setValor("000B", new W16("0007"))
-    simulador5.cargarProgramaYRegistros(programa5, "000C", Map[String, W16]())
+    simulador5.cargarProgramaYRegistros(programa5, "0010", Map[String, W16]())
 
     var programa6 = new Programa(List(contexto.inst6))
     var simulador6 = Simulador()
     simulador6.inicializarSim
     simulador6.busIO.setValor("0008", new W16("0005"))
     simulador6.busIO.setValor("000A", new W16("0004"))
-    simulador6.cargarProgramaYRegistros(programa6, "000C", Map[String, W16]())
+    simulador6.cargarProgramaYRegistros(programa6, "0010", Map[String, W16]())
+
+    var programa7 = new Programa(List(contexto.inst7))
+    var simulador7 = Simulador()
+    simulador7.inicializarSim
+    simulador7.cpu.registros(4).valor = new W16("0004")
+    simulador7.busIO.setValor("0004", new W16("000E"))
+    simulador7.busIO.setValor("000E", new W16("1000"))
+    simulador7.busIO.setValor("1000", new W16("0001"))
+    simulador7.cargarProgramaYRegistros(programa7, "0010", Map[String, W16]())
+
+    var programa8 = new Programa(List(contexto.inst8))
+    var simulador8 = Simulador()
+    simulador8.inicializarSim
+    simulador8.cpu.registros(0).valor = new W16("0004")
+    simulador8.busIO.setValor("0004", new W16("0004"))
+    simulador8.busIO.setValor("000A", new W16("0005"))
+    simulador8.busIO.setValor("0005", new W16("0004"))
+    simulador8.cargarProgramaYRegistros(programa8, "0010", Map[String, W16]())
 
   }
+  //------------------------------------------------------Q1
 
   "Una Instruccion" should "buscar los datos en los modos de direccionamiento destino ->Registro origen -> Registro y verificar el store" in {
     var ctx = contexto_operandos
@@ -102,10 +118,9 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador2.execute()
 
     assert(sim.simulador2.cpu.registros(2).getValor().equals(new W16("4000")))
-
   }
 
-  //  // ------------------------------------------------------------//  
+  // ---------------------------------------------------Q2---------
   it should "buscar los datos en los modos de direccionamiento destino ->Registro origen -> Directo y verificar el store" in {
     var ctx = contexto_operandos
     var sim = simuladores
@@ -123,8 +138,8 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador3.execute()
 
     assert(sim.simulador3.cpu.registros(3).getValor().equals(new W16("123D")))
-
   }
+
   it should "buscar los datos en los modos de direccionamiento destino ->Directo origen -> Registro y verificar el store" in {
     var ctx = contexto_operandos
     var sim = simuladores
@@ -140,8 +155,8 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador4.execute()
 
     assert(sim.simulador4.obtenerValor(ctx.inst4.destino).equals(new W16("FFFD")))
-
   }
+
   it should "buscar los datos en los modos de direccionamiento destino ->Directo origen -> Directo y verificar el store" in {
     var ctx = contexto_operandos
     var sim = simuladores
@@ -157,7 +172,6 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador5.execute()
 
     assert(sim.simulador5.obtenerValor(ctx.inst5.destino).equals(new W16("FFF7")))
-
   }
 
   it should "buscar los datos en los modos de direccionamiento destino ->Directo origen -> Inmediato y verificar el store" in {
@@ -175,36 +189,41 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     sim.simulador6.execute()
 
     assert(sim.simulador6.obtenerValor(ctx.inst6.destino).equals(new W16("0001")))
-
   }
 
-  //  // --------------------------------------------------------------//
-  //  it should "buscar los datos en los modos de direccionamiento destino ->Inmediato origen -> RegistroIndirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->Registro origen -> RegistroIndirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->Directo origen -> RegistroIndirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->RegistroIndirecto origen -> RegistroIndirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->RegistroIndirecto origen -> Directo" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->RegistroIndirecto origen -> Registro" in {
-  //  }
-  //
-  //  // -------------------------------------------------------------//
-  //  it should "buscar los datos en los modos de direccionamiento destino ->Inmediato origen -> InDirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->Registro origen -> InDirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->Directo origen -> InDirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->RegistroIndirecto origen -> InDirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->InDirecto origen -> InDirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->InDirecto origen -> RegistroIndirecto" in {
-  //  }
-  //  it should "buscar los datos en los modos de direccionamiento destino ->InDirecto origen -> Directo" in {
-  //  }
+  // ------------------------------------Q5--------------------------//
+
+  it should "buscar los datos en los modos de direccionamiento destino ->InDirecto origen -> RegistroIndirecto" in {
+    var ctx = contexto_operandos
+    var sim = simuladores
+    sim.simulador7.fetch()
+
+    var instruccionActual = sim.simulador7.instruccionActual.asInstanceOf[Instruccion_DosOperandos]
+    var destino = sim.simulador7.obtenerValor(instruccionActual.destino)
+    var origen = instruccionActual.origen.getValor()
+    assert(sim.simulador7.obtenerValor(ctx.inst7.destino).equals(destino))
+    assert(ctx.inst7.origen.getValor.equals(origen))
+    sim.simulador7.decode()
+    sim.simulador7.execute()
+
+    assert(sim.simulador7.obtenerValor(ctx.inst7.destino).equals(new W16("0001")))
+  }
+
+  it should "buscar los datos en los modos de direccionamiento destino ->RegistroIndirecto origen -> InDirecto" in {
+    var ctx = contexto_operandos
+    var sim = simuladores
+    sim.simulador8.fetch()
+
+    var instruccionActual = sim.simulador8.instruccionActual.asInstanceOf[Instruccion_DosOperandos]
+    var destino = sim.simulador8.obtenerValor(instruccionActual.destino)
+    println(destino)
+    var origen = instruccionActual.origen.getValor()
+    println(origen)
+    assert(sim.simulador8.obtenerValor(ctx.inst8.destino).equals(destino))
+    assert(ctx.inst8.origen.getValor.equals(origen))
+    sim.simulador8.decode()
+    sim.simulador8.execute()
+
+     assert(sim.simulador8.obtenerValor(ctx.inst8.destino).equals(new W16("0008")))
+  }
 }

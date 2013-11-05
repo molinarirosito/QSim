@@ -1,0 +1,28 @@
+\select@language {spanish}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{5}{chapter.1}
+\contentsline {chapter}{\numberline {2}Contexto}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Sobre la materia Organizaci\IeC {\'o}n de Computadoras}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Conceptos importantes}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}Arquitecturas Q}{7}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Caracter\IeC {\'\i }sticas generales}{7}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Repertorio de instrucciones}{7}{subsection.2.3.2}
+\contentsline {subsubsection}{Instrucciones de 2 operandos}{7}{section*.2}
+\contentsline {subsubsection}{Instrucciones de 1 operando origen}{7}{section*.3}
+\contentsline {subsubsection}{Instrucciones de 1 operando destino}{7}{section*.4}
+\contentsline {subsubsection}{Instrucciones sin operandos}{7}{section*.5}
+\contentsline {subsubsection}{Instrucciones de salto condicional}{7}{section*.6}
+\contentsline {subsection}{\numberline {2.3.3}Versiones de la arquitectura}{7}{subsection.2.3.3}
+\contentsline {subsubsection}{Q1}{7}{section*.7}
+\contentsline {subsubsection}{Q2}{7}{section*.8}
+\contentsline {subsubsection}{Q3}{7}{section*.9}
+\contentsline {subsubsection}{Q4}{7}{section*.10}
+\contentsline {section}{\numberline {2.4}Estado del arte}{7}{section.2.4}
+\contentsline {chapter}{\numberline {3}Simulador QSim}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Funcionalidad del simulador}{9}{section.3.1}
+\contentsline {section}{\numberline {3.2}Implementaci\IeC {\'o}n del simulador}{9}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Tecnolog\IeC {\'\i }a utilizada}{9}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2} (arq OO)}{9}{subsection.3.2.2}
+\contentsline {chapter}{\numberline {4}Evaluaci\IeC {\'o}n del desarrollo}{11}{chapter.4}
+\contentsline {section}{\numberline {4.1}Dificultades encontradas}{11}{section.4.1}
+\contentsline {section}{\numberline {4.2}Casos de prueba}{11}{section.4.2}
+\contentsline {section}{\numberline {4.3}Ejemplos de uso}{11}{section.4.3}
