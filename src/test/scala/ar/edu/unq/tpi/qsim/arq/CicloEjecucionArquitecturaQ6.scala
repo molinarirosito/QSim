@@ -16,10 +16,10 @@ class CicloEjecucionArquitecturaQ6 extends FlatSpec with Matchers {
   }
 
   def programas = new {
-    var instrucciones = List(MOV(R1, new Indirecto(new Directo(new Inmediato("0010")))), CMP(new RegistroIndirecto(R2), new Inmediato("0000")), MOV(new Indirecto(new Directo(new Inmediato("0010"))), R2))
+    var instrucciones = List(NOT(R0), AND(new RegistroIndirecto(R6), new Directo(new Inmediato("0006"))), OR(new Indirecto(new Directo(new Inmediato("0023"))), new Inmediato("0300")), AND(R5, new Directo(new Inmediato("0005"))), OR(R6, new Inmediato("0005")))
     var programaQ6 = new Programa(instrucciones)
-    var instruccionesinterpretadas = List("1858 0010", "6C80 0000", "1622 0010 ")
-    var instruccionesdecodificadas = List("MOV R1, [[0x0010]]", "CMP [R2], 0x0000", "MOV [[0x0010]], R2")
+    var instruccionesinterpretadas = List("9800 ", "4D88 0006", "5600 0023 0300", "4948 0005", "5980 0005")
+    var instruccionesdecodificadas = List("NOT R0", "AND [R6], [0x0006]", "OR [[0x0023]], 0x0300","AND R5, [0x0005]", "OR R6, 0x0005")
   }
   //--------------------------------------------TESTS PARSER -----------------------------------------------//
 
@@ -32,7 +32,7 @@ class CicloEjecucionArquitecturaQ6 extends FlatSpec with Matchers {
   it should "tirar un Failure cuando parsea un programa con sintaxis invalida" in {
     var set_parser = parsers_resultados
     var set_programas = programas
-    var mensaje_esperado = "Ha ocurrido un error en la linea 3 MOV [[0x0011] , "
+    var mensaje_esperado = "Ha ocurrido un error en la linea 1 NOT"
     val exception = intercept[SyntaxErrorException] {
 
       set_parser.parser.ensamblarQ6("src/main/resources/programaQ6SyntaxError.qsim")
