@@ -39,6 +39,10 @@ object Parser extends Ensamblador {
     val str = readFile(path)
     result(parse(str, this.programQ5))
   }
+  def ensamblarQ6(path: String): Programa = {
+    val str = readFile(path)
+    result(parse(str, this.programQ6))
+  }
 
   def result(resultado: ParseResult[Programa]): Programa = resultado match {
     case Success(result, _) ⇒ result

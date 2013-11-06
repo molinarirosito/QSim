@@ -73,7 +73,6 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
     // verificar que pc tiene el valor esperado
     set_simuladores.simulador.cpu.pc.hex should be(pc)
-    // TODO TESTEAR QUE DENTRO DE LA MEMORIA EXISTA TAL PROGRAMA!!!
   }
 
   it should "actualizar los registros de cpu" in {

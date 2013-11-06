@@ -211,23 +211,23 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Este parser indica que parser se van a usar para ensamblar el operando destino de las instrucciones de Q5
    */
   def asignableQ5 = asignableQ2 | indirect | registerIndirect
- 
-   /**
+
+  /**
    * Este parser indica que parser se van a usar para ensamblar el operando destino de las instrucciones de Q5
    */
   def directionableQ5 = directionableQ2 | indirect | registerIndirect
 
   /**
-   * Este parser indica que parser se van a usar para ensamblar el operando origen de la instruccion CALL , JMP y MOV de Q3 
+   * Este parser indica que parser se van a usar para ensamblar el operando origen de la instruccion CALL , JMP y MOV de Q5
    */
   def directionable1Q5 = directionable1Q3 | indirect | registerIndirect
 
-   /**
-   * Este parser ensambla la instruccion MOV de dos operandos en Q5 
+  /**
+   * Este parser ensambla la instruccion MOV de dos operandos en Q5
    * Toma la instruccion y operando origen y crea una una Instruccion MOV en Q5
    */
   def instruction2movQ5 = instruccionesDosOperandos(movQ3DosOperandos, asignableQ5, directionable1Q5)
-  
+
   /**
    * Este parser ensambla las instrucciones de un operando en Q5
    * Toma la instruccion y operando origen y crea una una Instruccion de Un operando en Q5
@@ -240,48 +240,76 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q5.
    */
   def instruction2Q5 = instruccionesDosOperandos(instruccionsQ4DosOperandos, asignableQ5, directionableQ5)
- 
+
   def instructionQ5 = instructionQ4Saltos | instruction2movQ5 | instruction1Q5 | instruction2Q5 | instruction0Q3
 
   ///////////////////////////////////////////////////////////////////////////////////
-  
+
+  // PARSER ENSAMBLADOR - Q6
+
+  /**
+   *  Estas son las instrucciones validas en Q6
+   */
+  def instruccionsQ6DosOperandos = instruccionsQ4DosOperandos | "AND" | "OR"
+
+  /**
+   * Se agrega la instruccion NOT al conjunto de instrucciones de Q6
+   */
+  def instruccionsQ6UnOperando = "NOT"
+
+  /**
+   * Este parser ensambla las instrucciones de un operando en Q6
+   * Toma la instruccion y operando destino y crea una una Instruccion de Un operando en Q6
+   */
+  def instruction1Q6 = instruccionsQ6UnOperando ~ asignableQ5 ^^
+    { case ins ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento]).newInstance(dir2).asInstanceOf[Instruccion_UnOperando] }
+
+  /**
+   * Este parser ensambla las instrucciones de Q6
+   * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q6.
+   */
+  def instruction2Q6 = instruccionesDosOperandos(instruccionsQ6DosOperandos, asignableQ5, directionableQ5)
+
+  def instructionQ6 = instructionQ4Saltos | instruction2movQ5 | instruction1Q5 | instruction1Q6 | instruction2Q6 | instruction0Q3
+//--------------------------------------------------------------------------------------------
   // Construccion de Instrucciones de Dos Operandos !!!
   def instruccionesDosOperandos(instrucciones: Parser[String], asignable: Parser[ModoDireccionamiento], direccionable: Parser[ModoDireccionamiento]) = instrucciones ~ asignable ~ ("," ~> direccionable) ^^
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
-  
+
   // Agregar las instrucciones de cada Q:
   def instructionsQ1 = instruction2Q1
   def instructionsQ2 = instruction2Q2
-  
+
   // Agregar a partor de Q3 la idea de etiqueta :
   def instructionsQ3 = ((ident <~ ":")?) ~ instructionQ3
   def instructionsQ4 = ((ident <~ ":")?) ~ instructionQ4
   def instructionsQ5 = ((ident <~ ":")?) ~ instructionQ5
-  
+  def instructionsQ6 = ((ident <~ ":")?) ~ instructionQ6
+
   // Especificar cada Programa
   def programQ1 = programSE(instructionsQ1)
   def programQ2 = programSE(instructionsQ2)
   def programQ3 = program(instructionsQ3)
   def programQ4 = program(instructionsQ4)
   def programQ5 = program(instructionsQ5)
-  
-  
+  def programQ6 = program(instructionsQ6)
+
   // Construccion de un Programa!!!
   def program(parser: Parser[Option[String] ~ Instruccion]) = rep(parser) ^^
     { case instructions ⇒ Programa(instructions.map(p ⇒ (p._1, p._2))) }
-  
+
   // Construccion de un Programa Sin Etiquetas!!!
   def programSE(parser: Parser[Instruccion]) = rep(parser) ^^
     { case instructions ⇒ Programa(instructions.map(p ⇒ (None, p))) }
-  
+
   // Especificacion del Parser
   def parse(input: String, parserQ: Parser[Programa]) = parseAll(parserQ, input)
 }
 
 object lala extends App {
 
-println(Parser.parse("""MOV R1, [[0x0010]]
+  println(Parser.parse("""MOV R1, [[0x0010]]
 CMP [R2], 0x0000
-MOV [[0x0011]] , R2""", Parser.programQ5))  
+MOV [[0x0011]] , R2""", Parser.programQ5))
 
 } 
