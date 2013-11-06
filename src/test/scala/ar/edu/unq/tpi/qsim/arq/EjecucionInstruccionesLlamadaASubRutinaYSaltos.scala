@@ -38,6 +38,10 @@ class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Match
     var simuladorSaltos = Simulador()
     simuladorSaltos.inicializarSim
     simuladorSaltos.cargarProgramaYRegistros(set_contexto_programas.programa_saltos, "0000", Map[String, W16]())
+     // Ejecuto la primera instruccion para que quede JMP para ejecutar
+    simuladorSaltos.fetch()
+    simuladorSaltos.decode()
+    simuladorSaltos.execute()
   }
 
   "Un CALL" should "guardar el valor del pc actual en la pila y actualizar el valor de pc con el operado origen" in {
@@ -74,32 +78,29 @@ class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Match
   "Un JMP" should "enviar el hilo de ejecucion a la celda que indica el valor del operando origen que recibe -(cambiar pc por el valor del operando)" in {
     // Ejecutando la segunda instruccion que es el call
     var set_simuladores = simuladores
-    var simulador = set_simuladores.simulador
-    var pcActual = new W16("0004")
-    var spActual = new W16("FFEF")
+    var simulador = set_simuladores.simuladorSaltos
     simulador.fetch()
     var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_UnOperando_Origen]
     simulador.decode()
     simulador.execute()
-    // probar que la ejecucion de la instruccion Call funciona    
-    assert(simulador.busIO.getValor(spActual).value === pcActual.value)
+    // probar que la ejecucion de la instruccion JMP funciona    
     assert(simulador.cpu.pc.equals(instruccion.operando.getValor))
   }
 
-  "Un lal" should "buscar el valor del tope de la pila y actualizar el pc con ese valor" in {
-    var set_simuladores = simuladores
-    var simulador = set_simuladores.simuladorRET
-    var pcActual = new W16("0004")
-    var spActual = new W16("FFEF")
-
-    simulador.fetch()
-    var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_SinOperandos]
-    simulador.decode()
-    simulador.execute()
-    // probar que la ejecucion de la instruccion RET funciona    
-    assert(simulador.cpu.sp.equals(spActual))
-    assert(simulador.cpu.pc.equals(pcActual))
-
-  }
+//  "Un lal" should "buscar el valor del tope de la pila y actualizar el pc con ese valor" in {
+//    var set_simuladores = simuladores
+//    var simulador = set_simuladores.simuladorRET
+//    var pcActual = new W16("0004")
+//    var spActual = new W16("FFEF")
+//
+//    simulador.fetch()
+//    var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_SinOperandos]
+//    simulador.decode()
+//    simulador.execute()
+//    // probar que la ejecucion de la instruccion RET funciona    
+//    assert(simulador.cpu.sp.equals(spActual))
+//    assert(simulador.cpu.pc.equals(pcActual))
+//
+//  }
 
 }
