@@ -5,53 +5,64 @@
 
 La funcionalidad del simulador puede caracterizarse mediante las siguientes partes importantes:
 
-Chequeo de sintaxis de los programas escritos en el lenguaje Q
-Ensamblado del código fuente de un programa en su correspondiente código máquina
-Cargado en memoria del código máquina
-Ejecución paso a paso de un programa cargado en memoria
+\begin{itemize}
+\item Chequeo de sintaxis de los programas escritos en el lenguaje Q
+\item Ensamblado del código fuente de un programa en su correspondiente código máquina
+\item Cargado en memoria del código máquina
+\item Ejecución paso a paso de un programa cargado en memoria
+\end{itemize}
 
 \subsection{Chequeo de sintaxis}
 
 El simulador provee al alumno de un editor de texto en el cual escribirá el programa en un lenguaje Qi, que desea cargar en memoria y ejecutar.
-Una vez que el usuario haya terminado la escritura, al momento de cargar el programa, el simulador utilizará un parser para detectar errores de sintaxis, tales como la falta de una coma o un corchete, o la presencia de símbolos que no pertenecen al lenguaje (como por ejemplo signos de pregunta y simbolos matematicos); o bien errores semánticos como la combinación incorrecta de elementos del lenguaje, por ejemplo: modos de direccionamiento mal ubicados.
+Una vez que el usuario haya terminado la escritura, al momento de cargar el programa, el simulador utilizará un parser para detectar errores de sintaxis, tales como la falta de una coma o un corchete, o la presencia de símbolos que no pertenecen al lenguaje (como por ejemplo signos de pregunta y símbolos matemáticos); o bien errores semánticos como la combinación incorrecta de elementos del lenguaje, por ejemplo: modos de direccionamiento mal ubicados.
 El parser solo revisará lo escrito por el alumno y de acuerdo a las gramática del lenguaje, mostrará alguno de los siguientes estados:
 
-OK:: Este mensaje se obtiene cuando no hubo ningún error de sintaxis. Si se da este resultado, es posible continuar con el ensamblado y cargado en memoria.
-
-SyntaxError:: Este mensaje de error se obtiene cuando en alguna línea del programa se detectó algun error de sintaxis o de semántica, como se describió arriba. Cuando ocurre este error se lo acompaña con una descripción lo mas detallada posible para que el alumno detecte donde ocurrió y pueda corregirlo. Un programa con errores no puede ser ensamblado y cargado en memoria.
+\begin{description}
+\item[OK] Este mensaje se obtiene cuando no hubo ningún error de sintaxis. Si se da este resultado, es posible continuar con el ensamblado y cargado en memoria.
+\item[SyntaxError] Este mensaje de error se obtiene cuando en alguna línea del programa se detectó algún error de sintaxis o de semántica, como se describió arriba. Cuando ocurre este error se lo acompaña con una descripción lo mas detallada posible para que el alumno detecte donde ocurrió y pueda corregirlo. Un programa con errores no puede ser ensamblado y cargado en memoria.
+\end{description}
 
 \subsection{Ensamblado}
 
-Una vez que el programa es sintácticamente válido es posible traducir el código fuente del programa en código máquina (representado en cadenas binarias). Para esto se respeta un formato de instrucción que indica cómo se codifica cada operación y los operandos.
+Una vez que el programa es sintácticamente válido es posible traducir el código fuente del programa en código máquina (representado en cadenas binarias). Para esto se respeta un formato de instrucción que indica cómo se codifica cada operación y los operandos. 
+
+\ojo{Mas detalle al respecto de este proceso en la sección de ...}{Poner vínculo a donde se ponen ejemplos de Qi}
 
 \subsection{Cargado en memoria}
 
-Una vez ensamblado, la representación binaria (o código máquina) del programa será cargado en memoria a partir de una ubicación (celda de memoria) que el alumno puede elegir. Esto permite visualizar el contenido de la memoria (con el programa cargado) y el estado de los registros de la CPU. La decodificacion con desensamblado permite al alumno experimentar otros escenarios y efectos laterares, por ejemplo:
+Una vez ensamblado, la representación binaria (o código máquina) del programa será cargado en memoria a partir de una ubicación (celda de memoria) que el alumno puede elegir. Esto permite visualizar el contenido de la memoria (con el programa cargado) y el estado de los registros de la CPU. La decodificación con desensamblado permite al alumno experimentar otros escenarios y efectos laterares,\ojo{por ejemplo}{entre los cuales podemos enumerar}:
 
-Si la ejecución paso a paso exede los límites del programa, pueden tomarse instrucciones de otra rutina y procesarse como una nueva instruccion.
-Si en cambio, se intenta ejecutar el contenido de una celda con datos (y no una instrucción) podrá ocurrir que se encuentre una instrucción invalida (combinacion de modos, codigos, incorrecta) y el alumno verá el mensaje de error pertinente.
-Durante la carga del programa en memoria puede producirse un OutOfMemoryError?, que significa que el programa no entra en la ubicación elegida en memoria ya que ocupa más celdas que las que se encuentran disponibles debajo de la inicial anteriormente elegida. Si por el contrario, no se produce este error, el alumno podrá ver el programa cargado en memoria exitosamente.
+\begin{itemize}
+\item Si la ejecución paso a paso excede los límites del programa, pueden tomarse instrucciones de otra rutina y procesarse como una nueva instruccion.
+\item Si en cambio, se intenta ejecutar el contenido de una celda con datos (y no una instrucción) podrá ocurrir que se encuentre una instrucción invalida (combinacion de modos, codigos, incorrecta) y el alumno verá el mensaje de error pertinente.
+\end{itemize}
+
+\ojo{Durante la carga del programa en memoria puede producirse un OutOfMemoryError?, que significa que el programa no entra en la ubicación elegida en memoria ya que ocupa más celdas que las que se encuentran disponibles debajo de la}{(Hablar de la estructura de la memoria:) Como se mencionó en la sección \ref{caracteristicasQ}, la memoria disponible tiene un tamaño limitado... Por este motivo la alocación en memoria del código máquina puede exceder el espacio disponible a partir de la celda ...} inicial anteriormente elegida. Si por el contrario, no se produce este error, el alumno podrá ver el programa cargado en memoria exitosamente.
 
 \subsection{Ejecución paso a paso}
 
-Se provee la funcionalidad de la ejecución paso a paso ya que se desea que el alumno pueda experimentar y así comprender los pasos del ciclo de ejecución. Además puede ejercitarse situaciones que se denominan "errores conceptuales de programacion", Esto es a lo que llamamos ConceptError?. Por ejemplo:
+Se provee la funcionalidad de la ejecución paso a paso ya que se desea que el alumno pueda experimentar y así comprender los pasos del ciclo de ejecución \ojo{de una instrucción}{}. Además puede ejercitarse situaciones que se denominan ''errores conceptuales de programación'' Esto es a lo que llamamos \ojo{ConceptError?. Por ejemplo:}{Errores conceptuales, entre los cuales es posible mencionar:}
 
-Tomar un dato de un secor de memoria equivocado.
-Que el programa sobrescriba su mismo código máquina.
-Permitir que la ejecución continue una vez terminado el programar cargado en memoria.
+\begin{itemize}
+\item Tomar un dato de un sector de memoria equivocado.
+\item Que el programa sobrescriba su mismo código máquina.
+\item Permitir que la ejecución continue una vez terminado el programar cargado en memoria.
+\item 
+\end{itemize}
+
 El paso a paso que provee el simulador consiste en las siguientes estapas pertenecientes al ciclo de instruccion:
 
-1 - FI (Fetch de instruccion)
+\begin{enumerate}
+\item \textbf{\ojo{FI (Fetch de instruccion)}{Búsqueda de instrucción}:} El alumno podrá visualizar el valor que contiene PC (Program counter) donde se encuentra la dirección de la celda en memoria que contiene la próxima instrucción a ejecutar (por ejemplo, en caso de ser la primer instrucción del programa recién cargado, el pc tendrá la dirección de memoria elegida por el alumno para iniciar el cargado del programa en memoria). El simulador, toma de la memoria el código maquina correspondiente a la instrucción que comienza en esa dirección tomada de PC (una instrucción puede ocupar más de una celda de memoria) y los guarda en el \IR\ (\textit{Instruction Register}). Será observable también para el alumno el incremento del registro PC, tantas como \ojo{}{celdas} ocupe la instrucción actual, lo que conceptualmente es, \ojo{prepararse}{preparar el contexto de ejecución} para tomar la siguiente instrucción.
 
-El alumno podrá visualizar el valor que contiene PC (Program counter) donde se encuentra la dirección de la celda en memoria que contiene la próxima instrucción a ejecutar (por ejemplo, en caso de ser la primer instrucción del programa recién cargado, el pc tendrá la dirección de memoria elegida por el alumno para iniciar el cargado del programa en memoria). El simulador, toma de la memoria el código maquina correspondiente a la instrucción que comienza en esa dirección tomada de PC (una instrucción puede ocupar más de una celda de memoria) y los guarda en el registro IR. (Instruction Register). Será observable también para el alumno el incremento del registro PC, tantas direcciones como ocupe la instrucción actual (Lo que conceptualmente es, perpararse para tomar la siguiente instrucción).
+\item  \textbf{Decodificación:}
+En la decodificación el Interprete\ojo{,se encarga de tomar lo que se encuentra en IR en representación hexadecimal y desensamblado}{se encarga de desensamblar el código máquina (abreviado en hexadecimal) que ya fue ubicado en el \IR} para mostrar el código fuente de la instrucción actual con sus respectivos operandos. Si el programa escrito por el alumno es sintacticamente y conceptualmente correcto, este paso le permite comprobar que la instrucción actual es la que él mismo escribió y no otra, visualizandola en pantalla. En esta etapa se provee también la oportunidad de que el alumno aprecie otros conceptos, tales como \ojo{el anteriormente mencionado ConceptError?}{los errores conceptuales mencionados antes}.
 
-2 - DC Decodificacion
+\item  \textbf{\ojo{EX Execute}{Ejecución}}
+\ojo{La ejecución lleva a cabo}{El execute ejecuta } los efectos de la instrucción y muestra en pantalla los cambios en el estado \ojo{}{de ejecución}: memoria, puertos, registros y flags. Dentro de esta misma etapa se \ojo{encuentra el ST (Store)}{lleva a cabo el almacenamiento de resultados} que, cuando sea necesario, guardará el valor resultante de la operación descripta por la instrucción en el operando destino. Esto cambiará el valor de una celda de memoria o de un registro y será visto en pantalla por el alumno.
+\end{enumerate}
 
-En la decodifación el Interprete, se encarga de tomar lo que se encuentra en IR en representación hexadecimal y desensamblado para mostrar el código fuente de la instrucción actual con sus respectivos operandos. Si el programa escrito por el alumno es sintacticamente y conceptualmente correcto, este paso le permite comprobar que en la instrucción actual es la que el mismo escribió y no otra visualizandola en pantalla. En esta etapa se provee también la oportunidad de que el alumno aprecie otros conceptos, tales como el anteriormente mencionado ConceptError?.
-
-4 - EX Execute
-
-El execute ejecuta los efectos de la instruccion y muestra en pantalla los cambios en el estado (memoria, puertos, registros, flags). Dentro de esta misma etapa se encuentra el ST (Store) que, cuando sea necesario, guardará el valor resultante de la operación descripta por la instruccion en el operando destino. Esto cambiará el valor de una celda de memoria o de un registro y será visto en pantalla por el alumno.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \section{Implementación del simulador}
