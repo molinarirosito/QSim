@@ -3,6 +3,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Dificultades encontradas}
 
+\subsection{Dificultades del dominio}
+Las dificultades del dominio estuvieron relacionadas a la comprensión no solamente del modelo de arquitectura Q si no también a su función didactica, ya que el objetivo del simulador no era solamente la implementación del lenguaje si no también el proveer a los alumnos la capacidad de realizar cosas conceptualmente erroneas, por lo que se requeria una comprensión didactica del problema más alla de la teoria de las arquitecturas Q. 
+
+
+\subsection{Disficultades de diseño}
+En primera instacia se opto por implementar un modelo de objetos que utilizaba un objeto de la clase Programa a lo largo de toda la ejecución (procesaba las instrucciones no leyendo de la matriz memoria, si no, pidiendo la siguiente instruccion al objeto instacia de la clase Programa), sobreviviendo asi las distintas etapas una vez que fue creado y evitando la creación de un objeto cuya responsabilidad sea intrepretar el código máquina alojado en la memoria. Luego, al caer en la cuenta de que un programa no sólo podía modificar su entorno al ser ejecutado (otras celdas de memoria que no ocupen su codigo maquina, celdas de puertos, registros, etc) si no que tambien podría sobreescribir su código maquina (ya sea con ese proposito o sólo por un ConcepError), o bien, que el alumno debía tener la posibilidad de seguir ejecutando más allá del código máquina alojado en memoria o más, inevitablemente se opto por refactorear todo el modelo agregando una clase llamada Interprete cuya responsabilidad es interpretar la siguiente instrucción alojada en memoria para que luego sea ejecutada y descartando el objeto instacia de Programa una vez que este es cargado en memoria con exito.
+
+Tuvieron que ser solicitadas además extenciones al equipo de desarrolladores de Arena para poder realizar la interfaz con dicho framework.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Casos de prueba}
 

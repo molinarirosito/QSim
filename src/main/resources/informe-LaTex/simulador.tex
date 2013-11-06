@@ -3,6 +3,55 @@
 
 \section{Funcionalidad del simulador}
 
+La funcionalidad del simulador puede caracterizarse mediante las siguientes partes importantes:
+
+Chequeo de sintaxis de los programas escritos en el lenguaje Q
+Ensamblado del código fuente de un programa en su correspondiente código máquina
+Cargado en memoria del código máquina
+Ejecución paso a paso de un programa cargado en memoria
+
+\subsection{Chequeo de sintaxis}
+
+El simulador provee al alumno de un editor de texto en el cual escribirá el programa en un lenguaje Qi, que desea cargar en memoria y ejecutar.
+Una vez que el usuario haya terminado la escritura, al momento de cargar el programa, el simulador utilizará un parser para detectar errores de sintaxis, tales como la falta de una coma o un corchete, o la presencia de símbolos que no pertenecen al lenguaje (como por ejemplo signos de pregunta y simbolos matematicos); o bien errores semánticos como la combinación incorrecta de elementos del lenguaje, por ejemplo: modos de direccionamiento mal ubicados.
+El parser solo revisará lo escrito por el alumno y de acuerdo a las gramática del lenguaje, mostrará alguno de los siguientes estados:
+
+OK:: Este mensaje se obtiene cuando no hubo ningún error de sintaxis. Si se da este resultado, es posible continuar con el ensamblado y cargado en memoria.
+
+SyntaxError:: Este mensaje de error se obtiene cuando en alguna línea del programa se detectó algun error de sintaxis o de semántica, como se describió arriba. Cuando ocurre este error se lo acompaña con una descripción lo mas detallada posible para que el alumno detecte donde ocurrió y pueda corregirlo. Un programa con errores no puede ser ensamblado y cargado en memoria.
+
+\subsection{Ensamblado}
+
+Una vez que el programa es sintácticamente válido es posible traducir el código fuente del programa en código máquina (representado en cadenas binarias). Para esto se respeta un formato de instrucción que indica cómo se codifica cada operación y los operandos.
+
+\subsection{Cargado en memoria}
+
+Una vez ensamblado, la representación binaria (o código máquina) del programa será cargado en memoria a partir de una ubicación (celda de memoria) que el alumno puede elegir. Esto permite visualizar el contenido de la memoria (con el programa cargado) y el estado de los registros de la CPU. La decodificacion con desensamblado permite al alumno experimentar otros escenarios y efectos laterares, por ejemplo:
+
+Si la ejecución paso a paso exede los límites del programa, pueden tomarse instrucciones de otra rutina y procesarse como una nueva instruccion.
+Si en cambio, se intenta ejecutar el contenido de una celda con datos (y no una instrucción) podrá ocurrir que se encuentre una instrucción invalida (combinacion de modos, codigos, incorrecta) y el alumno verá el mensaje de error pertinente.
+Durante la carga del programa en memoria puede producirse un OutOfMemoryError?, que significa que el programa no entra en la ubicación elegida en memoria ya que ocupa más celdas que las que se encuentran disponibles debajo de la inicial anteriormente elegida. Si por el contrario, no se produce este error, el alumno podrá ver el programa cargado en memoria exitosamente.
+
+\subsection{Ejecución paso a paso}
+
+Se provee la funcionalidad de la ejecución paso a paso ya que se desea que el alumno pueda experimentar y así comprender los pasos del ciclo de ejecución. Además puede ejercitarse situaciones que se denominan "errores conceptuales de programacion", Esto es a lo que llamamos ConceptError?. Por ejemplo:
+
+Tomar un dato de un secor de memoria equivocado.
+Que el programa sobrescriba su mismo código máquina.
+Permitir que la ejecución continue una vez terminado el programar cargado en memoria.
+El paso a paso que provee el simulador consiste en las siguientes estapas pertenecientes al ciclo de instruccion:
+
+1 - FI (Fetch de instruccion)
+
+El alumno podrá visualizar el valor que contiene PC (Program counter) donde se encuentra la dirección de la celda en memoria que contiene la próxima instrucción a ejecutar (por ejemplo, en caso de ser la primer instrucción del programa recién cargado, el pc tendrá la dirección de memoria elegida por el alumno para iniciar el cargado del programa en memoria). El simulador, toma de la memoria el código maquina correspondiente a la instrucción que comienza en esa dirección tomada de PC (una instrucción puede ocupar más de una celda de memoria) y los guarda en el registro IR. (Instruction Register). Será observable también para el alumno el incremento del registro PC, tantas direcciones como ocupe la instrucción actual (Lo que conceptualmente es, perpararse para tomar la siguiente instrucción).
+
+2 - DC Decodificacion
+
+En la decodifación el Interprete, se encarga de tomar lo que se encuentra en IR en representación hexadecimal y desensamblado para mostrar el código fuente de la instrucción actual con sus respectivos operandos. Si el programa escrito por el alumno es sintacticamente y conceptualmente correcto, este paso le permite comprobar que en la instrucción actual es la que el mismo escribió y no otra visualizandola en pantalla. En esta etapa se provee también la oportunidad de que el alumno aprecie otros conceptos, tales como el anteriormente mencionado ConceptError?.
+
+4 - EX Execute
+
+El execute ejecuta los efectos de la instruccion y muestra en pantalla los cambios en el estado (memoria, puertos, registros, flags). Dentro de esta misma etapa se encuentra el ST (Store) que, cuando sea necesario, guardará el valor resultante de la operación descripta por la instruccion en el operando destino. Esto cambiará el valor de una celda de memoria o de un registro y será visto en pantalla por el alumno.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \section{Implementación del simulador}
