@@ -97,11 +97,11 @@ El formato de instruccion de un operando origen es el siguiente:
 (4 bits)      (000000)        (6 bits)    (16 bits)
 
 \begin{enumerate}
-\item \textbf{CALL}
+\item \textbf{CALL origen}
 Código de operación: 1011
 El efecto del CALL es guardar la direccion de memoria en la celda de la dirección que se encuentra guardadad en el SP (Stack pointer) aumentar el SP y guardar en el PC (Program Counter) el dato que se encuentra guardado en el operando origen ya que describe el llamado a una subrutina que comienza en la celda de memoria cuya direccion esta guardada en el operando origen.
 
-\item \textbf{JMP}
+\item \textbf{JMP origen}
 Código de operación: 0110
 El efecto del JMP es cambiar el PC (Program Counter) por el dato que esta guardado en el operando origen ya que esta operación describe el salto a otra parte de la memoria para continuar con la ejecución del programa.
 
@@ -109,6 +109,18 @@ El efecto del JMP es cambiar el PC (Program Counter) por el dato que esta guarda
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de 1 operando destino}
+
+El formato de instruccion de un operando destino es el siguiente:
+
+  CodOp   +  Modo origen  +  relleno  +  Origen
+(4 bits)      (6 bits)      (000000)    (16 bits)
+
+\begin{enumerate}
+\item \textbf{NOT destino}
+Código de operación: 1001
+Esta instrucción describe la operación logica "negación" bit a bit en el datos del operando destino. El resultado de la ejecución de esta operación es guardado en la misma celda o registro de donde es leído el dato inicialmente.
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones sin operandos}
 
@@ -127,6 +139,60 @@ El efecto del ret es cambiar el pc por el dato que esta guardado en la celda de 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de salto condicional}
+
+El formato de instruccion de salto condicional es el siguiente es el siguiente:
+
+ prefijo +   CodOp   +  desplazamiento 
+ (1111)     (4 bits)     (8 bits)
+
+El efecto de cualquier salto condicional es aumentar el PC (Program Counter) en la cantidad de celdas que indique el desplazamiento si sólo la condición que cada salto condicional tiene da como resultado 1, lo cual es interpretado como verdadero.
+
+\begin{enumerate}
+\item \textbf{JE desplazamiento}
+Código de operación: 0001
+La condición del salto es que el flag \textbf{Z} (Cero) sea 1, es decir la ultima operación matemática dió como resultado el número cero.
+
+\item \textbf{JNE desplazamiento}
+Código de operación: 1001
+La condición del salto es que el flag \textbf{Z} (Cero) sea 0, es decir la ultima operación matemática no dió como resultado el número cero.
+
+\item \textbf{JLE desplazamiento}
+Código de operación: 0010
+La condición del salto es el resultado de la siguiente operación lógica \textbf{Z OR ( N XOR V )}, es decir la ultima operación matemática es menor o igual con signo.
+
+\item \textbf{JG desplazamiento}
+Código de operación: 1010
+La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (Z OR ( N XOR V ))}, es decir la ultima operación matemática es mayor con signo.
+
+\item \textbf{JL desplazamiento}
+Código de operación: 0011
+La condición del salto es el resultado de la siguiente operación lógica \textbf{N XOR V}, es decir la ultima operación matemática es menor con signo.
+
+\item \textbf{JGE desplazamiento}
+Código de operación: 1011
+La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (N XOR V)}, es decir la ultima operación matemática es mayor o igual con signo.
+
+\item \textbf{JLEU desplazamiento}
+Código de operación: 0100
+La condición del salto es el resultado de la siguiente operación lógica \textbf{C OR Z}, es decir la ultima operación matemática es menor o igual sin signo.
+
+\item \textbf{JGU desplazamiento}
+Código de operación: 1100
+La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (C OR Z)}, es decir la ultima operación matemática es mayor sin signo.
+
+\item \textbf{JCS desplazamiento}
+Código de operación: 0101
+La condición del salto es que el flag \textbf{C} sea 1, es decir la ultima operación matemática es menor sin signo.
+
+\item \textbf{JNEG desplazamiento}
+Código de operación: 0101
+La condición del salto es que el flag \textbf{N} sea 1, es decir si el último resultado de una operación dio negativo.
+
+\item \textbf{JVS desplazamiento}
+Código de operación: 0111
+La condición del salto es que el flag \textbf{V} sea 1, es decir si el último resultado de una operación dio overflow.
+
+\end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
