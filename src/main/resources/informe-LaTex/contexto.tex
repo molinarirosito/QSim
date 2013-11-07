@@ -4,6 +4,38 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conceptos importantes}
 
+\subsection{Enfoque de Von Newmann}
+Este enfoque generaliza la organización de las computadoras distinguiendo en tres partes interconectadas: La CPU (con la unidad aritmético-lógica o ALU y la unidad de control) la memoria, modulo de entrada/salida (con un bus de sistema que proporciona un medio de transporte de los datos entre las distintas partes). Con este modelo surge el concepto de programa almacenado contiene un conjunto de instrucciones que podían ser almacenadas en memoria, o sea, un programa que detalla la computación del mismo. El programa se codifica de cierta manera para que pueda ser almacenadoy posteriormente ejecutado quizas muchas veces. Ademas puede ser 'recordado' de esta manera se separa en el mecanismo de ejecución el hadware de la logica de computo o instrucciones (software).
+Este tipo del diseño que permite un programa almacenado también da la posibilidad de que los programas sean modificados ellos mismos durante su ejecución, por ejemplo un programa podría modificar o incrementar las direcciones de memoria que tenga en algunas instrucciones y luego volver a ejecutar dichas instrucciones con fin de procesar celdas diferentes de memoria. Esta caracteistica es potente y a la vez peligrosa pues las modificaciones en los programas podía ser algo perjudicial, por accidente o por diseño.
+
+\subsection{Organización de la computadora}
+
+La CPU (Unidad Central de Procesamiento del inglés: Central Processing Unit), es el componente principal y el encargado ejecutar los programas y procesar los datos. La CPU contiene otros componentes de importancia tales como la Unidad de Control, PC, IR, Registros y la ALU.
+
+PC: El contador de programa (en inglés Program Counter o PC) es un registro que indica la posición de memoria donde estará la siguiente instrucción que debe ejecutarse. Este registro se incrementa luego de cada ciclo de instrucción.
+
+IR: Este registro contiene la instrucción actual una vez que la misma es leída de memoria para luego decodificarla y ejecutarla.
+
+Registros: son elementos de una memoria de alta velocidad y poca capacidad que permite guardar y acceder a valores generalmente muy usados, por ejemplo, operandos en operaciones matemáticas. Hay diferentes tipos de registros, algunos pueden guardar tanto datos como direcciones de memoria.
+
+ALU: es la unidad aritmético lógica, recibe su nombre de las siglas en inglés de arithmetic logic unit. La ALU es un circuito digital que lleva a cabo operaciones aritméticas (suma, resta, multiplicación, división) y las operaciones lógicas (Negacion, Y, O, O exclusivo), entre dos cadenas binarias que son interpretadas como números. 
+
+Unidad de control: La UC dirige el ciclo de ejecución de cada instrucción, pidiendo la lectura de celdas de memoria donde esta alojada la instruccion, decodificando la instruccion y ejecutandola luego en colaboración con los otros componenetes del sistema: si es una operación lógica o aritmetica le ordena a la ALU su ejecución, si es de movimiento de datos colabora con el dispositivo de Entrada/Salida.
+
+Memoria: es un conjunto de celdas numeradas. La numeración de cada celda la identifica inequívocamente por lo cual a esta numeración se le llama direccion. En cada celda de la memoria se pueden almacenar datos o instrucciones en forma de cadenas binarias. La información puede leerse y modificarse. En la memoria es donde se alojan los programas que luego serán ejecutados.
+
+Buses: son los encargados de transferir los datos entre los componentes de la computadora.La unidad de control al pedir un contenido de una direccion de memoria lo hace a traves del bus, lo mismo cuando desea escribir en memoria.
+
+\subsection{Ejecución de un programa}
+
+La función de una computadora es la ejecución de programas. Los programas se encuentran almacenados en memoria y consisten en una sucesión de instrucciones que posee orden. La CPU es quien se encarga de ejecutar dichas instrucciones a través de un ciclo denominado ciclo instrucciones. Para ser almacenadas en memoria, las instrucciones deben codificarse en cadenas binarias (secuencias de ceros y unos) que no son legibles para las personas pero que la UC puede interpretar y traducir en acciones. Por eso para saber de qué instrucción se trata, y cuales son los valores o celdas de memoria que debería consultar o usar, la cpu utiliza la UC, que tomando bit por bit interpreta la cadena binaria y verificando los códigos únicos de cada instrucción o modos de direccionamiento, sabe qué instrucción y con qué valores debería ejecutar. La ejecución de instrucciones se divide en tres etapas importantes, fech - decode - execute.
+
+Al principio de cada ciclo de ejecución, durante el fech de instrucción la CPU busca una instrucción que se encuentra en alguna parte de la memoria. Para saber donde esta dicha instrucción la CPU contiene un registro llamado contador de programa (PC), que tiene la dirección de la próxima instrucción a buscar. La CPU a través del bus lee la instrucción, y luego incrementa el valor contenido en PC; así podrá buscar la siguiente instrucción en la secuencia luego de terminar con la actual. La instrucción leida que está en la forma de cadena binaria se carga dentro de otro registro de la CPU, llamado registro de instrucción (IR).
+
+Durante la decodificacion la UC determina que significa la cadena binaria.
+
+Finalmente al saber de qué instrucción se trata la CPU ejecuta la instrucción, es decir, realiza lo que la instrucción dice que debe hacer con sus argumentos, modificando la memoria o los registros como resultado final y el ciclo vuelve a comenzar hasta que el programa termine.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Arquitecturas Q}
 
