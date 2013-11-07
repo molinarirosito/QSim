@@ -48,6 +48,40 @@ Finalmente al saber de qué instrucción se trata la CPU ejecuta la instrucción
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de 2 operandos}
 
+\begin{enumerate}
+\item \textbf{MUL destino, origen}
+Código de operación: 0000
+Esta instrucción describe la multiplicación entre los datos de los dos operandos. Esta operación es la única que cuyo resultado puede ser 32 bits, que son dos celdas de memoria en hexadecimal, por lo que los primeros 16 bits, es decir, la primer mitad, es guardada en el registro R7 y la segunda en el operando destino.
+ 
+\item \textbf{ADD destino, origen}
+Código de operación: 0010
+Esta instrucción describe la suma entre los datos de los dos operandos. El resultado de la ejecución de la suma es guardado en el operando destino.
+
+\item \textbf{SUB destino, origen}
+Código de operación: 0011
+Esta instrucción describe la resta entre los datos de los dos operandos. El resultado de la ejecución de dicha resta es guardado en el operando destino.
+
+\item \textbf{DIV destino, origen}
+Código de operación: 0111
+Esta instrucción describe la división entre el dato en el operando destino como dividendo y el dato en el operando origen como divisor. El resultado de la ejecución de la división es guardado en el operando destino.
+
+\item \textbf{MOV destino, origen}
+Código de operación: 0001
+Esta instrucción describe la copia de datos del dato alojado en el operando origen al operando destino. El resultado de la ejecución del MOV es el dato guardado en el operando origen ahora también guardado en el operando destino.
+
+\item \textbf{AND destino, origen}
+Código de operación: 0100
+Esta instrucción describe la operación logica "y" bit a bit entre los datos de los dos operandos. El resultado de la ejecución de esta operación es guardado en el operando destino.
+
+\item \textbf{CMP destino, origen}
+Código de operación: 0110
+Esta instrucción describe la comparación bit a bit entre los datos de los dos operandos. El resultado de esta operación es solamente la actualización de flags en la cpu.
+
+\item \textbf{OR destino, origen}
+Código de operación: 0101
+Esta instrucción describe la operación logica "o" bit a bit entre los datos de los dos operandos. El resultado de la ejecución de esta operación es guardado en el operando destino.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de 1 operando origen}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,6 +103,11 @@ Finalmente al saber de qué instrucción se trata la CPU ejecuta la instrucción
 \subsubsection{Q3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Q4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Q5}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Q6}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Estado del arte}
