@@ -72,16 +72,16 @@ Ejemplos:
 \textbf{[[0x000F]]} representa el modo de direccionamiento indirecto cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria que identifica uniquevocamente a la dirección \textbf{0x000F}, es decir 15.
 
 \item \textbf{Registro}
-Codigo de modo de direccionamiento: 100xxx 
-Donde "xxx" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.
+Codigo de modo de direccionamiento: 100rrr 
+Donde "rrr" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.
 
 Ejemplos:
 \textbf{R0} representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R0}.
 \textbf{R7} representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R7}.
 
 \item \textbf{RegistroIndirecto}
-Codigo de modo de direccionamiento: 110xxx 
-Donde "xxx" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.
+Codigo de modo de direccionamiento: 110rrr 
+Donde "rrr" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.
 
 Ejemplos:
 \textbf{[R0]} representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R0}.
@@ -245,18 +245,112 @@ La condición del salto es que el flag \textbf{V} sea 1, es decir si el último 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Versiones de la arquitectura}
 
+Las versiones de la arquitectura QUARQ estan pensadas para incorporar funcionalidades de manera que la curva de aprendizaje sea adecuada para los alumnos, siendo paulatina e incremental, es decir, cada arquitectura Qi agrega más funcionalidad (ya sean instrucciones nuevas o modos de direccionamiento) a las arquitecturas Qi anteriores.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Q1}
+
+\textbf{Modos de direccionamiento}
+\begin{enumerate}
+\item Inmediato
+\item Registro
+\end{enumerate}
+
+\textbf{Instrucciones}
+\begin{enumerate}
+\item MOV
+\item SUB 
+\item DIV 
+\item ADD 
+\item MUL
+\end{enumerate}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Q2}
+
+\textbf{Modos de direccionamiento}
+\begin{enumerate}
+\item Modos de direccionamiento \textbf{Q1}
+\item Directo 
+\end{enumerate}
+
+\textbf{Instrucciones}
+\begin{enumerate}
+\item Instrucciones \textbf{Q1}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Q3}
+
+\textbf{Modos de direccionamiento}
+\begin{enumerate}
+\item Modos de direccionamiento \textbf{Q2}
+\end{enumerate}
+
+\textbf{Instrucciones}
+\begin{enumerate}
+\item Instrucciones \textbf{Q2}
+\item CALL
+\item RET
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Q4}
+
+\textbf{Modos de direccionamiento}
+\begin{enumerate}
+\item Modos de direccionamiento \textbf{Q3}
+\end{enumerate}
+
+\textbf{Instrucciones}
+\begin{enumerate}
+\item Instrucciones \textbf{Q3}
+\item CMP
+\item JMP
+\item JE 
+\item JNE 
+\item JLE 
+\item JG 
+\item JL 
+\item JGE 
+\item JLEU 
+\item JGU 
+\item JCS 
+\item JNEG 
+\item JVS
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Q5}
+
+\textbf{Modos de direccionamiento}
+\begin{enumerate}
+\item Modos de direccionamiento \textbf{Q4}
+\item Idirecto
+\item RegistroIdirecto
+\end{enumerate}
+
+\textbf{Instrucciones}
+\begin{enumerate}
+\item Instrucciones \textbf{Q4}
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Q6}
+
+\textbf{Modos de direccionamiento}
+\begin{enumerate}
+\item Modos de direccionamiento \textbf{Q5}
+\end{enumerate}
+
+\textbf{Instrucciones}
+\begin{enumerate}
+\item Instrucciones \textbf{Q5}
+\item AND
+\item OR
+\item NOT
+\end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
