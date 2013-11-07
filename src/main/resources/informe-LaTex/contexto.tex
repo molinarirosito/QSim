@@ -43,6 +43,54 @@ Finalmente al saber de qué instrucción se trata la CPU ejecuta la instrucción
 \subsection{Características generales} \label{caracteristicasQ}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Repertorio de modos de direccionamiento}
+
+\begin{enumerate}
+
+\item \textbf{Inmediato}
+Codigo de modo de direccionamiento: 000000
+Este modo de direccionamiento es un valor que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.
+
+Ejemplos:
+\textbf{0x0000} representa el modo de direccionamiento inmediato cuyo valor es cero.
+\textbf{0x000F} representa el modo de direccionamiento inmediato cuyo valor es 15.
+
+\item \textbf{Directo}
+Codigo de modo de direccionamiento: 001000
+Este modo de direccionamiento representa una direccion de memoria o de puertos que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.
+
+Ejemplos:
+\textbf{[0x0000]} representa el modo de direccionamiento directo cuyo valor se encuentra en la celda de memoria que identifica uniquevocamente a la dirección \textbf{0x0000}, es decir 0.
+\textbf{[0x000F]} representa el modo de direccionamiento directo cuyo valor se encuentra en la celda de memoria que identifica uniquevocamente a la dirección \textbf{0x000F}, es decir 15.
+
+\item \textbf{Indirecto}
+Codigo de modo de direccionamiento: 011000
+Este modo de direccionamiento representa una direccion de memoria o de puertos que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.
+
+Ejemplos:
+\textbf{[[0x0000]]} representa el modo de direccionamiento indirecto cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria que identifica uniquevocamente a la dirección \textbf{0x0000}, es decir 0.
+\textbf{[[0x000F]]} representa el modo de direccionamiento indirecto cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria que identifica uniquevocamente a la dirección \textbf{0x000F}, es decir 15.
+
+\item \textbf{Registro}
+Codigo de modo de direccionamiento: 100xxx 
+Donde "xxx" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.
+
+Ejemplos:
+\textbf{R0} representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R0}.
+\textbf{R7} representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R7}.
+
+\item \textbf{RegistroIndirecto}
+Codigo de modo de direccionamiento: 110xxx 
+Donde "xxx" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.
+
+Ejemplos:
+\textbf{[R0]} representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R0}.
+\textbf{[R7]} representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R7}.
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Repertorio de instrucciones}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,7 +152,6 @@ El efecto del CALL es guardar la direccion de memoria en la celda de la direcci�
 \item \textbf{JMP origen}
 Código de operación: 0110
 El efecto del JMP es cambiar el PC (Program Counter) por el dato que esta guardado en el operando origen ya que esta operación describe el salto a otra parte de la memoria para continuar con la ejecución del programa.
-
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
