@@ -1,4 +1,3 @@
-
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{amsmath}
@@ -19,6 +18,8 @@
 
 \newcommand{\IR}{registro IR}
 \newcommand{\UC}{Unidad de Control}
+\newcommand{\ALU}{Unidad Aritmético-Lógica}
+\newcommand{\PC}{\textit{Program Counter}}
 
 
 \newcommand{\ojo}[2]{{\large\verde{#1}}\footnote{#2}}
@@ -28,3 +29,10 @@
 \newcommand{\rojo}[1]{{\color{red}#1}}
 \newcommand{\verde}[1]{{\color{green}#1}}
 \newcommand{\fucsia}[1]{{\color{fucsia}#1}}
+
+\newcommand{\graf}[3][\textwidth]{
+\begin{figure}[h]
+\includegraphics[width=#1]{#2}
+\caption{#3}
+\label{#2}
+\end{figure}}
