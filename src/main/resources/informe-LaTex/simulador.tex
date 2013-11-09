@@ -119,9 +119,19 @@ Que devuelve la representación en string como codigo fuente, por ejemplo la rep
 Retorna el string que representa al código único de modo de direccionamiento, por el ejemplo, el código de modo de direccionamiento del R7 es 100111.
 \item  \textbf{getValorString}
 Retorna el string que representa al dato que posee el modo de direccionamiento. En el caso de un Inmediato que sea FF56, devolvera el string "FF56", y en el caso de cualquier registro, retornara el valor que represente su W16.
+\end{itemize}
+Los modos de direccionamiento diferentes a Inmediato y Registro, conocen en vez de un W16 otro modo de direccionamiento según corresponda:
+\begin{itemize}
+\item RegistroIndirecto conoce un a instancia de Registro.
+\item Directo conoce conoce un a instancia de Inmediato.
+\item Indirecto conoce conoce un a instancia de Directo.
+\end{itemize}
+Esto se implemento de esta manera para que el leer datos de memoria, puertos o registros, o guardarlos en los mismos sea más sencillo ya que se delega en el modo de direccionamiento que conoce.
+
+La clase Etiqueta representa la etiqueta creada por el alumno cuando realiza el programa. Cuando el mismo es cargado en memoria, según cual sea la celda de inicio y cuanto ocupen las instruciones, se calcula la dirección de memoria que representa la etiqueta y luego se descarta reemplazandola por un modo de direccionamiento Inmediato.
 
 La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, representa el dato que es guardado en memoria. Tiene la responsabilidad de incrementarse, decrementarse, sumar una entero, devolver su representación binria y su valor en entero.
-\end{itemize}
+
 
 \graf{ModoDireccionamiento}{Diagrama de clase de la \ModoDireccionamiento}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
