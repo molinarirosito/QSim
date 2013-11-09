@@ -23,6 +23,8 @@ Tuvieron que ser solicitadas además extensiones al equipo de desarrolladores de
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Casos de prueba}
 
+\item \textbf{Descripcion de cada Caso de Prueba}
+
 \subsection{Chequeo de sintaxis en la distintas Qi}
 
 Para chequear la sintaxis de cada \textbf{Arquitectura Q}, primero escribimos un programa Qi en un archivo con extension .qsim luego este archivo lo recibe el objeto Parser que se encargara de chequear la sintaxis. 
@@ -41,10 +43,11 @@ En este caso escribimos un programa Qi con errores de sintaxis para ver como rea
 Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepcion te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepcion y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
 \end{enumerate}
 
-\subsection{Ensamblado Objetos \longrightarrow Codigo Maquina}
+\subsection{Ensamblado (Objetos --+ Codigo Maquina)}
 jajajjajja
-\subsection{Decodificacion Codigo Maquina --> Objetos (Iterprete)}
-aakkaakkaka
+\subsection{Decodificacion Codigo Maquina --+ Objetos (Iterprete)}
+Para poder verificar que la decodificacion 
+
 \subsection{Ejecucion}
 alallalalala
 
