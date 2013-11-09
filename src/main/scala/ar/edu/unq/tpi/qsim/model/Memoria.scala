@@ -132,7 +132,14 @@ case class Memoria(var tamanio: Int) {
    * Pone un valor (W16) en la celda que se le indica por parametro.
    * @param Int, W16
    */
-  def setValorC(num_celda: Int, dato: W16) = celdas(num_celda).getW16.:=(dato.hex)
+  def setValorC(num_celda: Int, dato: W16) = {
+    if (num_celda < Memoria.this.tamanioMemoria()) {
+      celdas(num_celda).getW16.:=(dato.hex)
+    } else {
+      throw new CeldaFueraDeMemoriaException("La memoria no tiene ese numero de celda")
+    }
+    }
+    
 
   /**
    * Pone un valor (W16) en la celda que se le indica por parametro en valor hexadecimal.
