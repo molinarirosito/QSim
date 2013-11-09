@@ -89,7 +89,8 @@ Como se observa en la figura \ref{ALU} tiente toda la responsabilidad en la ejec
 \graf{ALU}{Diagrama de clase de la \ALU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida conoce a 
+Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la modificación de una celda o el leer un dato. Para conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
+Ambas clases conocen muchas intancias de la clase Celda, y cada Celda a su vez conoce un dato: una instancia del W16, que representa a los datos guardados en memoria o en los puertos.  
 
 \graf{BusEntradaSalida_Memoria_CeldasPuertos}{Diagrama de clase del la \BusEntradaSalida_Memoria_CeldasPuertos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
