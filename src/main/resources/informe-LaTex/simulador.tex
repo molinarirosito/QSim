@@ -90,27 +90,32 @@ Elegimos git como repositorio externo para sincronizar nuestro codigo ya que pro
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ (arq OO)}
 
+\subsubsection{ALU}
 Como se observa en la figura \ref{ALU} la ALU tiene toda la responsabilidad en la ejecución de operaciones matematicas y logicas, además del analisis sobre los flags luego de cada operación. 
 
 \graf{ALU}{Diagrama de clase de la \ALU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Bus de entrada y salida, memoria y puertos}
 Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la modificación de una celda o el leer un dato. Para ello conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
 Ambas clases conocen muchas intancias de la clase Celda, y cada Celda a su vez conoce un dato: una instancia del W16, que representa a los datos guardados en memoria o en los puertos.  
 
 \graf{BusEntradaSalida_Memoria_CeldasPuertos}{Diagrama de clase del la \BusEntradaSalida_Memoria_CeldasPuertos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{CPU}
 Como se observa en la figura \ref{CPU}, la CPU conoce a la ALU, contiene los registros IR y PC, y los flags (V,Z,C,N) y los ocho registros (R0...R7). La responsabilidad de la CPU es actualizar los flags, los registros, actualizar el PC y el IR, y ser la conexión con la ALU.
 
 \graf{CPU}{Diagrama de clase de la \CPU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{Interprete} el Interprete tiene la entera responsabilidad de recibir los datos leídos desde, una celda de memoria hasta tres celdas, y bit a bit, según los códigos de operación y de modo de direccionamiento saber de que instrucción se trata y cuales son sus operandos si es que los tiene y devolver el objeto que la representa. Se ocupa del decode de la instrucción.
+\subsubsection{Interprete}
+Como se observa en la figura \ref{Interprete} el Interprete es un singleton tiene la entera responsabilidad de recibir los datos leídos desde, una celda de memoria hasta tres celdas, y bit a bit, según los códigos de operación y de modo de direccionamiento saber de que instrucción se trata y cuales son sus operandos si es que los tiene y devolver el objeto que la representa. Se ocupa del decode de la instrucción.
 
 \graf{Interprete}{Diagrama de clase de la \Interprete}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Modos de direccionamiento y W16}
 Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del trait ModoDireccionamiento, donde se encuentran declarados mensajes necesarios para majear todas las subclases poliformicamente. Entre los cuales se encuentran los mensajes: 
 \begin{itemize}
 \item  \textbf{representacionString}
@@ -136,10 +141,35 @@ La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, represen
 \graf{ModoDireccionamiento}{Diagrama de clase de la \ModoDireccionamiento}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Instrucciones}
+Como se observa en la figura \ref{Instruccion} las Instrucciones estan modeladas en jerarquias que se dividen en:
+
+\begin{itemize}
+\item Un operando.
+\item Dos operandos.
+\item Sin operandos.
+\item JumpConducional.
+\end{itemize}
+
+\graf{Instruccion}{Diagrama de clase de la \Instruccion}
+
+\subsubsubsection{Instrucciones de un operando}
+
+Como se observa en la figura \ref{Instruccion} las Instrucciones estan modeladas en jerarquias que se dividen en:
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Programa}
+
 Como se observa en la figura \ref{Programa} la clase Programa conoce un grupo de Instrucciones (las instrucciones que lo componen). Las instancias son creadas por el parser, luego se calculan las etiquetas (si es que las tiene) y finalmente cuando es cargado en memoria la instancia de programa es desechada ya que no vuelve a usarse en ningún momento de la ejecución.
 
 \graf{Programa}{Diagrama de clase de la \Programa}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Simulador}
 
 Como se observa en la figura \ref{simulador} la clase Simulador conoce a una instancia de CPU, a una instancia de BusEntradaSalida y a una intancia de Instruccion que es la instruccion que se esta ejecutando en ese momento.
 La clase Simulador tiene la responsabilidad de obtener el codigo maquina a traves del Interprete de la siguiente instrucción (fech y decode), calcular las etiquetas de un programa, cargar el programa en memoria, asi mismo, los datos en registros,  ejecutar las instrucciones o delegar su ejecución a la ALU que conoce a traves de la CPU según corresponda (realizar el execute), y guardar datos en memoria o registros (Store).
