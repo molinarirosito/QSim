@@ -90,12 +90,12 @@ Elegimos git como repositorio externo para sincronizar nuestro codigo ya que pro
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ (arq OO)}
 
-Como se observa en la figura \ref{ALU} tiente toda la responsabilidad en la ejecución de operaciones matematicas y logicas, además del analisis sobre los flags luego de cada operación. 
+Como se observa en la figura \ref{ALU} la ALU tiene toda la responsabilidad en la ejecución de operaciones matematicas y logicas, además del analisis sobre los flags luego de cada operación. 
 
 \graf{ALU}{Diagrama de clase de la \ALU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la modificación de una celda o el leer un dato. Para conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
+Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la modificación de una celda o el leer un dato. Para ello conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
 Ambas clases conocen muchas intancias de la clase Celda, y cada Celda a su vez conoce un dato: una instancia del W16, que representa a los datos guardados en memoria o en los puertos.  
 
 \graf{BusEntradaSalida_Memoria_CeldasPuertos}{Diagrama de clase del la \BusEntradaSalida_Memoria_CeldasPuertos}
@@ -134,6 +134,18 @@ La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, represen
 
 
 \graf{ModoDireccionamiento}{Diagrama de clase de la \ModoDireccionamiento}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Como se observa en la figura \ref{Programa} la clase Programa conoce un grupo de Instrucciones (las instrucciones que lo componen). Las instancias son creadas por el parser, luego se calculan las etiquetas (si es que las tiene) y finalmente cuando es cargado en memoria la instancia de programa es desechada ya que no vuelve a usarse en ningún momento de la ejecución.
+
+\graf{Programa}{Diagrama de clase de la \Programa}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Como se observa en la figura \ref{simulador} la clase Simulador conoce a una instancia de CPU, a una instancia de BusEntradaSalida y a una intancia de Instruccion que es la instruccion que se esta ejecutando en ese momento.
+La clase Simulador tiene la responsabilidad de obtener el codigo maquina a traves del Interprete de la siguiente instrucción (fech y decode), calcular las etiquetas de un programa, cargar el programa en memoria, asi mismo, los datos en registros,  ejecutar las instrucciones o delegar su ejecución a la ALU que conoce a traves de la CPU según corresponda (realizar el execute), y guardar datos en memoria o registros (Store).
+Es la clase principal del modelo y la encargada de coordinar la ejecución del programa paso a paso. 
+
+\graf{simulador}{Diagrama de clase de la \Simulador}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Como se observa en la figura \ref{}
