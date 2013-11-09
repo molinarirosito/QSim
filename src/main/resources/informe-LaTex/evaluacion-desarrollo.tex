@@ -25,5 +25,20 @@ Tuvieron que ser solicitadas además extensiones al equipo de desarrolladores de
 
 \subsection{Chequeo de sintaxis en la distintas Qi}
 
+Para chequear la sintaxis de cada \textbf{Arquitectura Q}, primero escribimos un programa Qi en un archivo con extension .qsim luego este archivo lo recibe el objeto Parser que se encargara de chequear la sintaxis. 
+Para eso realizamos dos casos de prueba por cada Qi:
+\begin{enumerate}
+\item \textbf{Chequear programa Qi valido}
+
+Agarramos el programa Qi valido y se lo pasamos al Parser, cuando termina de chequear devuelve un resultado, como es de esperar devuelte un objeto programa con la lista de instrucciones. Tomamos ese resultado y como ultimo paso comparamos si el programa resultado es igual al programa esperado.
+
+\textit{ (esto va en nota al pie)programa Qi valido = Es un programa en cualquier arquitectura Q escrito sintaticamente correcto.}
+
+\item \textbf{Chequear programa Qi es invalido} 
+
+En este caso escribimos un programa Qi con errores de sintaxis para ver como reacciona el parser.
+
+Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepcion te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepcion y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
+\end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Ejemplos de uso}
