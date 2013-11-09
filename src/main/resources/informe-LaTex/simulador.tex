@@ -151,13 +151,34 @@ Como se observa en la figura \ref{Instruccion} las Instrucciones estan modeladas
 \item JumpConducional.
 \end{itemize}
 
+Se realizo dicha jerarquia para permitir la fácil agregación de nuevas instrucciones siendo subclases de la clase que corresponda ya que comparten comportamiento tal como manera de mostrarse y de codificarse.
+
 \graf{Instruccion}{Diagrama de clase de la \Instruccion}
+
+\subsubsubsection{Instrucciones sin operandos}
+
+Como se observa en la figura \ref{Instruccion_SinOperandos} la unica Instruccion sin operandos implementada es la Instruccion RET, a pesar de esto, se eligio hacer una jerarquia para que luego se facilite la inserción al modelo de nuevas instrucciones sin operandos.
+
+\graf{Instruccion_SinOperandos}{Diagrama de clase de la \Instruccion_SinOperandos}
 
 \subsubsubsection{Instrucciones de un operando}
 
-Como se observa en la figura \ref{Instruccion} las Instrucciones estan modeladas en jerarquias que se dividen en:
+Como se observa en la figura \ref{Instruccion_UnOperando} y concordando en lo mencionado sobre las Instrucciones anteriormente, puede haber dos tipos de instrucciones de un operando:
 
+\begin{itemize}
+\item Un operando origen.
+\item Un operando destino.
+\end{itemize}
 
+Ambas clases de instrucciones tienen un solo operando. La diferencia entre ellas es la logica de ejecución y la manera en la que se ensamblan y desensamblan ya que sus formato de instruccion difiere en donde esta colocado el relleno.
+
+\graf{Instruccion_UnOperando}{Diagrama de clase de la \Instruccion_UnOperando}
+
+\subsubsubsection{Instrucciones de dos operandos}
+
+Como se observa en la figura \ref{Instruccion_DosOperandos} la jerearquia de clases de instrucciones de dos operandos es la más amplia por tener mayor cantidad de instrucciones. Todas comparten la manera de decodificacion e interpretación, además de la logica de impresión.
+
+\graf{Instruccion_DosOperandos}{Diagrama de clase de la \Instruccion_DosOperandos}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
