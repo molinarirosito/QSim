@@ -100,19 +100,29 @@ Ambas clases conocen muchas intancias de la clase Celda, y cada Celda a su vez c
 \graf{BusEntradaSalida_Memoria_CeldasPuertos}{Diagrama de clase del la \BusEntradaSalida_Memoria_CeldasPuertos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+Como se observa en la figura \ref{CPU}, la CPU conoce a la ALU, contiene los registros IR y PC, y los flags (V,Z,C,N) y los ocho registros (R0...R7). La responsabilidad de la CPU es actualizar los flags, los registros, actualizar el PC y el IR, y ser la conexión con la ALU.
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+\graf{CPU}{Diagrama de clase de la \CPU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+Como se observa en la figura \ref{Interprete} el Interprete tiene la entera responsabilidad de recibir los datos leídos desde, una celda de memoria hasta tres celdas, y bit a bit, según los códigos de operación y de modo de direccionamiento saber de que instrucción se trata y cuales son sus operandos si es que los tiene y devolver el objeto que la representa. Se ocupa del decode de la instrucción.
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+\graf{Interprete}{Diagrama de clase de la \Interprete}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del trait ModoDireccionamiento, donde se encuentran declarados mensajes necesarios para majear todas las subclases poliformicamente. Entre los cuales se encuentran los mensajes: 
+\begin{itemize}
+\item  \textbf{representacionString}
+Que devuelve la representación en string como codigo fuente, por ejemplo la representación de un ADD(R0,R7), sería: ADD R0, R7
+\item  \textbf{codigo}
+Retorna el string que representa al código único de modo de direccionamiento, por el ejemplo, el código de modo de direccionamiento del R7 es 100111.
+\item  \textbf{getValorString}
+Retorna el string que representa al dato que posee el modo de direccionamiento. En el caso de un Inmediato que sea FF56, devolvera el string "FF56", y en el caso de cualquier registro, retornara el valor que represente su W16.
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, representa el dato que es guardado en memoria. Tiene la responsabilidad de incrementarse, decrementarse, sumar una entero, devolver su representación binria y su valor en entero.
+\end{itemize}
+
+\graf{ModoDireccionamiento}{Diagrama de clase de la \ModoDireccionamiento}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Como se observa en la figura \ref{ALU}
