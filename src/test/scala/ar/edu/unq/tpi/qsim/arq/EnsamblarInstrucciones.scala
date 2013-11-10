@@ -25,25 +25,47 @@ class EnsamblarInstrucciones extends FlatSpec with Matchers {
     
   }
   def contexto_ejecucion = new {
-   
-    //instrucciones sin operandos
-    val ret = RET()
     
-    //instruccione modo origen
-    val call=CALL(Inmediato("000F"))
-    val jmp=JMP(Inmediato("000F"))
-    
-    //instruccione modo destino
-    val not=NOT(R4)
-    
-    //instrucciones dos operandos
-
-    
+    //modos de direccionamiento
     val registro = R0
     val registroIndirecto = RegistroIndirecto(R7)
     val inmediato = Inmediato("F0F0")
     val directo = Directo(Inmediato("ABCD"))
     val indirecto = Indirecto(Directo(Inmediato("F0CA")))
+   
+    //instrucciones sin operandos
+    val ret = RET()
+    
+    //instruccione modo origen
+    
+    val call_registro = CALL(registro)
+    val call_registroIndirecto = CALL(registroIndirecto)
+    val call_inmediato = CALL(inmediato)
+    val call_directo = CALL(directo)
+    val call_indirecto = CALL(indirecto)    
+    
+    val call= call_registro
+    
+    val jmp_registro = JMP(registro)
+    val jmp_registroIndirecto = JMP(registroIndirecto)
+    val jmp_inmediato = JMP(inmediato)
+    val jmp_directo = JMP(directo)
+    val jmp_indirecto = JMP(indirecto)    
+    
+    val jmp=jmp_registro
+    
+    //instruccion modo destino
+    
+    val not_registro = NOT(registro)
+    val not_registroIndirecto = NOT(registroIndirecto)
+    val not_directo = NOT(directo)
+    val not_indirecto = NOT(indirecto)
+    
+    val not= not_registro
+    
+    
+    //instrucciones dos operandos
+
       
     val registro_registro = MUL(registro, registro)
     val registro_registroIndirecto = MUL(registro, registroIndirecto)
