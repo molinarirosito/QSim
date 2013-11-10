@@ -29,22 +29,24 @@ La \ALU, recibe su nombre de las siglas en inglés de \textit{Arithmetic and Log
 
 La memoria es un conjunto de celdas numeradas. La numeración de cada celda la identifica inequívocamente por lo cual a esta numeración se le llama dirección. En cada celda de la memoria se pueden almacenar datos o instrucciones en forma de cadenas binarias y este contenido puede leerse y modificarse. En la memoria es donde se alojan los programas que luego serán ejecutados.\\
 
-El bus de sistema es el encargado de transferir los datos entre los componentes de la computadora.\ojo{.La unidad de control al pedir un contenido de una dirección de memoria lo hace a través del bus, y similarmente mismo cuando desea escribir en memoria.}{, y lo hace a partir de que la \UC\ pide la lectura o escritura de celdas de memoria o puertos de entrada/salida}.
+El bus de sistema es el encargado de transferir los datos entre los componentes de la computadora..La unidad de control al pedir un contenido de una dirección de memoria lo hace a través del bus, y similarmente mismo cuando desea escribir en memoria, y lo hace a partir de que la \UC\ pide la lectura o escritura de celdas de memoria o puertos de entrada/salida.
 
 \subsection{Ejecución de un programa}
 
-La función de una computadora es la ejecución de programas. Los programas se encuentran almacenados en memoria y consisten en una secuencia de instrucciones y es la \UC\ es quien se encarga de ejecutar dichas instrucciones implementando un \textbf{\ciclo}. Para ser almacenadas en memoria, las instrucciones deben codificarse en cadenas binarias (secuencias de ceros y unos) que no son legibles para las personas pero son tales que la \UC\ las puede interpretar y traducir en acciones. Por eso para saber de qué instrucción se trata, y cuáles son los valores o \ojo{celdas de memoria que debería consultar o usar}{variables (celdas de memoria o registros) que estan involucrados}, la \UC\ toma el código máquina de la instrucción y verifica los códigos de operación y modos de direccionamiento. La ejecución de instrucciones se divide en tres etapas importantes: \ojo{fech - decode - execute}{\begin{enumerate}
+La función de una computadora es la ejecución de programas. Los programas se encuentran almacenados en memoria y consisten en una secuencia de instrucciones y es la \UC\ es quien se encarga de ejecutar dichas instrucciones implementando un \textbf{\ciclo}. Para ser almacenadas en memoria, las instrucciones deben codificarse en cadenas binarias (secuencias de ceros y unos) que no son legibles para las personas pero son tales que la \UC\ las puede interpretar y traducir en acciones. Por eso para saber de qué instrucción se trata, y cuáles son los valores o variables (celdas de memoria o registros) que estan involucrados, la \UC\ toma el código máquina de la instrucción y verifica los códigos de operación y modos de direccionamiento. La ejecución de instrucciones se divide en tres etapas importantes: 
+
+\begin{enumerate}
 \item \BI
 \item \DI
 \item \EI
-\end{enumerate}}
+\end{enumerate}
 \graf[7cm]{ciclo}{\ciclo}
 
 
-Al principio de cada \ciclo\ojo{, durante el fech de instrucción la CPU busca una instrucción que se encuentra en alguna parte de la memoria. Para saber donde esta dicha instrucción la CPU contiene un registro llamado contador de programa (PC), que tiene la dirección de la próxima instrucción a buscar. La CPU a través del bus lee la instrucción, y luego incrementa el valor contenido en PC; así podrá buscar la siguiente instrucción en la secuencia luego de terminar con la actual.}{se lleva a cabo la \BI\ durante la cual se leen las celdas que contienen el \codmaq\ de la instrucción y para lo cual se utiliza el \PC\ que mantiene la dirección de la siguiente instrucción a ejecutar}.
-\ojo{La}{El código máquina de la} instrucción leída \ojo{}{que está en la forma de cadena binaria} se carga dentro de otro registro de la CPU, llamado registro de instrucción (IR).\\
+Al principio de cada \ciclo se lleva a cabo la \BI\ durante la cual se leen las celdas que contienen el \codmaq\ de la instrucción y para lo cual se utiliza el \PC\ que mantiene la dirección de la siguiente instrucción a ejecutar.
+El código máquina de la instrucción leída que está en la forma de cadena binaria se carga dentro de otro registro de la CPU, llamado registro de instrucción (IR).\\
 
-Durante la \DI, la \UC\ determina que \ojo{significa la cadena binaria. Finalmente al saber de qué instrucción se trata la CPU ejecuta la instrucción, es decir, realiza lo que la instrucción dice que debe hacer con sus argumentos, hasta que el programa termine.}{operación se debe llevar a cabo, y finalmente durante la \EI la \UC realiza el efecto esperado para esa operación, buscando los operandos y } modificando la memoria o los registros como resultado final y el ciclo vuelve a comenzar
+Durante la \DI, la \UC\ determina que operación se debe llevar a cabo, y finalmente durante la \EI la \UC realiza el efecto esperado para esa operación, buscando los operandos y modificando la memoria o los registros como resultado final y el ciclo vuelve a comenzar
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Estado del arte}
