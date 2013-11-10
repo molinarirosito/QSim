@@ -1,14 +1,12 @@
 package ar.edu.unq.tpi.qsim.model
 
 import java.util.Calendar
-
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Map
-
 import org.uqbar.commons.utils.Observable
-
 import ar.edu.unq.tpi.qsim.exeptions.CeldaFueraDeMemoriaException
 import ar.edu.unq.tpi.qsim.utils.Util
+import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
 
 @Observable
 case class Simulador() {
@@ -294,6 +292,7 @@ case class Simulador() {
   def store(modoDir: ModoDireccionamiento, un_valor: W16) {
     var direccion: Int = 0
     modoDir match {
+      case Inmediato(valor: W16) => {throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.")}
       case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, CeldaState.STORE); busIO.setValorC(direccion, un_valor); }
       case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, CeldaState.STORE); busIO.setValorC(direccion, un_valor); }
       case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
