@@ -171,12 +171,41 @@ case class JVS(desp: Salto) extends JUMP_condicional("0111", "JVS", desp) {}
 
 object Testuds extends App {
 
-    println(Util.hexToBinary(CALL(Inmediato("F0F0")).representacionHexadecimal.substring(0, 4)).substring(0, 10))
-    println(ADD( Inmediato("F0F0"), Directo(Inmediato("FFFF"))).representacionHexadecimal)
-    println(DIV(Directo(Inmediato("0001")), Indirecto(Directo(Inmediato("0002")))).representacionHexadecimal)
-    println(SUB(Indirecto(Directo(Inmediato("0003"))), RegistroIndirecto(R5)).representacionHexadecimal)
-    println(MOV(RegistroIndirecto(R5), R4).representacionHexadecimal)
-    println(AND(R4, Inmediato("0004")).representacionHexadecimal)
-    println(OR(R4, Inmediato("0005")).representacionHexadecimal)
-    println(CMP(R4, Inmediato("0006")).representacionHexadecimal)
+   //instrucciones sin operandos
+   val ret = RET().representacionHexadecimal
+    var string_split = Util.hexToBinary(ret)
+    println(string_split)
+    
+    println(Util.hexToBinary(ret))
+    
+    //instruccione modo origen
+  /*  val call=CALL(Inmediato("000F")).representacionHexadecimal
+    val jmp=JMP(Inmediato("000F")).representacionHexadecimal
+    
+    //instruccione modo destino
+    val not=NOT(R4).representacionHexadecimal
+    
+    //instrucciones dos operandos
+    val mul = MUL(R4, Inmediato("F0F0")).representacionHexadecimal
+    val add = ADD( Inmediato("F0F0"), Directo(Inmediato("FFFF"))).representacionHexadecimal
+    val div = DIV(Directo(Inmediato("0001")), Indirecto(Directo(Inmediato("0002")))).representacionHexadecimal
+    val sub = SUB(Indirecto(Directo(Inmediato("0003"))), RegistroIndirecto(R5)).representacionHexadecimal
+    val mov = MOV(RegistroIndirecto(R5), R4).representacionHexadecimal
+    val and = AND(R4, Inmediato("0004")).representacionHexadecimal
+    val or = OR(R4, Inmediato("0005")).representacionHexadecimal
+    val cmp = CMP(R4, Inmediato("0006")).representacionHexadecimal
+    
+    // jmps condicionales
+    
+    val je =  JE(new Salto(0)).representacionHexadecimal
+	val jne = JNE(new Salto(1)).representacionHexadecimal
+	val jle = JLE(new Salto(2)).representacionHexadecimal
+	val jg = JG(new Salto(3)).representacionHexadecimal 
+	val jl = JL(new Salto(4)).representacionHexadecimal 
+	val jge = JGE(new Salto(5)).representacionHexadecimal 
+	val jleu = JLEU(new Salto(6)).representacionHexadecimal 
+	val jgu = JGU(new Salto(7)).representacionHexadecimal 
+	val jcs = JCS(new Salto(8)).representacionHexadecimal 
+	val jneg = JNEG(new Salto(0)).representacionHexadecimal
+	val jvs = JVS(new Salto(0)).representacionHexadecimal */
 }

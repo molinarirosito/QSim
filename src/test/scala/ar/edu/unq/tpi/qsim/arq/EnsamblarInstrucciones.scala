@@ -8,27 +8,97 @@ import ar.edu.unq.tpi.qsim.utils._
 
 class EnsamblarInstrucciones extends FlatSpec with Matchers {
 
+  def obtenerCodigoBinario(instruccion : Instruccion) : String = {
+    
+    val ins = instruccion.representacionHexadecimal
+    var split = ins.split(" ")
+    var string_split = ""
+    split.foreach(f => {
+      string_split = string_split + Util.hexToBinary(f)
+     })
+    string_split
+  }
+
+  def obtenerOperandosBinario(instruccion : Instruccion) :String = {
+   val instruccion_binario = obtenerCodigoBinario(instruccion) 
+   instruccion_binario.takeRight(instruccion_binario.size - 4) 
+    
+  }
   def contexto_ejecucion = new {
+    
+    //modos de direccionamiento
+    val registro = R0
+    val registroIndirecto = RegistroIndirecto(R7)
+    val inmediato = Inmediato("F0F0")
+    val directo = Directo(Inmediato("ABCD"))
+    val indirecto = Indirecto(Directo(Inmediato("F0CA")))
    
     //instrucciones sin operandos
     val ret = RET()
     
     //instruccione modo origen
-    val call=CALL(Inmediato("000F"))
-    val jmp=JMP(Inmediato("000F"))
     
-    //instruccione modo destino
-    val not=NOT(R4)
+    val call_registro = CALL(registro)
+    val call_registroIndirecto = CALL(registroIndirecto)
+    val call_inmediato = CALL(inmediato)
+    val call_directo = CALL(directo)
+    val call_indirecto = CALL(indirecto)    
+    
+    val call= call_registro
+    
+    val jmp_registro = JMP(registro)
+    val jmp_registroIndirecto = JMP(registroIndirecto)
+    val jmp_inmediato = JMP(inmediato)
+    val jmp_directo = JMP(directo)
+    val jmp_indirecto = JMP(indirecto)    
+    
+    val jmp=jmp_registro
+    
+    //instruccion modo destino
+    
+    val not_registro = NOT(registro)
+    val not_registroIndirecto = NOT(registroIndirecto)
+    val not_directo = NOT(directo)
+    val not_indirecto = NOT(indirecto)
+    
+    val not= not_registro
+    
     
     //instrucciones dos operandos
-    val mul = MUL(R4, Inmediato("F0F0"))
-    val add = ADD( Inmediato("F0F0"), Directo(Inmediato("FFFF")))
-    val div = DIV(Directo(Inmediato("0001")), Indirecto(Directo(Inmediato("0002"))))
-    val sub = SUB(Indirecto(Directo(Inmediato("0003"))), RegistroIndirecto(R5))
-    val mov = MOV(RegistroIndirecto(R5), R4)
-    val and = AND(R4, Inmediato("0004"))
-    val or = OR(R4, Inmediato("0005"))
-    val cmp = CMP(R4, Inmediato("0006"))
+
+      
+    val registro_registro = MUL(registro, registro)
+    val registro_registroIndirecto = MUL(registro, registroIndirecto)
+    val registro_inmediato = MUL(registro, inmediato)
+    val registro_directo = MUL(registro, directo)
+    val registro_indirecto = MUL(registro, indirecto)
+    
+    val registroIndirecto_registro = MUL(registroIndirecto, registro)
+    val registroIndirecto_registroIndirecto = MUL(registroIndirecto, registroIndirecto)
+    val registroIndirecto_inmediato = MUL(registroIndirecto, inmediato)
+    val registroIndirecto_directo = MUL(registroIndirecto, directo)
+    val registroIndirecto_indirecto = MUL(registroIndirecto, indirecto)
+     
+    val directo_registro = MUL(directo, registro)
+    val directo_registroIndirecto = MUL(directo, registroIndirecto)
+    val directo_inmediato = MUL(directo, inmediato)
+    val directo_directo = CMP(directo, directo)
+    val directo_indirecto = OR(directo, indirecto)
+    
+    val indirecto_registro = ADD(indirecto, registro)
+    val indirecto_registroIndirecto = DIV(indirecto, registroIndirecto)
+    val indirecto_inmediato = SUB(indirecto, inmediato)
+    val indirecto_directo = MOV(indirecto, directo)
+    val indirecto_indirecto = AND(indirecto, indirecto)
+    
+    val mul = directo_inmediato
+    val add = indirecto_registro
+    val div = indirecto_registroIndirecto
+    val sub = indirecto_inmediato
+    val mov = indirecto_directo
+    val and = indirecto_indirecto
+    val or = directo_indirecto
+    val cmp = directo_directo
     
     // jmps condicionales
     
@@ -62,7 +132,8 @@ class EnsamblarInstrucciones extends FlatSpec with Matchers {
     val not = "1001"
   }
 
-  def resultados_codigos_instrucciones_dos_operandos = new {
+  
+   def resultados_codigos_instrucciones_dos_operandos = new {
     val mul = "0000"
     val add = "0010"
     val div = "0111"
@@ -87,13 +158,54 @@ class EnsamblarInstrucciones extends FlatSpec with Matchers {
 	val jvs = "0111" 
   }
     
+   def resultados_codigos_modos_dir = new {
+    val registro = "100000"
+    val registro_indirecto = "110111"
+    val inmediato = "000000"
+    val valor_inmediato = "1111000011110000" //F0F0
+    val directo = "001000" 
+    val valor_directo = "1010101111001101" //ABCD
+    val indirecto = "011000" 
+    val valor_indirecto = "1111000011001010" //F0CA
+  }
   
-  "Las instrucciones sin operandos" should "ensamblarse y devolver en hexadecimal el equivalente en binario a su codigo de opercion correspondiente mas 12 bits en cero" in {
+  "Los ensamblamientos de instrucciones con dos operandos" should ("ensamblarse y devolver en hexadecimal el equivalente en binario al formato modo destino" 
+ + "(6 bits), modo origen (6 bits), destino (16 bits), orgen (16 bits) luego de los primer 4 bits de modo de operacion  ") in {
+    var ctx = contexto_ejecucion
+    var resultado = resultados_codigos_modos_dir
+    
+    assert(obtenerOperandosBinario(ctx.registro_registro).endsWith(resultado.registro + resultado.registro))
+    assert(obtenerOperandosBinario(ctx.registro_registroIndirecto).endsWith(resultado.registro + resultado.registro_indirecto))
+    assert(obtenerOperandosBinario(ctx.registro_inmediato).endsWith(resultado.registro + resultado.inmediato + resultado.valor_inmediato ))
+    assert(obtenerOperandosBinario(ctx.registro_directo).endsWith(resultado.registro + resultado.directo + resultado.valor_directo ))
+    assert(obtenerOperandosBinario(ctx.registro_indirecto).endsWith(resultado.registro + resultado.indirecto + resultado.valor_indirecto ))
+        
+    assert(obtenerOperandosBinario(ctx.registroIndirecto_registro).endsWith(resultado.registro_indirecto + resultado.registro))
+    assert(obtenerOperandosBinario(ctx.registroIndirecto_registroIndirecto).endsWith(resultado.registro_indirecto + resultado.registro_indirecto))
+    assert(obtenerOperandosBinario(ctx.registroIndirecto_inmediato).endsWith(resultado.registro_indirecto + resultado.inmediato + resultado.valor_inmediato ))
+    assert(obtenerOperandosBinario(ctx.registroIndirecto_directo).endsWith(resultado.registro_indirecto + resultado.directo + resultado.valor_directo ))
+    assert(obtenerOperandosBinario(ctx.registroIndirecto_indirecto).endsWith(resultado.registro_indirecto + resultado.indirecto + resultado.valor_indirecto ))
+    
+    assert(obtenerOperandosBinario(ctx.directo_registro).endsWith(resultado.directo + resultado.registro + resultado.valor_directo))
+    assert(obtenerOperandosBinario(ctx.directo_registroIndirecto).endsWith(resultado.directo + resultado.registro_indirecto + resultado.valor_directo))
+    assert(obtenerOperandosBinario(ctx.directo_inmediato).endsWith(resultado.directo +  resultado.inmediato + resultado.valor_directo + resultado.valor_inmediato ))
+    assert(obtenerOperandosBinario(ctx.directo_directo).endsWith(resultado.directo  + resultado.directo + resultado.valor_directo + resultado.valor_directo ))
+    assert(obtenerOperandosBinario(ctx.directo_indirecto).endsWith(resultado.directo + resultado.indirecto + resultado.valor_directo + resultado.valor_indirecto ))
+    
+    assert(obtenerOperandosBinario(ctx.indirecto_registro).endsWith(resultado.indirecto + resultado.registro + resultado.valor_indirecto))
+    assert(obtenerOperandosBinario(ctx.indirecto_registroIndirecto).endsWith(resultado.indirecto + resultado.registro_indirecto + resultado.valor_indirecto))
+    assert(obtenerOperandosBinario(ctx.indirecto_inmediato).endsWith(resultado.indirecto +  resultado.inmediato + resultado.valor_indirecto + resultado.valor_inmediato ))
+    assert(obtenerOperandosBinario(ctx.indirecto_directo).endsWith(resultado.indirecto  + resultado.directo + resultado.valor_indirecto + resultado.valor_directo ))
+    assert(obtenerOperandosBinario(ctx.indirecto_indirecto).endsWith(resultado.indirecto + resultado.indirecto + resultado.valor_indirecto + resultado.valor_indirecto ))
+  }
+  
+  
+ "Las instrucciones sin operandos" should "ensamblarse y devolver en hexadecimal el equivalente en binario a su codigo de opercion correspondiente mas 12 bits en cero" in {
     var ctx = contexto_ejecucion
     var resultados = resultados_codigos_instrucciones_sin_operandos 
     
     assert(Util.hexTo4Binary(ctx.ret.representacionHexadecimal.head.toString).equals(resultados.ret))
-    assert(Util.hexToBinary(ctx.ret.representacionHexadecimal).equals(resultados.ret + "000000000000"))
+    assert(obtenerCodigoBinario(ctx.ret).equals(resultados.ret + "000000000000"))
    
   }
   
@@ -102,10 +214,10 @@ class EnsamblarInstrucciones extends FlatSpec with Matchers {
     var resultados = resultados_codigos_un_modo_origen 
     
     assert(Util.hexTo4Binary(ctx.call.representacionHexadecimal.head.toString).equals(resultados.call))
-    assert(Util.hexToBinary(ctx.call.representacionHexadecimal.substring(0, 4)).substring(0, 10).equals(resultados.call + "000000"))
+    assert(obtenerCodigoBinario(ctx.call).substring(0, 10).equals(resultados.call + "000000"))
     
     assert(Util.hexTo4Binary(ctx.jmp.representacionHexadecimal.head.toString).equals(resultados.jmp))
-    assert(Util.hexToBinary(ctx.jmp.representacionHexadecimal.substring(0, 4)).substring(0, 10).equals(resultados.jmp + "000000"))
+    assert(obtenerCodigoBinario(ctx.jmp).substring(0, 10).equals(resultados.jmp + "000000"))
    
   }
   
