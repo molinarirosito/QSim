@@ -40,17 +40,25 @@ Agarramos el programa Qi valido y se lo pasamos al Parser, cuando termina de che
 
 En este caso escribimos un programa Qi con errores de sintaxis para ver como reacciona el parser.
 
-Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepcion te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepcion y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
+Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception \textbf{SyntaxErrorException} porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepcion te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepcion y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
 \end{enumerate}
 
 \subsection{Ensamblado (Objetos --+ Codigo Maquina)}
 
-Para poder verificar que el ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto programa que contiene un conjunto de objetos intrucciones, el ensamblado simplemente lo realiza cada instruccion, esto quiere decir que cada intruccion sabe ensamblarse. De esta forma realizamos el ensamblado del programa y obtenemos una lista de codigo maquina como resultado y como ultimo paso comparamos la lista de codigo maquina resultado con la lista codigo maquina esperado.
+Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto programa que contiene un conjunto de objetos intrucciones, el ensamblado simplemente lo realiza cada instruccion, esto quiere decir que cada intruccion sabe ensamblarse. De esta forma realizamos el ensamblado del programa y obtenemos una lista de codigo maquina como resultado y como ultimo paso comparamos la lista de codigo maquina resultado con la lista codigo maquina esperado.
 
-
-  
 \subsection{Decodificacion Codigo Maquina --+ Objetos (Iterprete)}
-jajajja
+La Decodificacion se verifica correctamente a la inversa del Ensamblado tomando el ensamblado del programa Qi que como sabemos es la lista de codigo maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado puede devolver dos cosas: 
+\begin{enumerate}
+\item \textbf{Lista de de Instrucciones (decodificacion)} 
+
+El resultado correcto es la lista de objetos instrucciones, por cada codigo maquina el interprete verifica los codigos de operacion para poder crear las instrucciones correctas y como ultimo paso de la verificacion comparamos la lista resultante con la lista esperada.
+\item\textbf{Error}
+
+El resultado puede ser un error porque puede pasar que el codigo de operacion o el codigo de algun modo de direccionamiento dentro del formato de cada instruccion sea invalido. La excepcion que puede tirar tiene el nombre de \textbf{CodigoInvalidoException}.   
+\end{enumerate}
+
+
 \subsection{Ejecucion}
 alallalalala
 
