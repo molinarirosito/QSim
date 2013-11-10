@@ -173,6 +173,7 @@ object Interprete {
   def construir_instruccionDosOperandos(constructor:(ModoDireccionamiento,ModoDireccionamiento)=>Instruccion,map : Map[String,ModoDireccionamiento] ) : Instruccion = {
     val op1 = map("op1")
     val op2 = map("op2")
+    
     constructor(op1,op2)    
   }
   
