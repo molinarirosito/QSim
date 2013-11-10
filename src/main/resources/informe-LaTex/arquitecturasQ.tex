@@ -1,11 +1,11 @@
 \section{Especificación de la arquitectura Q}\label{apendiceQ}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Características generales (susi)} 
+\subsection{Características generales} 
 
 La Arquitectua Q tiene 8 registros de uso genereal de 16 bits, denominados R0..R7, registros especiales de 16 bits tales como PC - \textit{Program counter}, SP\footnote{Comienza en la direccion FFEF.} - \textit{Stack Pointer} y los Flags de un bit como Negative, oVerflow, Carry, Zero. Tambien tiene un conjunto de instrucciones que detallaran mas adelante. Todas las instrucciones Alteran los flags excepto MOV, CALL, RET, JMP, Jxx. De las instrucciones que alteran los Flags, todas dejan C y V en 0 a excepcion de ADD, SUB y CMP.  
-La instruccion DIV tiene como efecto [destino <- destino \%\footnote{El caracter \% denota el cociente de la división entera.} origen ]. 
-La instruccion MUL\footnote{El resultado de la operación \textbf{MUL} ocupa 32 bits, almacenándose los 16 bits menos significativos en el operando destino y los 16 bits mas significativos en el registro \textbf{R7}.} tiene como efecto [destino <- destino * origen].
+La instruccion DIV tiene como efecto [destino (- destino \%\footnote{El caracter \% denota el cociente de la división entera.} origen ]. 
+La instruccion MUL\footnote{El resultado de la operación \textbf{MUL} ocupa 32 bits, almacenándose los 16 bits menos significativos en el operando destino y los 16 bits mas significativos en el registro \textbf{R7}.} tiene como efecto [destino (- estino * origen].
 Por ultimo tiene una Memoria que tiene direcciones de 16 bit, donde el tamaño de cada celda tambien es de 16 bit. La Memoria tiene un tamanio de 65536 celdas. \\ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Modos de direccionamiento}
