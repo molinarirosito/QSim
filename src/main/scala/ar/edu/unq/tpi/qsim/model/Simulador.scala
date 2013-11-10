@@ -1,17 +1,14 @@
 package ar.edu.unq.tpi.qsim.model
 
-import ar.edu.unq.tip.qsim.state._
-import ar.edu.unq.tpi.qsim.exeptions._
-import scala.collection.mutable.Map
-import scala.collection.mutable.ArrayBuffer
-import ar.edu.unq.tip.qsim.state.Inicial
-import ar.edu.unq.tpi.qsim.utils._
-import org.uqbar.commons.utils.Observable
-import scala.collection.mutable.ArrayBuffer
-import java.util.Date
-import scala.collection.JavaConversions._
-import scala.collection.JavaConverters._
 import java.util.Calendar
+
+import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.Map
+
+import org.uqbar.commons.utils.Observable
+
+import ar.edu.unq.tpi.qsim.exeptions.CeldaFueraDeMemoriaException
+import ar.edu.unq.tpi.qsim.utils.Util
 
 @Observable
 case class Simulador() {
