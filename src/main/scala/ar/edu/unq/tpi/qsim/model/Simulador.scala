@@ -9,10 +9,18 @@ import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
 
 @Observable
+object Ciclo
+{
+  var fetch = true
+  var decode = false
+  var execute = false
+}
+
+@Observable
 case class Simulador() {
 
   
-  var estado_actual_ejecucion = State.NONE
+  var ciclo = Ciclo
   var mensaje_al_usuario = ""
   var cpu: CPU = _
   var busIO: BusEntradaSalida = _
@@ -124,6 +132,8 @@ case class Simulador() {
     programa
   }
 
+ 
+  
   /**
    * Carga el programa en memoria, a partir de un pc hexadecimal (String) y los registros que recibe dentro de un map
    * @param Programa, String, Map[String,W16]
@@ -178,7 +188,8 @@ case class Simulador() {
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
     cambiarEstadoCeldasInstruccionActual(State.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
-    estado_actual_ejecucion = State.FECH
+    ciclo.fetch = false
+    ciclo.decode = true
     println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
     
   }
@@ -203,7 +214,8 @@ case class Simulador() {
     println("----------DECODE------------")
     agregarMensaje("Se decodifico la instruccion : " + (instruccionActual.toString))
     println(mensaje_al_usuario)
-    estado_actual_ejecucion = State.DECODE
+    ciclo.decode = false
+    ciclo.execute = true
     (instruccionActual.toString)
   }
 
@@ -280,7 +292,8 @@ case class Simulador() {
       }
       case iOp2: Instruccion_DosOperandos ⇒ store(iOp2.destino, execute_instruccion_matematica())
     }
-    estado_actual_ejecucion = State.EXECUTED
+    ciclo.execute = false
+    ciclo.fetch = true
     println("Ejecuta la instruccion!!!")
   }
 

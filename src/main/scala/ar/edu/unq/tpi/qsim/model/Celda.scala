@@ -3,7 +3,7 @@ import org.uqbar.commons.utils.Observable
 
 object State extends Enumeration {
   type Type = Value
-  val NONE, PROGRAM, FECH, DECODE, FECH_DECODE, STORE, EXECUTED = Value
+  val NONE, PROGRAM, FECH_DECODE, STORE, EXECUTED = Value
 }
 
 @Observable
