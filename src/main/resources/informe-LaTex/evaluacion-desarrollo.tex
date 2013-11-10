@@ -61,13 +61,22 @@ El resultado puede ser un error porque puede pasar que el codigo de operacion o 
 
 \subsection{Ejecucion}
 
-Para verificar que la ejecucion de un programa Qi con el ciclo de instruccion se realice correctamente lo que hacemos es cargar el programa  en la memoria a traves del objeto simulador, de esta forma cuando se encuentra cargado esta listo para la ejecucion. Los pasos que se verifican son 3:
+Para verificar que la ejecucion de un programa Qi con el \textbf{Ciclo de Instruccion} se realice correctamente lo que hacemos es cargar el programa en la memoria a traves del objeto \textbf{Simulador}, de esta forma cuando se encuentra cargado esta listo para la ejecucion. Los pasos que se verifican son 3:
 
-el fetch 
+\begin{itemize}
+\item \textbf{Feth} 
 
-decode
+Para verificar el fetch se toma la instruccion siguiente a ejecutar y se compara el valor que se guarda en el registro ir con el valor esperado. Ademas se verifica que el registro especial pc apunte a la siguiente instruccion a ejecutar.
 
-execute 
+\item \textbf{Decode}
+
+Para verificar el decode, se toma el valor del registro ir para que lo reciba el interprete que dara como resultado el objeto instruccion correspondiente. Este objeto instruccion sabe mostrarse quien es y por eso la responsabilidad de decodificar se la delega a la instruccion. Al obtener la decodificacion de cada instruccion podemos comparar la decodificacion resultante con la esperada.
+ 
+\item \textbf{Execute}
+
+Para verificar el efecto de cada instruccion se considero armar un caso de prueba por cada instruccion donde cada uno tiene un estado inicial y luego de realizar la ejecucion de dicha instruccion termina con un estado final modificado en el cual verificamos el resultado obtenido con el resultado esperado. 
+
+\end{itemize}
   
 \subsubsection{Operaciones de ALU}
 
