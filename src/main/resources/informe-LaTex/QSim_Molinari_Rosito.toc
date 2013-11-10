@@ -1,34 +1,40 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{5}{chapter.1}
-\contentsline {chapter}{\numberline {2}Contexto}{7}{chapter.2}
-\contentsline {section}{\numberline {2.1}Sobre la materia Organizaci\IeC {\'o}n de Computadoras}{7}{section.2.1}
-\contentsline {section}{\numberline {2.2}Conceptos importantes}{7}{section.2.2}
-\contentsline {section}{\numberline {2.3}Arquitecturas Q}{7}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Caracter\IeC {\'\i }sticas generales}{7}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Repertorio de instrucciones}{7}{subsection.2.3.2}
-\contentsline {subsubsection}{Instrucciones de 2 operandos}{7}{section*.2}
-\contentsline {subsubsection}{Instrucciones de 1 operando origen}{7}{section*.3}
-\contentsline {subsubsection}{Instrucciones de 1 operando destino}{7}{section*.4}
-\contentsline {subsubsection}{Instrucciones sin operandos}{7}{section*.5}
-\contentsline {subsubsection}{Instrucciones de salto condicional}{7}{section*.6}
-\contentsline {subsection}{\numberline {2.3.3}Versiones de la arquitectura}{7}{subsection.2.3.3}
-\contentsline {subsubsection}{Q1}{7}{section*.7}
-\contentsline {subsubsection}{Q2}{7}{section*.8}
-\contentsline {subsubsection}{Q3}{7}{section*.9}
-\contentsline {subsubsection}{Q4}{7}{section*.10}
-\contentsline {section}{\numberline {2.4}Estado del arte}{7}{section.2.4}
-\contentsline {chapter}{\numberline {3}Simulador QSim}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}Funcionalidad del simulador}{9}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Chequeo de sintaxis}{9}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Ensamblado}{10}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Cargado en memoria}{10}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Ejecuci\IeC {\'o}n paso a paso}{10}{subsection.3.1.4}
-\contentsline {section}{\numberline {3.2}Implementaci\IeC {\'o}n}{11}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Tecnolog\IeC {\'\i }a utilizada}{11}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2} (arq OO)}{11}{subsection.3.2.2}
-\contentsline {chapter}{\numberline {4}Evaluaci\IeC {\'o}n del desarrollo}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Dificultades encontradas}{13}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Dificultades presentadas por el dominio}{13}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Dificultades de dise\IeC {\~n}o}{13}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Casos de prueba}{14}{section.4.2}
-\contentsline {section}{\numberline {4.3}Ejemplos de uso}{14}{section.4.3}
+\contentsline {part}{I\hspace {1em}Contexto}{4}{part.1}
+\contentsline {section}{\numberline {1}Sobre la materia Organizaci\IeC {\'o}n de Computadoras(susi)}{4}{section.1}
+\contentsline {section}{\numberline {2}Conceptos importantes}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Enfoque de Von Neumann}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Organizaci\IeC {\'o}n de la computadora}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Ejecuci\IeC {\'o}n de un programa}{6}{subsection.2.3}
+\contentsline {section}{\numberline {3}Arquitecturas Q}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}Caracter\IeC {\'\i }sticas generales(susi)}{7}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Modos de direccionamiento}{7}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Repertorio de instrucciones}{9}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Instrucciones de 2 operandos}{9}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Instrucciones de 1 operando origen}{10}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Instrucciones de 1 operando destino}{10}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}Instrucciones sin operandos}{10}{subsubsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.3.5}Instrucciones de salto condicional}{10}{subsubsection.3.3.5}
+\contentsline {subsection}{\numberline {3.4}Versiones de la arquitectura (SUSI)}{11}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Q1}{12}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}Q2}{12}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.3}Q3}{12}{subsubsection.3.4.3}
+\contentsline {subsubsection}{\numberline {3.4.4}Q4}{13}{subsubsection.3.4.4}
+\contentsline {subsubsection}{\numberline {3.4.5}Q5}{13}{subsubsection.3.4.5}
+\contentsline {subsubsection}{\numberline {3.4.6}Q6}{13}{subsubsection.3.4.6}
+\contentsline {section}{\numberline {4}Estado del arte (Susi)}{14}{section.4}
+\contentsline {part}{II\hspace {1em}Simulador QSim}{14}{part.2}
+\contentsline {section}{\numberline {5}Funcionalidad del simulador}{14}{section.5}
+\contentsline {subsection}{\numberline {5.1}Chequeo de sintaxis}{14}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Ensamblado}{14}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Cargado en memoria}{15}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Ejecuci\IeC {\'o}n paso a paso}{15}{subsection.5.4}
+\contentsline {section}{\numberline {6}Implementaci\IeC {\'o}n}{16}{section.6}
+\contentsline {subsection}{\numberline {6.1}Tecnolog\IeC {\'\i }a utilizada (tati)}{16}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2} (arq OO)}{16}{subsection.6.2}
+\contentsline {part}{III\hspace {1em}Evaluaci\IeC {\'o}n del desarrollo}{16}{part.3}
+\contentsline {section}{\numberline {7}Dificultades encontradas}{16}{section.7}
+\contentsline {subsection}{\numberline {7.1}Dificultades presentadas por el dominio}{16}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Dificultades de dise\IeC {\~n}o}{17}{subsection.7.2}
+\contentsline {section}{\numberline {8}Casos de prueba}{18}{section.8}
+\contentsline {section}{\numberline {9}Ejemplos de uso}{18}{section.9}
+\contentsline {section}{\numberline {10}Trabajo Futuro}{18}{section.10}

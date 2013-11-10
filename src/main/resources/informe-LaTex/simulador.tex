@@ -66,8 +66,12 @@ El execute ejecuta los efectos de la instrucción y muestra en pantalla los camb
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \section{Implementación}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tecnología utilizada (tati)}
+
+\begin{itemize}
+
 
 \item  \textbf{Scala}
 Elegimos el lenguaje Scala para realizar el simulador ya que, en la materia llamada Objetos III, lo utilizamos un pequeño lapso de tiempo y creímos que era una buena oportunidad para, en vez de elegir un lenguaje que hayamos utilizado más en la carrera como java, profundizar en la utilización de Scala y aprovechar las ventajas que este ofrecia al combinar el manejo de objetos y las características de un lenguaje funcional.
@@ -81,64 +85,124 @@ Se eligio utilizar el entorno de programación Eclipse ya que ambas trabajamos e
 \item  \textbf{Git}
 Elegimos git como repositorio externo para sincronizar nuestro codigo ya que promueve el codigo abierto (ACA QUIERO PONER LO DE QUE ESTA AHI ARRIBA Y NO LE CEDEMOS DERECHOS NI NADA  A NADIE PERO NO ME SALE!!!)
 
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ (arq OO)}
 
-Como se observa en la figura \ref{ALU} tiente toda la responsabilidad en la ejecución de operaciones matematicas y logicas, además del analisis sobre los flags luego de cada operación. 
+\subsubsection{ALU}
+Como se observa en la figura \ref{ALU} la ALU tiene toda la responsabilidad en la ejecución de operaciones matematicas y logicas, además del analisis sobre los flags luego de cada operación. 
 
 \graf{ALU}{Diagrama de clase de la \ALU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la modificación de una celda o el leer un dato. Para conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
+\subsubsection{Bus de entrada y salida, memoria y puertos}
+Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la modificación de una celda o el leer un dato. Para ello conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
 Ambas clases conocen muchas intancias de la clase Celda, y cada Celda a su vez conoce un dato: una instancia del W16, que representa a los datos guardados en memoria o en los puertos.  
 
 \graf{BusEntradaSalida_Memoria_CeldasPuertos}{Diagrama de clase del la \BusEntradaSalida_Memoria_CeldasPuertos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+\subsubsection{CPU}
+Como se observa en la figura \ref{CPU}, la CPU conoce a la ALU, contiene los registros IR y PC, y los flags (V,Z,C,N) y los ocho registros (R0...R7). La responsabilidad de la CPU es actualizar los flags, los registros, actualizar el PC y el IR, y ser la conexión con la ALU.
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+\graf{CPU}{Diagrama de clase de la \CPU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+\subsubsection{Interprete}
+Como se observa en la figura \ref{Interprete} el Interprete es un singleton tiene la entera responsabilidad de recibir los datos leídos desde, una celda de memoria hasta tres celdas, y bit a bit, según los códigos de operación y de modo de direccionamiento saber de que instrucción se trata y cuales son sus operandos si es que los tiene y devolver el objeto que la representa. Se ocupa del decode de la instrucción.
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+\graf{Interprete}{Diagrama de clase de la \Interprete}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+\subsubsection{Modos de direccionamiento y W16}
+Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del trait ModoDireccionamiento, donde se encuentran declarados mensajes necesarios para majear todas las subclases poliformicamente. Entre los cuales se encuentran los mensajes: 
+\begin{itemize}
+\item  \textbf{representacionString}
+Que devuelve la representación en string como codigo fuente, por ejemplo la representación de un ADD(R0,R7), sería: ADD R0, R7
+\item  \textbf{codigo}
+Retorna el string que representa al código único de modo de direccionamiento, por el ejemplo, el código de modo de direccionamiento del R7 es 100111.
+\item  \textbf{getValorString}
+Retorna el string que representa al dato que posee el modo de direccionamiento. En el caso de un Inmediato que sea FF56, devolvera el string "FF56", y en el caso de cualquier registro, retornara el valor que represente su W16.
+\end{itemize}
+Los modos de direccionamiento diferentes a Inmediato y Registro, conocen en vez de un W16 otro modo de direccionamiento según corresponda:
+\begin{itemize}
+\item RegistroIndirecto conoce un a instancia de Registro.
+\item Directo conoce conoce un a instancia de Inmediato.
+\item Indirecto conoce conoce un a instancia de Directo.
+\end{itemize}
+Esto se implemento de esta manera para que el leer datos de memoria, puertos o registros, o guardarlos en los mismos sea más sencillo ya que se delega en el modo de direccionamiento que conoce.
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+La clase Etiqueta representa la etiqueta creada por el alumno cuando realiza el programa. Cuando el mismo es cargado en memoria, según cual sea la celda de inicio y cuanto ocupen las instruciones, se calcula la dirección de memoria que representa la etiqueta y luego se descarta reemplazandola por un modo de direccionamiento Inmediato.
+
+La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, representa el dato que es guardado en memoria. Tiene la responsabilidad de incrementarse, decrementarse, sumar una entero, devolver su representación binria y su valor en entero.
+
+
+\graf{ModoDireccionamiento}{Diagrama de clase de la \ModoDireccionamiento}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+\subsubsection{Instrucciones}
+Como se observa en la figura \ref{Instruccion} las Instrucciones estan modeladas en jerarquias que se dividen en:
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+\begin{itemize}
+\item Un operando.
+\item Dos operandos.
+\item Sin operandos.
+\item JumpConducional.
+\end{itemize}
+
+Se realizo dicha jerarquia para permitir la fácil agregación de nuevas instrucciones siendo subclases de la clase que corresponda ya que comparten comportamiento tal como manera de mostrarse y de codificarse.
+
+\graf{Instruccion}{Diagrama de clase de la \Instruccion}
+
+\subsubsubsection{Instrucciones sin operandos}
+
+Como se observa en la figura \ref{Instruccion_SinOperandos} la unica Instruccion sin operandos implementada es la Instruccion RET, a pesar de esto, se eligio hacer una jerarquia para que luego se facilite la inserción al modelo de nuevas instrucciones sin operandos.
+
+\graf{Instruccion_SinOperandos}{Diagrama de clase de la \Instruccion_SinOperandos}
+
+\subsubsubsection{Instrucciones de un operando}
+
+Como se observa en la figura \ref{Instruccion_UnOperando} y concordando en lo mencionado sobre las Instrucciones anteriormente, puede haber dos tipos de instrucciones de un operando:
+
+\begin{itemize}
+\item Un operando origen.
+\item Un operando destino.
+\end{itemize}
+
+Ambas clases de instrucciones tienen un solo operando. La diferencia entre ellas es la logica de ejecución y la manera en la que se ensamblan y desensamblan ya que sus formato de instruccion difiere en donde esta colocado el relleno.
+
+\graf{Instruccion_UnOperando}{Diagrama de clase de la \Instruccion_UnOperando}
+
+\subsubsubsection{Instrucciones de dos operandos}
+
+Como se observa en la figura \ref{Instruccion_DosOperandos} la jerearquia de clases de instrucciones de dos operandos es la más amplia por tener mayor cantidad de instrucciones. Todas comparten la manera de decodificacion e interpretación, además de la logica de impresión.
+
+\graf{Instruccion_DosOperandos}{Diagrama de clase de la \Instruccion_DosOperandos}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+\subsubsection{Programa}
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+Como se observa en la figura \ref{Programa} la clase Programa conoce un grupo de Instrucciones (las instrucciones que lo componen). Las instancias son creadas por el parser, luego se calculan las etiquetas (si es que las tiene) y finalmente cuando es cargado en memoria la instancia de programa es desechada ya que no vuelve a usarse en ningún momento de la ejecución.
+
+\graf{Programa}{Diagrama de clase de la \Programa}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+\subsubsection{Simulador}
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+Como se observa en la figura \ref{simulador} la clase Simulador conoce a una instancia de CPU, a una instancia de BusEntradaSalida y a una intancia de Instruccion que es la instruccion que se esta ejecutando en ese momento.
+La clase Simulador tiene la responsabilidad de obtener el codigo maquina a traves del Interprete de la siguiente instrucción (fech y decode), calcular las etiquetas de un programa, cargar el programa en memoria, asi mismo, los datos en registros,  ejecutar las instrucciones o delegar su ejecución a la ALU que conoce a traves de la CPU según corresponda (realizar el execute), y guardar datos en memoria o registros (Store).
+Es la clase principal del modelo y la encargada de coordinar la ejecución del programa paso a paso. 
+
+\graf{simulador}{Diagrama de clase de la \Simulador}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Como se observa en la figura \ref{ALU}
+%Como se observa en la figura \ref{}
 
-\graf{ALU}{Diagrama de clase de la \ALU}
+%\graf{}{Diagrama de clase de la \}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Como se observa en la figura \ref{ALU}
-
-\graf{ALU}{Diagrama de clase de la \ALU}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-Como se observa en la figura \ref{ALU}
-
-\graf{ALU}{Diagrama de clase de la \ALU}
 
 %[width=0.7\textwidth]
 

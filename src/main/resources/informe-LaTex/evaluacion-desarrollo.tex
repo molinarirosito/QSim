@@ -23,11 +23,94 @@ Tuvieron que ser solicitadas además extensiones al equipo de desarrolladores de
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Casos de prueba}
 
+\item \textbf{Descripcion de cada Caso de Prueba}
+
+\subsection{Chequeo de sintaxis en la distintas Qi}
+
+Para chequear la sintaxis de cada \textbf{Arquitectura Q}, primero escribimos un programa Qi en un archivo con extension .qsim luego este archivo lo recibe el objeto Parser que se encargara de chequear la sintaxis. 
+Para eso realizamos dos casos de prueba por cada Qi:
+\begin{enumerate}
+\item \textbf{Chequear programa Qi valido}
+
+Agarramos el programa Qi valido y se lo pasamos al Parser, cuando termina de chequear devuelve un resultado, como es de esperar devuelte un objeto programa con la lista de instrucciones. Tomamos ese resultado y como ultimo paso comparamos si el programa resultado es igual al programa esperado.
+
+\textit{ (esto va en nota al pie)programa Qi valido = Es un programa en cualquier arquitectura Q escrito sintaticamente correcto.}
+
+\item \textbf{Chequear programa Qi es invalido} 
+
+En este caso escribimos un programa Qi con errores de sintaxis para ver como reacciona el parser.
+
+Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception \textbf{SyntaxErrorException} porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepcion te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepcion y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
+\end{enumerate}
+
+\subsection{Ensamblado (Objetos --+ Codigo Maquina)}
+
+Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto programa que contiene un conjunto de objetos intrucciones, el ensamblado simplemente lo realiza cada instruccion, esto quiere decir que cada intruccion sabe ensamblarse. De esta forma realizamos el ensamblado del programa y obtenemos una lista de codigo maquina como resultado y como ultimo paso comparamos la lista de codigo maquina resultado con la lista codigo maquina esperado.
+
+\subsection{Decodificacion Codigo Maquina --+ Objetos (Iterprete)}
+La Decodificacion se verifica correctamente a la inversa del Ensamblado tomando el ensamblado del programa Qi que como sabemos es la lista de codigo maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado puede devolver dos cosas: 
+\begin{enumerate}
+\item \textbf{Lista de de Instrucciones (decodificacion)} 
+
+El resultado correcto es la lista de objetos instrucciones, por cada codigo maquina el interprete verifica los codigos de operacion para poder crear las instrucciones correctas y como ultimo paso de la verificacion comparamos la lista resultante con la lista esperada.
+\item\textbf{Error}
+
+El resultado puede ser un error porque puede pasar que el codigo de operacion o el codigo de algun modo de direccionamiento dentro del formato de cada instruccion sea invalido. La excepcion que puede tirar tiene el nombre de \textbf{CodigoInvalidoException}.   
+\end{enumerate}
+
+\subsection{Ejecucion}
+
+Para verificar que la ejecucion de un programa Qi con el \textbf{Ciclo de Instruccion} se realice correctamente lo que hacemos es cargar el programa en la memoria a traves del objeto \textbf{Simulador}, de esta forma cuando se encuentra cargado esta listo para la ejecucion. Los pasos que se verifican son 3:
+
+\begin{itemize}
+\item \textbf{Feth} 
+
+Para verificar el fetch se toma la instruccion siguiente a ejecutar y se compara el valor que se guarda en el registro ir con el valor esperado. Ademas se verifica que el registro especial pc apunte a la siguiente instruccion a ejecutar.
+
+\item \textbf{Decode}
+
+Para verificar el decode, se toma el valor del registro ir para que lo reciba el interprete que dara como resultado el objeto instruccion correspondiente. Este objeto instruccion sabe mostrarse quien es y por eso la responsabilidad de decodificar se la delega a la instruccion. Al obtener la decodificacion de cada instruccion podemos comparar la decodificacion resultante con la esperada.
+ 
+\item \textbf{Execute}
+
+Para verificar el efecto de cada instruccion se considero armar un caso de prueba por cada instruccion donde cada uno tiene un estado inicial y luego de realizar la ejecucion de dicha instruccion termina con un estado final modificado en el cual verificamos el resultado obtenido con el resultado esperado. 
+\end{itemize}
+
+\textbf{Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instruccion}
+  
+\subsubsection{Operaciones de ALU}
+
+La ALU es la encargada de ejecutar operaciones aritmeticas/logicas. Si la instruccion a ejecutar tiene un efecto aritmetico/logico se le delega la ejecucion de la operacion. Para poder verificar todas las operaciones creamos un caso de prueba por cada operacion. Tanto las operaciones aritmeticas como las logicas se analizan de la misma forma:
+
+\begin{enumerate}
+\item Se toma cada valor de los operandos(la busqueda se detalla el la siguiente instruccion)
+
+\item Se realiza la operacion aritmetica/logica. 
+
+\item Se verifica el resultado obtenido con el resultado esperado.
+
+\item Algunas operaciones (la mayoria) modifican los flags. la ALU tiene mucha relacion con los flags ya que por cada cuenta realizada actualiza los mismos. Estos tambien se se verifican comparando el resultado obtenido con el valor esperado. 
+\end{enumerate}
+
+\subsubsection{Busqueda de Operandos}
+
+Para verificar la busqueda de operandos, tomamos una instruccion cualquiera y probamos todas las combinaciones de modos de direccionamiento para cada operando, teniendo en cuenta que son invalidas todas las combinaciones de 1/2 operando/s que tenga el operando destino el modo de direccionamiento Inmediato. Al tener la instruccion elegida procedemos a obtener el valor de cada operando, este valor se lo compara con el valor esperado. 
+ 
+\subsubsection{Almacenamiento de Operandos}
+
+Para verificar el almacenamiento de operandos, salvo algunas instrucciones todas pasan por la etapa de store.
+Tomamos cada una de las instrucciones de un programa Qi y realizamos el ciclo de ejecucion mensionado anteriormente.
+Cuando estamos en la etapa de ejecucion, cada una tiene un operando destinado a guardar el resultado de su efecto.
+En esta instancia sabemos que  dicho operando tiene el valor guardado, a este valor lo comparamos con el valor esperado.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Ejemplos de uso}
+<<<<<<< HEAD
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Trabajo Futuro}
 
 \ojo{Incorporar push y pop/ mejorar el editor de programas Qi/Entrada y salida: modelar dispositivos como el teclado, etc}{}
+=======
+>>>>>>> d1dad07a272b016488f909e7459ca848c53f3344
