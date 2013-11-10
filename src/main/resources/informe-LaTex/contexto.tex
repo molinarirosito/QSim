@@ -49,7 +49,34 @@ Finalmente al saber de qué instrucción se trata la CPU ejecuta la instrucción
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Características generales(susi)} \label{caracteristicasQ}
 
-Aqui voy yo!!
+\begin{itemize}
+\item Tiene \textbf{8 registros} de uso general de 16 bits:\textbf{ R0..R7}.
+
+\item La memoria tiene \textbf{direcciones de 16 bits}.
+
+\item Tiene un contador de programas (\textbf{program counter}) de 16 bits.
+
+\item \textbf{Stack Pointer} de 16 bits. Comienza en la direccion FFEF.
+
+\item Flags: \textbf{Z,N,C,V}(Zero, Negative, Carry, Overflow).
+
+\item Todas las instrucciones alteran los flags excepto \textbf{MOV, CALL, RET, JMP, Jxx}.
+
+\item De las instrucciones que alteran los Flags, todas dejan C y V en 0 a excepcion de \textbf{ADD, SUB y CMP}.
+
+\item Las instrucciones que alteran Z y N:\textbf{ ADD, SUB, CMP, DIV, MUL, AND, OR, NOT}. Las 3 primeras ademas calcula C y V.
+
+\end{itemize}
+
+\textbf{Nota1:} El caracter \% denota el cociente de la división entera.\\
+
+\textbf{Nota2:} El resultado de la operación \textbf{MUL} ocupa 32 bits, almacenándose los 16 bits menos significativos en el operando destino y los 16 bits mas significativos en el registro \textbf{R7}.\\
+
+\textbf{Nota3:} Donde \textbf{rrr} es una codificación (en 3 bits) del número de registro.\\
+
+\textbf{Nota4:} Con este formato, los campos \code{\dest{}} y \code{\src{}} contienen valores constantes (si el modo respectivo es \textit{inmediato}), contienen direcciones de memoria principal (si el modo es \textit{directo}), o no existen (si el modo respectivo es \textit{registro}). \\
+
+\textbf{Nota5:} Saltos condicionales tiene como formato codop - desplazamiento donde los primeros 4 bits del campo codop corresponde a la cadea 1111. Las instrucciones en este formato son de la forma Jxx(salto relativo condicional).Si al evaluar la condicion de salto en los Flags el resultado es 1, el efecto es incrementar al PC con el valor de los 8 bits de desplazamiento, representado en complemento a 2 de 8 bits. En caso contrario la instruccion no hace nada. \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Modos de direccionamiento}
