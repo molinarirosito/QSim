@@ -92,6 +92,8 @@ La ALU es la encargada de ejecutar operaciones aritmeticas/logicas. Si la instru
 \item Algunas operaciones (la mayoria) modifican los flags. la ALU tiene mucha relacion con los flags ya que por cada cuenta realizada actualiza los mismos. Estos tambien se se verifican comparando el resultado obtenido con el valor esperado. 
 
 \subsubsection{Busqueda de Operandos (para los distintos modos de direccionamiento)}
+Para verificar la busqueda de operandos, tomamos una instruccion cualquiera y probamos todas las combinaciones de modos de direccionamiento para cada operando, teniendo en cuenta que son invalidas todas las combinaciones de 1/2 operando/s que tenga el operando destino el modo de direccionamiento Inmediato. Al tener la instruccion elegida procedemos a obtener el valor de cada operando, este valor se lo compara con el valor esperado. 
+ 
 
 \subsubsection{Almacenamiento de Operandos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
