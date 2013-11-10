@@ -168,6 +168,17 @@ object Util {
      val value = hexToInteger(hexNumber)
      toBinary16B(value)
    }
+   
+     /**
+   * Transforma una cadena hexadecimal en una cadena binaria de 4 bits.
+   * @param number: String
+   * @return String
+   */
+   def hexTo4Binary(hexNumber:String) :String =
+   {
+     val value = hexToInteger(hexNumber)
+     toBinary4B(value)
+   }
 
    def rep[A](n: Int)(f: => A) { if (n > 0) { f; rep(n-1)(f) } }
 

@@ -11,11 +11,6 @@ import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
 @Observable
 case class Simulador() {
 
-  private val NONE = 0
-  private val PROGRAM = 1
-  private val FECH_DECODE = 2
-  private val STORE = 3
-  private val EXECUTED = 4
 
   var mensaje_al_usuario = ""
   var cpu: CPU = _

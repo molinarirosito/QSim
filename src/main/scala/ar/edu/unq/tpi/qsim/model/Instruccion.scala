@@ -171,7 +171,7 @@ case class JVS(desp: Salto) extends JUMP_condicional("0111", "JVS", desp) {}
 
 object Testuds extends App {
 
-    println(MUL(R4, Inmediato("F0F0")).representacionHexadecimal)
+    println(Util.hexToBinary(CALL(Inmediato("F0F0")).representacionHexadecimal.substring(0, 4)).substring(0, 10))
     println(ADD( Inmediato("F0F0"), Directo(Inmediato("FFFF"))).representacionHexadecimal)
     println(DIV(Directo(Inmediato("0001")), Indirecto(Directo(Inmediato("0002")))).representacionHexadecimal)
     println(SUB(Indirecto(Directo(Inmediato("0003"))), RegistroIndirecto(R5)).representacionHexadecimal)

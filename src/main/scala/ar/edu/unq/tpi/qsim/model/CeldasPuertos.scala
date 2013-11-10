@@ -5,12 +5,6 @@ import org.uqbar.commons.utils.Observable
 @Observable
 case class CeldasPuertos {  
   
-  private val NONE = 0
-  private val PROGRAM = 1
-  private val FECH_DECODE = 2
-  private val STORE = 3
-  private val EXECUTED = 4
-  
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tpi.qsim.exeptions._
