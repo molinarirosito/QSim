@@ -1,0 +1,246 @@
+\section{Especificación de la arquitectura Q}\label{apendiceQ}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Características generales (susi)} 
+\ojo{ Dar forma de prosa!
+\begin{itemize}
+\item Tiene \textbf{8 registros} de uso general de 16 bits, denominados \textbf{R0..R7}.
+
+\item La memoria tiene \textbf{direcciones de 16 bits}.
+
+\item Tiene un contador de programas de 16 bits.
+
+\item \textbf{Stack Pointer} de 16 bits. Comienza en la direccion FFEF.
+
+\item Flags: \textbf{Z,N,C,V}(Zero, Negative, Carry, Overflow).
+
+\item Todas las instrucciones alteran los flags excepto \textbf{MOV, CALL, RET, JMP, Jxx}.
+
+\item De las instrucciones que alteran los Flags, todas dejan C y V en 0 a excepcion de \textbf{ADD, SUB y CMP}.
+
+\item Las instrucciones que alteran Z y N:\textbf{ ADD, SUB, CMP, DIV, MUL, AND, OR, NOT}. Las 3 primeras ademas calcula C y V.
+
+\end{itemize}
+}{La arquitectura Q tiene 8 registros de uso general de 16 bits, denominados R0...R7, los registros especificos incluyen un PC bla bla, un SP bla bla, un registro de flags bla bla... Todas las instrucciones alteran los flags...}
+
+\ojo{\textbf{Nota1:} El caracter \% denota el cociente de la división entera\\
+
+\textbf{Nota2:} El resultado de la operación \textbf{MUL} ocupa 32 bits, almacenándose los 16 bits menos significativos en el operando destino y los 16 bits mas significativos en el registro \textbf{R7}.\\
+
+\textbf{Nota3:} Donde \textbf{rrr} es una codificación (en 3 bits) del número de registro.\\
+
+\textbf{Nota4:} Con este formato, los campos \code{\dest{}} y \code{\src{}} contienen valores constantes (si el modo respectivo es \textit{inmediato}), contienen direcciones de memoria principal (si el modo es \textit{directo}), o no existen (si el modo respectivo es \textit{registro}). \\
+
+\textbf{Nota5:} Saltos condicionales tiene como formato codop - desplazamiento donde los primeros 4 bits del campo codop corresponde a la cadea 1111. Las instrucciones en este formato son de la forma Jxx(salto relativo condicional).Si al evaluar la condicion de salto en los Flags el resultado es 1, el efecto es incrementar al PC con el valor de los 8 bits de desplazamiento, representado en complemento a 2 de 8 bits. En caso contrario la instrucción no hace nada. \\.}{(Estas notas ponerlas como nota al pie donde corresponda)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Modos de direccionamiento}
+Los siguientes son los modos de direccionamiento implementados en la Arquitectura Q.
+\begin{enumerate}
+
+\item \textbf{Inmediato} \ojo{}{Representa un operando que denota un valor constante}\ojo{Este modo de direccionamiento es un valor que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{Es importante notar que este modo direccionamiento es admitido en el operando origen pero no el operando destino.} La codificación de este modo se indica en la tabla \ref{tablamodos}.
+
+Ejemplos:
+\begin{itemize}
+\item \textbf{0x0000} denota el modo de direccionamiento inmediato cuyo valor es cero.
+\item \textbf{0x000F} denota el modo de direccionamiento inmediato cuyo valor es 15.
+\end{itemize}
+
+
+\item \textbf{Directo}
+\ojo{Este modo de direccionamiento representa}{Con este modo de direccionamiento se denota un operando alojado en} una dirección de memoria o de puertos\ojo{que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{no va!}La codificación de este modo se indica en la tabla \ref{tablamodos}.
+
+Ejemplos:
+\begin{itemize}
+\item \textbf{[0x0000]} denota \ojo{el modo de direccionamiento directo}{un operando} cuyo valor se encuentra en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x0000}.
+\item \textbf{[0x000F]} denota  \ojo{el modo de direccionamiento directo}{un operando} cuyo valor se encuentra en la celda de memoria\ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x000F}.
+\end{itemize}
+
+
+\item \textbf{Indirecto}
+\ojo{Este modo de direccionamiento representa una dirección de memoria o de puertos que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{Con este modo de direccionamiento se denota un operando alojado en una celda de memoria cuya dirección está almacenada en otra celda de memoria.} La codificación de este modo se indica en la tabla \ref{tablamodos}.
+
+Ejemplos:
+\begin{itemize}
+\item \textbf{[[0x0000]]} denota \ojo{el modo de direccionamiento indirecto} {un operando} cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x0000}
+\item \textbf{[[0x000F]]} denota \ojo{el modo de direccionamiento indirecto} {un operando} cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x000F}
+\end{itemize}
+
+\item \textbf{Registro}\ojo{Donde "rrr" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.}{Con este modo de direccionamiento se denota un operando alojado en un registro de uso general (R0 a R7)} La codificación de este modo se indica en la tabla \ref{tablamodos}.
+
+Ejemplos:
+\textbf{R0} \ojo{representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R0}.}{denota un operando almacenado en el registro R0} 
+\textbf{R7} \ojo{representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R7}.}{denota un operando almacenado en el registro R7}
+
+\item \textbf{RegistroIndirecto} \ojo{Donde "rrr" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.}{De manera similar al modo indirecto, con este modo de direccionamiento se denota un operando alojado en una celda de memoria cuya dirección está almacenada en el registro indicado} La codificación de este modo se indica en la tabla \ref{tablamodos}.
+
+
+Ejemplos:
+\textbf{[R0]} \ojo{representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R0}.}{denota un operando almacenado en una celda de memoria cuya dirección está en el registro R0}
+\textbf{[R7]} \ojo{representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R7}.}{denota un operando almacenado en una celda de memoria cuya dirección está en el registro R7}
+
+\end{enumerate}
+
+\tabla{|l|l|l|}{
+\textbf{Modo}       &  \textbf{Codificación}\\ \hline\hline
+Inmediato   &  000000\\ \hline
+Directo     &  001000\\ \hline
+Indirecto   &  011000\\ \hline
+Registro    &  100rrr\\ \hline
+Registro indirecto &  110rrr\\ \hline
+}{\label{tablamodos}Tabla de códigos de los modos de direccionamiento (Nota: rrr describe el número de registro)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Repertorio de instrucciones}
+En esta sección se detalla cómo se construye el código máquina de las instrucciones de la arquitectura.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Instrucciones de 2 operandos}
+
+\ojo{El formato de instruccion}{A continuación se muestra la codificación (formato) de las instrucciones} de dos operandos:
+
+\formatoinstr{|c|c|c|c|c|c|}{
+Codigo de Operación  & \mdest{}& \msrc{}  & \dest{} & \src{}\\
+(4b)     &   (6b)  &  (6b)   &  (16b)  &  (16b)} 
+
+
+
+\ojo{Donde el operando destino no puede ser un modo de direccionamiento Inmediato, ya que en la dirección de memoria o registro que describa dicho operando es donde se guardará el resultado de la operación.}{(Explicar un poco mas) Las instrucciones de dos operandos descriptas a continuación son instrucciones aritméticas o lógicas donde se asume que el resultado de la operación se almacena en uno de los dos operandos de entrada, y por lo tanto se lo denomina \textbf{operando destino}.}
+
+\begin{enumerate}
+\item \textbf{MUL destino, origen}
+Código de operación: 0000
+Esta instrucción describe la multiplicación entre los datos de los dos operandos. Esta operación es la única que cuyo resultado puede ser 32 bits, que son \ojo{dos celdas de memoria en hexadecimal}{No entiendo!}, por lo que los primeros 16 bits, es decir, la primer mitad, es guardada en el registro R7 y la segunda en el operando destino.
+ 
+\item \textbf{ADD destino, origen}
+Código de operación: 0010
+Esta instrucción describe la suma entre los datos de los dos operandos. El resultado de la ejecución de la suma es guardado en el operando destino.
+
+\item \textbf{SUB destino, origen}
+Código de operación: 0011
+Esta instrucción describe la resta entre los datos de los dos operandos. El resultado de la ejecución de dicha resta es guardado en el operando destino.
+
+\item \textbf{DIV destino, origen}
+Código de operación: 0111
+Esta instrucción describe la división entre el dato en el operando destino como dividendo y el dato en el operando origen como divisor. El resultado de la ejecución de la división es guardado en el operando destino.
+
+\item \textbf{MOV destino, origen}
+Código de operación: 0001
+Esta instrucción describe la copia de datos del dato alojado en el operando origen al operando destino. El resultado de la ejecución del MOV es el dato guardado en el operando origen ahora también guardado en el operando destino.
+
+\item \textbf{AND destino, origen}
+Código de operación: 0100
+Esta instrucción describe la operación logica "y" bit a bit entre los datos de los dos operandos. El resultado de la ejecución de esta operación es guardado en el operando destino.
+
+\item \textbf{CMP destino, origen}
+Código de operación: 0110
+Esta instrucción describe la comparación bit a bit entre los datos de los dos operandos. El resultado de esta operación es solamente la actualización de flags en la cpu.
+
+\item \textbf{OR destino, origen}
+Código de operación: 0101
+Esta instrucción describe la operación logica "o" bit a bit entre los datos de los dos operandos. El resultado de la ejecución de esta operación es guardado en el operando destino.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Instrucciones de 1 operando origen  (falta revisar Mara)}
+
+El formato de instruccion de un operando origen es el siguiente:
+
+  CodOp   +   relleno   +  Modo origen +   Origen
+(4 bits)      (000000)        (6 bits)    (16 bits)
+
+\begin{enumerate}
+\item \textbf{CALL origen}
+Código de operación: 1011
+El efecto del CALL es guardar la direccion de memoria en la celda de la dirección que se encuentra guardadad en el SP (Stack pointer) aumentar el SP y guardar en el PC (Program Counter) el dato que se encuentra guardado en el operando origen ya que describe el llamado a una subrutina que comienza en la celda de memoria cuya direccion esta guardada en el operando origen.
+
+\item \textbf{JMP origen}
+Código de operación: 0110
+El efecto del JMP es cambiar el PC (Program Counter) por el dato que esta guardado en el operando origen ya que esta operación describe el salto a otra parte de la memoria para continuar con la ejecución del programa.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Instrucciones de 1 operando destino  (falta revisar Mara)}
+
+El formato de instrucción de un operando destino es el siguiente:
+
+  CodOp   +  Modo origen  +  relleno  +  Origen
+(4 bits)      (6 bits)      (000000)    (16 bits)
+
+\begin{enumerate}
+\item \textbf{NOT destino}
+Código de operación: 1001
+Esta instrucción describe la operación logica "negación" bit a bit en el datos del operando destino. El resultado de la ejecución de esta operación es guardado en la misma celda o registro de donde es leído el dato inicialmente.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Instrucciones sin operandos  (falta revisar Mara)}
+
+El formato de instrucción sin operandos es el siguiente:
+
+ CodOp     +    relleno 
+(4 bits)     (000000000000)
+
+
+\begin{enumerate}
+\item \textbf{RET}
+Código de operación: 0110
+El efecto del ret es cambiar el pc por el dato que esta guardado en la celda de memoria que se encuentra en el SP (Stack pointer) y decrementar el SP ya que describe la finalización de la ejecución de una subrutina y la ejecución del resto del programa.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Instrucciones de salto condicional  (falta revisar Mara)}
+
+El formato de instrucción de salto condicional es el siguiente es el siguiente:
+
+ prefijo +   CodOp   +  desplazamiento 
+ (1111)     (4 bits)     (8 bits)
+
+El efecto de cualquier salto condicional es aumentar el PC (Program Counter) en la cantidad de celdas que indique el desplazamiento si sólo la condición que cada salto condicional tiene da como resultado 1, lo cual es interpretado como verdadero.
+
+\begin{enumerate}
+\item \textbf{JE desplazamiento}
+Código de operación: 0001
+La condición del salto es que el flag \textbf{Z} (Cero) sea 1, es decir la ultima operación matemática dió como resultado el número cero.
+
+\item \textbf{JNE desplazamiento}
+Código de operación: 1001
+La condición del salto es que el flag \textbf{Z} (Cero) sea 0, es decir la ultima operación matemática no dió como resultado el número cero.
+
+\item \textbf{JLE desplazamiento}
+Código de operación: 0010
+La condición del salto es el resultado de la siguiente operación lógica \textbf{Z OR ( N XOR V )}, es decir la ultima operación matemática es menor o igual con signo.
+
+\item \textbf{JG desplazamiento}
+Código de operación: 1010
+La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (Z OR ( N XOR V ))}, es decir la ultima operación matemática es mayor con signo.
+
+\item \textbf{JL desplazamiento}
+Código de operación: 0011
+La condición del salto es el resultado de la siguiente operación lógica \textbf{N XOR V}, es decir la ultima operación matemática es menor con signo.
+
+\item \textbf{JGE desplazamiento}
+Código de operación: 1011
+La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (N XOR V)}, es decir la ultima operación matemática es mayor o igual con signo.
+
+\item \textbf{JLEU desplazamiento}
+Código de operación: 0100
+La condición del salto es el resultado de la siguiente operación lógica \textbf{C OR Z}, es decir la ultima operación matemática es menor o igual sin signo.
+
+\item \textbf{JGU desplazamiento}
+Código de operación: 1100
+La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (C OR Z)}, es decir la ultima operación matemática es mayor sin signo.
+
+\item \textbf{JCS desplazamiento}
+Código de operación: 0101
+La condición del salto es que el flag \textbf{C} sea 1, es decir la ultima operación matemática es menor sin signo.
+
+\item \textbf{JNEG desplazamiento}
+Código de operación: 0101
+La condición del salto es que el flag \textbf{N} sea 1, es decir si el último resultado de una operación dio negativo.
+
+\item \textbf{JVS desplazamiento}
+Código de operación: 0111
+La condición del salto es que el flag \textbf{V} sea 1, es decir si el último resultado de una operación dio overflow.
+
+\end{enumerate}

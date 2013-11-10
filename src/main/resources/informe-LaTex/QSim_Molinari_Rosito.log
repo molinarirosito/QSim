@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.10)  8 NOV 2013 23:54
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.10)  10 NOV 2013 11:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -611,123 +611,257 @@ LaTeX Info: Redefining \% on input line 15.
 LaTeX Info: Redefining \. on input line 15.
 LaTeX Info: Redefining \% on input line 15.
  [3] (./introduccion.tex) (./contexto.tex
-Underfull \hbox (badness 10000) in paragraph at lines 8--9
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
 
 
-Overfull \hbox (10.36345pt too wide) in paragraph at lines 10--12
-\OT1/cmr/bx/n/10 pro-gra-ma al-ma-ce-na-do[]\OT1/cmr/m/n/12 contiene un con-jun
--to de in-struc-ciones que pod^^S^^Pan
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--18
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
  []
 
-LaTeX Info: Redefining \. on input line 18.
-LaTeX Info: Redefining \% on input line 18.
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+
+ []
+
+LaTeX Info: Redefining \. on input line 17.
+LaTeX Info: Redefining \% on input line 17.
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 19--20
+Underfull \hbox (badness 10000) in paragraph at lines 20--21
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 21--22
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--24
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 25--26
+Underfull \hbox (badness 10000) in paragraph at lines 26--27
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 27--28
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--30
+Underfull \hbox (badness 10000) in paragraph at lines 30--31
 
  []
 
-LaTeX Info: Redefining \. on input line 32.
-LaTeX Info: Redefining \% on input line 32.
-LaTeX Info: Redefining \. on input line 32.
-LaTeX Info: Redefining \% on input line 32.
-[5] <ciclo.pdf, id=271, 492.89142pt x 446.14178pt>
+LaTeX Info: Redefining \. on input line 33.
+LaTeX Info: Redefining \% on input line 33.
+LaTeX Info: Redefining \. on input line 33.
+LaTeX Info: Redefining \% on input line 33.
+[5] <ciclo.pdf, id=309, 492.89142pt x 446.14178pt>
 File: ciclo.pdf Graphic file (type pdf)
  <use ciclo.pdf>
-Package pdftex.def Info: ciclo.pdf used on input line 40.
-(pdftex.def)             Requested size: 170.71652pt x 154.52495pt.
+Package pdftex.def Info: ciclo.pdf used on input line 41.
+(pdftex.def)             Requested size: 199.16928pt x 180.27797pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--45
+Underfull \hbox (badness 10000) in paragraph at lines 44--46
 
  []
 
-LaTeX Info: Redefining \. on input line 45.
-LaTeX Info: Redefining \% on input line 45.
-LaTeX Info: Redefining \. on input line 45.
-LaTeX Info: Redefining \% on input line 45.
+LaTeX Info: Redefining \. on input line 46.
+LaTeX Info: Redefining \% on input line 46.
+LaTeX Info: Redefining \. on input line 46.
+LaTeX Info: Redefining \% on input line 46.
 [6 <./ciclo.pdf>]
-LaTeX Info: Redefining \. on input line 75.
-LaTeX Info: Redefining \% on input line 75.
- [7]
-LaTeX Info: Redefining \. on input line 120.
-LaTeX Info: Redefining \% on input line 120.
-LaTeX Info: Redefining \. on input line 120.
-LaTeX Info: Redefining \% on input line 120.
- [8]
-LaTeX Info: Redefining \. on input line 153.
-LaTeX Info: Redefining \% on input line 153.
-LaTeX Info: Redefining \. on input line 153.
-LaTeX Info: Redefining \% on input line 153.
- [9]
-Overfull \hbox (0.6661pt too wide) in paragraph at lines 215--216
-[]\OT1/cmr/m/n/10 El efec-to de cualquier salto condi-cional es au-men-tar el P
-C (Pro-gram Counter)
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+
  []
 
-LaTeX Info: Redefining \. on input line 218.
-LaTeX Info: Redefining \% on input line 218.
-LaTeX Info: Redefining \. on input line 218.
-LaTeX Info: Redefining \% on input line 218.
-[10]
-LaTeX Info: Redefining \. on input line 271.
-LaTeX Info: Redefining \% on input line 271.
-LaTeX Info: Redefining \. on input line 271.
-LaTeX Info: Redefining \% on input line 271.
- [11]
-LaTeX Info: Redefining \. on input line 332.
-LaTeX Info: Redefining \% on input line 332.
-LaTeX Info: Redefining \. on input line 332.
-LaTeX Info: Redefining \% on input line 332.
- [12]) (./simulador.tex
-LaTeX Info: Redefining \. on input line 9.
-LaTeX Info: Redefining \% on input line 9.
-LaTeX Info: Redefining \. on input line 9.
-LaTeX Info: Redefining \% on input line 9.
- [13]
-LaTeX Info: Redefining \. on input line 32.
-LaTeX Info: Redefining \% on input line 32.
- [14]
+
+Underfull \hbox (badness 10000) in paragraph at lines 54--56
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+
+ []
+
 LaTeX Info: Redefining \. on input line 58.
 LaTeX Info: Redefining \% on input line 58.
-LaTeX Info: Redefining \. on input line 58.
-LaTeX Info: Redefining \% on input line 58.
- [15]
-<ALU.pdf, id=452, 746.53906pt x 475.7775pt>
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+
+ []
+
+LaTeX Info: Redefining \. on input line 88.
+LaTeX Info: Redefining \% on input line 88.
+[8]
+LaTeX Info: Redefining \. on input line 151.
+LaTeX Info: Redefining \% on input line 151.
+LaTeX Info: Redefining \. on input line 151.
+LaTeX Info: Redefining \% on input line 151.
+ [9]) (./simulador.tex
+LaTeX Info: Redefining \. on input line 20.
+LaTeX Info: Redefining \% on input line 20.
+LaTeX Info: Redefining \. on input line 20.
+LaTeX Info: Redefining \% on input line 20.
+ [10]
+
+LaTeX Warning: Reference `caracteristicasQ' on page 11 undefined on input line 
+40.
+
+LaTeX Info: Redefining \. on input line 41.
+LaTeX Info: Redefining \% on input line 41.
+LaTeX Info: Redefining \. on input line 41.
+LaTeX Info: Redefining \% on input line 41.
+[11]
+LaTeX Info: Redefining \. on input line 63.
+LaTeX Info: Redefining \% on input line 63.
+LaTeX Info: Redefining \. on input line 63.
+LaTeX Info: Redefining \% on input line 63.
+ [12] <ALU.pdf, id=437, 746.53906pt x 475.7775pt>
 File: ALU.pdf Graphic file (type pdf)
  <use ALU.pdf>
-Package pdftex.def Info: ALU.pdf used on input line 78.
+Package pdftex.def Info: ALU.pdf used on input line 95.
 (pdftex.def)             Requested size: 345.0pt x 219.8694pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+<BusEntradaSalida_Memoria_CeldasPuertos.pdf, id=439, 1232.22859pt x 359.66873pt
+>
+File: BusEntradaSalida_Memoria_CeldasPuertos.pdf Graphic file (type pdf)
+ <use BusEntradaSalida_Memoria_CeldasPuertos.pdf>
+Package pdftex.def Info: BusEntradaSalida_Memoria_CeldasPuertos.pdf used on inp
+ut line 102.
+(pdftex.def)             Requested size: 345.0pt x 100.69557pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Info: Redefining \. on input line 107.
+LaTeX Info: Redefining \% on input line 107.
+[13] <CPU.pdf, id=448, 1284.29813pt x 542.025pt>
+File: CPU.pdf Graphic file (type pdf)
+ <use CPU.pdf>
+Package pdftex.def Info: CPU.pdf used on input line 108.
+(pdftex.def)             Requested size: 345.0pt x 145.60434pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Interprete.pdf, id=450, 816.17422pt x 266.9975pt>
+File: Interprete.pdf Graphic file (type pdf)
+ <use Interprete.pdf>
+Package pdftex.def Info: Interprete.pdf used on input line 114.
+(pdftex.def)             Requested size: 345.0pt x 112.85928pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Info: Redefining \. on input line 119.
+LaTeX Info: Redefining \% on input line 119.
+LaTeX Info: Redefining \. on input line 119.
+LaTeX Info: Redefining \% on input line 119.
+[14 <./ALU.pdf> <./BusEntradaSalida_Memoria_CeldasPuertos.pdf
+
+pdfTeX warning: pdflatex (file ./BusEntradaSalida_Memoria_CeldasPuertos.pdf): P
+DF inclusion: multiple pdfs with page group included in a single page
+>]
+LaTeX Info: Redefining \. on input line 130.
+LaTeX Info: Redefining \% on input line 130.
+LaTeX Info: Redefining \. on input line 130.
+LaTeX Info: Redefining \% on input line 130.
+ [15 <./CPU.pdf> <./Interprete.pdf
+
+pdfTeX warning: pdflatex (file ./Interprete.pdf): PDF inclusion: multiple pdfs 
+with page group included in a single page
+>] <ModoDireccionamiento.pdf, id=470, 1238.37656pt x 541.39766pt>
+File: ModoDireccionamiento.pdf Graphic file (type pdf)
+
+<use ModoDireccionamiento.pdf>
+Package pdftex.def Info: ModoDireccionamiento.pdf used on input line 140.
+(pdftex.def)             Requested size: 345.0pt x 150.83029pt.
+
+<Instruccion.pdf, id=472, 926.6921pt x 489.32813pt>
+File: Instruccion.pdf Graphic file (type pdf)
+ <use Instruccion.pdf>
+Package pdftex.def Info: Instruccion.pdf used on input line 155.
+(pdftex.def)             Requested size: 345.0pt x 182.16855pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `InstruccionSinOperandos' on page 16 undefined on inpu
+t line 158.
+
+<Instruccion_SinOperandos.pdf, id=474, 282.93204pt x 209.6081pt>
+File: Instruccion_SinOperandos.pdf Graphic file (type pdf)
+
+<use Instruccion_SinOperandos.pdf>
+Package pdftex.def Info: Instruccion_SinOperandos.pdf used on input line 160.
+(pdftex.def)             Requested size: 345.0pt x 255.61275pt.
+LaTeX Info: Redefining \. on input line 160.
+LaTeX Info: Redefining \% on input line 160.
+LaTeX Info: Redefining \. on input line 160.
+LaTeX Info: Redefining \% on input line 160.
+ [16 <./ModoDireccionamiento.pdf>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `InstruccionUnOperando' on page 17 undefined on input 
+line 163.
+
+<Instruccion_UnOperando.pdf, id=482, 1335.61484pt x 635.07263pt>
+File: Instruccion_UnOperando.pdf Graphic file (type pdf)
+
+<use Instruccion_UnOperando.pdf>
+Package pdftex.def Info: Instruccion_UnOperando.pdf used on input line 172.
+(pdftex.def)             Requested size: 345.0pt x 164.03935pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `InstruccionDosOperandos' on page 17 undefined on inpu
+t line 177.
+
+<Instruccion_DosOperandos.pdf, id=483, 1547.0297pt x 656.8289pt>
+File: Instruccion_DosOperandos.pdf Graphic file (type pdf)
+
+<use Instruccion_DosOperandos.pdf>
+Package pdftex.def Info: Instruccion_DosOperandos.pdf used on input line 179.
+(pdftex.def)             Requested size: 345.0pt x 146.4772pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Programa.pdf, id=485, 859.46094pt x 380.79765pt>
+File: Programa.pdf Graphic file (type pdf)
+ <use Programa.pdf>
+Package pdftex.def Info: Programa.pdf used on input line 191.
+(pdftex.def)             Requested size: 345.0pt x 152.85672pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Info: Redefining \. on input line 199.
+LaTeX Info: Redefining \% on input line 199.
+LaTeX Info: Redefining \. on input line 199.
+LaTeX Info: Redefining \% on input line 199.
+[17 <./Instruccion.pdf>] <simulador.pdf, id=496, 1169.49422pt x 447.37138pt>
+File: simulador.pdf Graphic file (type pdf)
+
+<use simulador.pdf>
+Package pdftex.def Info: simulador.pdf used on input line 200.
+(pdftex.def)             Requested size: 345.0pt x 131.9734pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -735,7 +869,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ) (./evaluacion-desarrollo.tex
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
- [16]
+ [18 <./Instruccion_SinOperandos.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 11--12
 
  []
@@ -744,58 +878,149 @@ LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
-[17 <./ALU.pdf>])
-Overfull \hbox (6.46457pt too wide) in paragraph at lines 33--20
+[19 <./Instruccion_UnOperando.pdf> <./Instruccion_DosOperandos.pdf
+
+pdfTeX warning: pdflatex (file ./Instruccion_DosOperandos.pdf): PDF inclusion: 
+multiple pdfs with page group included in a single page
+>]
+LaTeX Info: Redefining \. on input line 18.
+LaTeX Info: Redefining \% on input line 18.
+LaTeX Info: Redefining \. on input line 18.
+LaTeX Info: Redefining \% on input line 18.
+ [20 <./Programa.pdf> <./simulador.pdf
+
+pdfTeX warning: pdflatex (file ./simulador.pdf): PDF inclusion: multiple pdfs w
+ith page group included in a single page
+>]
+LaTeX Info: Redefining \. on input line 49.
+LaTeX Info: Redefining \% on input line 49.
+ [21]
+Overfull \hbox (9.15834pt too wide) in paragraph at lines 50--50
+[]\OT1/cmr/bx/n/12 Decodificacion Codi-go Maquina --+ Ob-je-tos (Iter-prete) 
+ []
+
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
+[22])
+Overfull \hbox (6.46457pt too wide) in paragraph at lines 113--20
 []\OT1/cmr/m/n/12 Incorporar push y pop/ mejo-rar el ed-i-tor de pro-gra-mas Qi
 /Entrada
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 39.
-LaTeX Info: Redefining \. on input line 39.
-LaTeX Info: Redefining \% on input line 39.
-[18]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 39.
+(./arquitecturasQ.tex
+LaTeX Info: Redefining \. on input line 24.
+LaTeX Info: Redefining \% on input line 24.
+ [23]
+Underfull \hbox (badness 10000) in paragraph at lines 34--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--34
+
+ []
+
+LaTeX Info: Redefining \. on input line 35.
+LaTeX Info: Redefining \% on input line 35.
+[24]
+LaTeX Info: Redefining \. on input line 66.
+LaTeX Info: Redefining \% on input line 66.
+LaTeX Info: Redefining \. on input line 66.
+LaTeX Info: Redefining \% on input line 66.
+ [25]
+LaTeX Info: Redefining \. on input line 103.
+LaTeX Info: Redefining \% on input line 103.
+LaTeX Info: Redefining \. on input line 103.
+LaTeX Info: Redefining \% on input line 103.
+ [26]
+Overfull \hbox (12.01729pt too wide) in paragraph at lines 107--108
+[]\OT1/cmr/m/n/12 Donde el operan-do des-ti-no no puede ser un mo-do de di-rec-
+cionamien-
+ []
+
+LaTeX Info: Redefining \. on input line 137.
+LaTeX Info: Redefining \% on input line 137.
+LaTeX Info: Redefining \. on input line 137.
+LaTeX Info: Redefining \% on input line 137.
+[27]
+Overfull \hbox (0.6661pt too wide) in paragraph at lines 199--200
+[]\OT1/cmr/m/n/10 El efec-to de cualquier salto condi-cional es au-men-tar el P
+C (Pro-gram Counter)
+ []
+
+LaTeX Info: Redefining \. on input line 200.
+LaTeX Info: Redefining \% on input line 200.
+LaTeX Info: Redefining \. on input line 200.
+LaTeX Info: Redefining \% on input line 200.
+[28])
+LaTeX Info: Redefining \. on input line 31.
+LaTeX Info: Redefining \% on input line 31.
+LaTeX Info: Redefining \. on input line 31.
+LaTeX Info: Redefining \% on input line 31.
+ [29]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 42.
+LaTeX Info: Redefining \. on input line 42.
+LaTeX Info: Redefining \% on input line 42.
+LaTeX Info: Redefining \. on input line 42.
+LaTeX Info: Redefining \% on input line 42.
+ [30]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 42.
  (./QSim_Molinari_Rosito.aux
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 42.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 42.
 Package rerunfilecheck Info: File `QSim_Molinari_Rosito.out' has not changed.
-(rerunfilecheck)             Checksum: D427BC3D73DD02020D1F5E9CA950E001;2763.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 39.
+(rerunfilecheck)             Checksum: BC8400C60559261BDB5265979E4805D2;4140.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 42.
  ) 
 Here is how much of TeX's memory you used:
- 7509 strings out of 495059
- 102066 string characters out of 3182030
- 201634 words of memory out of 3000000
- 10403 multiletter control sequences out of 15000+200000
- 13636 words of font info for 52 fonts, out of 3000000 for 9000
+ 7655 strings out of 495059
+ 104577 string characters out of 3182030
+ 203634 words of memory out of 3000000
+ 10491 multiletter control sequences out of 15000+200000
+ 14107 words of font info for 54 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,16n,45p,1630b,696s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{Hfootnote.39} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.38} has been referenced but does not exis
-t, replaced by a fixed one
-
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on QSim_Molinari_Rosito.pdf (18 pages, 474479 bytes).
+ 36i,13n,45p,1630b,712s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on QSim_Molinari_Rosito.pdf (30 pages, 2227679 bytes).
 PDF statistics:
- 568 PDF objects out of 1000 (max. 8388607)
- 522 compressed objects within 6 object streams
- 182 named destinations out of 1000 (max. 500000)
- 323 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 768 PDF objects out of 1000 (max. 8388607)
+ 697 compressed objects within 7 object streams
+ 226 named destinations out of 1000 (max. 500000)
+ 493 words of extra memory for PDF output out of 10000 (max. 10000000)
 

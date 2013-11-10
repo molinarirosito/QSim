@@ -19,7 +19,8 @@
 \newcommand{\IR}{registro IR}
 \newcommand{\UC}{Unidad de Control}
 \newcommand{\ALU}{Unidad Aritmético-Lógica}
-\newcommand{\PC}{\textit{Program Counter}}
+\newcommand{\PC}{Contador de programa}
+\newcommand{\SP}{Puntero de pila}
 \newcommand{\ciclo}{ciclo de ejecución de instrucción}
 \newcommand{\BI}{búsqueda de instrucción}
 \newcommand{\DI}{decodificación de la instrucción}
@@ -53,4 +54,28 @@
 \caption{#3}
 \end{center}
 \end{table}
+}
+
+
+\newcommand{\code}[1]{\begin{small}\texttt{#1}\end{small}}
+
+\newcommand{\dest}{Destino}
+\newcommand{\src}{Origen}
+
+\newcommand{\mdest}{Modo Destino}
+\newcommand{\msrc}{Modo Origen}
+
+\newcommand{\formatoinstr}[2]{
+\begin{center}
+\begin{tabular}{#1}
+\hline #2\\ \hline 
+\end{tabular}
+\end{center}
+}
+
+\newcommand{\formatoinst}[3]{
+\codepeq{\begin{tabular}{#1}
+\headermulti{#2}{\normal{Formato de Instrucción}}
+#3\\ \hline 
+\end{tabular}}
 }

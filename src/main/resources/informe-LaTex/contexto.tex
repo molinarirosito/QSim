@@ -7,35 +7,29 @@
 
 \subsection{Enfoque de Von Neumann}
 
-El matemático John Von Neumann en el año 1945 que por ese entonces se encontraba colaborando en el proyecto  ENIAC, se comenzó a interesar por la problemática que significaba la la necesidad de reconfigurar la máquina para cada nueva tarea y tan sólo cuatro años más tarde propone y desarrolla una solución a este problema la cual consistentía en poner la información sobre las operaciones a realizar en la misma memoria utilizada para los datos escribiendola en código binario al igual que los datos.
+El matemático John Von Neumann en el año 1945 se encontraba colaborando en el proyecto ENIAC (\textit{Electronic Numerical Integrator And Computer}, primer computadora electrónica de propósito general, diseñada para ser utilizada por el ejército norteamericano. La ENIAC podía ser programada para realizar operaciones complejas e incluso decisiones, iteraciones y subrutinas, pero la tarea de resolver un problema y volcarlo en la máquina era tan complejo que podía tomar semanas. Luego que el programa era diseñado en papel, el proceso de representarlo en la máquina ENIAC mediante la manipulación de cables e interruptores tomaba varios días. Entonces Von Neumann se comenzó a interesar por la problemática que significaba la la necesidad de reconfigurar la máquina para cada nueva tarea y tan sólo cuatro años más tarde propone y desarrolla una solución a este problema que se basaba en almacenar la información sobre las operaciones a realizar en la misma memoria utilizada para los datos, a partir de su codificación en código binario al igual que los datos.\\
 
-Este enfoque generaliza la organización de las computadoras distinguiendo en tres partes interconectadas: La CPU (con la unidad aritmético-lógica o ALU y la unidad de control) la memoria, y un módulo de entrada/salida. La interconexión es llevada a cabo por un un bus de sistema que proporciona un medio de transporte de los datos entre las distintas partes. \\
+Además, este enfoque generaliza la organización de las computadoras distinguiendo en tres partes interconectadas: La CPU (con la unidad aritmético-lógica o ALU y la unidad de control) la memoria, y un módulo de entrada/salida. La interconexión es llevada a cabo por un bus de sistema que proporciona un medio de transporte de los datos entre las distintas partes. \\
 
-Con la propuesta de este modelo Von Neumann incorpora el concepto de \textbf{programa almacenado}\ojo{ contiene un conjunto de instrucciones que podían ser almacenadas en memoria, o sea, un programa que detalla la computación del mismo}{no entiendo esta frase. la puse yo? Si mara, jajaja que hacemos? (tati)}. Con esta idea, el programa se codifica de cierta manera para que pueda ser almacenado en memoria principal y posteriormente ejecutado quizás múltiples veces. De esta manera, la lógica del programa puede ser ''recordada'' y el programa toma un valor mayor, a diferencia de lo que ocurría hasta entonces, donde el programa se reflejaba en un conjunto de configuraciones de cables aplicadas a los equipos. Esto implica una separación entre el mecanismo de ejecución (el hadware) y la lógica de computo o instrucciones (el software).
+Con la propuesta de este modelo, Von Neumann incorpora el concepto de \textbf{programa almacenado} en memoria. Con esta idea, el programa se codifica de cierta manera para que pueda ser almacenado en memoria principal y posteriormente pueda ser ejecutado quizás múltiples veces. De esta manera, la lógica del programa puede ser ''recordada'' y el programa toma un valor mayor, a diferencia de lo que ocurría hasta entonces, donde el programa se reflejaba en un conjunto de configuraciones de cables aplicadas a los equipos. Esto implica una separación entre el mecanismo de ejecución (el \textit{hardware}) y la lógica de computo o instrucciones (el \textit{software}). La codificación en binario de las instrucciones de un programa se denomina \textbf{\codmaq}.\\
 
-Este tipo del diseño que permite un programa almacenado también da la posibilidad de que la ejecución de las instrucciones modifique el código máquina del mismo u otro programa. Por ejemplo un programa podría modificar o incrementar las referencias a las direcciones de memoria que tenga en algunas instrucciones y luego volver a ejecutar dichas instrucciones con el fin de procesar celdas diferentes de memoria cada vez. Esta característica es potente pero presenta un alto riesgo pues las modificaciones en los programas podía ser algo perjudicial, por accidente o por diseño.
+Por otro lado este tipo de diseño, que permite un programa almacenado, también da la posibilidad de que la ejecución de las instrucciones modifique el código máquina del mismo u otro programa. Por ejemplo un programa podría modificar o incrementar las referencias a las direcciones de memoria que tenga en algunas instrucciones y luego volver a ejecutar dichas instrucciones con el fin de procesar celdas diferentes de memoria cada vez. Esta característica es potente pero presenta un alto riesgo pues las modificaciones en los programas podía ser algo perjudicial, por accidente o por diseño.
 
 \subsection{Organización de la computadora}
 
-La CPU (Unidad Central de Procesamiento del inglés: Central Processing Unit), es el componente principal y el encargado ejecutar los programas y procesar los datos. La CPU contiene otros componentes de importancia tales como la \textbf{Unidad de Control}, el contador de programa (PC o \PC), el registro de instrucción (IR - \textit{Instruction Register}), otros registros de uso específico y general y la Unidad Aritmético-Lógica (ALU).\\
+La CPU (Unidad Central de Procesamiento del inglés: Central Processing Unit), es el componente principal y el encargado ejecutar los programas y procesar los datos. La CPU contiene otros componentes de importancia tales como la \UC, algunos registros de uso específico como el contador de programa (PC o \textit{Program Counter}), el registro de instrucción (IR - \textit{Instruction Register}) y el \SP\ (SP - \textit{Stack pointer}), otros registros de uso general y la Unidad Aritmético-Lógica (ALU).\\
 
 La \UC\ dirige el ciclo de ejecución de cada instrucción, pidiendo la lectura de celdas de memoria donde esta alojada, decodificándola  y ejecutándola luego en colaboración con los otros componentes del sistema: si es una operación lógica o aritmética le ordena a la ALU su ejecución, si es de movimiento de datos colabora con la memoria ó el módulo de Entrada/Salida.\\
 
-El contador de programa (en inglés \PC\ o PC) es un registro que indica la posición de memoria donde estará la siguiente instrucción que debe ejecutarse. Luego de completar el ciclo de ejecución de una instrucción, el PC se incrementa en función de la cantidad de celdas que ocupa el código máquina de esta.\\
+Entre los registros de uso específico, los más importantes son el \textbf{\PC} y el \textbf{\IR}. El \PC\ es un registro que indica la posición de memoria donde estará la siguiente instrucción que debe ejecutarse. Luego de completar el ciclo de ejecución de una instrucción, el PC se incrementa en función de la cantidad de celdas que ocupa el código máquina de esta. El registro de instrucción contiene el código máquina de la instrucción actual una vez que la misma es leída de memoria para luego decodificarla y ejecutarla.\verde{Falta hablar del SP y los flagsssss}{}\\
 
-El registro de instrucción contiene el código máquina de la instrucción actual una vez que la misma es leída de memoria para luego decodificarla y ejecutarla.\\
-
-El diseño de cada arquitectura ofrece un conjunto diferente de registros de uso general para ser usados en los programas. Estos registros son elementos de memoria de alta velocidad y poca capacidad que pueden ser utilizados como variables en los programas. Es importante marcar que pueden guardar tanto datos como direcciones de memoria.\\
+El diseño de cada arquitectura ofrece un conjunto diferente de registros de uso general para ser usados en los programas. Estos registros son elementos de memoria de alta velocidad y poca capacidad que pueden ser utilizados como variables en los programas. Es importante marcar que pueden almacenar tanto datos como direcciones de memoria.\\
 
 La \ALU, recibe su nombre de las siglas en inglés de \textit{Arithmetic and Logic Unit}. La ALU es un circuito digital que lleva a cabo operaciones aritméticas (suma, resta, multiplicación, división) y las operaciones lógicas como la negación, disyunción, conjunción, etc, entre dos cadenas binarias que son interpretadas como números o valores lógicos.\\
 
 La memoria es un conjunto de celdas numeradas. La numeración de cada celda la identifica inequívocamente por lo cual a esta numeración se le llama dirección. En cada celda de la memoria se pueden almacenar datos o instrucciones en forma de cadenas binarias y este contenido puede leerse y modificarse. En la memoria es donde se alojan los programas que luego serán ejecutados.\\
 
-<<<<<<< HEAD
-\ojo{Buses: son los encargados de}{El bus de sistema es el encargado de} transferir los datos entre los componentes de la computadora \ojo{.La unidad de control al pedir un contenido de una dirección de memoria lo hace a través del bus, y similarmente mismo cuando desea escribir en memoria.}{, y lo hace a partir de que la \UC\ pide la lectura o escritura de celdas de memoria o puertos de entrada/salida}.
-=======
-El bus de sistema es el encargado de transferir los datos entre los componentes de la computadora.La unidad de control al pedir un contenido de una dirección de memoria lo hace a través del bus, y similarmente mismo cuando desea escribir en memoria.
->>>>>>> d1dad07a272b016488f909e7459ca848c53f3344
+El bus de sistema es el encargado de transferir los datos entre los componentes de la computadora.\ojo{.La unidad de control al pedir un contenido de una dirección de memoria lo hace a través del bus, y similarmente mismo cuando desea escribir en memoria.}{, y lo hace a partir de que la \UC\ pide la lectura o escritura de celdas de memoria o puertos de entrada/salida}.
 
 \subsection{Ejecución de un programa}
 
@@ -44,7 +38,7 @@ La función de una computadora es la ejecución de programas. Los programas se e
 \item \DI
 \item \EI
 \end{enumerate}}
-\graf[6cm]{ciclo}{\ciclo}
+\graf[7cm]{ciclo}{\ciclo}
 
 
 Al principio de cada \ciclo\ojo{, durante el fech de instrucción la CPU busca una instrucción que se encuentra en alguna parte de la memoria. Para saber donde esta dicha instrucción la CPU contiene un registro llamado contador de programa (PC), que tiene la dirección de la próxima instrucción a buscar. La CPU a través del bus lee la instrucción, y luego incrementa el valor contenido en PC; así podrá buscar la siguiente instrucción en la secuencia luego de terminar con la actual.}{se lleva a cabo la \BI\ durante la cual se leen las celdas que contienen el \codmaq\ de la instrucción y para lo cual se utiliza el \PC\ que mantiene la dirección de la siguiente instrucción a ejecutar}.
@@ -52,262 +46,30 @@ Al principio de cada \ciclo\ojo{, durante el fech de instrucción la CPU busca u
 
 Durante la \DI, la \UC\ determina que \ojo{significa la cadena binaria. Finalmente al saber de qué instrucción se trata la CPU ejecuta la instrucción, es decir, realiza lo que la instrucción dice que debe hacer con sus argumentos, hasta que el programa termine.}{operación se debe llevar a cabo, y finalmente durante la \EI la \UC realiza el efecto esperado para esa operación, buscando los operandos y } modificando la memoria o los registros como resultado final y el ciclo vuelve a comenzar
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Arquitecturas Q}
+\section{Estado del arte}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Características generales} \label{caracteristicasQ}
+\ojo{En un principio la materia \orga\ eligió el simulador intel 8085 para enseniar assembler.}{A través de los años de la carreta \tpi, en la materia \orga\ se analizaron distintos enfoques y herramientas para desarrollar los conceptos relacionados a la ejecución de programas en una computadora.}\\
 
-\begin{itemize}
-\item Tiene \textbf{8 registros} de uso general de 16 bits:\textbf{ R0..R7}.
-
-\item La memoria tiene \textbf{direcciones de 16 bits}.
-
-\item Tiene un contador de programas (\textbf{program counter}) de 16 bits.
-
-\item \textbf{Stack Pointer} de 16 bits. Comienza en la direccion FFEF.
-
-\item Flags: \textbf{Z,N,C,V}(Zero, Negative, Carry, Overflow).
-
-\item Todas las instrucciones alteran los flags excepto \textbf{MOV, CALL, RET, JMP, Jxx}.
-
-\item De las instrucciones que alteran los Flags, todas dejan C y V en 0 a excepcion de \textbf{ADD, SUB y CMP}.
-
-\item Las instrucciones que alteran Z y N:\textbf{ ADD, SUB, CMP, DIV, MUL, AND, OR, NOT}. Las 3 primeras ademas calcula C y V.
-
-\end{itemize}
-
-\textbf{Nota1:} El caracter \% denota el cociente de la división entera.\\
-
-\textbf{Nota2:} El resultado de la operación \textbf{MUL} ocupa 32 bits, almacenándose los 16 bits menos significativos en el operando destino y los 16 bits mas significativos en el registro \textbf{R7}.\\
-
-\textbf{Nota3:} Donde \textbf{rrr} es una codificación (en 3 bits) del número de registro.\\
-
-\textbf{Nota4:} Con este formato, los campos \code{\dest{}} y \code{\src{}} contienen valores constantes (si el modo respectivo es \textit{inmediato}), contienen direcciones de memoria principal (si el modo es \textit{directo}), o no existen (si el modo respectivo es \textit{registro}). \\
-
-\textbf{Nota5:} Saltos condicionales tiene como formato codop - desplazamiento donde los primeros 4 bits del campo codop corresponde a la cadea 1111. Las instrucciones en este formato son de la forma Jxx(salto relativo condicional).Si al evaluar la condicion de salto en los Flags el resultado es 1, el efecto es incrementar al PC con el valor de los 8 bits de desplazamiento, representado en complemento a 2 de 8 bits. En caso contrario la instruccion no hace nada. \\
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Modos de direccionamiento}
-Los siguientes son los modos de direccionamiento implementados en la Arquitectura Q.
-\begin{enumerate}
-
-\item \textbf{Inmediato} \ojo{}{Representa un operando que denota un valor constante}\ojo{Este modo de direccionamiento es un valor que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{Es importante notar que este modo direccionamiento es admitido en el operando origen pero no el operando destino}
-
-Ejemplos:
-\begin{itemize}
-\item \textbf{0x0000} denota el modo de direccionamiento inmediato cuyo valor es cero.
-\item \textbf{0x000F} denota el modo de direccionamiento inmediato cuyo valor es 15.
-\end{itemize}
-
-
-\item \textbf{Directo}
-\ojo{Este modo de direccionamiento representa}{Con este modo de direccionamiento se denota un operando alojado en} una dirección de memoria o de puertos\ojo{que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{no va!}
-
-Ejemplos:
-\begin{itemize}
-\item \textbf{[0x0000]} denota \ojo{el modo de direccionamiento directo}{un operando} cuyo valor se encuentra en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x0000}.
-\item \textbf{[0x000F]} denota  \ojo{el modo de direccionamiento directo}{un operando} cuyo valor se encuentra en la celda de memoria\ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x000F}.
-\end{itemize}
-
-
-\item \textbf{Indirecto}
-\ojo{Este modo de direccionamiento representa una dirección de memoria o de puertos que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{Con este modo de direccionamiento se denota un operando alojado en una celda de memoria cuya dirección está almacenada en otra celda de memoria.}
-
-Ejemplos:
-\begin{itemize}
-\item \textbf{[[0x0000]]} denota \ojo{el modo de direccionamiento indirecto} {un operando} cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x0000}
-\item \textbf{[[0x000F]]} denota \ojo{el modo de direccionamiento indirecto} {un operando} cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x000F}
-\end{itemize}
-
-\item \textbf{Registro}
-Donde "rrr" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.
-
-Ejemplos:
-\textbf{R0} representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R0}.
-\textbf{R7} representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R7}.
-
-\item \textbf{RegistroIndirecto}
-Donde "rrr" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.
-
-Ejemplos:
-\textbf{[R0]} representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R0}.
-\textbf{[R7]} representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R7}.
-
-\end{enumerate}
-
-\tabla{|l|l|l|}{
-\textbf{Modo}       &  \textbf{Codificación}\\ \hline\hline
-Inmediato   &  000000\\ \hline
-Directo     &  001000\\ \hline
-Indirecto   &  011000\\ \hline
-Registro    &  100rrr\footnote{rrr es una codificación (en 3 bits) del número de registro}\\ \hline
-Registro indirecto &  110rrr\footnote{rrr es una codificación (en 3 bits) del número de registro}\\ \hline
-}{Tabla de códigos de los modos de direccionamiento}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Repertorio de instrucciones}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Instrucciones de 2 operandos}
-El formato de instruccion de dos operandos es el siguiente:
-
-  CodOp   +  Modo destino +  Modo origen +  Destino  +   Origen
-(4 bits)       (6 bits)        (6 bits)    (16 bits)    (16 bits)  
-
-Donde el operando destino no puede ser un modo de direccionamiento Inmediato, ya que en la direccion de memoria o registro que describa dicho operando es donde se guardará el resultado de la operación.
-
-\begin{enumerate}
-\item \textbf{MUL destino, origen}
-Código de operación: 0000
-Esta instrucción describe la multiplicación entre los datos de los dos operandos. Esta operación es la única que cuyo resultado puede ser 32 bits, que son dos celdas de memoria en hexadecimal, por lo que los primeros 16 bits, es decir, la primer mitad, es guardada en el registro R7 y la segunda en el operando destino.
+\ojo{Simulador intel 8085: Es un simulador y ensamblador para el microprocesador Intel 8085, que ofrece una interfas que a simple vista es difícil de entender, una parte para la ejecución y otra parte para ver el estado de la memoria y registros. }{Inicialmente se utilizó un simulador de código abierto para la arquitectura Intel 8085, que ofrecía una funcionalidad bastante completa, pero una interfaz que no resultaba del todo intuitiva.}
+\ojo{Las opiniones y experiencias con este simulador dentro de la materia no fueron muy buenas, fuera del gran esfuerzo que pusieron los profesores en que aprendieramos, dandonos mini tutoriales no resultaron como se esperaba. Todo lo que se trabajaba en ese simulador tambien se escribia a en hoja. }{Este simulador se eligió por tratarse de un lenguaje assembler mas reducido, con un repertorio de instrucciones y modos de direccionamiento mas pequeño que contaba con un entorno de prueba (el simulador propiamente dicho) para facilitar la didáctica de la programación en lenguaje ensamblador, pero posteriormente se entendió que las características de la arquitectura no eran las adecuadas para la enseñanza de los contenidos y se descartó.}\\
  
-\item \textbf{ADD destino, origen}
-Código de operación: 0010
-Esta instrucción describe la suma entre los datos de los dos operandos. El resultado de la ejecución de la suma es guardado en el operando destino.
+\ojo{En los primeros cuatrimeste la materia eligio incorporar la \textbf{Arquitectura QARQ} con su especificación y ademas un lenguaje microcódigo. En estos tiempos se desistio en utilizar un simulador complejo pero no dejaron de buscar e investigar alguna alternativa que pueda convivir con los estudantes. Todos los ejercicios se hacian en papel, la unica forma de verificar resultados es atraves de los profesores.}{Entonces el equipo docente eligió definir una arquitectura teórica que proveyera solamente lo necesario para cumplir con los objetivos de la materia e inspirados en un caso similar de la Universodad de Buenos Aires, se definió la arquitectura \textbf{QARQ}, muy similar a la que se presenta en la sección \ref{apendiceQ}}\\
 
-\item \textbf{SUB destino, origen}
-Código de operación: 0011
-Esta instrucción describe la resta entre los datos de los dos operandos. El resultado de la ejecución de dicha resta es guardado en el operando destino.
 
-\item \textbf{DIV destino, origen}
-Código de operación: 0111
-Esta instrucción describe la división entre el dato en el operando destino como dividendo y el dato en el operando origen como divisor. El resultado de la ejecución de la división es guardado en el operando destino.
+\ojo{Hace poco la materia o mejor dicho el equipo de Orga decidio dividir} {Posteriormente, el equipo docente propuso un cambio en la secuencia didáctica que requirió la división de } la especificacion de la arquitectura QARQ en varias partes, donde cada una recibe el nombre de \textbf{Arquitectura Qi} y agrega una nueva funcionalidad (instrucciones o modos de direccionamientos) a la versión anterior, son como capas de cebolla. \ojo{Ademas incorporaron un trabajo practico donde tiene que programar un programa que monocromatice una image en la \textbf{Arquitectura IA - 32}. En el enunciado se explica bastante como funciona esta arquitectura. }{no lo pondría}Sin embargo todos los ejercicios de las arquitecturas Qi se siguen haciendo en papel. \\
 
-\item \textbf{MOV destino, origen}
-Código de operación: 0001
-Esta instrucción describe la copia de datos del dato alojado en el operando origen al operando destino. El resultado de la ejecución del MOV es el dato guardado en el operando origen ahora también guardado en el operando destino.
-
-\item \textbf{AND destino, origen}
-Código de operación: 0100
-Esta instrucción describe la operación logica "y" bit a bit entre los datos de los dos operandos. El resultado de la ejecución de esta operación es guardado en el operando destino.
-
-\item \textbf{CMP destino, origen}
-Código de operación: 0110
-Esta instrucción describe la comparación bit a bit entre los datos de los dos operandos. El resultado de esta operación es solamente la actualización de flags en la cpu.
-
-\item \textbf{OR destino, origen}
-Código de operación: 0101
-Esta instrucción describe la operación logica "o" bit a bit entre los datos de los dos operandos. El resultado de la ejecución de esta operación es guardado en el operando destino.
-\end{enumerate}
+Actualmente se busca incorporar el \textbf{Simulador Qsim} en la materia \ojo{para que los chicos puedan entender el}{con el objetivo de que los alumnos puedan visualizar  el funcionamiento de una computadora al mas mínimo detalle, a través de la ejercitación del}  \ciclo\ \ojo{en la etapa de ejecucion de un programa}{??}, y chequear el efecto de los programas creados.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Instrucciones de 1 operando origen}
-
-El formato de instruccion de un operando origen es el siguiente:
-
-  CodOp   +   relleno   +  Modo origen +   Origen
-(4 bits)      (000000)        (6 bits)    (16 bits)
-
-\begin{enumerate}
-\item \textbf{CALL origen}
-Código de operación: 1011
-El efecto del CALL es guardar la direccion de memoria en la celda de la dirección que se encuentra guardadad en el SP (Stack pointer) aumentar el SP y guardar en el PC (Program Counter) el dato que se encuentra guardado en el operando origen ya que describe el llamado a una subrutina que comienza en la celda de memoria cuya direccion esta guardada en el operando origen.
-
-\item \textbf{JMP origen}
-Código de operación: 0110
-El efecto del JMP es cambiar el PC (Program Counter) por el dato que esta guardado en el operando origen ya que esta operación describe el salto a otra parte de la memoria para continuar con la ejecución del programa.
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Instrucciones de 1 operando destino}
-
-El formato de instrucción de un operando destino es el siguiente:
-
-  CodOp   +  Modo origen  +  relleno  +  Origen
-(4 bits)      (6 bits)      (000000)    (16 bits)
-
-\begin{enumerate}
-\item \textbf{NOT destino}
-Código de operación: 1001
-Esta instrucción describe la operación logica "negación" bit a bit en el datos del operando destino. El resultado de la ejecución de esta operación es guardado en la misma celda o registro de donde es leído el dato inicialmente.
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Instrucciones sin operandos}
-
-El formato de instrucción sin operandos es el siguiente:
-
- CodOp     +    relleno 
-(4 bits)     (000000000000)
-
-
-\begin{enumerate}
-\item \textbf{RET}
-Código de operación: 0110
-El efecto del ret es cambiar el pc por el dato que esta guardado en la celda de memoria que se encuentra en el SP (Stack pointer) y decrementar el SP ya que describe la finalización de la ejecución de una subrutina y la ejecución del resto del programa.
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Instrucciones de salto condicional}
-
-El formato de instrucción de salto condicional es el siguiente es el siguiente:
-
- prefijo +   CodOp   +  desplazamiento 
- (1111)     (4 bits)     (8 bits)
-
-El efecto de cualquier salto condicional es aumentar el PC (Program Counter) en la cantidad de celdas que indique el desplazamiento si sólo la condición que cada salto condicional tiene da como resultado 1, lo cual es interpretado como verdadero.
-
-\begin{enumerate}
-\item \textbf{JE desplazamiento}
-Código de operación: 0001
-La condición del salto es que el flag \textbf{Z} (Cero) sea 1, es decir la ultima operación matemática dió como resultado el número cero.
-
-\item \textbf{JNE desplazamiento}
-Código de operación: 1001
-La condición del salto es que el flag \textbf{Z} (Cero) sea 0, es decir la ultima operación matemática no dió como resultado el número cero.
-
-\item \textbf{JLE desplazamiento}
-Código de operación: 0010
-La condición del salto es el resultado de la siguiente operación lógica \textbf{Z OR ( N XOR V )}, es decir la ultima operación matemática es menor o igual con signo.
-
-\item \textbf{JG desplazamiento}
-Código de operación: 1010
-La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (Z OR ( N XOR V ))}, es decir la ultima operación matemática es mayor con signo.
-
-\item \textbf{JL desplazamiento}
-Código de operación: 0011
-La condición del salto es el resultado de la siguiente operación lógica \textbf{N XOR V}, es decir la ultima operación matemática es menor con signo.
-
-\item \textbf{JGE desplazamiento}
-Código de operación: 1011
-La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (N XOR V)}, es decir la ultima operación matemática es mayor o igual con signo.
-
-\item \textbf{JLEU desplazamiento}
-Código de operación: 0100
-La condición del salto es el resultado de la siguiente operación lógica \textbf{C OR Z}, es decir la ultima operación matemática es menor o igual sin signo.
-
-\item \textbf{JGU desplazamiento}
-Código de operación: 1100
-La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (C OR Z)}, es decir la ultima operación matemática es mayor sin signo.
-
-\item \textbf{JCS desplazamiento}
-Código de operación: 0101
-La condición del salto es que el flag \textbf{C} sea 1, es decir la ultima operación matemática es menor sin signo.
-
-\item \textbf{JNEG desplazamiento}
-Código de operación: 0101
-La condición del salto es que el flag \textbf{N} sea 1, es decir si el último resultado de una operación dio negativo.
-
-\item \textbf{JVS desplazamiento}
-Código de operación: 0111
-La condición del salto es que el flag \textbf{V} sea 1, es decir si el último resultado de una operación dio overflow.
-
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Versiones de la arquitectura (SUSI)}
-hacer un grafico copado donde se vea las capas de cebolla
+\section{Arquitecturas Q (Susi)}
 
 Las versiones de la arquitectura Q están pensadas para incorporar funcionalidades de manera que la curva de aprendizaje sea adecuada para los alumnos, siendo paulatina e incremental, es decir, cada arquitectura Qi agrega más funcionalidad (ya sean instrucciones nuevas o modos de direccionamiento) a las arquitecturas Qi anteriores.
 
-\ojo{Incorporar lo que sigue a un gráfico de la estructura en cebolla}
+\ojo{Incorporar lo que sigue a un gráfico de la estructura en cebolla}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Q1}
+\subsection{Q1}
 
 
 \textbf{Modos de direccionamiento}
@@ -327,7 +89,7 @@ Las versiones de la arquitectura Q están pensadas para incorporar funcionalidad
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Q2}
+\subsection{Q2}
 
 \textbf{Modos de direccionamiento}
 \begin{enumerate}
@@ -341,7 +103,7 @@ Las versiones de la arquitectura Q están pensadas para incorporar funcionalidad
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Q3}
+\subsection{Q3}
 
 \textbf{Modos de direccionamiento}
 \begin{enumerate}
@@ -356,7 +118,7 @@ Las versiones de la arquitectura Q están pensadas para incorporar funcionalidad
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Q4}
+\subsection{Q4}
 
 \textbf{Modos de direccionamiento}
 \begin{enumerate}
@@ -382,7 +144,7 @@ Las versiones de la arquitectura Q están pensadas para incorporar funcionalidad
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Q5}
+\subsection{Q5}
 
 \textbf{Modos de direccionamiento}
 \begin{enumerate}
@@ -397,7 +159,7 @@ Las versiones de la arquitectura Q están pensadas para incorporar funcionalidad
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Q6}
+\subsection{Q6}
 
 \textbf{Modos de direccionamiento}
 \begin{enumerate}
@@ -413,27 +175,3 @@ Las versiones de la arquitectura Q están pensadas para incorporar funcionalidad
 \end{enumerate}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Estado del arte}
-
-En un principio la materia Organizacion y Arquitectura eligio el simulador intel 8085 para enseniar assembler.
-
-\begin{itemize}
-
-\item \textbf{Simulador intel 8085}
-
-Es un simulador y ensamblador para el microprocesador Intel 8085, que ofrece una interfas que a simple vista es dificil de entender, una parte para la ejecucion y otra parte para ver el estado de la memoria y registros. 
-Las opiniones y experiencias con este simulador dentro de la materia no fueron muy buenas, fuera del gran esfuerzo que pusieron los profesores en que aprendieramos, dandonos mini tutoriales no resultaron como se esperaba. (Hmm si mi memoria no me falla se utilizo en un cuatrimestre [Mara si me equivoco corregime ehh!]). 
-Todo lo que se trabajaba en ese simulador tambien se escribia a en hoja. 
-
-\item En los primeros cuatrimeste la materia eligio incorporar la \textbf{Arquitectura QARQ} con su especificacion y ademas un lenguaje micro --(no me acuerdo el nombre). 
-En estos tiempos se desistio en utilizar un simulador complejo pero no dejaron de buscar e investigar alguna alternativa que pueda convivir con los estudantes. Todos los ejercicios se hacian en papel, la unica forma de verificar resultados es atraves de los profesores.
-
-\item Hace poco la materia o mejor dicho el equipo de Orga decidio dividir la especificacion de la arquitectura QARQ en varias partes, donde cada una recibe el nombre de \textbf{Arquitectura Q}. 
-
-Cada Arquitectura Qi agrega una nueva funcionalidad (instrucciones o modos de direccionamientos) que la anterior, son como capas de cebolla. Ademas incorporaron un trabajo practico donde tiene que programar un programa que monocromatice una image en la \textbf{Arquitectura IA - 32}. En el enunciado se explica bastante como funciona esta arquitectura. Sin embargo todos los ejercicios de las arquitecturas Qi se siguen haciendo en papel.  
-
-\item \textbf{Hasta ahora!!!} 
-La idea es incorporar el \textbf{Simulador Qsim} en la materia para que los chicos puedan entender el ciclo de instruccion en la etapa de ejecucion de un programa, poder ver que es lo que estan haciendo, chequear el efecto de los programas creados, jugar y divertirse aprendiendo :P (lo siento estoy re quemada). Pensamos que nuestro simulador va a encagar en la materia ya que cubre las necesidades basicas de un simulador. :D
-
-\end{itemize}

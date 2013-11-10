@@ -25,11 +25,10 @@ El parser solo revisará lo escrito por el alumno y de acuerdo a las gramática 
 
 \subsection{Ensamblado}
 
-Una vez que el programa es sintácticamente válido es posible traducir el código fuente del programa en código máquina (representado en cadenas binarias). Para esto se respeta un formato de instrucción que indica cómo se codifica cada operación y los operandos. 
+Una vez que el programa es sintácticamente válido es posible traducir el código fuente del programa en código máquina (representado en cadenas binarias). Para esto se respeta un formato de instrucción que indica cómo se codifica cada operación y los operandos. \\
+Mas detalle al respecto de este proceso en el apéndice \ref{apendiceQ}.
 
-\ojo{Mas detalle al respecto de este proceso en la sección de ...}{Poner vínculo a donde se ponen ejemplos de Qi}
-
-\subsection{Cargado en memoria}
+\subsection{Cargado en memoria (falta revisar Mara)}
 
 Una vez ensamblado, la representación binaria (o código máquina) del programa será cargado en memoria a partir de una ubicación (celda de memoria) que el alumno puede elegir. Esto permite visualizar el contenido de la memoria (con el programa cargado) y el estado de los registros de la CPU. La decodificación con desensamblado permite al alumno experimentar otros escenarios y efectos laterares, entre los cuales podemos enumerar:
 
@@ -40,7 +39,7 @@ Una vez ensamblado, la representación binaria (o código máquina) del programa
 
 Durante la carga del programa en memoria puede producirse un OutOfMemoryError?, que significa que el programa no entra en la ubicación elegida en memoria ya que ocupa más celdas que las que se encuentran disponibles debajo de ella ya que como se mencionó en la sección \ref{caracteristicasQ}, la memoria disponible tiene un tamaño limitado y por este motivo la alocación en memoria del código máquina puede exceder el espacio disponible a partir de la celda inicial anteriormente elegida. Si por el contrario, no se produce este error, el alumno podrá ver el programa cargado en memoria exitosamente.
 
-\subsection{Ejecución paso a paso}
+\subsection{Ejecución paso a paso (falta revisar Mara)}
 
 Se provee la funcionalidad de la ejecución paso a paso ya que se desea que el alumno pueda experimentar y así comprender los pasos del ciclo de ejecución. Además puede ejercitarse situaciones que se denominan ''errores conceptuales de programación'' Esto es a lo que llamamos Errores conceptuales, entre los cuales es posible mencionar:
 
@@ -88,7 +87,7 @@ Elegimos git como repositorio externo para sincronizar nuestro codigo ya que pro
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{ (arq OO)}
+\subsection{Diseño Orientado a Objetos  (falta revisar Mara)}
 
 \subsubsection{ALU}
 Como se observa en la figura \ref{ALU} la ALU tiene toda la responsabilidad en la ejecución de operaciones matematicas y logicas, además del analisis sobre los flags luego de cada operación. 
@@ -100,19 +99,19 @@ Como se observa en la figura \ref{ALU} la ALU tiene toda la responsabilidad en l
 Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la modificación de una celda o el leer un dato. Para ello conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
 Ambas clases conocen muchas intancias de la clase Celda, y cada Celda a su vez conoce un dato: una instancia del W16, que representa a los datos guardados en memoria o en los puertos.  
 
-\graf{BusEntradaSalida_Memoria_CeldasPuertos}{Diagrama de clase del la \BusEntradaSalida_Memoria_CeldasPuertos}
+\graf{BusEntradaSalida_Memoria_CeldasPuertos}{Diagrama de clase del la BusEntradaSalida\_Memoria\_CeldasPuertos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{CPU}
 Como se observa en la figura \ref{CPU}, la CPU conoce a la ALU, contiene los registros IR y PC, y los flags (V,Z,C,N) y los ocho registros (R0...R7). La responsabilidad de la CPU es actualizar los flags, los registros, actualizar el PC y el IR, y ser la conexión con la ALU.
 
-\graf{CPU}{Diagrama de clase de la \CPU}
+\graf{CPU}{Diagrama de clase de la CPU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Interprete}
 Como se observa en la figura \ref{Interprete} el Interprete es un singleton tiene la entera responsabilidad de recibir los datos leídos desde, una celda de memoria hasta tres celdas, y bit a bit, según los códigos de operación y de modo de direccionamiento saber de que instrucción se trata y cuales son sus operandos si es que los tiene y devolver el objeto que la representa. Se ocupa del decode de la instrucción.
 
-\graf{Interprete}{Diagrama de clase de la \Interprete}
+\graf{Interprete}{Diagrama de clase del Interprete}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Modos de direccionamiento y W16}
@@ -138,7 +137,7 @@ La clase Etiqueta representa la etiqueta creada por el alumno cuando realiza el 
 La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, representa el dato que es guardado en memoria. Tiene la responsabilidad de incrementarse, decrementarse, sumar una entero, devolver su representación binria y su valor en entero.
 
 
-\graf{ModoDireccionamiento}{Diagrama de clase de la \ModoDireccionamiento}
+\graf{ModoDireccionamiento}{Diagrama de clase de la jerarquía de los modos de direccionamiento}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Instrucciones}
@@ -151,19 +150,17 @@ Como se observa en la figura \ref{Instruccion} las Instrucciones estan modeladas
 \item JumpConducional.
 \end{itemize}
 
-Se realizo dicha jerarquia para permitir la fácil agregación de nuevas instrucciones siendo subclases de la clase que corresponda ya que comparten comportamiento tal como manera de mostrarse y de codificarse.
+Se realizo dicha jerarquía para permitir la fácil agregación de nuevas instrucciones siendo subclases de la clase que corresponda ya que comparten comportamiento tal como manera de mostrarse y de codificarse.
 
-\graf{Instruccion}{Diagrama de clase de la \Instruccion}
+\graf{Instruccion}{Diagrama de clase de la Instrucción}
 
-\subsubsubsection{Instrucciones sin operandos}
+\begin{description}
+\item[Instrucciones sin operandos] Como se observa en la figura \ref{InstruccionSinOperandos} la unica instrucción sin operandos implementada es la instruccion \code{RET}, a pesar de esto, se eligió hacer una jerarquía para que luego se facilite \ojo{la inserción al modelo de nuevas instrucciones sin operandos}{la escalabilidad del modelo, permitiendo la inserción de nuevas instrucciones sin operandos} .
 
-Como se observa en la figura \ref{Instruccion_SinOperandos} la unica Instruccion sin operandos implementada es la Instruccion RET, a pesar de esto, se eligio hacer una jerarquia para que luego se facilite la inserción al modelo de nuevas instrucciones sin operandos.
+\graf{Instruccion_SinOperandos}{Detalle de clase InstruccionSinOperandos}
 
-\graf{Instruccion_SinOperandos}{Diagrama de clase de la \Instruccion_SinOperandos}
-
-\subsubsubsection{Instrucciones de un operando}
-
-Como se observa en la figura \ref{Instruccion_UnOperando} y concordando en lo mencionado sobre las Instrucciones anteriormente, puede haber dos tipos de instrucciones de un operando:
+\item[Instrucciones de un operando] 
+Como se observa en la figura \ref{InstruccionUnOperando} y concordando en lo mencionado sobre las Instrucciones anteriormente, puede haber dos tipos de instrucciones de un operando:
 
 \begin{itemize}
 \item Un operando origen.
@@ -172,13 +169,17 @@ Como se observa en la figura \ref{Instruccion_UnOperando} y concordando en lo me
 
 Ambas clases de instrucciones tienen un solo operando. La diferencia entre ellas es la logica de ejecución y la manera en la que se ensamblan y desensamblan ya que sus formato de instruccion difiere en donde esta colocado el relleno.
 
-\graf{Instruccion_UnOperando}{Diagrama de clase de la \Instruccion_UnOperando}
+\graf{Instruccion_UnOperando}{Diagrama de clase de la InstruccionUnOperando}
 
-\subsubsubsection{Instrucciones de dos operandos}
 
-Como se observa en la figura \ref{Instruccion_DosOperandos} la jerearquia de clases de instrucciones de dos operandos es la más amplia por tener mayor cantidad de instrucciones. Todas comparten la manera de decodificacion e interpretación, además de la logica de impresión.
+\item[Instrucciones de dos operandos]
 
-\graf{Instruccion_DosOperandos}{Diagrama de clase de la \Instruccion_DosOperandos}
+Como se observa en la figura \ref{InstruccionDosOperandos} la jerarquía de clases de instrucciones de dos operandos es la más amplia por tener mayor cantidad de instrucciones. Todas comparten la manera de decodificación e interpretación, además de la lógica de impresión.
+
+\graf{Instruccion_DosOperandos}{Diagrama de clase de la InstruccionDosOperandos}
+
+\end{description}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -187,7 +188,7 @@ Como se observa en la figura \ref{Instruccion_DosOperandos} la jerearquia de cla
 
 Como se observa en la figura \ref{Programa} la clase Programa conoce un grupo de Instrucciones (las instrucciones que lo componen). Las instancias son creadas por el parser, luego se calculan las etiquetas (si es que las tiene) y finalmente cuando es cargado en memoria la instancia de programa es desechada ya que no vuelve a usarse en ningún momento de la ejecución.
 
-\graf{Programa}{Diagrama de clase de la \Programa}
+\graf{Programa}{Diagrama de clase de la Programa}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Simulador}
@@ -196,7 +197,7 @@ Como se observa en la figura \ref{simulador} la clase Simulador conoce a una ins
 La clase Simulador tiene la responsabilidad de obtener el codigo maquina a traves del Interprete de la siguiente instrucción (fech y decode), calcular las etiquetas de un programa, cargar el programa en memoria, asi mismo, los datos en registros,  ejecutar las instrucciones o delegar su ejecución a la ALU que conoce a traves de la CPU según corresponda (realizar el execute), y guardar datos en memoria o registros (Store).
 Es la clase principal del modelo y la encargada de coordinar la ejecución del programa paso a paso. 
 
-\graf{simulador}{Diagrama de clase de la \Simulador}
+\graf{simulador}{Diagrama de clase de la Simulador}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Como se observa en la figura \ref{}
