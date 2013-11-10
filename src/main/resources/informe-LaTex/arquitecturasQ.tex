@@ -38,7 +38,7 @@
 Los siguientes son los modos de direccionamiento implementados en la Arquitectura Q.
 \begin{enumerate}
 
-\item \textbf{Inmediato} \ojo{}{Representa un operando que denota un valor constante}\ojo{Este modo de direccionamiento es un valor que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{Es importante notar que este modo direccionamiento es admitido en el operando origen pero no el operando destino.} La codificación de este modo se indica en la tabla \ref{tablamodos}.
+\item \textbf{Inmediato} Representa un operando que denota un valor constante. Es importante notar que este modo direccionamiento es admitido en el operando origen pero no el operando destino. La codificación de este modo se indica en la tabla \ref{tablamodos}.
 
 Ejemplos:
 \begin{itemize}
@@ -48,36 +48,36 @@ Ejemplos:
 
 
 \item \textbf{Directo}
-\ojo{Este modo de direccionamiento representa}{Con este modo de direccionamiento se denota un operando alojado en} una dirección de memoria o de puertos\ojo{que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{no va!}La codificación de este modo se indica en la tabla \ref{tablamodos}.
+Con este modo de direccionamiento se denota un operando alojado en una dirección de memoria o de puertosLa codificación de este modo se indica en la tabla \ref{tablamodos}.
 
 Ejemplos:
 \begin{itemize}
-\item \textbf{[0x0000]} denota \ojo{el modo de direccionamiento directo}{un operando} cuyo valor se encuentra en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x0000}.
-\item \textbf{[0x000F]} denota  \ojo{el modo de direccionamiento directo}{un operando} cuyo valor se encuentra en la celda de memoria\ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x000F}.
+\item \textbf{[0x0000]} denota un operando cuyo valor se encuentra en la celda de memoria cuya dirección es \textbf{0x0000}.
+\item \textbf{[0x000F]} denota  un operando cuyo valor se encuentra en la celda de memoria cuya dirección es \textbf{0x000F}.
 \end{itemize}
 
 
 \item \textbf{Indirecto}
-\ojo{Este modo de direccionamiento representa una dirección de memoria o de puertos que será utilizado como modo origen pero nunca como modo destino ya que en el no pueden guardarse datos.}{Con este modo de direccionamiento se denota un operando alojado en una celda de memoria cuya dirección está almacenada en otra celda de memoria.} La codificación de este modo se indica en la tabla \ref{tablamodos}.
+Con este modo de direccionamiento se denota un operando alojado en una celda de memoria cuya dirección está almacenada en otra celda de memoria. La codificación de este modo se indica en la tabla \ref{tablamodos}.
 
 Ejemplos:
 \begin{itemize}
-\item \textbf{[[0x0000]]} denota \ojo{el modo de direccionamiento indirecto} {un operando} cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x0000}
-\item \textbf{[[0x000F]]} denota \ojo{el modo de direccionamiento indirecto} {un operando} cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria \ojo{que identifica inequívocamente a la dirección}{cuya dirección es} \textbf{0x000F}
+\item \textbf{[[0x0000]]} denota un operando cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria cuya dirección es \textbf{0x0000}
+\item \textbf{[[0x000F]]} denota un operando cuyo valor se encuentra en la celda de memoria cuya dirección esta guardada como dato en la celda de memoria cuya dirección es \textbf{0x000F}
 \end{itemize}
 
-\item \textbf{Registro}\ojo{Donde "rrr" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.}{Con este modo de direccionamiento se denota un operando alojado en un registro de uso general (R0 a R7)} La codificación de este modo se indica en la tabla \ref{tablamodos}.
+\item \textbf{Registro} Con este modo de direccionamiento se denota un operando alojado en un registro de uso general (R0 a R7)} La codificación de este modo se indica en la tabla \ref{tablamodos.
 
 Ejemplos:
-\textbf{R0} \ojo{representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R0}.}{denota un operando almacenado en el registro R0} 
-\textbf{R7} \ojo{representa el modo de direccionamiento registro cuyo valor se encuentra en el registro \textbf{R7}.}{denota un operando almacenado en el registro R7}
+\textbf{R0} denota un operando almacenado en el registro R0. 
+\textbf{R7} denota un operando almacenado en el registro R7.
 
-\item \textbf{RegistroIndirecto} \ojo{Donde "rrr" es una cadena binaria que puede tomar los valores desde 000 hasta 111 para identificar según el numero decimal que representen los diferentes ocho registros R0..R7.}{De manera similar al modo indirecto, con este modo de direccionamiento se denota un operando alojado en una celda de memoria cuya dirección está almacenada en el registro indicado} La codificación de este modo se indica en la tabla \ref{tablamodos}.
+\item \textbf{RegistroIndirecto} De manera similar al modo indirecto, con este modo de direccionamiento se denota un operando alojado en una celda de memoria cuya dirección está almacenada en el registro indicado. La codificación de este modo se indica en la tabla \ref{tablamodos}.
 
 
 Ejemplos:
-\textbf{[R0]} \ojo{representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R0}.}{denota un operando almacenado en una celda de memoria cuya dirección está en el registro R0}
-\textbf{[R7]} \ojo{representa el modo de direccionamiento registro cuyo valor se encuentra en la direccion de memoria que esta guardada como dato el registro \textbf{R7}.}{denota un operando almacenado en una celda de memoria cuya dirección está en el registro R7}
+\textbf{[R0]} denota un operando almacenado en una celda de memoria cuya dirección está en el registro \textbf{R0}.
+\textbf{[R7]} denota un operando almacenado en una celda de memoria cuya dirección está en el registro \textbf{R7}.
 
 \end{enumerate}
 
@@ -96,7 +96,7 @@ En esta sección se detalla cómo se construye el código máquina de las instru
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de 2 operandos}
 
-\ojo{El formato de instruccion}{A continuación se muestra la codificación (formato) de las instrucciones} de dos operandos:
+A continuación se muestra la codificación (formato) de las instrucciones de dos operandos:
 
 \formatoinstr{|c|c|c|c|c|c|}{
 Codigo de Operación  & \mdest{}& \msrc{}  & \dest{} & \src{}\\
@@ -104,12 +104,12 @@ Codigo de Operación  & \mdest{}& \msrc{}  & \dest{} & \src{}\\
 
 
 
-\ojo{Donde el operando destino no puede ser un modo de direccionamiento Inmediato, ya que en la dirección de memoria o registro que describa dicho operando es donde se guardará el resultado de la operación.}{(Explicar un poco mas) Las instrucciones de dos operandos descriptas a continuación son instrucciones aritméticas o lógicas donde se asume que el resultado de la operación se almacena en uno de los dos operandos de entrada, y por lo tanto se lo denomina \textbf{operando destino}.}
+Las instrucciones de dos operandos descriptas a continuación son instrucciones aritméticas o lógicas donde se asume que el resultado de la operación se almacena en uno de los dos operandos de entrada, y por lo tanto se lo denomina \textbf{operando destino}.
 
 \begin{enumerate}
 \item \textbf{MUL destino, origen}
 Código de operación: 0000
-Esta instrucción describe la multiplicación entre los datos de los dos operandos. Esta operación es la única que cuyo resultado puede ser 32 bits, que son \ojo{dos celdas de memoria en hexadecimal}{No entiendo!}, por lo que los primeros 16 bits, es decir, la primer mitad, es guardada en el registro R7 y la segunda en el operando destino.
+Esta instrucción describe la multiplicación entre los datos de los dos operandos. Esta operación es la única que cuyo resultado puede ser 32 bits, que son \ojo{lo que ocuparia más de una celda de memoria en codigo binario.}{(mara)No entiendo!. Asi esta mejor??}, por lo que los primeros 16 bits, es decir, la primer mitad, es guardada en el registro R7 y la segunda en el operando destino.
  
 \item \textbf{ADD destino, origen}
 Código de operación: 0010
@@ -133,7 +133,7 @@ Esta instrucción describe la operación logica "y" bit a bit entre los datos de
 
 \item \textbf{CMP destino, origen}
 Código de operación: 0110
-Esta instrucción describe la comparación bit a bit entre los datos de los dos operandos. El resultado de esta operación es solamente la actualización de flags en la cpu.
+Esta instrucción describe la resta entre dos operandos, sin guardar el resultado. Su único efecto es la actualización de flags en la cpu.
 
 \item \textbf{OR destino, origen}
 Código de operación: 0101

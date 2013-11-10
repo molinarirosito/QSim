@@ -48,7 +48,15 @@ class EnsamblarInstrucciones extends FlatSpec with Matchers {
   }
   
 
-  def resultados_esperados = new {
+  def resultados_instrucciones_dos_operandos = new {
+    val mul = "0"
+    val add = "2"
+    val div = "7"
+    val sub = "3"
+    val mov = "1"
+    val and = "4"
+    val or = "5"
+    val cmp = "6"
    
   }
   
