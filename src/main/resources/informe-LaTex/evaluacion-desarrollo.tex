@@ -58,7 +58,6 @@ El resultado correcto es la lista de objetos instrucciones, por cada codigo maqu
 El resultado puede ser un error porque puede pasar que el codigo de operacion o el codigo de algun modo de direccionamiento dentro del formato de cada instruccion sea invalido. La excepcion que puede tirar tiene el nombre de \textbf{CodigoInvalidoException}.   
 \end{enumerate}
 
-
 \subsection{Ejecucion}
 
 Para verificar que la ejecucion de un programa Qi con el \textbf{Ciclo de Instruccion} se realice correctamente lo que hacemos es cargar el programa en la memoria a traves del objeto \textbf{Simulador}, de esta forma cuando se encuentra cargado esta listo para la ejecucion. Los pasos que se verifican son 3:
@@ -80,6 +79,7 @@ Para verificar el efecto de cada instruccion se considero armar un caso de prueb
 \textbf{Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instruccion}
   
 \subsubsection{Operaciones de ALU}
+
 La ALU es la encargada de ejecutar operaciones aritmeticas/logicas. Si la instruccion a ejecutar tiene un efecto aritmetico/logico se le delega la ejecucion de la operacion. Para poder verificar todas las operaciones creamos un caso de prueba por cada operacion. Tanto las operaciones aritmeticas como las logicas se analizan de la misma forma:
 
 \begin{enumerate}
@@ -90,11 +90,18 @@ La ALU es la encargada de ejecutar operaciones aritmeticas/logicas. Si la instru
 \item Se verifica el resultado obtenido con el resultado esperado.
 
 \item Algunas operaciones (la mayoria) modifican los flags. la ALU tiene mucha relacion con los flags ya que por cada cuenta realizada actualiza los mismos. Estos tambien se se verifican comparando el resultado obtenido con el valor esperado. 
+\end{enumerate}
 
 \subsubsection{Busqueda de Operandos (para los distintos modos de direccionamiento)}
+
 Para verificar la busqueda de operandos, tomamos una instruccion cualquiera y probamos todas las combinaciones de modos de direccionamiento para cada operando, teniendo en cuenta que son invalidas todas las combinaciones de 1/2 operando/s que tenga el operando destino el modo de direccionamiento Inmediato. Al tener la instruccion elegida procedemos a obtener el valor de cada operando, este valor se lo compara con el valor esperado. 
  
-
 \subsubsection{Almacenamiento de Operandos}
+
+Para verificar el almacenamiento de operandos, salvo algunas instrucciones todas pasan por la etapa de store.
+Tomamos cada una de las instrucciones de un programa Qi y realizamos el ciclo de ejecucion mensionado anteriormente.
+Cuando estamos en la etapa de ejecucion, cada una tiene un operando destinado a guardar el resultado de su efecto.
+En esta instancia sabemos que  dicho operando tiene el valor guardado, a este valor lo comparamos con el valor esperado.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Ejemplos de uso}
