@@ -75,10 +75,21 @@ Para verificar el decode, se toma el valor del registro ir para que lo reciba el
 \item \textbf{Execute}
 
 Para verificar el efecto de cada instruccion se considero armar un caso de prueba por cada instruccion donde cada uno tiene un estado inicial y luego de realizar la ejecucion de dicha instruccion termina con un estado final modificado en el cual verificamos el resultado obtenido con el resultado esperado. 
-
 \end{itemize}
+
+\textbf{Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instruccion}
   
 \subsubsection{Operaciones de ALU}
+La ALU es la encargada de ejecutar operaciones aritmeticas/logicas. Si la instruccion a ejecutar tiene un efecto aritmetico/logico se le delega la ejecucion de la operacion. Para poder verificar todas las operaciones creamos un caso de prueba por cada operacion. Tanto las operaciones aritmeticas como las logicas se analizan de la misma forma:
+
+\begin{enumerate}
+\item Se toma cada valor de los operandos(la busqueda se detalla el la siguiente instruccion)
+
+\item Se realiza la operacion aritmetica/logica. 
+
+\item Se verifica el resultado obtenido con el resultado esperado.
+
+\item Algunas operaciones (la mayoria) modifican los flags. la ALU tiene mucha relacion con los flags ya que por cada cuenta realizada actualiza los mismos. Estos tambien se se verifican comparando el resultado obtenido con el valor esperado. 
 
 \subsubsection{Busqueda de Operandos (para los distintos modos de direccionamiento)}
 
