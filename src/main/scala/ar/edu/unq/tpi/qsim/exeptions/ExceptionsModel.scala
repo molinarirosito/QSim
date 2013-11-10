@@ -15,6 +15,10 @@ case class CeldaFueraDePuertosException(smth:String) extends UserException(smth)
 
 }
 
+case class ModoDeDireccionamientoInvalidoException(smth:String) extends UserException(smth) {
+
+}
+
 case class SyntaxErrorException(smth:String) extends UserException(smth) {
 
 }
