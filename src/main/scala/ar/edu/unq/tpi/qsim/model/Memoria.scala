@@ -116,7 +116,7 @@ case class Memoria(var tamanio: Int) {
       var celda_actual = celda
       for (x ← 0 to instruccion.cantidadCeldas - 1) {
         setValorC(celda_actual, new W16(string_split(x)))
-        setStateCelda(celda_actual, CeldaState.PROGRAM)
+        setStateCelda(celda_actual, State.PROGRAM)
 
         celda_actual = celda_actual + 1
       }
@@ -126,7 +126,7 @@ case class Memoria(var tamanio: Int) {
    * Cambia el estado de una celda por el pasado por parametro.
    * @param Int, Int
    */
-  def setStateCelda(num_celda: Int, state: CeldaState.Type) = celdas(num_celda).state = state
+  def setStateCelda(num_celda: Int, state: State.Type) = celdas(num_celda).state = state
 
   /**
    * Pone un valor (W16) en la celda que se le indica por parametro.

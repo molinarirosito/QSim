@@ -9,14 +9,18 @@ import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
 
 @Observable
+object Ciclo
+{
+  var fetch = true
+  var decode = false
+  var execute = false
+}
+
+@Observable
 case class Simulador() {
 
-  private val NONE = 0
-  private val PROGRAM = 1
-  private val FECH_DECODE = 2
-  private val STORE = 3
-  private val EXECUTED = 4
-
+  
+  var ciclo = Ciclo
   var mensaje_al_usuario = ""
   var cpu: CPU = _
   var busIO: BusEntradaSalida = _
@@ -128,6 +132,8 @@ case class Simulador() {
     programa
   }
 
+ 
+  
   /**
    * Carga el programa en memoria, a partir de un pc hexadecimal (String) y los registros que recibe dentro de un map
    * @param Programa, String, Map[String,W16]
@@ -172,7 +178,7 @@ case class Simulador() {
   def fetch() {
     println("----------FETCH ---------")
     println("Valor del Pc: " + cpu.pc.toString())
-    cambiarEstadoCeldasInstruccionActual(CeldaState.EXECUTED)
+    cambiarEstadoCeldasInstruccionActual(State.EXECUTED)
     val cadena_binaria = obtenerProximaInstruccionBinario()
     instruccionActual = Interprete.interpretarInstruccion(cadena_binaria)
     val instruccion_fech = instruccionActual.representacionHexadecimal()
@@ -180,8 +186,10 @@ case class Simulador() {
     cpu.ir = instruccion_fech
     agregarMensaje("La intruccion actual ocupa: " + instruccionActual.cantidadCeldas().toString )
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
-    cambiarEstadoCeldasInstruccionActual(CeldaState.FECH_DECODE)
+    cambiarEstadoCeldasInstruccionActual(State.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
+    ciclo.fetch = false
+    ciclo.decode = true
     println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
     
   }
@@ -192,7 +200,7 @@ case class Simulador() {
 
     }
 
-  def cambiarEstadoCeldasInstruccionActual(estado: CeldaState.Type) {
+  def cambiarEstadoCeldasInstruccionActual(estado: State.Type) {
 
     celdaInstruccionActual.foreach(celda ⇒
       celda.state = estado)
@@ -206,6 +214,8 @@ case class Simulador() {
     println("----------DECODE------------")
     agregarMensaje("Se decodifico la instruccion : " + (instruccionActual.toString))
     println(mensaje_al_usuario)
+    ciclo.decode = false
+    ciclo.execute = true
     (instruccionActual.toString)
   }
 
@@ -282,6 +292,8 @@ case class Simulador() {
       }
       case iOp2: Instruccion_DosOperandos ⇒ store(iOp2.destino, execute_instruccion_matematica())
     }
+    ciclo.execute = false
+    ciclo.fetch = true
     println("Ejecuta la instruccion!!!")
   }
 
@@ -293,8 +305,8 @@ case class Simulador() {
     var direccion: Int = 0
     modoDir match {
       case Inmediato(valor: W16) => {throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.")}
-      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, CeldaState.STORE); busIO.setValorC(direccion, un_valor); }
-      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, CeldaState.STORE); busIO.setValorC(direccion, un_valor); }
+      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, State.STORE); busIO.setValorC(direccion, un_valor); }
+      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, State.STORE); busIO.setValorC(direccion, un_valor); }
       case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
       case r: Registro ⇒
         r.valor = un_valor

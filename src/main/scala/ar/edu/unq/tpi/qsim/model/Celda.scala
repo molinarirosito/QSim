@@ -1,14 +1,14 @@
 package ar.edu.unq.tpi.qsim.model
 import org.uqbar.commons.utils.Observable
 
-object CeldaState extends Enumeration {
+object State extends Enumeration {
   type Type = Value
   val NONE, PROGRAM, FECH_DECODE, STORE, EXECUTED = Value
 }
 
 @Observable
 class Celda (var value: W16) {
-  var state = CeldaState.NONE
+  var state = State.NONE
   
   override def toString() =  value.toString
   
