@@ -20,6 +20,11 @@
 \newcommand{\UC}{Unidad de Control}
 \newcommand{\ALU}{Unidad Aritmético-Lógica}
 \newcommand{\PC}{\textit{Program Counter}}
+\newcommand{\ciclo}{ciclo de ejecución de instrucción}
+\newcommand{\BI}{búsqueda de instrucción}
+\newcommand{\DI}{decodificación de la instrucción}
+\newcommand{\EI}{ejecución de la instrucción}
+\newcommand{\codmaq}{código máquina}
 
 
 \newcommand{\ojo}[2]{{\large\verde{#1}}\footnote{#2}}
@@ -32,7 +37,20 @@
 
 \newcommand{\graf}[3][\textwidth]{
 \begin{figure}[h]
+\begin{center}
 \includegraphics[width=#1]{#2}
 \caption{#3}
 \label{#2}
+\end{center}
 \end{figure}}
+
+\newcommand{\tabla}[3]{
+\begin{table}
+\begin{center}
+\begin{tabular}{#1}\hline
+#2
+\end{tabular}
+\caption{#3}
+\end{center}
+\end{table}
+}
