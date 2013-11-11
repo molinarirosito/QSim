@@ -21,7 +21,7 @@ En la linea numero 2 el modo de direccionamiento inmediato esta incompleto, (le 
  
 "Ha ocurrido un error en la linea 2 : MUL R4, 0x01" \\  
 
-\item Dado el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 MOV 0x0006, 0x0056
@@ -33,7 +33,7 @@ En la linea numero 1 el operando destino es inmediato lo cual es invalido (El op
 
 \mensaje{"Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056"} \\
 
-\item Dado el siguiente programa escrito en Q1:\\
+\item Dado el siguiente programa escrito en Q1:
 
 \begin{verbatim}
 1.ADD R0, [0x0002]
@@ -44,7 +44,7 @@ En la linea numero 1 el operando origen es directo lo cual es invalido en la arq
 
 \mensaje{"Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]"} \\ 
 
-\item Dado el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 CMP R3, [0xA000]
@@ -55,7 +55,7 @@ En la línea numero 2 entre los operandos no se encuentra la coma que los separa
 
 \mensaje{"Ha ocurrido un error en la linea 2 : MOV R4, R0"} \\ 
 
-\item Dado el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 sub [[0x0004]], [0xA000]
@@ -66,7 +66,7 @@ En la linea numero 1 la instrucción sub esta escrita en minúscula esto es inv�
 
 \mensaje{"Ha ocurrido un error en la linea 1: sub [[0x0004]], [0xA000]"} \\ 
 
-\item Dado el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 MUL [R6], r4
@@ -77,7 +77,7 @@ En la linea numero 1 el operando origen es un registro escrito con minúscula, e
 
 \mensaje{"Ha ocurrido un error en la linea 1: MUL [R6], r4"} \\ 
 
-\item Dado el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 AND R2, R8
@@ -88,7 +88,7 @@ En la linea numero 1 el operando origen el numero del registro es invalido (Los 
 
 \mensaje{"Ha ocurrido un error en la linea 1: AND R2, R8"} \\ 
 
-\item Dado el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 MUL R7, R4
@@ -99,7 +99,7 @@ Para la instrucción MUL es inválido utilizar como destino el registro R7 por l
 
 \mensaje{"Ha ocurrido un error en la linea 1: MUL R7, R4"} \\ 
 
-\item Dado el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 inicio: MUL R7, R4
@@ -112,7 +112,7 @@ En la linea numero 3 la etiqueta anteriormente declarada en la línea número 1 
 \mensaje{"Ha ocurrido un error en la linea 3: JMP incio" \\}
 
 
-\item Dado el siguiente programa Qi :\\
+\item Dado el siguiente programa Qi :
 
 \begin{verbatim}
 ADD [0x9000], R4
@@ -123,7 +123,7 @@ En la linea numero 2 el operando destino de la instrucción NOT no puede ser un 
 
 \mensaje{"Ha ocurrido un error en la linea 2: NOT 0x0004"} \\ 
 
-\item Dado el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 ADD [9000], R4
@@ -134,7 +134,7 @@ En la linea numero 1 el operando origen no tiene el prefijo "0x", es una expresi
 
 \mensaje{"Ha ocurrido un error en la linea 1: ADD [0009], R4"} \\ 
 
-\item Dado el siguiente programa Qi :\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 ADD [0x900000000000], R4
@@ -145,7 +145,7 @@ En la linea numero 1 el operando destino tiene mas dígitos que los permitidos, 
 
 \mensaje{"Ha ocurrido un error en la linea 1: ADD [0x900000000000], R4"} \\ 
 
-\item Dado el siguiente programa Qi  :\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 ZDD [0x900000000000], [R5]
@@ -156,7 +156,7 @@ En la linea numero 1 el nombre de la operación es invalida (No existe la instru
 
 \mensaje{"Ha ocurrido un error en la linea 1: ZDD [0x900000000000], R4}" \\
 
-\item Dado el siguiente programa Qi  :\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 SUB [], 0x000A
@@ -166,7 +166,7 @@ En la linea numero 1 el operando destino no esta incompleto (El modo de direccio
 
 \mensaje{"Ha ocurrido un error en la linea 1: SUB [], 0x000A"} \\
 
-\item Dado el siguiente programa Qi  :\\
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 JMP
