@@ -29,9 +29,9 @@ ADD R2, R3
 SUB R1, R7
 \end{verbatim}
 
-En la linea numero 1 el operando destino es inmediato lo cual es invalido\footnote{El operando nunca puede tener como modo de direccionamiento un inmediato}. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
+En la linea numero 1 el operando destino es inmediato lo cual es invalido (El operando nunca puede tener como modo de direccionamiento un inmediato). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056" \\
+\mensaje{"Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056"} \\
 
 \item Dado el siguiente programa escrito en Q1:\\
 
@@ -40,9 +40,9 @@ En la linea numero 1 el operando destino es inmediato lo cual es invalido\footno
 2.MOV R4, R0
 \end{verbatim}
 
-En la linea numero 1 el operando origen es directo lo cual es invalido en la arquitectura Q1\footnote{El modo de direccionamiento Directo se incorpora en las arquitecturas Qi desde la arquitectura Q2 en adelante.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
+En la linea numero 1 el operando origen es directo lo cual es invalido en la arquitectura Q1 (El modo de direccionamiento Directo se incorpora en las arquitecturas Qi desde la arquitectura Q2 en adelante). Cuando el alumno quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]" \\ 
+\mensaje{"Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]"} \\ 
 
 \item Dado el siguiente programa Qi:\\
 
@@ -51,9 +51,9 @@ CMP R3, [0xA000]
 MOV R4 R0 
 \begin{verbatim}
 
-En la línea numero 2 entre los operandos no se encuentra la coma que los separa \footnote{Lasintáxis de las instrucciones de dos operandos especifica que debe haber una coma separando los operandos.}. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
+En la línea numero 2 entre los operandos no se encuentra la coma que los separa (La sintáxis de las instrucciones de dos operandos especifica que debe haber una coma separando los operandos.). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 2 : MOV R4, R0" \\ 
+\mensaje{"Ha ocurrido un error en la linea 2 : MOV R4, R0"} \\ 
 
 \item Dado el siguiente programa Qi:\\
 
@@ -62,44 +62,44 @@ sub [[0x0004]], [0xA000]
 ADD R4, R0
 \end{verbatim}
 
-En la linea numero 1 la instrucción sub esta escrita en minúscula esto es inválido\footnote{La sintáxis define que los nombres de las instrucciones son estrictamente en mayúscula}. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
+En la linea numero 1 la instrucción sub esta escrita en minúscula esto es inválido (La sintáxis define que los nombres de las instrucciones son estrictamente en mayúscula). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: sub [[0x0004]], [0xA000]" \\ 
+\mensaje{"Ha ocurrido un error en la linea 1: sub [[0x0004]], [0xA000]"} \\ 
 
-\item veamos que pasa si un alumno escribe el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:\\
 
 \begin{verbatim}
 MUL [R6], r4
 ADD [0xF0F0], R0
 \end{verbatim}
 
-En la linea numero 1 el operando destino es un registro que empieza con minúscula, esto es invalido\footnote{Los registros empiezan estrictamente con mayúscula}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 el operando origen es un registro escrito con minúscula, esto es invá lido(La sintáxis define que los registros empiezan estrictamente con "R"' mayúscula). Cuando se quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: MUL [R6], r4" \\ 
+\mensaje{"Ha ocurrido un error en la linea 1: MUL [R6], r4"} \\ 
 
-\item Otra situación que se podría dar es si un alumno escribe el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:\\
 
 \begin{verbatim}
 AND R2, R8
 OR [0xF0F0], R0
 \end{verbatim}
 
-En la linea numero 1 el operando destino el numero del registro es invalido\footnote{Los registros están en el rango R0..R7, por lo tanto R8 no pertenece al rango por eso es invalido}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 el operando origen el numero del registro es invalido (Los registros deben estar dentro del rango R0..R7). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: AND R2, R8" \\ 
+\mensaje{"Ha ocurrido un error en la linea 1: AND R2, R8"} \\ 
 
-\item Este es un error de concepto que se le puede escapar a los alumnos, que pasa si un alumno escribe el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:\\
 
 \begin{verbatim}
 MUL R7, R4
 AND R5, [R3]
 \end{verbatim}
 
-En la linea numero 1 cuando uno escribe la instrucción MUL no es valido utilizar como destino el registro numero 7 por lo tanto es invalida\footnote{El resultado de la multiplicación se parte en 2. La primer parte va a R7 y la segunda parte va al operando destino, no pueden ser los mismo porque si no se perdería una parte del resultado.} esa linea. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+Para la instrucción MUL es inválido utilizar como destino el registro R7 por lo que, la primer línea es inválida. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: MUL R7, R4" \\ 
+\mensaje{"Ha ocurrido un error en la linea 1: MUL R7, R4"} \\ 
 
-\item Este es otro error que se les puede escapar a los alumnos, que pasa si un alumno escribe el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:\\
 
 \begin{verbatim}
 inicio: MUL R7, R4
@@ -107,108 +107,74 @@ AND R5, [R3]
 JMP incio
 \end{verbatim}
 
-En la linea numero 3 cuando uno escribe una instrucción utilizando etiquetas no es correcto escribir el nombre incompleto de la etiqueta, por eso es invalido. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 3 la etiqueta anteriormente declarada en la línea número 1 esta incompleta (Le faltan los dos puntos). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 3: JMP incio" \\ 
-
-\item Otro error con etiquetas, que pasa si un alumno escribe el siguiente programa Qi:\\
-
-\begin{verbatim}
-MOV [0x0005], etiq
-CALL [0x0005]
-etiqueta: ADD R0, 0x0002
-\end{verbatim}
-
-En la linea numero 1 ocurre el mismo error antes mencionado donde el nombre de la etiqueta esta incompleto, esta situación es distinta ya que en la anterior uno define primero la etiqueta y luego se utiliza, acá es al reves primero se utiliza en la linea 1 y luego se define en la linea 3. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
-
-"Ha ocurrido un error en la linea 1: MOV [0x0005], etiq" \\
+\mensaje{"Ha ocurrido un error en la linea 3: JMP incio" \\}
 
 
-\item Relacionado con las etiquetas puede pasa que se olviden de algún símbolo, que pasa si un alumno escribe el siguiente programa Qi:\\
-
-\begin{verbatim}
-inicio SUB [0x9000], R4
-MUL R5, [R7]
-JMP inicio
-\end{verbatim}
-
-En la linea numero 1 la etiqueta inicio no es una etiqueta valida\footnote{Las etiquetas pueden empezar con mayúscula o minúscula pero al final siempre tienen que tener (:).}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
-
-"Ha ocurrido un error en la linea 1: inicio SUB [0x9000], R4" \\ 
-
-
-\item Esto es un error de concepto, que pasa si un alumno escribe el siguiente programa Qi :\\
+\item Dado el siguiente programa Qi :\\
 
 \begin{verbatim}
 ADD [0x9000], R4
 NOT 0x0004
 \end{verbatim}
 
-En la linea numero 2 el operando destino de la instrucción NOT no puede ser un inmediato, esto es invalido\footnote{La instrucción NOT no puede recibir un inmediato como destino porque necesita guardar el efecto que genera y un inmediato es una constante.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 2 el operando destino de la instrucción NOT no puede ser un inmediato, esto es inválido (Los operandos destinos no pueden ser inmediatos). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 2: NOT 0x0004" \\ 
+\mensaje{"Ha ocurrido un error en la linea 2: NOT 0x0004"} \\ 
 
-\item Esto es un error que se les puede escarpar, que pasa si un alumno escribe el siguiente programa Qi :\\
+\item Dado el siguiente programa Qi:\\
 
 \begin{verbatim}
 ADD [9000], R4
 NOT R2
 \end{verbatim}
 
-En la linea numero 1 el operando destino no tiene el prefijo 0x por lo tanto es una expresión invalida. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 el operando origen no tiene el prefijo "0x", es una expresión invalida. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: ADD [0009], R4" \\ 
+\mensaje{"Ha ocurrido un error en la linea 1: ADD [0009], R4"} \\ 
 
-\item Una cosa interesante puede ocurrir que pasa si un alumno escribe el siguiente programa Qi :\\
+\item Dado el siguiente programa Qi :\\
 
 \begin{verbatim}
 ADD [0x900000000000], R4
 NOT R2
 \end{verbatim}
 
-En la linea numero 1 el operando destino tiene mas dígitos que los permitidos, por esto es invalido\footnote{Un inmediato tiene el prefijo 0x y luego 4 dígitos hexadecimales.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino tiene mas dígitos que los permitidos, (Un inmediato tiene el prefijo 0x y luego sólo 4 dígitos hexadecimales). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: ADD [0x900000000000], R4" \\ 
+\mensaje{"Ha ocurrido un error en la linea 1: ADD [0x900000000000], R4"} \\ 
 
-\item Esto es un error que se les puede escarpar, que pasa si un alumno escribe el siguiente programa Qi  :\\
+\item Dado el siguiente programa Qi  :\\
 
 \begin{verbatim}
 ZDD [0x900000000000], [R5]
 NOT R2
 \end{verbatim}
 
-En la linea numero 1 el nombre de la operación es invalida\footnote{Ese nombre es invalido porque no es parte del conjunto de instrucciones, no existe la instrucción ZDD.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 el nombre de la operación es invalida (No existe la instrucción ZDD).Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: ZDD [0x900000000000], R4" \\
+\mensaje{"Ha ocurrido un error en la linea 1: ZDD [0x900000000000], R4}" \\
 
-\item Este error no es tan habitual, que pasa si un alumno escribe el siguiente programa Qi  :\\
+\item Dado el siguiente programa Qi  :\\
 
 \begin{verbatim}
 SUB [], 0x000A
 \end{verbatim}
 
-En la linea numero 1 el operando destino no contiene su valor, por eso es invalido\footnote{El modo de direccionamiento directo siempre contiene un inmediato como valor.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino no esta incompleto (El modo de direccionamiento directo debe escribirse como un valor inmediato encerrado entre corchetes). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: SUB [], 0x000A" \\
+\mensaje{"Ha ocurrido un error en la linea 1: SUB [], 0x000A"} \\
 
-\item otro error no tan habitual, que pasa si un alumno escribe el siguiente programa Qi  :\\
+\item Dado el siguiente programa Qi  :\\
 
 \begin{verbatim}
 JMP
 \end{verbatim}
 
-En la linea numero 1 el operando origen de la instrucción JMP no existe y por ende es invalido\footnote{Todas las instrucciones son validas si tienen a su operandos, en este caso JMP le falta su operando.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 sólo esta escrito el nombre de la instruccion JMP pero falta a continuación su el operando origen. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-"Ha ocurrido un error en la linea 1: JMP" \\
+\mensaje{"Ha ocurrido un error en la linea 1: JMP"} \\
  
-\item otro error no tan habitual, que pasa si un alumno escribe el siguiente programa Qi  :\\
-
-\begin{verbatim}
-ADD R7, [[]]
-\end{verbatim}
-
-En la linea numero 1 el valor el operando origen no existe, esto es invalido\footnote{El modo de direccionamiento indirecto necesita su valor inmediato.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
-
-"Ha ocurrido un error en la linea 1: ADD R7, [[]]" \\
 
 \end{itemize}
