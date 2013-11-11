@@ -49,32 +49,26 @@ object Parser extends Ensamblador {
 
   def result(resultado: ParseResult[Programa]): Programa = resultado match {
     case Success(result, _) ⇒ result
-  //  case Failure(msg, i) ⇒ {
-      //var mensaje = createMessage(i)
-      //throw new SyntaxErrorException(mensaje)
-    //}
+    case Failure(msg, i) ⇒ {
+     var mensaje = createMessage(i)
+     throw new SyntaxErrorException(mensaje)
+    }
     case Error(msg, i) ⇒ throw new SyntaxErrorException(msg)
   }
 
-  def createMessage(output: Input) {
+  def createMessage(output: Input): String = {
     var characterCount = output.offset 
     var cadenaCaracteres = output.source
-  } 
-    //var cadena 
-    //return getLineWithError(lineOfProgram, characterCount)
-  
+    var lineas = output.source.toString().split("\n")
+    return lineWithError(cadenaCaracteres.toString().substring(0, characterCount),lineas)
 
-  def getLineWithError(lineOfProgram: Array[String], amountCharactersBeforeError: Int): String = {
-    var countCharaters = 0
-    var mensaje = ""
-    lineOfProgram.foreach(line ⇒ {
-      if (amountCharactersBeforeError >= countCharaters && amountCharactersBeforeError <= countCharaters + line.length()) {
-        var countLine = (lineOfProgram.indexOf(line) + 1).toString
-        mensaje = s"Ha ocurrido un error en la linea $countLine $line"
-      }
-      countCharaters += line.length()
-    })
-    return mensaje
+  } 
+
+  def lineWithError(cadenaConError: String, lineas : Array[String] ): String = {
+    var lineasCortadasEnError = cadenaConError.split("\n")
+    var numeroLinea = lineasCortadasEnError.length
+    var linea = lineas(numeroLinea -1)
+    return s"Ha ocurrido un error en la linea $numeroLinea : $linea"
   }
 }
 
