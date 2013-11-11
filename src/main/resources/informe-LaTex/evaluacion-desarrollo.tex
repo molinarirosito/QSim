@@ -40,7 +40,7 @@ Se toma dicho resultado y como ultimo paso se compara si el programa resultado e
 
 Se toma como input del objeto instancia Parser un programa Qi invalido, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Al terminar de chequear el programa, el objeto parser retorna un objeto de la clase Exception del tipo \textbf{SyntaxErrorException}, se captura la excepción y se toma de ella el mensaje de error para corroborar que sea el mensaje esperado (que describe la línea donde esta el error de sintáxis).
 
-
+\end{enumerate}
 \subsection{Ensamblado}
 
 Para poder verificar que el ensamblado se realizó correctamente se toma un programa Qi y teniendo en cuenta que el resultado del parser genera un objeto de la clase \textbf{Programa} que contiene un conjunto de objetos de la clase \textbf{Instruccion}, además que cada instrucción tiene el comportamiento necesario para generar su propio \codmaq, se delega la generación del \codmaq a cada una, con la intención de comparar la secuencia resultante con la secuencia de \codmaq esperada.
@@ -163,10 +163,10 @@ Estas instrucciones permiten el manejo de la Pila como estructura de datos dispo
 
 \item Entrada y Salida\\
 
-Que el simulador admita la interacción con dispositivos de E/S. Para esto habría que modelar buses de entrada hacia los puertos y dispositivos tales como el teclado, impresora, monitor que esten conectados a los puertos y un programa pueda detectar su cambios y utilizar sus datos como input para luego procesarlos en un programa.
+Que el simulador admita la interacción con dispositivos de E/S. Para esto habría que modelar buses de entrada hacia los puertos y dispositivos tales como el teclado, impresora, monitor que estén conectados a los puertos y un programa pueda detectar su cambios y utilizar sus datos como input para luego procesarlos en un programa.
 
-\item Implementar interrupcciones}\\
+\item Implementar interrupcciones\\
 
-Para completar el modelo de entrada y salida sería necesario implementar tambien y agrar al modelo actual las interrupcciones de entrada y salida, ya que de esta manera los dispositivos de entrada y salida pueden dar aviso a la cpu que hay nuevos datos para ser procesados.
+Para completar el módulo de entrada y salida sería necesario implementar también y agregar al modelo actual las interrupciones de entrada y salida, ya que de esta manera los dispositivos de entrada y salida pueden dar aviso a la cpu que hay nuevos datos para ser procesados.
 
 \end{itemize}

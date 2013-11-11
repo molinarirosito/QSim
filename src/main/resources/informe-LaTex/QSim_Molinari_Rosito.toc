@@ -9,31 +9,31 @@
 \contentsline {section}{\numberline {4}Arquitecturas Q}{8}{section.4}
 \contentsline {part}{II\hspace {1em}Simulador QSim}{8}{part.2}
 \contentsline {section}{\numberline {5}Funcionalidad del simulador}{9}{section.5}
-\contentsline {subsection}{\numberline {5.1}Chequeo de sintaxis}{9}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.1}Chequeo de sintaxis}{10}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Ensamblado}{10}{subsection.5.2}
 \contentsline {subsection}{\numberline {5.3}Cargado en memoria}{10}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Ejecuci\IeC {\'o}n paso a paso}{10}{subsection.5.4}
-\contentsline {section}{\numberline {6}Implementaci\IeC {\'o}n}{11}{section.6}
-\contentsline {subsection}{\numberline {6.1}Tecnolog\IeC {\'\i }a utilizada}{11}{subsection.6.1}
+\contentsline {subsection}{\numberline {5.4}Ejecuci\IeC {\'o}n paso a paso}{11}{subsection.5.4}
+\contentsline {section}{\numberline {6}Implementaci\IeC {\'o}n}{12}{section.6}
+\contentsline {subsection}{\numberline {6.1}Tecnolog\IeC {\'\i }a utilizada}{12}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}Dise\IeC {\~n}o Orientado a Objetos}{12}{subsection.6.2}
 \contentsline {subsubsection}{\numberline {6.2.1}ALU}{12}{subsubsection.6.2.1}
 \contentsline {subsubsection}{\numberline {6.2.2}Bus de entrada y salida, memoria y puertos}{12}{subsubsection.6.2.2}
-\contentsline {subsubsection}{\numberline {6.2.3}CPU}{13}{subsubsection.6.2.3}
+\contentsline {subsubsection}{\numberline {6.2.3}CPU}{12}{subsubsection.6.2.3}
 \contentsline {subsubsection}{\numberline {6.2.4}Int\IeC {\'e}rprete}{13}{subsubsection.6.2.4}
-\contentsline {subsubsection}{\numberline {6.2.5}Modos de direccionamiento y W16}{14}{subsubsection.6.2.5}
+\contentsline {subsubsection}{\numberline {6.2.5}Modos de direccionamiento y W16}{13}{subsubsection.6.2.5}
 \contentsline {subsubsection}{\numberline {6.2.6}Instrucciones}{15}{subsubsection.6.2.6}
 \contentsline {subsubsection}{\numberline {6.2.7}Programa}{16}{subsubsection.6.2.7}
-\contentsline {subsubsection}{\numberline {6.2.8}Simulador}{16}{subsubsection.6.2.8}
+\contentsline {subsubsection}{\numberline {6.2.8}Simulador}{17}{subsubsection.6.2.8}
 \contentsline {part}{III\hspace {1em}Evaluaci\IeC {\'o}n del desarrollo}{17}{part.3}
 \contentsline {section}{\numberline {7}Dificultades encontradas}{17}{section.7}
 \contentsline {subsection}{\numberline {7.1}Dificultades presentadas por el dominio}{17}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Dificultades de dise\IeC {\~n}o}{17}{subsection.7.2}
-\contentsline {section}{\numberline {8}Casos de prueba}{19}{section.8}
-\contentsline {subsection}{\numberline {8.1}Chequeo de sintaxis en la distintas Qi}{19}{subsection.8.1}
+\contentsline {subsection}{\numberline {7.2}Dificultades de dise\IeC {\~n}o}{18}{subsection.7.2}
+\contentsline {section}{\numberline {8}Casos de prueba}{20}{section.8}
+\contentsline {subsection}{\numberline {8.1}Chequeo de sintaxis en la distintas Qi}{20}{subsection.8.1}
 \contentsline {subsection}{\numberline {8.2}Ensamblado}{20}{subsection.8.2}
 \contentsline {subsection}{\numberline {8.3}Decodificaci\IeC {\'o}n}{20}{subsection.8.3}
 \contentsline {subsection}{\numberline {8.4}Ejecuci\IeC {\'o}n}{21}{subsection.8.4}
-\contentsline {subsubsection}{\numberline {8.4.1}Operaciones de ALU}{21}{subsubsection.8.4.1}
+\contentsline {subsubsection}{\numberline {8.4.1}Operaciones de ALU}{22}{subsubsection.8.4.1}
 \contentsline {subsubsection}{\numberline {8.4.2}B\IeC {\'u}squeda de Operandos}{22}{subsubsection.8.4.2}
 \contentsline {subsubsection}{\numberline {8.4.3}Almacenamiento de Operandos}{22}{subsubsection.8.4.3}
 \contentsline {section}{\numberline {9}Ejemplos de uso}{22}{section.9}
@@ -42,11 +42,11 @@
 \contentsline {section}{\numberline {A}Especificaci\IeC {\'o}n de la arquitectura Q}{24}{appendix.Alph1}
 \contentsline {subsection}{\numberline {A.1}Caracter\IeC {\'\i }sticas generales}{24}{subsection.Alph1.1}
 \contentsline {subsection}{\numberline {A.2}Modos de direccionamiento}{24}{subsection.Alph1.2}
-\contentsline {subsection}{\numberline {A.3}Repertorio de instrucciones}{26}{subsection.Alph1.3}
+\contentsline {subsection}{\numberline {A.3}Repertorio de instrucciones}{25}{subsection.Alph1.3}
 \contentsline {subsubsection}{\numberline {A.3.1}Instrucciones de 2 operandos}{26}{subsubsection.Alph1.3.1}
 \contentsline {subsubsection}{\numberline {A.3.2}Instrucciones de 1 operando origen (falta revisar Mara)}{27}{subsubsection.Alph1.3.2}
 \contentsline {subsubsection}{\numberline {A.3.3}Instrucciones de 1 operando destino (falta revisar Mara)}{27}{subsubsection.Alph1.3.3}
-\contentsline {subsubsection}{\numberline {A.3.4}Instrucciones sin operandos (falta revisar Mara)}{27}{subsubsection.Alph1.3.4}
+\contentsline {subsubsection}{\numberline {A.3.4}Instrucciones sin operandos (falta revisar Mara)}{28}{subsubsection.Alph1.3.4}
 \contentsline {subsubsection}{\numberline {A.3.5}Instrucciones de salto condicional (falta revisar Mara)}{28}{subsubsection.Alph1.3.5}
 \contentsline {section}{\numberline {B}Como utilizar el simulador}{29}{appendix.Alph2}
 \contentsline {section}{\numberline {C}Errores comunes}{29}{appendix.Alph3}
