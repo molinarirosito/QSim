@@ -20,14 +20,15 @@ Por otro lado, tuvieron que solicitarse extensiones al equipo de desarrolladores
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\section{Casos de prueba (revisar redaccion!!)}
+\section{Casos de prueba}
 
-\ojo{En esta sección se describen los casos de prueba de la aplicación.}{Falta explicar porqué es importante esta sección}
+En esta sección se describen los casos de prueba que se llevaron a cabo para verificar la funcionalidad de la aplicación.
 
 \subsection{Chequeo de sintaxis en la distintas Qi}
 
-Para chequear la sintaxis de cada \textbf{Arquitectura Q}, primero escribimos un programa Qi en un archivo con extension .qsim luego este archivo lo recibe el objeto Parser que se encargara de chequear la sintaxis. 
-Para eso realizamos dos casos de prueba por cada Qi:
+Para chequear la sintaxis de cada \textbf{Arquitectura Qi}, el mecanismo es escribir un programa Qi en un archivo con extension .qsim y luego hacer que el objeto Parser lo procese para validar la sintaxis. 
+
+Con este objetivo se realizaron dos casos de prueba por cada Qi:
 \begin{enumerate}
 \item \textbf{Chequear programa Qi valido}
 
@@ -98,35 +99,36 @@ Para verificar la búsqueda de operandos, tomamos una instrucción cualquiera y 
  
 \subsubsection{Almacenamiento de Operandos}
 
-Para verificar el almacenamiento de operandos, salvo algunas instrucciones todas pasan por la etapa de store.
+Para verificar el almacenamiento de operandos, salvo algunas instrucciones todas pasan por la etapa de almacenamiento.
 Tomamos cada una de las instrucciones de un programa Qi y realizamos el ciclo de ejecución mencionado anteriormente.
 Cuando estamos en la etapa de ejecución, cada una tiene un operando destinado a guardar el resultado de su efecto.
 En esta instancia sabemos que  dicho operando tiene el valor guardado, a este valor lo comparamos con el valor esperado.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\section{Ejemplos de uso (Revisar!!)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ejemplos de uso}
 
-En esta sección vamos a mostrar las diferentes situaciones que pueden ocurrir a la hora de utilizar el simulador.
+Durante el desarrollo del simulador se encontraron situaciones especiales de uso que mostraron la potencialidad didáctica de la herramienta, según fue confirmado con los docentes de la materia \orga, dado que los estudiantes pueden experimentar mas allá de la resolución de problemas mediante programas \qi. En esta sección se muestran algunos ejemplos de estas situaciones.
 
-\subsection{Para Experimentar}
+\begin{enumerate}
 
-Esta sección describe situaciones particulares que los alumnos pueden experimentar.
+\item En el siguiente programa \qi\ se ve que el uso de etiquetas permite enmascarar el modo de direccionamiento inmediato difiriendo la resolución de su valor al momento del ensamblado, y dado que se trata de un valor constante, puede asignarse a cualquier operando destino. En este ejemplo, se almacena en la celda de memoria \code{0005}
 
-\begin{itemize}
+\begin{verbatim}
+etiqueta: ADD R0, 0x0002 
+          ...
+          MOV [0x0005], etiqueta
+          CALL [0x0005] 
+\end{verbatim}
 
-\item Supongamos que un alumno escribe el siguiente programa Qi:
+\item En el siguiente ejemplo se puede ejercitar como el uso de subrutinas, puede afectar el \ciclo. En particular, como efecto de la ejecución del \code{CALL} se apila la dirección de la siguiente instrucción (en este caso \code{ADD}), y la ejecución del \code{RET} hace que se vuelva entonces a ejecutar esa misma instrucción y luego un \code{RET} que no tuvo su correspondiente \code{CALL}.
 
-1.ADD R0, [0x0002]\\
-2.MUL R4, 0x0001 \\
-3.SUB [0x0003], 0x000A \\
-4.MOV R5, 0x0056 \\
-5.MOV [0x0005], etiqueta \\
-6.CALL [0x0005] \\
-7.etiqueta: ADD R0, 0x0002 \\
-8.RET \\
+\begin{verbatim}
+        CALL rutina 
+rutina: ADD R0, 0x0002 
+        RET 
+\end{verbatim}
 
-Lo interesante es que luego de ejecutar el CALL se ejecuta la instrucción ADD R0, 0x0002 y el RET. Cuando vuelve para ejecutar la próxima instrucción el PC se encuentra en la linea 7, donde vuelve a ejecutar la instrucción ADD antes mencionada. Ya lo ultimo que le queda es ejecutar el RET.
-Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecutar el RET  el registro SP tiene el valor inicial que es FFEF, luego en la ejecución lo primero que se hace es incrementar el SP osea que ahora tiene el valor FFFO y luego buscar el valor de esa dirección para actualizar el registro PC. Para informarles la dirección FFFO es un puerto de E/S. La conclusión es que en esta instancia el flujo de ejecución del programa depende del valor que tiene ese puerto, puede pasar que el valor sea 0x0000 y se actualice el PC nos lleve al inicio de la memoria donde se encuentra inicializado otro programa y empiece a ejecutar desde allí. 
+%Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecutar el RET  el registro SP tiene el valor inicial que es FFEF, luego en la ejecución lo primero que se hace es incrementar el SP osea que ahora tiene el valor FFFO y luego buscar el valor de esa dirección para actualizar el registro PC. Para informarles la dirección FFFO es un puerto de E/S. La conclusión es que en esta instancia el flujo de ejecución del programa depende del valor que tiene ese puerto, puede pasar que el valor sea 0x0000 y se actualice el PC nos lleve al inicio de la memoria donde se encuentra inicializado otro programa y empiece a ejecutar desde allí. 
 
 
 \item Para los que son curiosos, supongamos que un alumno escribe el siguiente programa Qi:
@@ -136,9 +138,9 @@ MUL R4, 0x0001
 SUB [0x0003], 0x000A 
 \end{verbatim}
 
-Pensemos que el PC se posiciona en la linea 3 y realizamos el ciclo de instrucción(FETCH - DECODE - EXECUTE). Como estado final tenemos el efecto de la ultima instrucción y el valor de PC apuntando a la siguiente instrucción a ejecutar. Como verán el programa que escribió el alumno termino en la la linea 3 pero el simulador no para de ejecutar, por ende te permite realizar las veces que quiera el ciclo de instrucción. Es re interesante que los chicos experimenten este tipo de cosas.
+Si el valor de PC hace referencia a la ultima instrucción y se lleva a cabo el \ciclo, como estado final se tiene el valor de PC apuntando a la siguiente instrucción a ejecutar. Como el programa no tiene mas instrucciones, si se continúa la simulación se comienza la búsqueda de una instrucción inválida.
 
-\end{itemize} 
+\end{enumerate} 
 
 \verde{La decodificación con desensamblado permite al alumno experimentar otros escenarios y efectos laterales, entre los cuales podemos enumerar:
 
