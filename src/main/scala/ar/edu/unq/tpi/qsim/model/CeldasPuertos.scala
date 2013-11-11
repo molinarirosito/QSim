@@ -27,7 +27,7 @@ import ar.edu.unq.tpi.qsim.exeptions._
   def initialize() = {
     celdas = new ArrayBuffer[Celda]()
     Util.rep(tamanioCeldas()){
-      val w16 = new W16("F000")
+      val w16 = new W16("0000")
       celdas.append(new Celda(w16))
     } 
   }
