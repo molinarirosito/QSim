@@ -20,60 +20,63 @@ Por otro lado, tuvieron que solicitarse extensiones al equipo de desarrolladores
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\section{Casos de prueba (revisar redaccion!!)}
+\section{Casos de prueba}
 
-\ojo{En esta sección se describen los casos de prueba de la aplicación.}{Falta explicar porqué es importante esta sección}
+En esta sección se describen los casos de prueba de la aplicación realizados para ilustrar el alcance de la aplicación y su robustez.
 
 \subsection{Chequeo de sintaxis en la distintas Qi}
 
-Para chequear la sintaxis de cada \textbf{Arquitectura Q}, primero escribimos un programa Qi en un archivo con extension .qsim luego este archivo lo recibe el objeto Parser que se encargara de chequear la sintaxis. 
-Para eso realizamos dos casos de prueba por cada Qi:
-\begin{enumerate}
-\item \textbf{Chequear programa Qi valido}
+El chequeo de sintaxis de cada \textbf{Arquitectura Q} se lleva a cabo escribiendo un programa Qi en un archivo con extension .qsim y luego, haciendo que este mismo archivo sea tomado por el objeto Parser cuya responsabilidad es chequear la sintaxis. 
 
-\ojo{Agarramos el programa Qi válido\footnote{Un programa Qi valido es un programa en cualquier sintáticamente correcto en alguna arquitectura Q.} y se lo pasamos al Parser, cuando termina de chequear devuelve un resultado, como es de esperar devuelve un objeto programa con la lista de instrucciones. Tomamos ese resultado y como ultimo paso comparamos si el programa resultado es igual al programa esperado.}{OJO con la redacción}
+Para chequear la sintaxis de cada \textbf{Arquitectura Q} se realizaron dos casos de prueba por cada Qi:
+\begin{enumerate}
+\item \textbf{Chequear programa Qi válido}
+
+Se toma como input del objeto instancia Parser un programa Qi válido\footnote{Un programa Qi válido es un programa sintáticamente correcto en alguna arquitectura Q.}, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada (Un programa sintácticamente válido en Q6 puede no ser sintácticamente válido en Q1 si utiliza modos de direccionamiento o instrucciones que aún no fueron agregadas en Q1). Al terminar de chequear el programa, el objeto parser retorna un objeto instancia de la clase Programa con la lista de instrucciones que fueron ensambladas. 
+Se toma dicho resultado y como ultimo paso se compara si el programa resultado es igual al programa esperado (que concuerda en objetos con el programa en código fuente escrito en el input).
 
 
 \item \textbf{Chequear programa Qi es invalido} 
 
-En este caso escribimos un programa Qi con errores de sintaxis para ver como reacciona el parser.
+Se toma como input del objeto instancia Parser un programa Qi invalido, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Al terminar de chequear el programa, el objeto parser retorna un Exception del tipo \textbf{SyntaxErrorException}, se captura la excepción y se toma de ella el mensaje de error para corroborar que sea el mensaje esperado (que describe la línea donde esta el error de sintáxis).
 
-Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception \textbf{SyntaxErrorException} porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepción te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepción y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
-\end{enumerate}
 
 \subsection{Ensamblado}
-\ojo{(Objetos --+ Código Maquina)}{}
+
 Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto de la clase \textbf{Programa} que contiene un conjunto de objetos de la clase \textbf{Instruccion}, el ensamblado simplemente lo realiza cada instrucción, esto quiere decir que cada instrucción tiene el comportamiento para generar su propio \codmaq. De esta forma realizamos el ensamblado del programa y obtenemos una lista de código maquina como resultado y como ultimo paso comparamos la lista de código maquina resultado con la lista código maquina esperado.
 
 \subsection{Decodificación}
-\ojo{Código Maquina --+ Objetos (Interprete)}{}
 
-La Decodificación se verifica correctamente a la inversa del Ensamblado tomando el ensamblado del programa Qi que como sabemos es la lista de código maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado puede devolver dos cosas: 
+La Decodificación se verifica correctamente a la inversa del Ensamblado: tomando como input el ensamblado de un programa Qi que es la secuencia de código maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado de cada iteración puede retornar dos cosas:
+ 
 \begin{enumerate}
-\item \textbf{Lista de de Instrucciones (decodificación)} 
+\item \textbf{Lista de Instrucciones} 
 
-El resultado correcto es la lista de objetos instrucciones, por cada código maquina el interprete verifica los códigos de operación para poder crear las instrucciones correctas y como ultimo paso de la verificación comparamos la lista resultante con la lista esperada.
+Este es el resultado de Intrepretar una secuencia de código máquina que representa correctamente a una instruccion y sus respectivos operandos. El objeto interprete verifica los códigos de operación para poder crear las instrucciones correctamente, y luego, depende de que tipo de instruccion se haya comenzado a interpretar comienza a interpretar sus respectivos operandos (si los tiene).
+Por último se compara cada instruccion en la lista resultante luego de intrepretar todo el programa con la lista esperada.
+
 \item\textbf{Error}
 
-El resultado puede ser un error porque puede pasar que el código de operación o el código de algún modo de direccionamiento dentro del formato de cada instrucción sea invalido. La excepción que puede tirar tiene el nombre de \textbf{CodigoInvalidoException}.   
+Al Intrepretar una secuencia de código máquina que no representa a ninguna instruccion (ya sea porque el código de operación o el código de algún modo de direccionamiento dentro del formato de cada instrucción es invalido) es una Exepcion del tipo \textbf{CodigoInvalidoException}.   
 \end{enumerate}
 
 \subsection{Ejecución}
 
-Para verificar que la ejecución de un programa Qi con el \textbf{Ciclo de Instrucción} se realice correctamente lo que hacemos es cargar el programa en la memoria a través del objeto \textbf{Simulador}, de esta forma cuando se encuentra cargado esta listo para la ejecución. Los pasos que se verifican son 3:
+Para verificar que la ejecución de un programa Qi fue necesario separar la verificación en los tres pasos del \textbf{Ciclo de Instrucción}:
 
 \begin{itemize}
 \item \textbf{Fetch} 
 
-Para verificar el fetch se toma la instrucción siguiente a ejecutar y se compara el valor que se guarda en el registro ir con el valor esperado. Ademas se verifica que el registro especial pc apunte a la siguiente instrucción a ejecutar.
+Para verificar el fetch se toma la instrucción siguiente a ejecutar y se compara el valor que se guarda en el registro \IR con el valor esperado que debería tener (es decir, con el código maquina que representa a la instruccion siguiente a ejecutar). Ademas se verifica que el registro especial \PC tenga como valor la dirección de memoria de la siguiente instrucción a ejecutar, para corroborar esto se compara el \PC luego del fetch con \PC anterior más la cantidad de celdas que ocupa la instrucción actual.
 
 \item \textbf{Decode}
 
-Para verificar el decode, se toma el valor del registro ir para que lo reciba el interprete que dará como resultado el objeto instrucción correspondiente. Este objeto instrucción sabe mostrarse quien es y por eso la responsabilidad de decodificar se la delega a la instrucción. Al obtener la decodificación de cada instrucción podemos comparar la decodificacion resultante con la esperada.
+Para verificar el decode, se toma el valor que esta guardado registro \IR para que lo reciba el interprete que retornará el objeto instrucción interpretado a partir de ese valor. Al obtener dicha instrucción se compara con la instrucción esperada.
  
 \item \textbf{Execute}
 
-Para verificar el efecto de cada instrucción se considero armar un caso de prueba por cada instrucción donde cada uno tiene un estado inicial y luego de realizar la ejecución de dicha instrucción termina con un estado final modificado en el cual verificamos el resultado obtenido con el resultado esperado. 
+Para verificar el efecto de cada instrucción se preparó un caso de prueba por cada instrucción donde, para cada instrucción se tiene un estado inicial y un estado final esperado. Se realiza la ejecución de dicha instrucción y se compara el resultado obtenido (ya sea la modificación de flags, registros, celdas de memoria o puertos) con el resultado esperado. 
+
 \end{itemize}
 
 \textbf{Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instrucción}
@@ -98,52 +101,54 @@ Para verificar la búsqueda de operandos, tomamos una instrucción cualquiera y 
  
 \subsubsection{Almacenamiento de Operandos}
 
-Para verificar el almacenamiento de operandos, salvo algunas instrucciones todas pasan por la etapa de store.
+Para verificar el almacenamiento de operandos, salvo algunas instrucciones todas pasan por la etapa de almacenamiento.
 Tomamos cada una de las instrucciones de un programa Qi y realizamos el ciclo de ejecución mencionado anteriormente.
 Cuando estamos en la etapa de ejecución, cada una tiene un operando destinado a guardar el resultado de su efecto.
 En esta instancia sabemos que  dicho operando tiene el valor guardado, a este valor lo comparamos con el valor esperado.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\section{Ejemplos de uso (Revisar!!)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ejemplos de uso}
 
-En esta sección vamos a mostrar las diferentes situaciones que pueden ocurrir a la hora de utilizar el simulador.
+Durante el desarrollo del simulador se encontraron situaciones especiales de uso que mostraron la potencialidad didáctica de la herramienta, según fue confirmado con los docentes de la materia \orga, dado que los estudiantes pueden experimentar mas allá de la resolución de problemas mediante programas \qi. En esta sección se muestran algunos ejemplos de estas situaciones.
 
-\subsection{Para Experimentar}
+\begin{enumerate}
 
-Esta sección describe situaciones particulares que los alumnos pueden experimentar.
+\item En el siguiente programa \qi\ se ve que el uso de etiquetas permite enmascarar el modo de direccionamiento inmediato difiriendo la resolución de su valor al momento del ensamblado, y dado que se trata de un valor constante, puede asignarse a cualquier operando destino. En este ejemplo, se almacena en la celda de memoria \code{0005}
 
-\begin{itemize}
+\begin{verbatim}
+etiqueta: ADD R0, 0x0002 
+          ...
+          MOV [0x0005], etiqueta
+          CALL [0x0005] 
+\end{verbatim}
 
-\item Supongamos que un alumno escribe el siguiente programa Qi:
+\item En el siguiente ejemplo se puede ejercitar como el uso de subrutinas, puede afectar el \ciclo. En particular, como efecto de la ejecución del \code{CALL} se apila la dirección de la siguiente instrucción (en este caso \code{ADD}), y la ejecución del \code{RET} hace que se vuelva entonces a ejecutar esa misma instrucción y luego un \code{RET} que no tuvo su correspondiente \code{CALL}.
 
-1.ADD R0, [0x0002]\\
-2.MUL R4, 0x0001 \\
-3.SUB [0x0003], 0x000A \\
-4.MOV R5, 0x0056 \\
-5.MOV [0x0005], etiqueta \\
-6.CALL [0x0005] \\
-7.etiqueta: ADD R0, 0x0002 \\
-8.RET \\
+\begin{verbatim}
+        CALL rutina 
+rutina: ADD R0, 0x0002 
+        RET 
+\end{verbatim}
 
-Lo interesante es que luego de ejecutar el CALL se ejecuta la instrucción ADD R0, 0x0002 y el RET. Cuando vuelve para ejecutar la próxima instrucción el PC se encuentra en la linea 7, donde vuelve a ejecutar la instrucción ADD antes mencionada. Ya lo ultimo que le queda es ejecutar el RET.
-Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecutar el RET  el registro SP tiene el valor inicial que es FFEF, luego en la ejecución lo primero que se hace es incrementar el SP osea que ahora tiene el valor FFFO y luego buscar el valor de esa dirección para actualizar el registro PC. Para informarles la dirección FFFO es un puerto de E/S. La conclusión es que en esta instancia el flujo de ejecución del programa depende del valor que tiene ese puerto, puede pasar que el valor sea 0x0000 y se actualice el PC nos lleve al inicio de la memoria donde se encuentra inicializado otro programa y empiece a ejecutar desde allí. 
+%Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecutar el RET  el registro SP tiene el valor inicial que es FFEF, luego en la ejecución lo primero que se hace es incrementar el SP osea que ahora tiene el valor FFFO y luego buscar el valor de esa dirección para actualizar el registro PC. Para informarles la dirección FFFO es un puerto de E/S. La conclusión es que en esta instancia el flujo de ejecución del programa depende del valor que tiene ese puerto, puede pasar que el valor sea 0x0000 y se actualice el PC nos lleve al inicio de la memoria donde se encuentra inicializado otro programa y empiece a ejecutar desde allí. 
 
 
-\item Para los que son curiosos, supongamos que un alumno escribe el siguiente programa Qi:
+\item Dado el siguiente programa Qi:
+
 \begin{verbatim}
 ADD R0, [0x0002]
 MUL R4, 0x0001
 SUB [0x0003], 0x000A 
 \end{verbatim}
 
-Pensemos que el PC se posiciona en la linea 3 y realizamos el ciclo de instrucción(FETCH - DECODE - EXECUTE). Como estado final tenemos el efecto de la ultima instrucción y el valor de PC apuntando a la siguiente instrucción a ejecutar. Como verán el programa que escribió el alumno termino en la la linea 3 pero el simulador no para de ejecutar, por ende te permite realizar las veces que quiera el ciclo de instrucción. Es re interesante que los chicos experimenten este tipo de cosas.
+Si el valor de PC hace referencia a la ultima instrucción y se lleva a cabo el \ciclo, como estado final se tiene el valor de PC apuntando a la siguiente instrucción a ejecutar. Como el programa no tiene mas instrucciones, si se continúa la simulación se comienza la búsqueda de una instrucción inválida.
 
-\end{itemize} 
+\end{enumerate} 
 
 \verde{La decodificación con desensamblado permite al alumno experimentar otros escenarios y efectos laterales, entre los cuales podemos enumerar:
 
 \begin{itemize}
-\item Si la ejecución paso a paso excede los límites del programa, pueden tomarse instrucciones de otra rutina y procesarse como una nueva instruccion.
+\item Si la ejecución paso a paso excede los límites del programa, pueden tomarse instrucciones de otra rutina y procesarse como una nueva instrucción.
 \item Si en cambio, se intenta ejecutar el contenido de una celda con datos (y no una instrucción) podrá ocurrir que se encuentre una instrucción invalida (por ejemplo, una combinación incorrecta de modos de direccionamiento y códigos de operación) y el alumno verá el mensaje de error pertinente.
 \end{itemize}}{ACOMODAR!!!}
 
@@ -165,5 +170,7 @@ Actualmente estas instrcucciones se encuentran implementadas pero no habilitadas
 \item Entrada y Salida.
 
 Que el simulador admita la interacción con dispositivos de E/S. Para eso tenemos que modelar dispositivos como el teclado, impresora, monitor, etc.
+
+\item \ojo{Implementar interrupcciones}{detallar}
 
 \end{itemize}
