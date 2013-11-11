@@ -14,10 +14,10 @@ La funcionalidad del simulador puede caracterizarse mediante las siguientes part
 \item Ejecución paso a paso de un programa cargado en memoria
 \end{itemize}
 
-\subsection{Chequeo de sintaxis}
+\subsection{Chequeo de sintaxis}\label{parser}
 
 El simulador provee al alumno de un editor de texto en el cual escribirá el programa en un lenguaje Qi, que desea cargar en memoria y ejecutar.
-Una vez que el usuario haya terminado la escritura, al momento de cargar el programa, el simulador utilizará un parser para detectar errores de sintaxis, tales como la falta de una coma o un corchete, o la presencia de símbolos que no pertenecen al lenguaje (como por ejemplo signos de pregunta y símbolos matemáticos); o bien errores semánticos como la combinación incorrecta de elementos del lenguaje, por ejemplo: modos de direccionamiento mal ubicados.
+Una vez que el usuario haya terminado la escritura, al momento de cargar el programa, el simulador utilizará un \textit{parser}\footnote{\verde{Definir parser en esta nota al pie}{}} para detectar errores de sintaxis, tales como la falta de una coma o un corchete, o la presencia de símbolos que no pertenecen al lenguaje (como por ejemplo signos de pregunta y símbolos matemáticos); o bien errores semánticos como la combinación incorrecta de elementos del lenguaje, por ejemplo: modos de direccionamiento mal ubicados.
 El parser solo revisará lo escrito por el alumno y de acuerdo a las gramática del lenguaje, mostrará alguno de los siguientes estados:
 
 \begin{description}
@@ -110,75 +110,78 @@ Como se observa en la figura \ref{CPU}, la CPU conoce a la ALU, contiene los reg
 \graf{CPU}{Diagrama de clase de la CPU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Intérprete}
+\subsubsection{Intérprete}\label{interprete}
 Como se observa en la figura \ref{Interprete} el Interprete es un \textit{singleton} que tiene la entera responsabilidad \ojo{de recibir los datos leídos desde, una celda de memoria hasta tres celdas, y bit a bit, según los códigos de operación y de modo de direccionamiento saber de que instrucción se trata y cuales son sus operandos si es que los tiene y devolver el objeto que la representa}{de construir un objeto que representa una instrucción determinada a partir de la decodificación de las celdas de memoria que ocupa su código máquina}. Se ocupa de la decodificación de la instrucción.
 
 \graf{Interprete}{Diagrama de clase del Interprete}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Modos de direccionamiento y W16}
-Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del trait ModoDireccionamiento, donde se encuentran declarados mensajes necesarios para manejar todas las subclases \ojo{poliformicamente}{de manera polimórfica}. \ojo{Entre los cuales se encuentran los mensajes:}{Entre estos mensajes podemos enumerar:}
+\ojo{}{Esta jerarquía de clases permite controlar el acceso a los operandos, mediante un objeto ModoDireccionamiento que controla el acceso a un objeto W16, que es quien contiene el valor propiamente dicho}. Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del trait ModoDireccionamiento,  \ojo{donde se encuentran declarados mensajes necesarios para manejar todas las subclasespoliformicamente}{donde se especifica el comportamiento que deben implementar las subclases de manera polimórfica}. \ojo{Entre los cuales se encuentran los mensajes:}{Entre estos mensajes podemos enumerar:}
 \begin{itemize}
 \item  \textbf{representacionString:}
-Devuelve la representación en string como código fuente, por ejemplo la representación de un \ojo{}{objeto?} \textbf{ADD(R0,R7)}, sería: \textbf{''ADD R0, R7''}
+Devuelve la representación en string como código fuente, por ejemplo la representación de un \ojo{}{objeto?} \textbf{ADD(R0,R7)}, sería: \textbf{''ADD R0, R7''}\ojo{}{(aclarar) este mensaje se utiliza en la etapa de desensamblado}
 \item  \textbf{codigo:}
-Retorna el string que representa al código del modo de direccionamiento, por el ejemplo, el código de modo de direccionamiento del R7 es \code{100111}.
+Retorna el string que representa al código del modo de direccionamiento, por el ejemplo, el código de modo de direccionamiento del R7 es \code{100111}. \ojo{}{(aclarar) este mensaje se utiliza en la etapa de ensamblado}
 \item  \textbf{getValorString:}
-Retorna el string que representa al dato que posee el modo de direccionamiento. En el caso de un Inmediato que sea \code{FF56}, devolverá el string "FF56", y en el caso de cualquier registro, retornara el valor que represente su W16.
+Retorna el dato almacenado en el operando. En el caso de un Inmediato que sea \code{FF56}, devolverá el string "FF56", y en el caso de cualquier registro, retornara el valor que represente su W16.
 \end{itemize}
-Los modos de direccionamiento diferentes a Inmediato y Registro, conocen en vez de un W16 otro modo de direccionamiento según corresponda, es decir:
+
+
+La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, representa el dato que es guardado en memoria. Tiene la \ojo{responsabilidad}{capacidad} de incrementarse, decrementarse, sumar una entero, devolver su representación binaria y su valor en decimal.\\
+
+Los modos de direccionamiento diferentes a Inmediato y Registro, conocen otro modo de direccionamiento que encapsula al objeto \textbf{W16} según corresponda, es decir:
 \begin{itemize}
 \item \textbf{RegistroIndirecto} conoce una instancia de Registro.
 \item \textbf{Directo} conoce conoce una instancia de Inmediato.
 \item \textbf{Indirecto} conoce conoce una instancia de Directo.
 \end{itemize}
-Esto se implemento de esta manera para que el leer datos de memoria, puertos o registros, o guardarlos en los mismos sea más sencillo ya que se delega en el modo de direccionamiento que conoce.
+\ojo{Esto se implemento de esta manera para que el leer datos de memoria, puertos o registros, o guardarlos en los mismos sea más sencillo ya que se delega en el modo de direccionamiento que conoce.}{(esto lo sacaría)}
 
-La clase Etiqueta representa las etiquetas creadas por el alumno cuando realiza el programa. Cuando el mismo es cargado en memoria, según cual sea la celda de inicio y cuanto ocupen las instrucciones, se calcula la dirección de memoria \textbf{que representa }{a la que hace referencia} la etiqueta y luego se la descarta reemplazándola por un modo de direccionamiento Inmediato.
+La clase \textbf{Etiqueta} representa las etiquetas creadas por el alumno cuando realiza el programa. Cuando el mismo es cargado en memoria, en función de cual sea la celda de inicio y cuanto ocupen las instrucciones, se calcula la dirección de memoria \textbf{que representa  la etiqueta }{a la que hace referencia} y luego se la descarta reemplazándola por un modo de direccionamiento Inmediato.
 
-La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, representa el dato que es guardado en memoria. Tiene la responsabilidad de incrementarse, decrementarse, sumar una entero, devolver su representación binaria y su valor en decimal.
 
 
 \graf[15cm]{ModoDireccionamiento}{Diagrama de clase de la jerarquía de los modos de direccionamiento}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Instrucciones (falta revisar Mara)}
-Como se observa en la figura \ref{Instruccion} las Instrucciones estan modeladas en jerarquias que se dividen en:
+\subsubsection{Instrucciones}
+Como se observa en la figura \ref{Instruccion} las Instrucciones están \ojo{modeladas en jerarquias que se dividen en}{jerarquizadas en}:
 
 \begin{itemize}
-\item Un operando.
-\item Dos operandos.
-\item Sin operandos.
-\item JumpCondicional.
+\item Instrucciones de un operando.
+\item Instrucciones de dos operandos.
+\item Instrucciones de sin operandos.
+\item Saltos condicionales.
 \end{itemize}
 
-Se realizo dicha jerarquía para permitir la fácil agregación de nuevas instrucciones siendo subclases de la clase que corresponda ya que comparten comportamiento tal como manera de mostrarse y de codificarse.
+Se realizó dicha jerarquía para permitir la fácil \ojo{agregación}{incorporación} de nuevas instrucciones \ojo{siendo}{como} subclases de la clase que corresponda ya que \ojo{comparten}{de ese modo se reutiliza} comportamiento tal como la manera de mostrarse (en términos de código fuente) y de codificarse (en términos de \codmaq).
 
 \graf{Instruccion}{Diagrama de clase de la Instrucción}
 
 \begin{description}
-\item[Instrucciones sin operandos] Como se observa en la figura \ref{InstruccionSinOperandos} la unica instrucción sin operandos implementada es la instrucción \code{RET}, a pesar de esto, se eligió hacer una jerarquía para que luego se facilite \ojo{la inserción al modelo de nuevas instrucciones sin operandos}{la escalabilidad del modelo, permitiendo la inserción de nuevas instrucciones sin operandos} .
+\item[Instrucciones sin operandos] Como se observa en la figura \ref{Instruccion_SinOperandos} la única instrucción sin operandos implementada en la arquitectura Q es la instrucción \code{RET}. A pesar de esto, se eligió hacer una jerarquía para que luego se facilite \ojo{la inserción al modelo de nuevas instrucciones sin operandos}{la escalabilidad del modelo, permitiendo la inserción de nuevas instrucciones sin operandos}.
 
-\graf[5cm]{Instruccion_SinOperandos}{Detalle de clase InstruccionSinOperandos}
+\graf[4cm]{Instruccion_SinOperandos}{Detalle de clase Instruccion\_SinOperandos}
 
 \item[Instrucciones de un operando] 
-Como se observa en la figura \ref{InstruccionUnOperando} y concordando en lo mencionado sobre las Instrucciones anteriormente, puede haber dos tipos de instrucciones de un operando:
+Como se observa en la figura \ref{Instruccion_UnOperando} y \ojo{concordando en lo}{siguiendo con el criterio} mencionado antes sobre la jerarquía de instrucciones, puede haber dos tipos de instrucciones de un operando:
 
 \begin{itemize}
 \item Un operando origen.
 \item Un operando destino.
 \end{itemize}
 
-Ambas clases de instrucciones tienen un solo operando. La diferencia entre ellas es la logica de ejecución y la manera en la que se ensamblan y desensamblan ya que sus formato de instruccion difiere en donde esta colocado el relleno.
+Ambas clases de instrucciones tienen un solo operando. La diferencia entre ellas es la lógica de ejecución y la manera en la que se ensamblan y desensamblan ya que sus formato de instrucción difiere\ojo{ en donde esta colocado el relleno}{(ver apéndice \ref{apendiceQ})}.
 
-\graf{Instruccion_UnOperando}{Diagrama de clase de la InstruccionUnOperando}
+\graf[15cm]{Instruccion_UnOperando}{Diagrama de clase de la Instruccion\_UnOperando}
 
 
 \item[Instrucciones de dos operandos]
 
-Como se observa en la figura \ref{InstruccionDosOperandos} la jerarquía de clases de instrucciones de dos operandos es la más amplia por tener mayor cantidad de instrucciones. Todas comparten la manera de decodificación e interpretación, además de la lógica de impresión.
+Como se observa en la figura \ref{Instruccion_DosOperandos} la jerarquía de clases de instrucciones de dos operandos es la más amplia por tener mayor cantidad de instrucciones. Todas comparten \ojo{la manera de }{el comportamiento para la} decodificación e interpretación, además de la lógica de impresión.
 
-\graf[13cm]{Instruccion_DosOperandos}{Diagrama de clase de la InstruccionDosOperandos}
+\graf[15cm]{Instruccion_DosOperandos}{Diagrama de clase de la Instruccion\_DosOperandos}
 
 \end{description}
 
@@ -188,18 +191,18 @@ Como se observa en la figura \ref{InstruccionDosOperandos} la jerarquía de clas
 
 \subsubsection{Programa}
 
-Como se observa en la figura \ref{Programa} la clase Programa conoce un grupo de Instrucciones (las instrucciones que lo componen). Las instancias son creadas por el parser, luego se calculan las etiquetas (si es que las tiene) y finalmente cuando es cargado en memoria la instancia de programa es desechada ya que no vuelve a usarse en ningún momento de la ejecución.
+Como se observa en la figura \ref{Programa} la clase Programa conoce un grupo de Instrucciones (las instrucciones que lo componen). Las instancias son creadas por el \textit{parser} (ver sección \ref{parser}), luego se calculan las etiquetas (si es que las tiene) y finalmente cuando es cargado en memoria la instancia de programa es desechada ya que no vuelve a usarse en ningún momento de la ejecución.
 
 \graf{Programa}{Diagrama de clase de la Programa}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Simulador}
 
-Como se observa en la figura \ref{simulador} la clase Simulador conoce a una instancia de CPU, a una instancia de BusEntradaSalida y a una intancia de Instruccion que es la instruccion que se esta ejecutando en ese momento.
-La clase Simulador tiene la responsabilidad de obtener el codigo maquina a traves del Interprete de la siguiente instrucción (fech y decode), calcular las etiquetas de un programa, cargar el programa en memoria, asi mismo, los datos en registros,  ejecutar las instrucciones o delegar su ejecución a la ALU que conoce a traves de la CPU según corresponda (realizar el execute), y guardar datos en memoria o registros (Store).
-Es la clase principal del modelo y la encargada de coordinar la ejecución del programa paso a paso. 
+Esta e la clase principal del modelo y la encargada de coordinar la ejecución del programa paso a paso. Como se observa en la figura \ref{simulador} la clase \textbf{Simulador} conoce a una instancia de la clase \textbf{CPU}, a una instancia de la clase \textbf{BusEntradaSalida} y a una intancia de la clase \textbf{Instruccion}, que representa a la instrucción que se esta ejecutando en ese momento.\\
 
-\graf{simulador}{Diagrama de clase de la Simulador}
+La clase Simulador tiene la responsabilidad de obtener el \codmaq\ de la siguiente instrucción, colaborando con el Interprete (ver \ref{interprete}), calcular las etiquetas de un programa, cargar el programa en memoria y los datos en registros,  ejecutar las instrucciones o delegar su ejecución al objeto \textbf{ALU} que conoce a través de la \textbf{CPU} según corresponda, y guardar datos en memoria o registros (almacenamiento de resultados).
+
+\graf[15cm]{simulador}{Diagrama de clase de la Simulador}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Como se observa en la figura \ref{}

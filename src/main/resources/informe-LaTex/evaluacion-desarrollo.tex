@@ -7,9 +7,9 @@
 Las dificultades del dominio estuvieron relacionadas a la comprensión no solamente del modelo de arquitectura Q si no también a su propósito didáctico, ya que el objetivo del simulador no es solamente la simulación de la arquitectura y la ejecución de programas, sino también el proveer a los alumnos la capacidad de ejercitar situaciones conceptualmente erróneas, por lo que se requería una comprensión didáctica del problema más allá de la especificación de las arquitecturas Q. 
 
 \subsection{Dificultades de diseño}
-En primera instancia se opto por implementar un modelo de objetos que utilizaba un objeto de la clase \textbf{Programa} a lo largo de toda la ejecución. Procesaba las instrucciones no leyendo de la matriz memoria, si no, pidiendo la siguiente instrucción al objeto instancia de la clase Programa, sobreviviendo así las distintas etapas una vez que fue creado y evitando la creación de un objeto cuya responsabilidad sea interpretar el código máquina alojado en la memoria, evitando la nueva creaccion de instancias de la clase \textbf{Instrucción} y haciendo mucho más sencillo al modelo ya que la memoria era sólo una clase que contenía datos que se reflejaban en pantalla y no se extraían datos de celdas en ningún momento. Luego entendimos que un programa no sólo podía modificar su entorno al ser ejecutado (otras celdas de memoria que no ocupen su código maquina, celdas de puertos, registros, etc) si no que también podría sobrescribir su código maquina (ya sea con ese propósito o sólo por un error conceptual), o bien, que el alumno debía tener la posibilidad de seguir ejecutando más allá del código máquina alojado en memoria o más, inevitablemente se necesitó corregir gran parte del modelo agregando una clase denominada \textbf{Intérprete}, cuya responsabilidad es interpretar la siguiente instrucción alojada en memoria para que luego sea ejecutada, otorgando más responsabilidad a la clase \textbf{Memoria} y descartando el objeto instancia de \textbf{Programa} una vez que éste es cargado en memoria con éxito.\\
+En primera instancia se optó por implementar un modelo de objetos que utilizaba un objeto de la clase \textbf{Programa} a lo largo de toda la ejecución. \verde{Procesaba las instrucciones no leyendo de la matriz memoria, si no, pidiendo}{Esto implica que no leía de la memoria principal las instrucciones a ejecutar, sino que solicitaba} la siguiente instrucción al objeto instancia de la clase Programa, sobreviviendo así las distintas etapas una vez que fue creado \verde{(agregar)}{por el \textit{parser}}. \verde{y evitando}{Este enfoque evitaba} la creación de un objeto \verde{cuya responsabilidad sea}{que tuviera que} interpretar el código máquina alojado en la memoria, \verde{evitando }{evitaba} la nueva creación de instancias de la clase \textbf{Instrucción} y \verde{haciendo mucho más sencillo al}{simplificaba en gran medida el} modelo ya que la memoria era sólo una clase que contenía datos que se reflejaban en pantalla y no se extraían datos de celdas en ningún momento. Luego entendimos que un programa no sólo podía modificar su entorno al ser ejecutado (otras celdas de memoria que no ocupen su código maquina, celdas de puertos, registros, etc) si no que también podría sobrescribir su código maquina (ya sea con ese propósito o sólo por un error conceptual), o bien, que el alumno debía tener la posibilidad de seguir ejecutando más allá del código máquina alojado en memoria o más. A partir de eso fue necesario corregir gran parte del modelo agregando una clase denominada \textbf{Intérprete}, cuya responsabilidad es interpretar la siguiente instrucción alojada en memoria para que luego sea ejecutada, otorgando más responsabilidad a la clase \textbf{Memoria} y descartando el objeto instancia de \textbf{Programa} una vez que éste es cargado en memoria con éxito.\\
 
-Tuvieron que ser solicitadas además extensiones al equipo de desarrolladores de Arena para poder realizar la interfaz con dicho framework.
+Por otro lado, tuvieron que solicitarse extensiones al equipo de desarrolladores de Arena para poder realizar la interfaz con dicho framework:
 
 \begin{itemize}
 \item FileSelector para que los alumnos puedan cargar el archivo .Qsim en el cual se encuentra su programa
@@ -20,9 +20,9 @@ Tuvieron que ser solicitadas además extensiones al equipo de desarrolladores de
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\section{Casos de prueba}
+\section{Casos de prueba (revisar redacci´on!!)}
 
-\textbf{Descripción de cada Caso de Prueba}
+\ojo{En esta sección se describen los casos de prueba de la aplicación.}{Falta explicar porqué es importante esta sección}
 
 \subsection{Chequeo de sintaxis en la distintas Qi}
 
@@ -31,9 +31,8 @@ Para eso realizamos dos casos de prueba por cada Qi:
 \begin{enumerate}
 \item \textbf{Chequear programa Qi valido}
 
-Agarramos el programa Qi valido y se lo pasamos al Parser, cuando termina de chequear devuelve un resultado, como es de esperar devuelve un objeto programa con la lista de instrucciones. Tomamos ese resultado y como ultimo paso comparamos si el programa resultado es igual al programa esperado.
+\ojo{Agarramos el programa Qi válido\footnote{Un programa Qi valido es un programa en cualquier sintáticamente correcto en alguna arquitectura Q.} y se lo pasamos al Parser, cuando termina de chequear devuelve un resultado, como es de esperar devuelve un objeto programa con la lista de instrucciones. Tomamos ese resultado y como ultimo paso comparamos si el programa resultado es igual al programa esperado.}{OJO con la redacción}
 
-\textit{ (esto va en nota al pie)programa Qi valido = Es un programa en cualquier arquitectura Q escrito sintaticamente correcto.}
 
 \item \textbf{Chequear programa Qi es invalido} 
 
@@ -42,11 +41,12 @@ En este caso escribimos un programa Qi con errores de sintaxis para ver como rea
 Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception \textbf{SyntaxErrorException} porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepción te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepción y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
 \end{enumerate}
 
-\subsection{Ensamblado (Objetos --+ Código Maquina)}
-
+\subsection{Ensamblado}
+%(Objetos --+ Código Maquina)
 Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto programa que contiene un conjunto de objetos instrucciones, el ensamblado simplemente lo realiza cada instrucción, esto quiere decir que cada instrucción sabe ensamblarse. De esta forma realizamos el ensamblado del programa y obtenemos una lista de código maquina como resultado y como ultimo paso comparamos la lista de código maquina resultado con la lista código maquina esperado.
 
-\subsection{Decodificación Código Maquina --+ Objetos (Interprete)}
+\subsection{Decodificación}
+% Código Maquina --+ Objetos (Interprete)
 La Decodificación se verifica correctamente a la inversa del Ensamblado tomando el ensamblado del programa Qi que como sabemos es la lista de código maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado puede devolver dos cosas: 
 \begin{enumerate}
 \item \textbf{Lista de de Instrucciones (decodificación)} 
