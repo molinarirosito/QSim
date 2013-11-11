@@ -107,7 +107,7 @@ En esta instancia sabemos que  dicho operando tiene el valor guardado, a este va
 
 En esta seccion vamos a mostrar las diferentes situaciones que pueden ocurrir a la hora de utilizar el simulador.
 
-\subsection{ERROR DE SINTAXIS} 
+\subsection{Errore de Sintaxis} 
 
 \begin{itemize}
 
@@ -282,7 +282,7 @@ En la linea numero 1 el valor el operando origen no existe, esto es invalido\foo
 
 \end{itemize}
 
-\subsection{PARA EXPERIMENTAR}
+\subsection{Para Experimentar}
 
 Esta seccion describe situaciones particulares que los alumnos pueden experimentar.
 
@@ -317,4 +317,18 @@ Pensemos que el PC se posiciona en la linea 3 y realizamos el ciclo de instrucci
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Trabajo Futuro}
 
-\ojo{Incorporar push y pop/ mejorar el editor de programas Qi/Entrada y salida: modelar dispositivos como el teclado, etc}{}
+En esta seccion se describiran caracteristicas y funcionalidades que deseamos agreguar al Simulador QSim en el futuro.
+
+\begin{itemize}
+
+\item Incorporar las instrucciones PUSH y POP.
+
+Estas instrucciones permiten tener un mejor manejo de la Pila. 
+PUSH tiene como efecto agregar el valor del operando origen a la pila. 
+POP permite sacar el primer elemento de la pila y guardarlo en el operando destino.
+
+\item Entrada y Salida.
+
+Que el simulador admita la intersaccion con dispositivos de E/S. Para eso tenemos que modelar dispositivos como el teclado, impresora, monitor, etc.
+
+\end{itemize}
