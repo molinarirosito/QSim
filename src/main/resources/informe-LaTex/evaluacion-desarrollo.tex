@@ -42,20 +42,22 @@ Se toma como input del objeto instancia Parser un programa Qi invalido, este che
 
 
 \subsection{Ensamblado}
-\ojo{(Objetos --+ Código Maquina)}{}
+
 Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto de la clase \textbf{Programa} que contiene un conjunto de objetos de la clase \textbf{Instruccion}, el ensamblado simplemente lo realiza cada instrucción, esto quiere decir que cada instrucción tiene el comportamiento para generar su propio \codmaq. De esta forma realizamos el ensamblado del programa y obtenemos una lista de código maquina como resultado y como ultimo paso comparamos la lista de código maquina resultado con la lista código maquina esperado.
 
 \subsection{Decodificación}
-\ojo{Código Maquina --+ Objetos (Interprete)}{}
 
-La Decodificación se verifica correctamente a la inversa del Ensamblado tomando el ensamblado del programa Qi que como sabemos es la lista de código maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado puede devolver dos cosas: 
+La Decodificación se verifica correctamente a la inversa del Ensamblado: tomando como input el ensamblado de un programa Qi que es la secuencia de código maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado de cada iteración puede retornar dos cosas:
+ 
 \begin{enumerate}
-\item \textbf{Lista de de Instrucciones (decodificación)} 
+\item \textbf{Lista de Instrucciones} 
 
-El resultado correcto es la lista de objetos instrucciones, por cada código maquina el interprete verifica los códigos de operación para poder crear las instrucciones correctas y como ultimo paso de la verificación comparamos la lista resultante con la lista esperada.
+Este es el resultado de Intrepretar una secuencia de código máquina que representa correctamente a una instruccion y sus respectivos operandos. El objeto interprete verifica los códigos de operación para poder crear las instrucciones correctamente, y luego, depende de que tipo de instruccion se haya comenzado a interpretar comienza a interpretar sus respectivos operandos (si los tiene).
+Por último se compara cada instruccion en la lista resultante luego de intrepretar todo el programa con la lista esperada.
+
 \item\textbf{Error}
 
-El resultado puede ser un error porque puede pasar que el código de operación o el código de algún modo de direccionamiento dentro del formato de cada instrucción sea invalido. La excepción que puede tirar tiene el nombre de \textbf{CodigoInvalidoException}.   
+Al Intrepretar una secuencia de código máquina que no representa a ninguna instruccion (ya sea porque el código de operación o el código de algún modo de direccionamiento dentro del formato de cada instrucción es invalido) es una Exepcion del tipo \textbf{CodigoInvalidoException}.   
 \end{enumerate}
 
 \subsection{Ejecución}
