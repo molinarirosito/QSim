@@ -172,10 +172,10 @@ El efecto del ret es cambiar el pc por el dato que esta guardado en la celda de 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de salto condicional  (falta revisar Mara)}
 
-El formato de instrucción de salto condicional es el siguiente es el siguiente:
+El formato de instrucción de salto condicional es el siguiente:
 
- prefijo +   CodOp   +  desplazamiento 
- (1111)     (4 bits)     (8 bits)
+\formatoinstr{|c|c|}{Cod\_Op (8)&Desplazamiento(8)} donde los primeros cuatro bits del campo \code{Cod\_Op} es la cadena \bin{1111}. Si \textbf{al evaluar la condición de salto} el resultado es 1, se le suma al PC el valor del desplazamiento, representado en \cados{8}. En caso contrario la instrucción no hace nada.
+}
 
 El efecto de cualquier salto condicional es aumentar el PC (Program Counter) en la cantidad de celdas que indique el desplazamiento si sólo la condición que cada salto condicional tiene da como resultado 1, lo cual es interpretado como verdadero.
 
