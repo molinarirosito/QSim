@@ -73,8 +73,7 @@ A continuación se muestra la codificación (formato) de las instrucciones de do
 
 \formatoinstr{|c|c|c|c|c|c|}{
 Codigo de Operación  & \mdest{}& \msrc{}  & \dest{} & \src{}\\
-(4b)     &   (6b)  &  (6b)   &  (16b)  &  (16b)} 
-
+(4b)     &   (6b)  &  (6b)   &  (16b)  &  (16b)}
 
 
 Las instrucciones de dos operandos descriptas a continuación son instrucciones aritméticas o lógicas donde se asume que el resultado de la operación se almacena en uno de los dos operandos de entrada, y por lo tanto se lo denomina \textbf{operando destino}.
@@ -120,7 +119,6 @@ El formato de instrucción de un operando origen es el siguiente:\\
 
 \formatoinst
 {|c|c|c|c|}
-{4}
 {CodOp& Relleno&\msrc{}& Operando \src{}\\
 (4b)     &   (000000)  &  (6b)   &  (16b) 
 }
@@ -142,7 +140,6 @@ El formato de instrucción de un operando destino es el siguiente:\\
 
 \formatoinst
 {|c|c|c|c|}
-{4}
 {CodOp & \msrc{} & Relleno & Operando \src{}\\
 (4b)   &   (6b)  & (000000)&  (16b) 
 } 
@@ -158,7 +155,7 @@ Esta instrucción describe la operación lógica "negación" bit a bit en el dat
 
 El formato de instrucción sin operandos es el siguiente:\\
 
-\formatoinst{|c|c|}{2}{CodOp & Relleno \\  (4b) & (000000000000)}
+\formatoinst{|c|c|}{CodOp & Relleno \\  (4b) & (000000000000)}
 }
 
 
