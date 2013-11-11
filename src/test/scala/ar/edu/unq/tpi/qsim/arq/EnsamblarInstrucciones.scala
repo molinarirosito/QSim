@@ -40,19 +40,14 @@ class EnsamblarInstrucciones extends FlatSpec with Matchers {
     
     val call_registro = CALL(registro)
     val call_registroIndirecto = CALL(registroIndirecto)
-    val call_inmediato = CALL(inmediato)
-    val call_directo = CALL(directo)
-    val call_indirecto = CALL(indirecto)    
-    
+
     val call= call_registro
-    
-    val jmp_registro = JMP(registro)
-    val jmp_registroIndirecto = JMP(registroIndirecto)
+
     val jmp_inmediato = JMP(inmediato)
     val jmp_directo = JMP(directo)
     val jmp_indirecto = JMP(indirecto)    
     
-    val jmp=jmp_registro
+    val jmp=jmp_inmediato
     
     //instruccion modo destino
     
@@ -102,10 +97,11 @@ class EnsamblarInstrucciones extends FlatSpec with Matchers {
     
     // jmps condicionales
     
-    val je =  JE(new Salto(0)) 
-	val jne = JNE(new Salto(1)) 
-	val jle = JLE(new Salto(2)) 
-	val jg = JG(new Salto(3)) 
+    
+    val je =  JE(new Salto(255)) //11111111
+	val jne = JNE(new Salto(1))  //00000001
+	val jle = JLE(new Salto(2))  //00000001
+	val jg = JG(new Salto(100))    //01100100
 	val jl = JL(new Salto(4)) 
 	val jge = JGE(new Salto(5)) 
 	val jleu = JLEU(new Salto(6)) 
@@ -167,6 +163,45 @@ class EnsamblarInstrucciones extends FlatSpec with Matchers {
     val valor_directo = "1010101111001101" //ABCD
     val indirecto = "011000" 
     val valor_indirecto = "1111000011001010" //F0CA
+  }
+   
+   "Los ensamblamientos de instrucciones con jmps condicionales" should ("ensamblarse y devolver en hexadecimal el equivalente en binario al formato el numero" 
+ + "corresponda segun cuantas celdas deban saltarse luego del codigo de operacion y el relleno") in {
+    var ctx = contexto_ejecucion
+    var resultado = resultados_codigos_modos_dir
+
+    assert(obtenerCodigoBinario(ctx.je).endsWith("11111111"))
+    assert(obtenerCodigoBinario(ctx.jne).endsWith("00000001"))
+    assert(obtenerCodigoBinario(ctx.jle).endsWith("00000010"))
+    assert(obtenerCodigoBinario(ctx.jg).endsWith("01100100"))
+    
+  }
+   
+   "Los ensamblamientos de instrucciones con un operando destino" should ("ensamblarse y devolver en hexadecimal el equivalente en binario al formato modo destino" 
+ + "(6 bits), destino (16 bits) luego de los primer 4 bits de modo de operacion y antes de los seis bits en cero de relleno ") in {
+    var ctx = contexto_ejecucion
+    var resultado = resultados_codigos_modos_dir
+
+    assert(obtenerOperandosBinario(ctx.not_registro).startsWith(resultado.registro))
+    assert(obtenerOperandosBinario(ctx.not_registroIndirecto).startsWith(resultado.registro_indirecto))
+    assert(obtenerOperandosBinario(ctx.not_directo).startsWith(resultado.directo + "000000" + resultado.valor_directo))
+    assert(obtenerOperandosBinario(ctx.not_indirecto).startsWith(resultado.indirecto  + "000000" + resultado.valor_indirecto))
+    
+  }
+   
+    "Los ensamblamientos de instrucciones con un operando origen" should ("ensamblarse y devolver en hexadecimal el equivalente en binario al formato modo destino" 
+ + "(6 bits), destino (16 bits) luego de los primer 4 bits de modo de operacion y de los seis bits en cero de relleno ") in {
+    var ctx = contexto_ejecucion
+    var resultado = resultados_codigos_modos_dir
+          
+    
+    assert(obtenerOperandosBinario(ctx.call_registro).endsWith(resultado.registro))
+    assert(obtenerOperandosBinario(ctx.call_registroIndirecto).endsWith(resultado.registro_indirecto))
+    assert(obtenerOperandosBinario(ctx.jmp_inmediato).endsWith(resultado.inmediato + resultado.valor_inmediato))
+    assert(obtenerOperandosBinario(ctx.jmp_directo).endsWith(resultado.directo + resultado.valor_directo))
+    assert(obtenerOperandosBinario(ctx.jmp_indirecto).endsWith(resultado.indirecto  + resultado.valor_indirecto))
+ 
+    
   }
   
   "Los ensamblamientos de instrucciones con dos operandos" should ("ensamblarse y devolver en hexadecimal el equivalente en binario al formato modo destino" 
