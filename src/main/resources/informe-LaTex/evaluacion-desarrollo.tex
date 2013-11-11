@@ -32,16 +32,14 @@ Para chequear la sintaxis de cada \textbf{Arquitectura Q} se realizaron dos caso
 \begin{enumerate}
 \item \textbf{Chequear programa Qi válido}
 
-Se toma como input del objeto instancia Parser un programa Qi válido\footnote{Un programa Qi válido es un programa sintáticamente correcto en alguna arquitectura Q.}, este chequeará la sintaxis del programa acorde a la artetura Qi seleccionada (Un programa sintácticamente válido en Q6 puede no ser sintácticamente válido en Q1 si utiliza modos de direccionamiento o instrucciones que aún no fueron agregadas en Q1). Al terminar de chequear el programa, el objeto parser retorna un objeto instancia de la clase Programa con la lista de instrucciones que fueron ensambladas. 
+Se toma como input del objeto instancia Parser un programa Qi válido\footnote{Un programa Qi válido es un programa sintáticamente correcto en alguna arquitectura Q.}, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada (Un programa sintácticamente válido en Q6 puede no ser sintácticamente válido en Q1 si utiliza modos de direccionamiento o instrucciones que aún no fueron agregadas en Q1). Al terminar de chequear el programa, el objeto parser retorna un objeto instancia de la clase Programa con la lista de instrucciones que fueron ensambladas. 
 Se toma dicho resultado y como ultimo paso se compara si el programa resultado es igual al programa esperado (que concuerda en objetos con el programa en código fuente escrito en el input).
 
 
 \item \textbf{Chequear programa Qi es invalido} 
 
-En este caso escribimos un programa Qi con errores de sintaxis para ver como reacciona el parser.
+Se toma como input del objeto instancia Parser un programa Qi invalido, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Al terminar de chequear el programa, el objeto parser retorna un Exception del tipo \textbf{SyntaxErrorException}, se captura la excepción y se toma de ella el mensaje de error para corroborar que sea el mensaje esperado (que describe la línea donde esta el error de sintáxis).
 
-Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception \textbf{SyntaxErrorException} porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepción te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepción y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
-\end{enumerate}
 
 \subsection{Ensamblado}
 \ojo{(Objetos --+ Código Maquina)}{}
