@@ -7,8 +7,8 @@ import org.uqbar.commons.utils.Observable
 
 object Parser extends Ensamblador {
 
-  var arquitecturas = List(ArquitecturaQ("Q1"), ArquitecturaQ("Q2"), ArquitecturaQ("Q3"), ArquitecturaQ("Q4"), ArquitecturaQ("Q5"), ArquitecturaQ("Q6"))
-
+  var arquitecturas = List(ArquitecturaQ("Q1", ensamblarQ1), ArquitecturaQ("Q2",ensamblarQ2), ArquitecturaQ("Q3", ensamblarQ3), ArquitecturaQ("Q4", ensamblarQ4), ArquitecturaQ("Q5", ensamblarQ5), ArquitecturaQ("Q6", ensamblarQ6))
+  
   def readFile(path: String): String = {
     val input = io.Source.fromFile(path)
     return input.mkString
@@ -29,7 +29,7 @@ object Parser extends Ensamblador {
     result(parse(str, this.programQ3))
   }
 
-  def ensamblarQ3SDFADSDFDSFASFASDFASDFASDFASD(codigo: String): Programa = {
+  def ensamblarQ3SDFADSDFDSFASFASDFASDFASDFASDAccionesAccionesAccionesAccionesAccionesAccionesAccionesAcciones(codigo: String): Programa = {
     result(parse(codigo, this.programQ3))
   }
 
@@ -43,58 +43,36 @@ object Parser extends Ensamblador {
     result(parse(str, this.programQ5))
   }
   def ensamblarQ6(path: String): Programa = {
-    val str = readFile(path)
-    result(parse(str, this.programQ6))
+    //val str = readFile(path)
+    result(parse(path, this.programQ6))
   }
 
   def result(resultado: ParseResult[Programa]): Programa = resultado match {
     case Success(result, _) ⇒ result
     case Failure(msg, i) ⇒ {
-      var mensaje = createMessage(i)
-      throw new SyntaxErrorException(mensaje)
+     var mensaje = createMessage(i)
+     throw new SyntaxErrorException(mensaje)
     }
     case Error(msg, i) ⇒ throw new SyntaxErrorException(msg)
   }
 
   def createMessage(output: Input): String = {
-    var lineOfProgram = output.source.toString().split("\n")
-    var characterCount = output.offset - (lineOfProgram.length - 1)
+    var characterCount = output.offset 
+    var cadenaCaracteres = output.source
+    var lineas = output.source.toString().split("\n")
+    return lineWithError(cadenaCaracteres.toString().substring(0, characterCount),lineas)
 
-    return searchLineWithError(lineOfProgram, characterCount)
-  }
+  } 
 
-  def searchLineWithError(lineOfProgram: Array[String], amountCharactersBeforeError: Int): String = {
-    var countCharaters = 0
-    var mensaje = ""
-    lineOfProgram.foreach(line ⇒ {
-      if (amountCharactersBeforeError >= countCharaters && amountCharactersBeforeError <= countCharaters + line.length()) {
-        var countLine = (lineOfProgram.indexOf(line) + 1).toString
-        mensaje = s"Ha ocurrido un error en la linea $countLine $line"
-      }
-      countCharaters += line.length()
-    })
-    return mensaje
+  def lineWithError(cadenaConError: String, lineas : Array[String] ): String = {
+    var lineasCortadasEnError = cadenaConError.split("\n")
+    var numeroLinea = lineasCortadasEnError.length
+    var linea = lineas(numeroLinea -1)
+    return s"Ha ocurrido un error en la linea $numeroLinea : $linea"
   }
 }
 
-case class ArquitecturaQ(var name: String) {}
-
 @Observable
-object Acciones {
-  
-  var agregar = true
-  var eliminar = false
-  var ensamblar = false
-  var cargar = false
-
-  def inicializar() {
-    var agregar = true
-    var eliminar = false
-    var ensamblar = false
-    var cargar = false
-  }
-  
-  def agregarArchivos()
-  {}
- 
+case class ArquitecturaQ(var name: String, parser:(String)=>Programa) {
+  override def toString = name
 }

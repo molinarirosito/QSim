@@ -1,35 +1,37 @@
 package ar.edu.unq.tpi.qsim.model
 
 import java.util.Calendar
+
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Map
+
 import org.uqbar.commons.utils.Observable
+
 import ar.edu.unq.tpi.qsim.exeptions.CeldaFueraDeMemoriaException
-import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
+import ar.edu.unq.tpi.qsim.utils.Util
 
 @Observable
-object Ciclo
-{
+object Ciclo {
   var fetch = true
   var decode = false
   var execute = false
-  
-   def ninguna_etapa(){
+
+  def ninguna_etapa() {
     fetch = false
     decode = false
     execute = false
   }
-  
-  def pasarAFetch(){
+
+  def pasarAFetch() {
     fetch = true
     execute = false
   }
-  def pasarADecode(){
+  def pasarADecode() {
     fetch = false
     decode = true
   }
-  def pasarAExecute(){
+  def pasarAExecute() {
     decode = false
     execute = true
   }
@@ -38,7 +40,6 @@ object Ciclo
 @Observable
 case class Simulador() {
 
-  
   var ciclo = Ciclo
   var mensaje_al_usuario = ""
   var cpu: CPU = _
@@ -110,7 +111,7 @@ case class Simulador() {
       origen = new Inmediato(programa.etiquetas(instruccion.origen.representacionString).position)
     }
     origen
-  }     
+  }
   /**
    * Calcula de acuerdo al operando que le pasan el valor de la etiqueta
    * @param Operando , Programa
@@ -119,12 +120,13 @@ case class Simulador() {
   def calcularValorOperandoEtiqueta(instruccion: Instruccion_UnOperando, programa: Programa) = {
     var operando = instruccion.operando
     if (instruccion.operando.codigo.equals("111111")) {
-       operando = new Inmediato(programa.etiquetas(instruccion.operando.representacionString).position)
+      operando = new Inmediato(programa.etiquetas(instruccion.operando.representacionString).position)
     }
     operando
   }
-  
-  /** Calcula de acuerdo al operando que le pasan el valor de la etiqueta
+
+  /**
+   * Calcula de acuerdo al operando que le pasan el valor de la etiqueta
    * @param Operando , Programa
    * @return W16
    */
@@ -134,25 +136,23 @@ case class Simulador() {
       instruccion.position.++
       var posicionActual = instruccion.position
       var posicionASaltar = programa.etiquetas(instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.representacionString).position
-      resultado = Math.abs((posicionASaltar-posicionActual).value)
+      resultado = Math.abs((posicionASaltar - posicionActual).value)
     }
     resultado
   }
- 
+
   def calcularEtiquetas(programa: Programa): Programa = {
     programa.instrucciones.foreach(inst ⇒ {
       inst match {
         case inst_dp: Instruccion_DosOperandos ⇒ inst_dp.origen = calcularValorOrigenEtiqueta(inst_dp, programa)
         case inst_up: Instruccion_UnOperando ⇒ inst_up.operando = calcularValorOperandoEtiqueta(inst_up, programa)
         case inst_sc: JUMP_condicional ⇒ inst_sc.desplazamiento.salto = calcularValorSaltoEtiqueta(inst_sc, programa)
-        case inst ⇒ 
+        case inst ⇒
       }
     })
     programa
   }
 
- 
-  
   /**
    * Carga el programa en memoria, a partir de un pc hexadecimal (String) y los registros que recibe dentro de un map
    * @param Programa, String, Map[String,W16]
@@ -167,7 +167,7 @@ case class Simulador() {
       var programaSinEtiquetas = calcularEtiquetas(programa)
 
       busIO.memoria.cargarPrograma(programaSinEtiquetas, pc)
-        } else {
+    } else {
       println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
   }
@@ -202,13 +202,13 @@ case class Simulador() {
     val instruccion_fech = instruccionActual.representacionHexadecimal()
     println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
-    agregarMensaje("La intruccion actual ocupa: " + instruccionActual.cantidadCeldas().toString )
+    agregarMensaje("La intruccion actual ocupa: " + instruccionActual.cantidadCeldas().toString)
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
     cambiarEstadoCeldasInstruccionActual(State.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
     ciclo.pasarADecode
     println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
-    
+
   }
 
   def obtenerCeldasInstruccionActual(): ArrayBuffer[Celda] =
@@ -319,14 +319,14 @@ case class Simulador() {
   def store(modoDir: ModoDireccionamiento, un_valor: W16) {
     var direccion: Int = 0
     modoDir match {
-      case Inmediato(valor: W16) => {throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.")}
+      case Inmediato(valor: W16) ⇒ { throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.") }
       case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, State.STORE); busIO.setValorC(direccion, un_valor); }
       case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, State.STORE); busIO.setValorC(direccion, un_valor); }
       case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
       case r: Registro ⇒
         r.valor = un_valor
-    println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
-    agregarMensaje(s"Se guardado el resutado $un_valor en " + modoDir.toString )
+        println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
+        agregarMensaje(s"Se guardado el resutado $un_valor en " + modoDir.toString)
     }
   }
   /**
@@ -389,13 +389,13 @@ case class Simulador() {
     store(modoDir, busIO.memoria.getValor(cpu.sp.toString))
   }
 
-  def obtenerHora() : String = {
-   val hoy = Calendar.getInstance().getTime()
-    
-   "["+hoy.getDate().toString()+"/"+hoy.getMonth().toString+" "+hoy.getHours().toString+":"+hoy.getMinutes().toString+"]"
+  def obtenerHora(): String = {
+    val hoy = Calendar.getInstance().getTime()
+
+    "[" + hoy.getDate().toString() + "/" + hoy.getMonth().toString + " " + hoy.getHours().toString + ":" + hoy.getMinutes().toString + "]"
   }
   def agregarMensaje(mensaje: String) {
-    mensaje_al_usuario = mensaje_al_usuario  + obtenerHora +" "+ mensaje +"\n"
+    mensaje_al_usuario = mensaje_al_usuario + obtenerHora + " " + mensaje + "\n"
 
   }
 }
