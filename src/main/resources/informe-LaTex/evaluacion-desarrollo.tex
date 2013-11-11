@@ -67,7 +67,7 @@ Para verificar que la ejecución de un programa Qi fue necesario separar la veri
 \begin{itemize}
 \item \textbf{Fetch} 
 
-Para verificar el fetch se toma la instrucción siguiente a ejecutar y se compara el valor que se guarda en el registro ir con el valor esperado. Ademas se verifica que el registro especial pc apunte a la siguiente instrucción a ejecutar.
+Para verificar el fetch se toma la instrucción siguiente a ejecutar y se compara el valor que se guarda en el registro \IR con el valor esperado que debería tener (es decir, con el código maquina que representa a la instruccion siguiente a ejecutar). Ademas se verifica que el registro especial \PC tenga como valor la dirección de memoria de la siguiente instrucción a ejecutar, para corroborar esto se compara el \PC luego del fetch con \PC anterior más la cantidad de celdas que ocupa la instrucción actual.
 
 \item \textbf{Decode}
 
