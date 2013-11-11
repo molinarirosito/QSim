@@ -10,8 +10,8 @@ class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Match
 
   def contexto_programas = new {
     var parser = Parser
-    var programa = parser.ensamblarQ3("src/main/resources/programaQ3CALLRET.qsim")
-    var programa_saltos = parser.ensamblarQ4("src/main/resources/programaSaltos.qsim")
+    var programa = parser.ensamblarQ3("src/main/resources/casos-test/programaQ3CALLRET.qsim")
+    var programa_saltos = parser.ensamblarQ4("src/main/resources/casos-test/programaSaltos.qsim")
   }
 
   def simuladores = new {

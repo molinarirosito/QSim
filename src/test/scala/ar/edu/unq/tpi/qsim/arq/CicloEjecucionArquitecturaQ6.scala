@@ -12,7 +12,7 @@ class CicloEjecucionArquitecturaQ6 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
-    var resultadoQ6 = parser.ensamblarQ6("src/main/resources/programaQ6.qsim")
+    var resultadoQ6 = parser.ensamblarQ6("src/main/resources/casos-test/programaQ6.qsim")
   }
 
   def programas = new {
@@ -35,7 +35,7 @@ class CicloEjecucionArquitecturaQ6 extends FlatSpec with Matchers {
     var mensaje_esperado = "Ha ocurrido un error en la linea 1 NOT"
     val exception = intercept[SyntaxErrorException] {
 
-      set_parser.parser.ensamblarQ6("src/main/resources/programaQ6SyntaxError.qsim")
+      set_parser.parser.ensamblarQ6("src/main/resources/casos-test/programaQ6SyntaxError.qsim")
     }
     assert(exception.getMessage().equals(mensaje_esperado))
   }

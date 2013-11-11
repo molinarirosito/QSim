@@ -124,7 +124,6 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
   it should "buscar los datos en los modos de direccionamiento destino ->Registro origen -> Directo y verificar el store" in {
     var ctx = contexto_operandos
     var sim = simuladores
-    println(sim.simulador3.busIO.memoria.show("0000"))
     sim.simulador3.fetch()
 
     var instruccionActual = sim.simulador3.instruccionActual.asInstanceOf[Instruccion_DosOperandos]

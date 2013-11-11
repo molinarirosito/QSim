@@ -13,7 +13,7 @@ class CicloEjecucionArquitecturaQ5 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
-    var resultadoQ5 = parser.ensamblarQ5("src/main/resources/programaQ5.qsim")
+    var resultadoQ5 = parser.ensamblarQ5("src/main/resources/casos-test/programaQ5.qsim")
   }
 
   def programas = new {
@@ -36,7 +36,7 @@ class CicloEjecucionArquitecturaQ5 extends FlatSpec with Matchers {
     var mensaje_esperado = "Ha ocurrido un error en la linea 3 MOV [[0x0011] , "
     val exception = intercept[SyntaxErrorException] {
       
-      set_parser.parser.ensamblarQ5("src/main/resources/programaQ5SyntaxError.qsim")
+      set_parser.parser.ensamblarQ5("src/main/resources/casos-test/programaQ5SyntaxError.qsim")
     }
     assert(exception.getMessage().equals(mensaje_esperado))
   }

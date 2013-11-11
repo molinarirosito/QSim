@@ -148,8 +148,7 @@ case class Simulador() {
       var programaSinEtiquetas = calcularEtiquetas(programa)
 
       busIO.memoria.cargarPrograma(programaSinEtiquetas, pc)
-    ///  println("la memoria cargada : " + busIO.memoria.show("0000"))
-    } else {
+        } else {
       println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
   }
