@@ -49,19 +49,20 @@ object Parser extends Ensamblador {
 
   def result(resultado: ParseResult[Programa]): Programa = resultado match {
     case Success(result, _) ⇒ result
-    case Failure(msg, i) ⇒ {
-      var mensaje = createMessage(i)
-      throw new SyntaxErrorException(mensaje)
-    }
+  //  case Failure(msg, i) ⇒ {
+      //var mensaje = createMessage(i)
+      //throw new SyntaxErrorException(mensaje)
+    //}
     case Error(msg, i) ⇒ throw new SyntaxErrorException(msg)
   }
 
-  def createMessage(output: Input): String = {
+  def createMessage(output: Input) {
     var characterCount = output.offset 
-    ""
+    var cadenaCaracteres = output.source
+  } 
     //var cadena 
     //return getLineWithError(lineOfProgram, characterCount)
-  }
+  
 
   def getLineWithError(lineOfProgram: Array[String], amountCharactersBeforeError: Int): String = {
     var countCharaters = 0
