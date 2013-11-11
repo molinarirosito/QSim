@@ -305,14 +305,22 @@ Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecu
 
 
 \item Para los que son curiosos, supongamos que un alumno escribe el siguiente programa Qi:
-
-1.ADD R0, [0x0002]\\
-2.MUL R4, 0x0001 \\
-3.SUB [0x0003], 0x000A \\
+\begin{verbatim}
+ADD R0, [0x0002]
+MUL R4, 0x0001
+SUB [0x0003], 0x000A 
+\end{verbatim}
 
 Pensemos que el PC se posiciona en la linea 3 y realizamos el ciclo de instrucción(FETCH - DECODE - EXECUTE). Como estado final tenemos el efecto de la ultima instrucción y el valor de PC apuntando a la siguiente instrucción a ejecutar. Como verán el programa que escribió el alumno termino en la la linea 3 pero el simulador no para de ejecutar, por ende te permite realizar las veces que quiera el ciclo de instrucción. Es re interesante que los chicos experimenten este tipo de cosas.
 
 \end{itemize} 
+
+\verde{La decodificación con desensamblado permite al alumno experimentar otros escenarios y efectos laterales, entre los cuales podemos enumerar:
+
+\begin{itemize}
+\item Si la ejecución paso a paso excede los límites del programa, pueden tomarse instrucciones de otra rutina y procesarse como una nueva instruccion.
+\item Si en cambio, se intenta ejecutar el contenido de una celda con datos (y no una instrucción) podrá ocurrir que se encuentre una instrucción invalida (por ejemplo, una combinación incorrecta de modos de direccionamiento y códigos de operación) y el alumno verá el mensaje de error pertinente.
+\end{itemize}}{ACOMODAR!!!}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
