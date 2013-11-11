@@ -71,11 +71,12 @@ Para verificar el fetch se toma la instrucción siguiente a ejecutar y se compar
 
 \item \textbf{Decode}
 
-Para verificar el decode, se toma el valor del registro ir para que lo reciba el interprete que dará como resultado el objeto instrucción correspondiente. Este objeto instrucción sabe mostrarse quien es y por eso la responsabilidad de decodificar se la delega a la instrucción. Al obtener la decodificación de cada instrucción podemos comparar la decodificacion resultante con la esperada.
+Para verificar el decode, se toma el valor que esta guardado registro \IR para que lo reciba el interprete que retornará el objeto instrucción interpretado a partir de ese valor. Al obtener dicha instrucción se compara con la instrucción esperada.
  
 \item \textbf{Execute}
 
-Para verificar el efecto de cada instrucción se considero armar un caso de prueba por cada instrucción donde cada uno tiene un estado inicial y luego de realizar la ejecución de dicha instrucción termina con un estado final modificado en el cual verificamos el resultado obtenido con el resultado esperado. 
+Para verificar el efecto de cada instrucción se preparó un caso de prueba por cada instrucción donde, para cada instrucción se tiene un estado inicial y un estado final esperado. Se realiza la ejecución de dicha instrucción y se compara el resultado obtenido (ya sea la modificación de flags, registros, celdas de memoria o puertos) con el resultado esperado. 
+
 \end{itemize}
 
 \textbf{Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instrucción}
