@@ -3,8 +3,11 @@ package ar.edu.unq.tpi.qsim.parser
 import ar.edu.unq.tpi.qsim.model.Programa
 import scala.util.parsing.input.CharSequenceReader
 import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
+import org.uqbar.commons.utils.Observable
 
 object Parser extends Ensamblador {
+
+  var arquitecturas = List(ArquitecturaQ("Q1"), ArquitecturaQ("Q2"), ArquitecturaQ("Q3"), ArquitecturaQ("Q4"), ArquitecturaQ("Q5"), ArquitecturaQ("Q6"))
 
   def readFile(path: String): String = {
     val input = io.Source.fromFile(path)
@@ -72,4 +75,26 @@ object Parser extends Ensamblador {
     })
     return mensaje
   }
+}
+
+case class ArquitecturaQ(var name: String) {}
+
+@Observable
+object Acciones {
+  
+  var agregar = true
+  var eliminar = false
+  var ensamblar = false
+  var cargar = false
+
+  def inicializar() {
+    var agregar = true
+    var eliminar = false
+    var ensamblar = false
+    var cargar = false
+  }
+  
+  def agregarArchivos()
+  {}
+ 
 }
