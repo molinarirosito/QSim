@@ -116,7 +116,7 @@ Esta instrucción describe la operación lógica "o" bit a bit entre los datos d
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de 1 operando origen  (falta revisar Mara)}
 
-El formato de instrucción de un operando origen es el siguiente:
+El formato de instrucción de un operando origen es el siguiente:\\
 
 \formatoinst
 {|c|c|c|c|}
@@ -138,7 +138,7 @@ El efecto del JMP es cambiar el PC (Program Counter) por el dato que esta guarda
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de 1 operando destino  (falta revisar Mara)}
 
-El formato de instrucción de un operando destino es el siguiente:
+El formato de instrucción de un operando destino es el siguiente:\\
 
 \formatoinst
 {|c|c|c|c|}
@@ -156,7 +156,7 @@ Esta instrucción describe la operación lógica "negación" bit a bit en el dat
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones sin operandos  (falta revisar Mara)}
 
-El formato de instrucción sin operandos es el siguiente:
+El formato de instrucción sin operandos es el siguiente:\\
 
 \formatoinst{|c|c|}{2}{CodOp & Relleno \\  (4b) & (000000000000)}
 }
@@ -172,7 +172,7 @@ El efecto del ret es cambiar el pc por el dato que esta guardado en la celda de 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de salto condicional  (falta revisar Mara)}
 
-El formato de instrucción de salto condicional es el siguiente:
+El formato de instrucción de salto condicional es el siguiente:\\
 
 \formatoinstr{|c|c|}{Cod\_Op (8)&Desplazamiento(8)} donde los primeros cuatro bits del campo \code{Cod\_Op} es la cadena \bin{1111}. Si \textbf{al evaluar la condición de salto} el resultado es 1, se le suma al PC el valor del desplazamiento, representado en \cados{8}. En caso contrario la instrucción no hace nada.
 }
