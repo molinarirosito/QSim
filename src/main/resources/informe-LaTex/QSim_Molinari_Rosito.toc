@@ -21,7 +21,7 @@
 \contentsline {subsubsection}{\numberline {6.2.3}CPU}{15}{subsubsection.6.2.3}
 \contentsline {subsubsection}{\numberline {6.2.4}Int\IeC {\'e}rprete}{15}{subsubsection.6.2.4}
 \contentsline {subsubsection}{\numberline {6.2.5}Modos de direccionamiento y W16}{16}{subsubsection.6.2.5}
-\contentsline {subsubsection}{\numberline {6.2.6}Instrucciones}{16}{subsubsection.6.2.6}
+\contentsline {subsubsection}{\numberline {6.2.6}Instrucciones (falta revisar Mara)}{16}{subsubsection.6.2.6}
 \contentsline {subsubsection}{\numberline {6.2.7}Programa}{19}{subsubsection.6.2.7}
 \contentsline {subsubsection}{\numberline {6.2.8}Simulador}{19}{subsubsection.6.2.8}
 \contentsline {part}{III\hspace {1em}Evaluaci\IeC {\'o}n del desarrollo}{20}{part.3}

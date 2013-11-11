@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.10)  10 NOV 2013 23:32
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.10)  10 NOV 2013 23:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1329,13 +1329,13 @@ File: logoQSim.png Graphic file (type png)
 Package pdftex.def Info: logoQSim.png used on input line 36.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [31]
-LaTeX Info: Redefining \. on input line 82.
-LaTeX Info: Redefining \% on input line 82.
-LaTeX Info: Redefining \. on input line 82.
-LaTeX Info: Redefining \% on input line 82.
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
 File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 82.
+Package pdftex.def Info: logoQSim.png used on input line 77.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [32]
 LaTeX Info: Redefining \. on input line 129.
@@ -1378,17 +1378,23 @@ LaTeX Info: Redefining \% on input line 21.
 )
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 46.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 46.
-Package rerunfilecheck Info: File `QSim_Molinari_Rosito.out' has not changed.
-(rerunfilecheck)             Checksum: A8B0328C04AFFAAE90A7A6F6596D05F0;4017.
 
+
+Package rerunfilecheck Warning: File `QSim_Molinari_Rosito.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `QSim_Molinari_Rosito.out':
+(rerunfilecheck)             Before: A8B0328C04AFFAAE90A7A6F6596D05F0;4017
+(rerunfilecheck)             After:  FCC70D21B3847441A32E8DA36C733A6C;4040.
 
 LaTeX Warning: There were undefined references.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
  ) 
 Here is how much of TeX's memory you used:
- 7661 strings out of 495059
- 104595 string characters out of 3182030
+ 7662 strings out of 495059
+ 104607 string characters out of 3182030
  203773 words of memory out of 3000000
  10491 multiletter control sequences out of 15000+200000
  13407 words of font info for 52 fonts, out of 3000000 for 9000
@@ -1409,10 +1415,10 @@ sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on QSim_Molinari_Rosito.pdf (35 pages, 2233061 bytes).
+Output written on QSim_Molinari_Rosito.pdf (35 pages, 2234005 bytes).
 PDF statistics:
- 784 PDF objects out of 1000 (max. 8388607)
- 705 compressed objects within 8 object streams
- 229 named destinations out of 1000 (max. 500000)
+ 786 PDF objects out of 1000 (max. 8388607)
+ 707 compressed objects within 8 object streams
+ 230 named destinations out of 1000 (max. 500000)
  482 words of extra memory for PDF output out of 10000 (max. 10000000)
 

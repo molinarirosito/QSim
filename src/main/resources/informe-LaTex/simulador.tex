@@ -142,14 +142,14 @@ La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, represen
 \graf[15cm]{ModoDireccionamiento}{Diagrama de clase de la jerarquía de los modos de direccionamiento}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Instrucciones}
+\subsubsection{Instrucciones (falta revisar Mara)}
 Como se observa en la figura \ref{Instruccion} las Instrucciones estan modeladas en jerarquias que se dividen en:
 
 \begin{itemize}
 \item Un operando.
 \item Dos operandos.
 \item Sin operandos.
-\item JumpConducional.
+\item JumpCondicional.
 \end{itemize}
 
 Se realizo dicha jerarquía para permitir la fácil agregación de nuevas instrucciones siendo subclases de la clase que corresponda ya que comparten comportamiento tal como manera de mostrarse y de codificarse.
@@ -157,7 +157,7 @@ Se realizo dicha jerarquía para permitir la fácil agregación de nuevas instru
 \graf{Instruccion}{Diagrama de clase de la Instrucción}
 
 \begin{description}
-\item[Instrucciones sin operandos] Como se observa en la figura \ref{InstruccionSinOperandos} la unica instrucción sin operandos implementada es la instruccion \code{RET}, a pesar de esto, se eligió hacer una jerarquía para que luego se facilite \ojo{la inserción al modelo de nuevas instrucciones sin operandos}{la escalabilidad del modelo, permitiendo la inserción de nuevas instrucciones sin operandos} .
+\item[Instrucciones sin operandos] Como se observa en la figura \ref{InstruccionSinOperandos} la unica instrucción sin operandos implementada es la instrucción \code{RET}, a pesar de esto, se eligió hacer una jerarquía para que luego se facilite \ojo{la inserción al modelo de nuevas instrucciones sin operandos}{la escalabilidad del modelo, permitiendo la inserción de nuevas instrucciones sin operandos} .
 
 \graf[5cm]{Instruccion_SinOperandos}{Detalle de clase InstruccionSinOperandos}
 
