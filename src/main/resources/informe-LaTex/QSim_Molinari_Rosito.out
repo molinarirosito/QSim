@@ -42,17 +42,13 @@
 \BOOKMARK [3][-]{subsubsection.8.4.2}{Busqueda de Operandos}{subsection.8.4}% 42
 \BOOKMARK [3][-]{subsubsection.8.4.3}{Almacenamiento de Operandos}{subsection.8.4}% 43
 \BOOKMARK [1][-]{section.9}{Ejemplos de uso}{part.3}% 44
-\BOOKMARK [2][-]{subsection.9.1}{Errore de Sintaxis}{section.9}% 45
-\BOOKMARK [2][-]{subsection.9.2}{Para Experimentar}{section.9}% 46
-\BOOKMARK [1][-]{section.10}{Trabajo Futuro}{part.3}% 47
-\BOOKMARK [0][-]{part.4}{IV Ap\351ndices}{}% 48
-\BOOKMARK [1][-]{appendix.Alph1}{Especificaci\363n de la arquitectura Q}{part.4}% 49
-\BOOKMARK [2][-]{subsection.Alph1.1}{Caracter\355sticas generales}{appendix.Alph1}% 50
-\BOOKMARK [2][-]{subsection.Alph1.2}{Modos de direccionamiento}{appendix.Alph1}% 51
-\BOOKMARK [2][-]{subsection.Alph1.3}{Repertorio de instrucciones}{appendix.Alph1}% 52
-\BOOKMARK [3][-]{subsubsection.Alph1.3.1}{Instrucciones de 2 operandos}{subsection.Alph1.3}% 53
-\BOOKMARK [3][-]{subsubsection.Alph1.3.2}{Instrucciones de 1 operando origen \(falta revisar Mara\)}{subsection.Alph1.3}% 54
-\BOOKMARK [3][-]{subsubsection.Alph1.3.3}{Instrucciones de 1 operando destino \(falta revisar Mara\)}{subsection.Alph1.3}% 55
-\BOOKMARK [3][-]{subsubsection.Alph1.3.4}{Instrucciones sin operandos \(falta revisar Mara\)}{subsection.Alph1.3}% 56
-\BOOKMARK [3][-]{subsubsection.Alph1.3.5}{Instrucciones de salto condicional \(falta revisar Mara\)}{subsection.Alph1.3}% 57
-\BOOKMARK [1][-]{appendix.Alph2}{Como utilizar el simulador}{part.4}% 58
+\BOOKMARK [1][-]{section.10}{Trabajo Futuro}{part.3}% 45
+\BOOKMARK [1][-]{appendix.Alph1}{Especificaci\363n de la arquitectura Q}{part.3}% 46
+\BOOKMARK [2][-]{subsection.Alph1.1}{Caracter\355sticas generales \(susi\)}{appendix.Alph1}% 47
+\BOOKMARK [2][-]{subsection.Alph1.2}{Modos de direccionamiento}{appendix.Alph1}% 48
+\BOOKMARK [2][-]{subsection.Alph1.3}{Repertorio de instrucciones}{appendix.Alph1}% 49
+\BOOKMARK [3][-]{subsubsection.Alph1.3.1}{Instrucciones de 2 operandos}{subsection.Alph1.3}% 50
+\BOOKMARK [3][-]{subsubsection.Alph1.3.2}{Instrucciones de 1 operando origen \(falta revisar Mara\)}{subsection.Alph1.3}% 51
+\BOOKMARK [3][-]{subsubsection.Alph1.3.3}{Instrucciones de 1 operando destino \(falta revisar Mara\)}{subsection.Alph1.3}% 52
+\BOOKMARK [3][-]{subsubsection.Alph1.3.4}{Instrucciones sin operandos \(falta revisar Mara\)}{subsection.Alph1.3}% 53
+\BOOKMARK [3][-]{subsubsection.Alph1.3.5}{Instrucciones de salto condicional \(falta revisar Mara\)}{subsection.Alph1.3}% 54

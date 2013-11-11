@@ -15,7 +15,7 @@ Actualmente, la arquitectura se presenta a los estudiantes mediante especificaci
 
 \subsection{Enfoque de Von Neumann}
 
-El matemático John Von Neumann en el año 1945 se encontraba colaborando en el proyecto ENIAC (\textit{Electronic Numerical Integrator And Computer}, primer computadora electrónica de propósito general, diseñada para ser utilizada por el ejército norteamericano. La ENIAC podía ser programada para realizar operaciones complejas e incluso decisiones, iteraciones y subrutinas, pero la tarea de resolver un problema y volcarlo en la máquina era tan complejo que podía tomar semanas. Luego que el programa era diseñado en papel, el proceso de representarlo en la máquina ENIAC mediante la manipulación de cables e interruptores tomaba varios días. Entonces Von Neumann se comenzó a interesar por la problemática que significaba la la necesidad de reconfigurar la máquina para cada nueva tarea y tan sólo cuatro años más tarde propone y desarrolla una solución a este problema que se basaba en almacenar la información sobre las operaciones a realizar en la misma memoria utilizada para los datos, a partir de su codificación en código binario al igual que los datos.\\
+El matemático John Von Neumann en el año 1945 se encontraba colaborando en el proyecto ENIAC (\textit{Electronic Numerical Integrator And Computer}, primer computadora electrónica de propósito general, diseñada para ser utilizada por el ejército norteamericano. La ENIAC podía ser programada para realizar operaciones complejas e incluso decisiones, interacciones y subrutinas, pero la tarea de resolver un problema y volcarlo en la máquina era tan complejo que podía tomar semanas. Luego que el programa era diseñado en papel, el proceso de representarlo en la máquina ENIAC mediante la manipulación de cables e interruptores tomaba varios días. Entonces Von Neumann se comenzó a interesar por la problemática que significaba la la necesidad de reconfigurar la máquina para cada nueva tarea y tan sólo cuatro años más tarde propone y desarrolla una solución a este problema que se basaba en almacenar la información sobre las operaciones a realizar en la misma memoria utilizada para los datos, a partir de su codificación en código binario al igual que los datos.\\
 
 Además, este enfoque generaliza la organización de las computadoras distinguiendo en tres partes interconectadas: La CPU (con la unidad aritmético-lógica o ALU y la unidad de control) la memoria, y un módulo de entrada/salida. La interconexión es llevada a cabo por un bus de sistema que proporciona un medio de transporte de los datos entre las distintas partes. \\
 
@@ -64,10 +64,10 @@ A través de los años de la carrera \tpi, en la materia \orga\ se analizaron di
 Inicialmente se utilizó un simulador de código abierto para la arquitectura Intel 8085, que ofrecía una funcionalidad bastante completa, pero una interfaz que no resultaba del todo intuitiva.
 Este simulador se eligió por tratarse de un lenguaje assembler mas reducido, con un repertorio de instrucciones y modos de direccionamiento mas pequeño que contaba con un entorno de prueba (el simulador propiamente dicho) para facilitar la didáctica de la programación en lenguaje ensamblador, pero posteriormente se entendió que las características de la arquitectura no eran las adecuadas para la enseñanza de los contenidos y se descartó.\\
  
-Entonces el equipo docente eligió definir una arquitectura teórica que proveyera solamente lo necesario para cumplir con los objetivos de la materia e inspirados en un caso similar de la Universodad de Buenos Aires, se definió la arquitectura \textbf{QARQ}, muy similar a la que se presenta en la sección \ref{apendiceQ}\\
+Entonces el equipo docente eligió definir una arquitectura teórica que proveyera solamente lo necesario para cumplir con los objetivos de la materia e inspirados en un caso similar de la Universidad de Buenos Aires, se definió la arquitectura \textbf{QARQ}, muy similar a la que se presenta en la sección \ref{apendiceQ}\\
 
 
-Posteriormente, el equipo docente propuso un cambio en la secuencia didáctica que requirió la división de la especificacion de la arquitectura QARQ en varias partes, donde cada una recibe el nombre de \textbf{Arquitectura Qi} y agrega una nueva funcionalidad (instrucciones o modos de direccionamientos) a la versión anterior, son como capas de cebolla. Sin embargo todos los ejercicios de las arquitecturas Qi se siguen haciendo en papel. \\
+Posteriormente, el equipo docente propuso un cambio en la secuencia didáctica que requirió la división de la especificación de la arquitectura QARQ en varias partes, donde cada una recibe el nombre de \textbf{Arquitectura Qi} y agrega una nueva funcionalidad (instrucciones o modos de direccionamientos) a la versión anterior, son como capas de cebolla. Sin embargo todos los ejercicios de las arquitecturas Qi se siguen haciendo en papel. \\
 
 Actualmente se busca incorporar el \textbf{Simulador Qsim} en la materia con el objetivo de que los alumnos puedan visualizar el funcionamiento de una computadora al mas mínimo detalle, a través de la ejercitación del \ciclo.
 
@@ -159,7 +159,7 @@ Las versiones de la arquitectura Q están pensadas para incorporar funcionalidad
 \textbf{Modos de direccionamiento}
 \begin{enumerate}
 \item Modos de direccionamiento \textbf{Q4}
-\item Idirecto
+\item Indirecto
 \item RegistroIdirecto
 \end{enumerate}
 

@@ -43,17 +43,13 @@
 \contentsline {subsubsection}{\numberline {8.4.2}Busqueda de Operandos}{23}{subsubsection.8.4.2}
 \contentsline {subsubsection}{\numberline {8.4.3}Almacenamiento de Operandos}{23}{subsubsection.8.4.3}
 \contentsline {section}{\numberline {9}Ejemplos de uso}{23}{section.9}
-\contentsline {subsection}{\numberline {9.1}Errore de Sintaxis}{24}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}Para Experimentar}{29}{subsection.9.2}
-\contentsline {section}{\numberline {10}Trabajo Futuro}{30}{section.10}
-\contentsline {part}{IV\hspace {1em}Ap\IeC {\'e}ndices}{30}{part.4}
-\contentsline {section}{\numberline {A}Especificaci\IeC {\'o}n de la arquitectura Q}{30}{appendix.Alph1}
-\contentsline {subsection}{\numberline {A.1}Caracter\IeC {\'\i }sticas generales}{30}{subsection.Alph1.1}
-\contentsline {subsection}{\numberline {A.2}Modos de direccionamiento}{31}{subsection.Alph1.2}
-\contentsline {subsection}{\numberline {A.3}Repertorio de instrucciones}{32}{subsection.Alph1.3}
-\contentsline {subsubsection}{\numberline {A.3.1}Instrucciones de 2 operandos}{32}{subsubsection.Alph1.3.1}
-\contentsline {subsubsection}{\numberline {A.3.2}Instrucciones de 1 operando origen (falta revisar Mara)}{33}{subsubsection.Alph1.3.2}
-\contentsline {subsubsection}{\numberline {A.3.3}Instrucciones de 1 operando destino (falta revisar Mara)}{34}{subsubsection.Alph1.3.3}
-\contentsline {subsubsection}{\numberline {A.3.4}Instrucciones sin operandos (falta revisar Mara)}{34}{subsubsection.Alph1.3.4}
-\contentsline {subsubsection}{\numberline {A.3.5}Instrucciones de salto condicional (falta revisar Mara)}{34}{subsubsection.Alph1.3.5}
-\contentsline {section}{\numberline {B}Como utilizar el simulador}{35}{appendix.Alph2}
+\contentsline {section}{\numberline {10}Trabajo Futuro}{23}{section.10}
+\contentsline {section}{\numberline {A}Especificaci\IeC {\'o}n de la arquitectura Q}{24}{appendix.Alph1}
+\contentsline {subsection}{\numberline {A.1}Caracter\IeC {\'\i }sticas generales (susi)}{24}{subsection.Alph1.1}
+\contentsline {subsection}{\numberline {A.2}Modos de direccionamiento}{25}{subsection.Alph1.2}
+\contentsline {subsection}{\numberline {A.3}Repertorio de instrucciones}{26}{subsection.Alph1.3}
+\contentsline {subsubsection}{\numberline {A.3.1}Instrucciones de 2 operandos}{26}{subsubsection.Alph1.3.1}
+\contentsline {subsubsection}{\numberline {A.3.2}Instrucciones de 1 operando origen (falta revisar Mara)}{28}{subsubsection.Alph1.3.2}
+\contentsline {subsubsection}{\numberline {A.3.3}Instrucciones de 1 operando destino (falta revisar Mara)}{28}{subsubsection.Alph1.3.3}
+\contentsline {subsubsection}{\numberline {A.3.4}Instrucciones sin operandos (falta revisar Mara)}{28}{subsubsection.Alph1.3.4}
+\contentsline {subsubsection}{\numberline {A.3.5}Instrucciones de salto condicional (falta revisar Mara)}{29}{subsubsection.Alph1.3.5}

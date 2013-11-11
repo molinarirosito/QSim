@@ -7,16 +7,16 @@
 Las dificultades del dominio estuvieron relacionadas a la comprensión no solamente del modelo de arquitectura Q si no también a su propósito didáctico, ya que el objetivo del simulador no es solamente la simulación de la arquitectura y la ejecución de programas, sino también el proveer a los alumnos la capacidad de ejercitar situaciones conceptualmente erróneas, por lo que se requería una comprensión didáctica del problema más allá de la especificación de las arquitecturas Q. 
 
 \subsection{Dificultades de diseño}
-En primera instancia se opto por implementar un modelo de objetos que utilizaba un objeto de la clase \textbf{Programa} a lo largo de toda la ejecución. Procesaba las instrucciones no leyendo de la matriz memoria, si no, pidiendo la siguiente instrucción al objeto instancia de la clase Programa, sobreviviendo así las distintas etapas una vez que fue creado y evitando la creación de un objeto cuya responsabilidad sea interpretar el código máquina alojado en la memoria, evitando la nueva creaccion de instancias de la clase \textbf{Instruccion} y haciendo mucho más sencillo al modelo ya que la memoria era sólo una clase que contenia datos que se reflejaban en pantalla y no se extraian datos de celdas en ningun momento. Luego entendimos que un programa no sólo podía modificar su entorno al ser ejecutado (otras celdas de memoria que no ocupen su código maquina, celdas de puertos, registros, etc) si no que también podría sobreescribir su código maquina (ya sea con ese propósito o sólo por un error conceptual), o bien, que el alumno debía tener la posibilidad de seguir ejecutando más allá del código máquina alojado en memoria o más, inevitablemente se necesitó corregir gran parte del modelo agregando una clase denominada \textbf{Intérprete}, cuya responsabilidad es interpretar la siguiente instrucción alojada en memoria para que luego sea ejecutada, otorgando más responsabilidad a la clase \textbf{Memoria} y descartando el objeto instancia de \textbf{Programa} una vez que éste es cargado en memoria con éxito.\\
+En primera instancia se opto por implementar un modelo de objetos que utilizaba un objeto de la clase \textbf{Programa} a lo largo de toda la ejecución. Procesaba las instrucciones no leyendo de la matriz memoria, si no, pidiendo la siguiente instrucción al objeto instancia de la clase Programa, sobreviviendo así las distintas etapas una vez que fue creado y evitando la creación de un objeto cuya responsabilidad sea interpretar el código máquina alojado en la memoria, evitando la nueva creaccion de instancias de la clase \textbf{Instrucción} y haciendo mucho más sencillo al modelo ya que la memoria era sólo una clase que contenía datos que se reflejaban en pantalla y no se extraían datos de celdas en ningún momento. Luego entendimos que un programa no sólo podía modificar su entorno al ser ejecutado (otras celdas de memoria que no ocupen su código maquina, celdas de puertos, registros, etc) si no que también podría sobrescribir su código maquina (ya sea con ese propósito o sólo por un error conceptual), o bien, que el alumno debía tener la posibilidad de seguir ejecutando más allá del código máquina alojado en memoria o más, inevitablemente se necesitó corregir gran parte del modelo agregando una clase denominada \textbf{Intérprete}, cuya responsabilidad es interpretar la siguiente instrucción alojada en memoria para que luego sea ejecutada, otorgando más responsabilidad a la clase \textbf{Memoria} y descartando el objeto instancia de \textbf{Programa} una vez que éste es cargado en memoria con éxito.\\
 
 Tuvieron que ser solicitadas además extensiones al equipo de desarrolladores de Arena para poder realizar la interfaz con dicho framework.
 
 \begin{itemize}
 \item FileSelector para que los alumnos puedan cargar el archivo .Qsim en el cual se encuentra su programa
 \item CodeEditor (O actualmente llamado KeywordTextArea). Es el espacio donde se visualiza el programa Qi que realizaron los alumnos una vez que esta cargado.
-\item Bindings contra el background de componentes y celdas de una tabla, para permitir la visualizacion de cambios de colores en la memoria luego de las etapas de ejecución y de realizar algun cambio en la misma.
+\item Bindings contra el background de componentes y celdas de una tabla, para permitir la visualización de cambios de colores en la memoria luego de las etapas de ejecución y de realizar algún cambio en la misma.
 \item TexBox multiLine (TextArea) con scroll para ser utilizado como consola de devolucion.
-\item Icono para la aplicacion, solo por cuestiones estéticas.
+\item Icono para la aplicación, solo por cuestiones estéticas.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
@@ -31,7 +31,7 @@ Para eso realizamos dos casos de prueba por cada Qi:
 \begin{enumerate}
 \item \textbf{Chequear programa Qi valido}
 
-Agarramos el programa Qi valido y se lo pasamos al Parser, cuando termina de chequear devuelve un resultado, como es de esperar devuelte un objeto programa con la lista de instrucciones. Tomamos ese resultado y como ultimo paso comparamos si el programa resultado es igual al programa esperado.
+Agarramos el programa Qi valido y se lo pasamos al Parser, cuando termina de chequear devuelve un resultado, como es de esperar devuelve un objeto programa con la lista de instrucciones. Tomamos ese resultado y como ultimo paso comparamos si el programa resultado es igual al programa esperado.
 
 \textit{ (esto va en nota al pie)programa Qi valido = Es un programa en cualquier arquitectura Q escrito sintaticamente correcto.}
 
@@ -39,79 +39,79 @@ Agarramos el programa Qi valido y se lo pasamos al Parser, cuando termina de che
 
 En este caso escribimos un programa Qi con errores de sintaxis para ver como reacciona el parser.
 
-Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception \textbf{SyntaxErrorException} porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepcion te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepcion y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
+Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de chequear devuelve un error, como es de esperar devuelve una Exception \textbf{SyntaxErrorException} porque dentro del archivo del programa hay una linea que tiene errores de sintaxis, el mensaje de la excepción te muestra el numero de linea y la propia linea para que veas en donde te equivocaste. Capturamos la Excepción y tomamos como resultado el mensaje y como ultimo paso comparamos el mensaje resultado con el mensaje esperado.
 \end{enumerate}
 
-\subsection{Ensamblado (Objetos --+ Codigo Maquina)}
+\subsection{Ensamblado (Objetos --+ Código Maquina)}
 
-Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto programa que contiene un conjunto de objetos intrucciones, el ensamblado simplemente lo realiza cada instruccion, esto quiere decir que cada intruccion sabe ensamblarse. De esta forma realizamos el ensamblado del programa y obtenemos una lista de codigo maquina como resultado y como ultimo paso comparamos la lista de codigo maquina resultado con la lista codigo maquina esperado.
+Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto programa que contiene un conjunto de objetos instrucciones, el ensamblado simplemente lo realiza cada instrucción, esto quiere decir que cada instrucción sabe ensamblarse. De esta forma realizamos el ensamblado del programa y obtenemos una lista de código maquina como resultado y como ultimo paso comparamos la lista de código maquina resultado con la lista código maquina esperado.
 
-\subsection{Decodificacion Codigo Maquina --+ Objetos (Iterprete)}
-La Decodificacion se verifica correctamente a la inversa del Ensamblado tomando el ensamblado del programa Qi que como sabemos es la lista de codigo maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado puede devolver dos cosas: 
+\subsection{Decodificación Código Maquina --+ Objetos (Interprete)}
+La Decodificación se verifica correctamente a la inversa del Ensamblado tomando el ensamblado del programa Qi que como sabemos es la lista de código maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado puede devolver dos cosas: 
 \begin{enumerate}
-\item \textbf{Lista de de Instrucciones (decodificacion)} 
+\item \textbf{Lista de de Instrucciones (decodificación)} 
 
-El resultado correcto es la lista de objetos instrucciones, por cada codigo maquina el interprete verifica los codigos de operacion para poder crear las instrucciones correctas y como ultimo paso de la verificacion comparamos la lista resultante con la lista esperada.
+El resultado correcto es la lista de objetos instrucciones, por cada código maquina el interprete verifica los códigos de operación para poder crear las instrucciones correctas y como ultimo paso de la verificación comparamos la lista resultante con la lista esperada.
 \item\textbf{Error}
 
-El resultado puede ser un error porque puede pasar que el codigo de operacion o el codigo de algun modo de direccionamiento dentro del formato de cada instruccion sea invalido. La excepcion que puede tirar tiene el nombre de \textbf{CodigoInvalidoException}.   
+El resultado puede ser un error porque puede pasar que el código de operación o el código de algún modo de direccionamiento dentro del formato de cada instrucción sea invalido. La excepción que puede tirar tiene el nombre de \textbf{CodigoInvalidoException}.   
 \end{enumerate}
 
-\subsection{Ejecucion}
+\subsection{Ejecución}
 
-Para verificar que la ejecucion de un programa Qi con el \textbf{Ciclo de Instruccion} se realice correctamente lo que hacemos es cargar el programa en la memoria a traves del objeto \textbf{Simulador}, de esta forma cuando se encuentra cargado esta listo para la ejecucion. Los pasos que se verifican son 3:
+Para verificar que la ejecución de un programa Qi con el \textbf{Ciclo de Instrucción} se realice correctamente lo que hacemos es cargar el programa en la memoria a través del objeto \textbf{Simulador}, de esta forma cuando se encuentra cargado esta listo para la ejecución. Los pasos que se verifican son 3:
 
 \begin{itemize}
 \item \textbf{Fetch} 
 
-Para verificar el fetch se toma la instruccion siguiente a ejecutar y se compara el valor que se guarda en el registro ir con el valor esperado. Ademas se verifica que el registro especial pc apunte a la siguiente instruccion a ejecutar.
+Para verificar el fetch se toma la instrucción siguiente a ejecutar y se compara el valor que se guarda en el registro ir con el valor esperado. Ademas se verifica que el registro especial pc apunte a la siguiente instrucción a ejecutar.
 
 \item \textbf{Decode}
 
-Para verificar el decode, se toma el valor del registro ir para que lo reciba el interprete que dara como resultado el objeto instruccion correspondiente. Este objeto instruccion sabe mostrarse quien es y por eso la responsabilidad de decodificar se la delega a la instruccion. Al obtener la decodificacion de cada instruccion podemos comparar la decodificacion resultante con la esperada.
+Para verificar el decode, se toma el valor del registro ir para que lo reciba el interprete que dará como resultado el objeto instrucción correspondiente. Este objeto instrucción sabe mostrarse quien es y por eso la responsabilidad de decodificar se la delega a la instrucción. Al obtener la decodificación de cada instrucción podemos comparar la decodificacion resultante con la esperada.
  
 \item \textbf{Execute}
 
-Para verificar el efecto de cada instruccion se considero armar un caso de prueba por cada instruccion donde cada uno tiene un estado inicial y luego de realizar la ejecucion de dicha instruccion termina con un estado final modificado en el cual verificamos el resultado obtenido con el resultado esperado. 
+Para verificar el efecto de cada instrucción se considero armar un caso de prueba por cada instrucción donde cada uno tiene un estado inicial y luego de realizar la ejecución de dicha instrucción termina con un estado final modificado en el cual verificamos el resultado obtenido con el resultado esperado. 
 \end{itemize}
 
-\textbf{Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instruccion}
+\textbf{Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instrucción}
   
 \subsubsection{Operaciones de ALU}
 
-La ALU es la encargada de ejecutar operaciones aritmeticas/logicas. Si la instruccion a ejecutar tiene un efecto aritmetico/logico se le delega la ejecucion de la operacion. Para poder verificar todas las operaciones creamos un caso de prueba por cada operacion. Tanto las operaciones aritmeticas como las logicas se analizan de la misma forma:
+La ALU es la encargada de ejecutar operaciones aritméticas/lógicas. Si la instrucción a ejecutar tiene un efecto aritmético/lógico se le delega la ejecución de la operación. Para poder verificar todas las operaciones creamos un caso de prueba por cada operación. Tanto las operaciones aritméticas como las lógicas se analizan de la misma forma:
 
 \begin{enumerate}
-\item Se toma cada valor de los operandos(la busqueda se detalla el la siguiente instruccion)
+\item Se toma cada valor de los operandos(la búsqueda se detalla el la siguiente instrucción)
 
-\item Se realiza la operacion aritmetica/logica. 
+\item Se realiza la operación aritmética/lógica. 
 
 \item Se verifica el resultado obtenido con el resultado esperado.
 
-\item Algunas operaciones (la mayoria) modifican los flags. la ALU tiene mucha relacion con los flags ya que por cada cuenta realizada actualiza los mismos. Estos tambien se se verifican comparando el resultado obtenido con el valor esperado. 
+\item Algunas operaciones (la mayoría) modifican los flags. la ALU tiene mucha relación con los flags ya que por cada cuenta realizada actualiza los mismos. Estos también se se verifican comparando el resultado obtenido con el valor esperado. 
 \end{enumerate}
 
-\subsubsection{Busqueda de Operandos}
+\subsubsection{Búsqueda de Operandos}
 
-Para verificar la busqueda de operandos, tomamos una instruccion cualquiera y probamos todas las combinaciones de modos de direccionamiento para cada operando, teniendo en cuenta que son invalidas todas las combinaciones de 1/2 operando/s que tenga el operando destino el modo de direccionamiento Inmediato. Al tener la instruccion elegida procedemos a obtener el valor de cada operando, este valor se lo compara con el valor esperado. 
+Para verificar la búsqueda de operandos, tomamos una instrucción cualquiera y probamos todas las combinaciones de modos de direccionamiento para cada operando, teniendo en cuenta que son invalidas todas las combinaciones de 1/2 operando/s que tenga el operando destino el modo de direccionamiento Inmediato. Al tener la instrucción elegida procedemos a obtener el valor de cada operando, este valor se lo compara con el valor esperado. 
  
 \subsubsection{Almacenamiento de Operandos}
 
 Para verificar el almacenamiento de operandos, salvo algunas instrucciones todas pasan por la etapa de store.
-Tomamos cada una de las instrucciones de un programa Qi y realizamos el ciclo de ejecucion mensionado anteriormente.
-Cuando estamos en la etapa de ejecucion, cada una tiene un operando destinado a guardar el resultado de su efecto.
+Tomamos cada una de las instrucciones de un programa Qi y realizamos el ciclo de ejecución mencionado anteriormente.
+Cuando estamos en la etapa de ejecución, cada una tiene un operando destinado a guardar el resultado de su efecto.
 En esta instancia sabemos que  dicho operando tiene el valor guardado, a este valor lo comparamos con el valor esperado.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Ejemplos de uso}
 
-En esta seccion vamos a mostrar las diferentes situaciones que pueden ocurrir a la hora de utilizar el simulador.
+En esta sección vamos a mostrar las diferentes situaciones que pueden ocurrir a la hora de utilizar el simulador.
 
-\subsection{Errore de Sintaxis} 
+\subsection{Errores de Sintaxis} 
 
 \begin{itemize}
 
-\item Enfoquemonos en esta situacion, que pasaria si un alumno escribe el siguiente programa Qi:
+\item Enfoquemonos en esta situación, que pasaría si un alumno escribe el siguiente programa Qi:
 
 1.ADD R0, 0x0002 \\
 2.MUL R4, 0x01\\
@@ -120,44 +120,44 @@ En esta seccion vamos a mostrar las diferentes situaciones que pueden ocurrir a 
 5.MOV R2, R3\\
 6.ADD R1, R7\\
 
-En la linea numero 2 el modo de direcciomiento inmediato esta incompleto, (le faltan dos digitos). Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 2 el modo de direccionamiento inmediato esta incompleto, (le faltan dos dígitos). Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
  
 "Ha ocurrido un error en la linea 2 : MUL R4, 0x01" \\  
 
-\item Otra situacion seria si un alumno escribe el siguiente programa Qi:\\
+\item Otra situación seria si un alumno escribe el siguiente programa Qi:\\
 
 1.MOV 0x0006, 0x0056\\
 2.ADD R2, R3\\
 3.SUB R1, R7\\
 
-En la linea numero 1 el operando destino es inmediato lo cual es invalido\footnote{El operando nunca puede tener como modo de direccionamiento un inmediato}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino es inmediato lo cual es invalido\footnote{El operando nunca puede tener como modo de direccionamiento un inmediato}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056" \\
 
-\item Una situacion peculiar puede ser si un alumno escribe el siguiente programa Q1:\\
+\item Una situación peculiar puede ser si un alumno escribe el siguiente programa Q1:\\
 
 1.ADD R0, [0x0002] \\
 2.MOV R4, R0\\
 
-En la linea numero 1 el operando destino es directo lo cual es invalido en Q1\footnote{El modo de direccionamiento no es parte de Q1}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino es directo lo cual es invalido en Q1\footnote{El modo de direccionamiento no es parte de Q1}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]" \\ 
 
-\item Una situacion peculiar puede ser si un alumno escribe el siguiente programa Qi:\\
+\item Una situación peculiar puede ser si un alumno escribe el siguiente programa Qi:\\
 
 1.CMP R3, [0xA000] \\
 2.MOV R4 R0 \\
 
-En la linea numero 2 entre los operandos no se encuentra la coma que los separa, eso es invalido\footnote{las instrucciones de dos operandos tiene que tener la coma para separarlos}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 2 entre los operandos no se encuentra la coma que los separa, eso es invalido\footnote{las instrucciones de dos operandos tiene que tener la coma para separarlos}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 2 : MOV R4, R0" \\ 
 
-\item Algo comun que podria ocurrir es si un alumno escribe el siguiente programa Qi:\\
+\item Algo común que podría ocurrir es si un alumno escribe el siguiente programa Qi:\\
 
 1.sub [[0x0004]], [0xA000] \\
 2.ADD R4, R0 \\
 
-En la linea numero 1 la instruccion sub se escribio en minuscula esto es invalido\footnote{Los nombres de las instrucciones son estrictamente en mayuscula}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 la instrucción sub se escribió en minúscula esto es invalido\footnote{Los nombres de las instrucciones son estrictamente en mayúscula}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: sub [[0x0004]], [0xA000]" \\ 
 
@@ -166,16 +166,16 @@ En la linea numero 1 la instruccion sub se escribio en minuscula esto es invalid
 1.MUL [R6], r4 \\
 2.ADD [0xF0F0], R0 \\
 
-En la linea numero 1 el operando destino es un registro que empieza con minuscula, esto es invalido\footnote{Los registros empiezan estrictamente con Mayuscula}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino es un registro que empieza con minúscula, esto es invalido\footnote{Los registros empiezan estrictamente con Mayúscula}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: MUL [R6], r4" \\ 
 
-\item Otra situacion que se podria dar es si un alumno escribe el siguiente programa Qi:\\
+\item Otra situación que se podría dar es si un alumno escribe el siguiente programa Qi:\\
 
 1.AND R2, R8 \\
 2.OR [0xF0F0], R0 \\
 
-En la linea numero 1 el operando destino el numero del registro es invalido\footnote{Los registros estan en el rango R0..R7, por lo tanto R8 no pertenece al rango por eso es invalido}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino el numero del registro es invalido\footnote{Los registros están en el rango R0..R7, por lo tanto R8 no pertenece al rango por eso es invalido}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: AND R2, R8" \\ 
 
@@ -184,7 +184,7 @@ En la linea numero 1 el operando destino el numero del registro es invalido\foot
 1.MUL R7, R4 \\
 2.AND R5, [R3] \\
 
-En la linea numero 1 cuando uno escribe la instruccion MUL no es valido utilizar como destino el registro numero 7 por lo tanto es invalida\footnote{El resultado de la multiplicacion se parte en 2. La primer parte va a R7 y la segunda parte va al operando destino, no pueden ser los mismo porque si no se perderia una parte del resultado.} esa linea. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 cuando uno escribe la instrucción MUL no es valido utilizar como destino el registro numero 7 por lo tanto es invalida\footnote{El resultado de la multiplicación se parte en 2. La primer parte va a R7 y la segunda parte va al operando destino, no pueden ser los mismo porque si no se perdería una parte del resultado.} esa linea. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: MUL R7, R4" \\ 
 
@@ -194,7 +194,7 @@ En la linea numero 1 cuando uno escribe la instruccion MUL no es valido utilizar
 2.AND R5, [R3] \\
 3.JMP incio \\
 
-En la linea numero 3 cuando uno escribe una instruccion utilizando etiquetas no es correcto escribir el nombre incompleto de la etiqueta, por eso es invalido. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 3 cuando uno escribe una instrucción utilizando etiquetas no es correcto escribir el nombre incompleto de la etiqueta, por eso es invalido. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 3: JMP incio" \\ 
 
@@ -204,18 +204,18 @@ En la linea numero 3 cuando uno escribe una instruccion utilizando etiquetas no 
 2.CALL [0x0005] \\
 3.etiqueta: ADD R0, 0x0002 \\
 
-En la linea numero 1 ocurre el mismo error antes mencionado donde el nombre de la etiqueta esta incompleto, esta situacion es distinta ya que en la anterior uno define primero la etiqueta y luego se utiliza, aca es alreves primero se utiliza en la linea 1 y luego se define en la linea 3. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 ocurre el mismo error antes mencionado donde el nombre de la etiqueta esta incompleto, esta situación es distinta ya que en la anterior uno define primero la etiqueta y luego se utiliza, acá es alreves primero se utiliza en la linea 1 y luego se define en la linea 3. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: MOV [0x0005], etiq" \\
 
 
-\item Relacionado con las etiquetas puede pasa que se olviden de algun simbolo, que pasa si un alumno escribe el siguiente programa Qi:\\
+\item Relacionado con las etiquetas puede pasa que se olviden de algún símbolo, que pasa si un alumno escribe el siguiente programa Qi:\\
 
 1.inicio SUB [0x9000], R4 \\
 2.MUL R5, [R7] \\
 3.JMP inicio \\
 
-En la linea numero 1 la etiqueta inicio no es una etiqueta valida\footnote{Las etiquetas pueden empezar con mayuscula o minuscula pero al final siempre tienen que tenen (:).}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 la etiqueta inicio no es una etiqueta valida\footnote{Las etiquetas pueden empezar con mayúscula o minúscula pero al final siempre tienen que tener (:).}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: inicio SUB [0x9000], R4" \\ 
 
@@ -225,7 +225,7 @@ En la linea numero 1 la etiqueta inicio no es una etiqueta valida\footnote{Las e
 1.ADD [0x9000], R4 \\
 2.NOT 0x0004 \\
 
-En la linea numero 2 el operando destino de la instruccion NOT no puede ser un inmediato, esto es invalido\footnote{La instruccion NOT no puede recibir un inmediato como destino porque necesita guardar el efecto que genera y un inmediato es una constante.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 2 el operando destino de la instrucción NOT no puede ser un inmediato, esto es invalido\footnote{La instrucción NOT no puede recibir un inmediato como destino porque necesita guardar el efecto que genera y un inmediato es una constante.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 2: NOT 0x0004" \\ 
 
@@ -234,7 +234,7 @@ En la linea numero 2 el operando destino de la instruccion NOT no puede ser un i
 1.ADD [9000], R4 \\
 2.NOT R2 \\
 
-En la linea numero 1 el operando destino no tiene el prefijo 0x por lo tanto es una expresion invalida. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino no tiene el prefijo 0x por lo tanto es una expresión invalida. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: ADD [0009], R4" \\ 
 
@@ -243,7 +243,7 @@ En la linea numero 1 el operando destino no tiene el prefijo 0x por lo tanto es 
 1.ADD [0x900000000000], R4 \\
 2.NOT R2 \\
 
-En la linea numero 1 el operando destino tiene mas digitos que los permitidos, por esto es invalido\footnote{Un inmediato tiene el prefijo 0x y luego 4 digitos hexadecimales.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino tiene mas dígitos que los permitidos, por esto es invalido\footnote{Un inmediato tiene el prefijo 0x y luego 4 dígitos hexadecimales.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: ADD [0x900000000000], R4" \\ 
 
@@ -252,7 +252,7 @@ En la linea numero 1 el operando destino tiene mas digitos que los permitidos, p
 1.ZDD [0x900000000000], [R5] \\
 2.NOT R2 \\
 
-En la linea numero 1 el nombre de la operacion es invalida\footnote{Ese nombre es invalido porque no es parte del conjunto de instrucciones, no existe la instruccion ZDD.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el nombre de la operación es invalida\footnote{Ese nombre es invalido porque no es parte del conjunto de instrucciones, no existe la instrucción ZDD.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: ZDD [0x900000000000], R4" \\
 
@@ -260,7 +260,7 @@ En la linea numero 1 el nombre de la operacion es invalida\footnote{Ese nombre e
 
 1.SUB [], 0x000A \\
 
-En la linea numero 1 el operando destino no contiene su valor, por eso es invalido\footnote{El modo de direccionamiento directo siempre contiene un inmediato como valor.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino no contiene su valor, por eso es invalido\footnote{El modo de direccionamiento directo siempre contiene un inmediato como valor.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: SUB [], 0x000A" \\
 
@@ -268,7 +268,7 @@ En la linea numero 1 el operando destino no contiene su valor, por eso es invali
 
 1.JMP \\
 
-En la linea numero 1 el operando origen de la instruccion JMP no existe y por ende es invalido\footnote{Todas las instrucciones son validas si tienen a su operandos, en este caso JMP le falta su operando.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el operando origen de la instrucción JMP no existe y por ende es invalido\footnote{Todas las instrucciones son validas si tienen a su operandos, en este caso JMP le falta su operando.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: JMP" \\
  
@@ -276,7 +276,7 @@ En la linea numero 1 el operando origen de la instruccion JMP no existe y por en
 
 1.ADD R7, [[]] \\
 
-En la linea numero 1 el valor el operando origen no existe, esto es invalido\footnote{El modo de direccionamiento indirecto necesita su valor inmediato.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibira el error descriptivo como el siguiente:
+En la linea numero 1 el valor el operando origen no existe, esto es invalido\footnote{El modo de direccionamiento indirecto necesita su valor inmediato.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
 
 "Ha ocurrido un error en la linea 1: ADD R7, [[]]" \\
 
@@ -284,7 +284,7 @@ En la linea numero 1 el valor el operando origen no existe, esto es invalido\foo
 
 \subsection{Para Experimentar}
 
-Esta seccion describe situaciones particulares que los alumnos pueden experimentar.
+Esta sección describe situaciones particulares que los alumnos pueden experimentar.
 
 \begin{itemize}
 
@@ -299,8 +299,8 @@ Esta seccion describe situaciones particulares que los alumnos pueden experiment
 7.etiqueta: ADD R0, 0x0002 \\
 8.RET \\
 
-Lo interesante es que luego de ejecutar el CALL se ejecuta la instruccion ADD R0, 0x0002 y el RET. Cuando vuelve para ejecutar la proxima instruccion el PC se encuentra en la linea 7, donde vuelve a ejecutar la instruccion ADD antes mencionada. Ya lo ultimo que le queda es ejecutar el RET.
-Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecutar el RET  el registro SP tiene el valor inicial que es FFEF, luego en la ejecucion lo primero que se hace es incrementar el SP osea que ahora tiene el valor FFFO y luego buscar el valor de esa direccion para actualizar el registro PC. Para informarles la direccion FFFO es un puerto de E/S. La conclucion es que en esta instancia el flujo de ejecucion del programa depende del valor que tiene ese puerto, puede pasar que el valor sea 0x0000 y se actualice el PC nos lleve al inicio de la memoria donde se encuentra inicializado otro programa y empiece a ejecutar desde alli. 
+Lo interesante es que luego de ejecutar el CALL se ejecuta la instrucción ADD R0, 0x0002 y el RET. Cuando vuelve para ejecutar la próxima instrucción el PC se encuentra en la linea 7, donde vuelve a ejecutar la instrucción ADD antes mencionada. Ya lo ultimo que le queda es ejecutar el RET.
+Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecutar el RET  el registro SP tiene el valor inicial que es FFEF, luego en la ejecución lo primero que se hace es incrementar el SP osea que ahora tiene el valor FFFO y luego buscar el valor de esa dirección para actualizar el registro PC. Para informarles la dirección FFFO es un puerto de E/S. La conclusión es que en esta instancia el flujo de ejecución del programa depende del valor que tiene ese puerto, puede pasar que el valor sea 0x0000 y se actualice el PC nos lleve al inicio de la memoria donde se encuentra inicializado otro programa y empiece a ejecutar desde allí. 
 
 
 \item Para los que son curiosos, supongamos que un alumno escribe el siguiente programa Qi:
@@ -309,7 +309,7 @@ Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecu
 2.MUL R4, 0x0001 \\
 3.SUB [0x0003], 0x000A \\
 
-Pensemos que el PC se posiciona en la linea 3 y realizamos el ciclo de instruccion(FETCH - DECODE - EXECUTE). Como estado final tenemos el efecto de la ultima instruccion y el valor de PC apuntando a la siguiente instruccion a ejecutar. Como veran el programa que escribio el alumno termino en la la linea 3 pero el simulador no para de ejecutar, por ende te permite realizar las veces que quiera el ciclo de instruccion. Es re interesante que los chicos esperimenten este tipo de cosas.
+Pensemos que el PC se posiciona en la linea 3 y realizamos el ciclo de instrucción(FETCH - DECODE - EXECUTE). Como estado final tenemos el efecto de la ultima instrucción y el valor de PC apuntando a la siguiente instrucción a ejecutar. Como verán el programa que escribió el alumno termino en la la linea 3 pero el simulador no para de ejecutar, por ende te permite realizar las veces que quiera el ciclo de instrucción. Es re interesante que los chicos experimenten este tipo de cosas.
 
 \end{itemize} 
 
@@ -317,7 +317,7 @@ Pensemos que el PC se posiciona en la linea 3 y realizamos el ciclo de instrucci
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Trabajo Futuro}
 
-En esta seccion se describiran caracteristicas y funcionalidades que deseamos agreguar al Simulador QSim en el futuro.
+En esta sección se describirán características y funcionalidades que deseamos agregar al Simulador QSim en el futuro.
 
 \begin{itemize}
 
@@ -329,6 +329,6 @@ POP permite sacar el primer elemento de la pila y guardarlo en el operando desti
 
 \item Entrada y Salida.
 
-Que el simulador admita la intersaccion con dispositivos de E/S. Para eso tenemos que modelar dispositivos como el teclado, impresora, monitor, etc.
+Que el simulador admita la interacción con dispositivos de E/S. Para eso tenemos que modelar dispositivos como el teclado, impresora, monitor, etc.
 
 \end{itemize}
