@@ -3,7 +3,7 @@ package ar.edu.unq.tpi.qsim.parser
 import ar.edu.unq.tpi.qsim.model.Programa
 import scala.util.parsing.input.CharSequenceReader
 import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
-
+import org.uqbar.commons.utils.Observable
 
 object Parser extends Ensamblador {
 
@@ -78,3 +78,30 @@ object Parser extends Ensamblador {
 }
 
 case class ArquitecturaQ(var name:String){}
+
+//@Observable
+//object Acciones
+//{
+//  var agregar = true
+//  var eliminar = false
+//  var execute = false
+//  
+//   def ninguna_etapa(){
+//    fetch = false
+//    decode = false
+//    execute = false
+//  }
+//  
+//  def pasarAFetch(){
+//    fetch = true
+//    execute = false
+//  }
+//  def pasarADecode(){
+//    fetch = false
+//    decode = true
+//  }
+//  def pasarAExecute(){
+//    decode = false
+//    execute = true
+//  }
+//}
