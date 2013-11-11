@@ -49,6 +49,6 @@
 \contentsline {subsubsection}{\numberline {A.3.3}Instrucciones de 1 operando destino (falta revisar Mara)}{27}{subsubsection.Alph1.3.3}
 \contentsline {subsubsection}{\numberline {A.3.4}Instrucciones sin operandos (falta revisar Mara)}{27}{subsubsection.Alph1.3.4}
 \contentsline {subsubsection}{\numberline {A.3.5}Instrucciones de salto condicional (falta revisar Mara)}{27}{subsubsection.Alph1.3.5}
-\contentsline {section}{\numberline {B}Como utilizar el simulador}{29}{appendix.Alph2}
+\contentsline {section}{\numberline {B}Como utilizar el simulador}{28}{appendix.Alph2}
 \contentsline {section}{\numberline {C}Errores comunes}{29}{appendix.Alph3}
 \contentsline {subsection}{\numberline {C.1}Errores de Sintaxis}{29}{subsection.Alph3.1}

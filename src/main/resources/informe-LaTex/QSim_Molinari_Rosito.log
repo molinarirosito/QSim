@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.7.11)  11 NOV 2013 15:01
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.7.11)  11 NOV 2013 15:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -828,14 +828,14 @@ File: logoQSim.png Graphic file (type png)
 Package pdftex.def Info: logoQSim.png used on input line 139.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [14 <./Interprete.pdf>]
-<ModoDireccionamiento.pdf, id=413, 1238.37656pt x 541.39766pt>
+<ModoDireccionamiento.pdf, id=414, 1238.37656pt x 541.39766pt>
 File: ModoDireccionamiento.pdf Graphic file (type pdf)
 
 <use ModoDireccionamiento.pdf>
 Package pdftex.def Info: ModoDireccionamiento.pdf used on input line 140.
 (pdftex.def)             Requested size: 426.79134pt x 186.58412pt.
 
-<Instruccion.pdf, id=415, 926.6921pt x 489.32813pt>
+<Instruccion.pdf, id=416, 926.6921pt x 489.32813pt>
 File: Instruccion.pdf Graphic file (type pdf)
  <use Instruccion.pdf>
 Package pdftex.def Info: Instruccion.pdf used on input line 155.
@@ -844,7 +844,7 @@ Package pdftex.def Info: Instruccion.pdf used on input line 155.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Instruccion_SinOperandos.pdf, id=417, 282.93204pt x 209.6081pt>
+<Instruccion_SinOperandos.pdf, id=418, 282.93204pt x 209.6081pt>
 File: Instruccion_SinOperandos.pdf Graphic file (type pdf)
 
 <use Instruccion_SinOperandos.pdf>
@@ -863,7 +863,7 @@ File: logoQSim.png Graphic file (type png)
 Package pdftex.def Info: logoQSim.png used on input line 171.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [15 <./ModoDireccionamiento.pdf>]
-<Instruccion_UnOperando.pdf, id=429, 1335.61484pt x 635.07263pt>
+<Instruccion_UnOperando.pdf, id=430, 1335.61484pt x 635.07263pt>
 File: Instruccion_UnOperando.pdf Graphic file (type pdf)
 
 <use Instruccion_UnOperando.pdf>
@@ -873,7 +873,7 @@ Package pdftex.def Info: Instruccion_UnOperando.pdf used on input line 172.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Instruccion_DosOperandos.pdf, id=431, 1547.0297pt x 656.8289pt>
+<Instruccion_DosOperandos.pdf, id=432, 1547.0297pt x 656.8289pt>
 File: Instruccion_DosOperandos.pdf Graphic file (type pdf)
 
 <use Instruccion_DosOperandos.pdf>
@@ -883,7 +883,7 @@ Package pdftex.def Info: Instruccion_DosOperandos.pdf used on input line 179.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Programa.pdf, id=434, 859.46094pt x 380.79765pt>
+<Programa.pdf, id=435, 859.46094pt x 380.79765pt>
 File: Programa.pdf Graphic file (type pdf)
  <use Programa.pdf>
 Package pdftex.def Info: Programa.pdf used on input line 191.
@@ -913,7 +913,7 @@ multiple pdfs with page group included in a single page
 
 LaTeX Warning: Reference `interprete' on page 17 undefined on input line 198.
 
-<simulador.pdf, id=446, 1169.49422pt x 447.37138pt>
+<simulador.pdf, id=447, 1169.49422pt x 447.37138pt>
 File: simulador.pdf Graphic file (type pdf)
  <use simulador.pdf>
 Package pdftex.def Info: simulador.pdf used on input line 200.
@@ -1011,72 +1011,80 @@ File: logoQSim.png Graphic file (type png)
 Package pdftex.def Info: logoQSim.png used on input line 70.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [25]
-Underfull \hbox (badness 10000) in paragraph at lines 119--120
+Underfull \hbox (badness 10000) in paragraph at lines 118--119
 
  []
 
 ! Undefined control sequence.
 \formatoinst #1#2#3-> \codepeq 
                                {\begin {tabular}{#1} \headermulti {#2}{\norm...
-l.126 }
-       
+l.125 
+      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-LaTeX Info: Redefining \. on input line 126.
-LaTeX Info: Redefining \% on input line 126.
-LaTeX Info: Redefining \. on input line 126.
-LaTeX Info: Redefining \% on input line 126.
+LaTeX Info: Redefining \. on input line 125.
+LaTeX Info: Redefining \% on input line 125.
+LaTeX Info: Redefining \. on input line 125.
+LaTeX Info: Redefining \% on input line 125.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 126.
+Package pdftex.def Info: logoQSim.png used on input line 125.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [26]
 ! Undefined control sequence.
 \formatoinst ...\begin {tabular}{#1} \headermulti 
                                                   {#2}{\normal {Formato de I...
-l.126 }
-       
+l.125 
+      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.125 
+      
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
 
 ! Undefined control sequence.
 \formatoinst ...ar}{#1} \headermulti {#2}{\normal 
                                                   {Formato de Instrucción}}...
-l.126 }
-       
+l.125 
+      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+! Missing { inserted.
+<inserted text> 
+                {
+l.125 
+      
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
 
-Overfull \hbox (31.38962pt too wide) in paragraph at lines 126--127
-[][]
- []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--142
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
  []
 
 ! Undefined control sequence.
 \formatoinst #1#2#3-> \codepeq 
                                {\begin {tabular}{#1} \headermulti {#2}{\norm...
-l.148 }
-       
+l.146 
+      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1086,86 +1094,85 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 \formatoinst ...\begin {tabular}{#1} \headermulti 
                                                   {#2}{\normal {Formato de I...
-l.148 }
-       
+l.146 
+      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.146 
+      
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
 
 ! Undefined control sequence.
 \formatoinst ...ar}{#1} \headermulti {#2}{\normal 
                                                   {Formato de Instrucción}}...
-l.148 }
+l.146 
+      
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.146 
+      
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
+
+ []
+
+! Argument of \formatoinst has an extra }.
+<inserted text> 
+                \par 
+l.159 }
        
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
 
-
-Overfull \hbox (31.38962pt too wide) in paragraph at lines 148--149
-[][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 148--149
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--160
-
- []
-
-! Undefined control sequence.
-\formatoinst #1#2#3-> \codepeq 
-                               {\begin {tabular}{#1} \headermulti {#2}{\norm...
-l.161 ...odOp & Relleno \\  (4b) & (000000000000)}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\formatoinst ...\begin {tabular}{#1} \headermulti 
-                                                  {#2}{\normal {Formato de I...
-l.161 ...odOp & Relleno \\  (4b) & (000000000000)}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\formatoinst ...ar}{#1} \headermulti {#2}{\normal 
-                                                  {Formato de Instrucción}}...
-l.161 ...odOp & Relleno \\  (4b) & (000000000000)}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+Runaway argument?
+! Paragraph ended before \formatoinst was complete.
+<to be read again> 
+                   \par 
+l.159 }
+       
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
 
 ! Too many }'s.
-l.162 }
+<recently read> }
+                 
+l.159 }
        
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--176
+Underfull \hbox (badness 10000) in paragraph at lines 172--173
 
  []
 
 ! Undefined control sequence.
-l.177 ...el campo \code{Cod\_Op} es la cadena \bin
+l.174 ...el campo \code{Cod\_Op} es la cadena \bin
                                                   {1111}. Si \textbf{al eval...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1174,7 +1181,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.177 ...el desplazamiento, representado en \cados
+l.174 ...el desplazamiento, representado en \cados
                                                   {8}. En caso contrario la ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1183,36 +1190,34 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Too many }'s.
-l.178 }
+l.175 }
        
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
 
-Overfull \hbox (0.6661pt too wide) in paragraph at lines 180--181
+Overfull \hbox (0.6661pt too wide) in paragraph at lines 177--178
 []\OT1/cmr/m/n/10 El efec-to de cualquier salto condi-cional es au-men-tar el P
 C (Pro-gram Counter)
  []
 
-LaTeX Info: Redefining \. on input line 181.
-LaTeX Info: Redefining \% on input line 181.
-LaTeX Info: Redefining \. on input line 181.
-LaTeX Info: Redefining \% on input line 181.
+LaTeX Info: Redefining \. on input line 180.
+LaTeX Info: Redefining \% on input line 180.
+LaTeX Info: Redefining \. on input line 180.
+LaTeX Info: Redefining \% on input line 180.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 181.
+Package pdftex.def Info: logoQSim.png used on input line 180.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [27]) (./howto.tex
-LaTeX Info: Redefining \. on input line 5.
-LaTeX Info: Redefining \% on input line 5.
-LaTeX Info: Redefining \. on input line 5.
-LaTeX Info: Redefining \% on input line 5.
+ [27]) (./howto.tex) (./erroresComunes.tex
+LaTeX Info: Redefining \. on input line 6.
+LaTeX Info: Redefining \% on input line 6.
 File: logoQSim.png Graphic file (type png)
- <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 5.
+
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 6.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [28])
-(./erroresComunes.tex
+ [28]
 Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
@@ -1271,13 +1276,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
 
-LaTeX Info: Redefining \. on input line 44.
-LaTeX Info: Redefining \% on input line 44.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 44.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [29]
 ! Undefined control sequence.
 l.45 \mensaje
              {"Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]"} \\
@@ -1327,7 +1325,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
  []
 
-
+LaTeX Info: Redefining \. on input line 49.
+LaTeX Info: Redefining \% on input line 49.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 49.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [29]
 Overfull \hbox (1464.98447pt too wide) in paragraph at lines 63--63
  []\OT1/cmtt/m/n/10 En la l^^S^^Pnea numero 2 entre los operandos no se encuent
 ra la coma que los separa (La sint^^Saxis de las instrucciones de dos operandos
@@ -1471,15 +1475,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 80--81
 
  []
 
-LaTeX Info: Redefining \. on input line 88.
-LaTeX Info: Redefining \% on input line 88.
-LaTeX Info: Redefining \. on input line 88.
-LaTeX Info: Redefining \% on input line 88.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 88.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [30]
 ! Undefined control sequence.
 l.89 \mensaje
              {"Ha ocurrido un error en la linea 1: AND R2, R8"} \\
@@ -1546,6 +1541,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 99.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [30]
 ! Undefined control sequence.
 l.100 \mensaje
               {"Ha ocurrido un error en la linea 1: MUL R7, R4"} \\
@@ -1780,15 +1784,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
-LaTeX Info: Redefining \. on input line 138.
-LaTeX Info: Redefining \% on input line 138.
-LaTeX Info: Redefining \. on input line 138.
-LaTeX Info: Redefining \% on input line 138.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 138.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [31]
 ! Undefined control sequence.
 l.146 \mensaje
               {"Ha ocurrido un error en la linea 1: ADD [0x900000000000], R4...
@@ -1855,6 +1850,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 148--149
 
  []
 
+LaTeX Info: Redefining \. on input line 149.
+LaTeX Info: Redefining \% on input line 149.
+LaTeX Info: Redefining \. on input line 149.
+LaTeX Info: Redefining \% on input line 149.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 149.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [31]
 ! Undefined control sequence.
 l.157 \mensaje
               {"Ha ocurrido un error en la linea 1: ZDD [0x900000000000], R4...
@@ -2022,15 +2026,6 @@ l.180 \end{itemize}
 Things are pretty mixed up, but I think the worst is over.
 
 )
-LaTeX Info: Redefining \. on input line 39.
-LaTeX Info: Redefining \% on input line 39.
-LaTeX Info: Redefining \. on input line 39.
-LaTeX Info: Redefining \% on input line 39.
-File: logoQSim.png Graphic file (type png)
- <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 39.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [32]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 47.
 LaTeX Info: Redefining \. on input line 47.
 LaTeX Info: Redefining \% on input line 47.
@@ -2040,7 +2035,7 @@ File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 47.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [33]
+ [32]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 47.
  (./QSim_Molinari_Rosito.aux
 LaTeX Info: Redefining \. on input line 21.
@@ -2054,15 +2049,12 @@ Package rerunfilecheck Info: File `QSim_Molinari_Rosito.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 47.
  ) 
 Here is how much of TeX's memory you used:
- 7599 strings out of 495059
- 104098 string characters out of 3182030
- 202817 words of memory out of 3000000
+ 7598 strings out of 495059
+ 104091 string characters out of 3182030
+ 202851 words of memory out of 3000000
  10498 multiletter control sequences out of 15000+200000
  13098 words of font info for 51 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
@@ -2081,10 +2073,10 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on QSim_Molinari_Rosito.pdf (33 pages, 2231662 bytes).
+Output written on QSim_Molinari_Rosito.pdf (32 pages, 2231182 bytes).
 PDF statistics:
- 676 PDF objects out of 1000 (max. 8388607)
- 597 compressed objects within 6 object streams
- 157 named destinations out of 1000 (max. 500000)
+ 671 PDF objects out of 1000 (max. 8388607)
+ 593 compressed objects within 6 object streams
+ 156 named destinations out of 1000 (max. 500000)
  495 words of extra memory for PDF output out of 10000 (max. 10000000)
 
