@@ -111,8 +111,7 @@ Esta instrucción describe la disyunción bit a bit entre los datos de los dos o
 
 El formato de instrucción de un operando origen es el siguiente:\\
 
-\formatoinst
-{|c|c|c|c|}
+\formatoinstr{|c|c|c|c|}
 {CodOp& Relleno&\msrc{}& Operando \src{}\\
 (4b)     &   (000000)  &  (6b)   &  (16b) 
 }
@@ -130,8 +129,7 @@ El efecto del JMP es cambiar el PC (Program Counter) por el dato que esta guarda
 
 El formato de instrucción de un operando destino es el siguiente:\\
 
-\formatoinst
-{|c|c|c|c|}
+\formatoinstr{|c|c|c|c|}
 {CodOp & \msrc{} & Relleno & Operando \src{}\\
 (4b)   &   (6b)  & (000000)&  (16b) 
 } 
@@ -146,8 +144,8 @@ Esta instrucción describe la operación lógica "negación" bit a bit en el dat
 
 El formato de instrucción sin operandos es el siguiente:\\
 
-\formatoinst{|c|c|}{CodOp & Relleno \\  (4b) & (000000000000)}
-}
+\formatoinstr{|c|c|}{CodOp & Relleno \\  (4b) & (000000000000)}
+
 
 \begin{enumerate}
 \item  \mostrarinst{RET}{0110}

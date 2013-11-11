@@ -19,7 +19,7 @@ ADD R1, R7
 
 En la linea numero 2 el modo de direccionamiento inmediato esta incompleto, (le faltan dos dígitos). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up\footnote{Ventana emergente.} el siguiente mensaje:
  
-'Ha ocurrido un error en la linea 2 : MUL R4, 0x01' \\  
+\mensaje{Ha ocurrido un error en la linea 2 : MUL R4, 0x01} 
 
 \item Dado el siguiente programa Qi:
 
@@ -31,18 +31,18 @@ SUB R1, R7
 
 En la linea numero 1 el operando destino es inmediato lo cual es invalido (El operando nunca puede tener como modo de direccionamiento un inmediato). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056'} 
+\mensaje{Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056} 
 
 \item Dado el siguiente programa escrito en Q1:
 
 \begin{verbatim}
-1.ADD R0, [0x0002]
-2.MOV R4, R0
+ADD R0, [0x0002]
+MOV R4, R0
 \end{verbatim}
 
 En la linea numero 1 el operando origen es directo lo cual es invalido en la arquitectura Q1 (El modo de direccionamiento Directo se incorpora en las arquitecturas Qi desde la arquitectura Q2 en adelante). Cuando el alumno quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]'} 
+\mensaje{Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]} 
 
 \item Dado el siguiente programa Qi:
 
@@ -53,7 +53,7 @@ MOV R4 R0
 
 En la línea numero 2 entre los operandos no se encuentra la coma que los separa (La sintáxis de las instrucciones de dos operandos especifica que debe haber una coma separando los operandos.). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 2 : MOV R4, R0'} 
+\mensaje{Ha ocurrido un error en la linea 2 : MOV R4, R0} 
 
 \item Dado el siguiente programa Qi:
 
@@ -64,7 +64,7 @@ ADD R4, R0
 
 En la linea numero 1 la instrucción sub esta escrita en minúscula esto es inválido (La sintáxis define que los nombres de las instrucciones son estrictamente en mayúscula). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: sub [[0x0004]], [0xA000]'}
+\mensaje{Ha ocurrido un error en la linea 1: sub [[0x0004]], [0xA000]}
 
 \item Dado el siguiente programa Qi:
 
@@ -75,7 +75,7 @@ ADD [0xF0F0], R0
 
 En la linea numero 1 el operando origen es un registro escrito con minúscula, esto es invá lido(La sintáxis define que los registros empiezan estrictamente con 'R'' mayúscula). Cuando se quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: MUL [R6], r4'} 
+\mensaje{Ha ocurrido un error en la linea 1: MUL [R6], r4} 
 
 \item Dado el siguiente programa Qi:
 
@@ -86,7 +86,7 @@ OR [0xF0F0], R0
 
 En la linea numero 1 el operando origen el numero del registro es invalido (Los registros deben estar dentro del rango R0..R7). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: AND R2, R8'} 
+\mensaje{Ha ocurrido un error en la linea 1: AND R2, R8} 
 
 \item Dado el siguiente programa Qi:
 
@@ -97,19 +97,19 @@ AND R5, [R3]
 
 Para la instrucción MUL es inválido utilizar como destino el registro R7 por lo que, la primer línea es inválida. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: MUL R7, R4'}  
+\mensaje{Ha ocurrido un error en la linea 1: MUL R7, R4}  
 
 \item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 inicio: MUL R7, R4
-AND R5, [R3]
-JMP incio
+        AND R5, [R3]
+        JMP incio
 \end{verbatim}
 
 En la linea numero 3 la etiqueta anteriormente declarada en la línea número 1 esta incompleta (Le faltan los dos puntos). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 3: JMP incio'}
+\mensaje{Ha ocurrido un error en la linea 3: JMP incio}
 
 
 \item Dado el siguiente programa Qi :
@@ -121,7 +121,7 @@ NOT 0x0004
 
 En la linea numero 2 el operando destino de la instrucción NOT no puede ser un inmediato, esto es inválido (Los operandos destinos no pueden ser inmediatos). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 2: NOT 0x0004'}  
+\mensaje{Ha ocurrido un error en la linea 2: NOT 0x0004}  
 
 \item Dado el siguiente programa Qi:
 
@@ -132,7 +132,7 @@ NOT R2
 
 En la linea numero 1 el operando origen no tiene el prefijo '0x', es una expresión invalida. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: ADD [0009], R4'} 
+\mensaje{Ha ocurrido un error en la linea 1: ADD [0009], R4} 
 
 \item Dado el siguiente programa Qi:
 
@@ -143,7 +143,7 @@ NOT R2
 
 En la linea numero 1 el operando destino tiene mas dígitos que los permitidos, (Un inmediato tiene el prefijo 0x y luego sólo 4 dígitos hexadecimales). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: ADD [0x900000000000], R4'}  
+\mensaje{Ha ocurrido un error en la linea 1: ADD [0x900000000000], R4}  
 
 \item Dado el siguiente programa Qi:
 
@@ -154,7 +154,7 @@ NOT R2
 
 En la linea numero 1 el nombre de la operación es invalida (No existe la instrucción ZDD).Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: ZDD [0x900000000000], R4'}
+\mensaje{Ha ocurrido un error en la linea 1: ZDD [0x900000000000], R4}
 
 \item Dado el siguiente programa Qi:
 
@@ -164,7 +164,7 @@ SUB [], 0x000A
 
 En la linea numero 1 el operando destino no esta incompleto (El modo de direccionamiento directo debe escribirse como un valor inmediato encerrado entre corchetes). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: SUB [], 0x000A'} 
+\mensaje{Ha ocurrido un error en la linea 1: SUB [], 0x000A} 
 
 \item Dado el siguiente programa Qi:
 
@@ -174,7 +174,7 @@ JMP
 
 En la linea numero 1 sólo esta escrito el nombre de la instruccion JMP pero falta a continuación su el operando origen. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
-\mensaje{'Ha ocurrido un error en la linea 1: JMP'} 
+\mensaje{Ha ocurrido un error en la linea 1: JMP} 
  
 
 \end{itemize}

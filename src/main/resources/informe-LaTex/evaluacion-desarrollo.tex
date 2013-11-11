@@ -32,79 +32,76 @@ Para chequear la sintaxis de cada \textbf{Arquitectura Q} se realizaron dos caso
 \begin{enumerate}
 \item \textbf{Chequear programa Qi válido}
 
-Se toma como input del objeto instancia Parser un programa Qi válido\footnote{Un programa Qi válido es un programa sintáticamente correcto en alguna arquitectura Q.}, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada (Un programa sintácticamente válido en Q6 puede no ser sintácticamente válido en Q1 si utiliza modos de direccionamiento o instrucciones que aún no fueron agregadas en Q1). Al terminar de chequear el programa, el objeto parser retorna un objeto instancia de la clase Programa con la lista de instrucciones que fueron ensambladas. 
+Se toma como input del objeto instancia Parser un programa Qi válido\footnote{Un programa Qi válido es un programa sintáticamente correcto en alguna arquitectura Q.}, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Por ejemplo, un programa sintácticamente válido en Q6 puede no ser sintácticamente válido en Q1 si utiliza modos de direccionamiento o instrucciones Q1 no incluye. Al terminar de chequear el programa, el objeto parser retorna un objeto instancia de la clase Programa con la lista de instrucciones que fueron ensambladas. 
 Se toma dicho resultado y como ultimo paso se compara si el programa resultado es igual al programa esperado (que concuerda en objetos con el programa en código fuente escrito en el input).
 
 
 \item \textbf{Chequear programa Qi es invalido} 
 
-Se toma como input del objeto instancia Parser un programa Qi invalido, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Al terminar de chequear el programa, el objeto parser retorna un Exception del tipo \textbf{SyntaxErrorException}, se captura la excepción y se toma de ella el mensaje de error para corroborar que sea el mensaje esperado (que describe la línea donde esta el error de sintáxis).
+Se toma como input del objeto instancia Parser un programa Qi invalido, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Al terminar de chequear el programa, el objeto parser retorna un objeto de la clase Exception del tipo \textbf{SyntaxErrorException}, se captura la excepción y se toma de ella el mensaje de error para corroborar que sea el mensaje esperado (que describe la línea donde esta el error de sintáxis).
 
 
 \subsection{Ensamblado}
 
-Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto de la clase \textbf{Programa} que contiene un conjunto de objetos de la clase \textbf{Instruccion}, el ensamblado simplemente lo realiza cada instrucción, esto quiere decir que cada instrucción tiene el comportamiento para generar su propio \codmaq. De esta forma realizamos el ensamblado del programa y obtenemos una lista de código maquina como resultado y como ultimo paso comparamos la lista de código maquina resultado con la lista código maquina esperado.
+Para poder verificar que el ensamblado se realizó correctamente se toma un programa Qi y teniendo en cuenta que el resultado del parser genera un objeto de la clase \textbf{Programa} que contiene un conjunto de objetos de la clase \textbf{Instruccion}, además que cada instrucción tiene el comportamiento necesario para generar su propio \codmaq, se delega la generación del \codmaq a cada una, con la intención de comparar la secuencia resultante con la secuencia de \codmaq esperada.
 
 \subsection{Decodificación}
 
-La Decodificación se verifica correctamente a la inversa del Ensamblado: tomando como input el ensamblado de un programa Qi que es la secuencia de código maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado de cada iteración puede retornar dos cosas:
+El proceso de decodificación se verifica a la inversa del proceso de ensamblado: tomando como entrada una lista de cadenas que representa cada una al \codmaq\ de cada instrucción de un programa Qi. Esta lista se recorre para ser procesada por el objeto Interprete que es el encargado de Decodificar. Como resultado de este procesamiento se puede retornar una de dos cosas:
  
 \begin{enumerate}
 \item \textbf{Lista de Instrucciones} 
 
-Este es el resultado de Intrepretar una secuencia de código máquina que representa correctamente a una instruccion y sus respectivos operandos. El objeto interprete verifica los códigos de operación para poder crear las instrucciones correctamente, y luego, depende de que tipo de instruccion se haya comenzado a interpretar comienza a interpretar sus respectivos operandos (si los tiene).
-Por último se compara cada instruccion en la lista resultante luego de intrepretar todo el programa con la lista esperada.
+Este es el resultado de interpretar una secuencia de código máquina que representa correctamente a un conjunto de instrucciones y sus respectivos operandos. El objeto \textbf{Interprete} verifica los códigos de operación para poder crear las instrucciones correctamente, y luego, dependiendo de que tipo de instrucción se trate, comienza a interpretar sus respectivos operandos (si los tiene).
+Por último se compara cada instrucción en la lista resultante con la lista que se esperaba.
 
 \item\textbf{Error}
 
-Al Intrepretar una secuencia de código máquina que no representa a ninguna instruccion (ya sea porque el código de operación o el código de algún modo de direccionamiento dentro del formato de cada instrucción es invalido) es una Exepcion del tipo \textbf{CodigoInvalidoException}.   
+Al interpretar una secuencia de código máquina que no representa a ninguna instrucción (ya sea porque el código de operación o el código de algún modo de direccionamiento dentro del formato de cada instrucción es invalido) se obtiene una excepción del tipo \textbf{CodigoInvalidoException}.   
 \end{enumerate}
 
 \subsection{Ejecución}
 
-Para verificar que la ejecución de un programa Qi fue necesario separar la verificación en los tres pasos del \textbf{Ciclo de Instrucción}:
+Para verificar que la ejecución de un programa Qi se realiza correctamente fue necesario separar la verificación en los tres pasos del \ciclo:
 
 \begin{itemize}
-\item \textbf{Fetch} 
+\item \textbf{Búsqueda} 
 
-Para verificar el fetch se toma la instrucción siguiente a ejecutar y se compara el valor que se guarda en el registro \IR con el valor esperado que debería tener (es decir, con el código maquina que representa a la instruccion siguiente a ejecutar). Ademas se verifica que el registro especial \PC tenga como valor la dirección de memoria de la siguiente instrucción a ejecutar, para corroborar esto se compara el \PC luego del fetch con \PC anterior más la cantidad de celdas que ocupa la instrucción actual.
+Para verificar la búsqueda de instrucción se toma la instrucción siguiente a ejecutar y se compara el valor que se guarda en el registro \IR con el valor esperado que debería tener (es decir, con el código maquina que representa a la instrucción siguiente a ejecutar). Ademas se verifica que el registro \PC\ tenga como valor la dirección de memoria de la siguiente instrucción a ejecutar, para corroborar esto se compara el \PC\ luego de la búsqueda con el resultado de la suma del \PC anterior y la cantidad de celdas que ocupa la instrucción procesada.
 
-\item \textbf{Decode}
+\item \textbf{Decodificación}
 
-Para verificar el decode, se toma el valor que esta guardado registro \IR para que lo reciba el interprete que retornará el objeto instrucción interpretado a partir de ese valor. Al obtener dicha instrucción se compara con la instrucción esperada.
+Para verificar la decodificación, se toma el valor que esta guardado registro \IR\ para que lo reciba el interprete que retornará el objeto instrucción interpretado a partir de ese valor. Al obtener dicha instrucción se compara con la instrucción esperada.
  
-\item \textbf{Execute}
+\item \textbf{Ejecución}
 
-Para verificar el efecto de cada instrucción se preparó un caso de prueba por cada instrucción donde, para cada instrucción se tiene un estado inicial y un estado final esperado. Se realiza la ejecución de dicha instrucción y se compara el resultado obtenido (ya sea la modificación de flags, registros, celdas de memoria o puertos) con el resultado esperado. 
+Para verificar el efecto de cada instrucción se preparó un caso de prueba por cada instrucción donde se tiene un estado inicial y un estado final esperado. Se realiza la ejecución de dicha instrucción y se compara el resultado obtenido (ya sea la modificación de flags, registros, celdas de memoria o puertos) con el resultado esperado. 
 
 \end{itemize}
 
-\textbf{Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instrucción}
+Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instrucción
   
 \subsubsection{Operaciones de ALU}
 
-La ALU es la encargada de ejecutar operaciones aritméticas/lógicas. Si la instrucción a ejecutar tiene un efecto aritmético/lógico se le delega la ejecución de la operación. Para poder verificar todas las operaciones creamos un caso de prueba por cada operación. Tanto las operaciones aritméticas como las lógicas se analizan de la misma forma:
+La ALU es la encargada de ejecutar operaciones aritméticas y lógicas. Si la instrucción a ejecutar tiene un efecto aritmético/lógico se le delega la ejecución de la operación. Para poder verificar todas las operaciones creamos un caso de prueba por cada operación. Tanto las operaciones aritméticas como las lógicas se analizan de la misma forma:
 
 \begin{enumerate}
-\item Se toma cada valor de los operandos(la búsqueda se detalla el la siguiente instrucción)
+\item Se toma cada valor de los operandos (la búsqueda se detalla el la siguiente sección)
 
 \item Se realiza la operación aritmética/lógica. 
 
 \item Se verifica el resultado obtenido con el resultado esperado.
 
-\item Algunas operaciones (la mayoría) modifican los flags. la ALU tiene mucha relación con los flags ya que por cada cuenta realizada actualiza los mismos. Estos también se se verifican comparando el resultado obtenido con el valor esperado. 
+\item Dado que algunas la mayoría de las operaciones modifica los flags, el valor final de éstos también se comparan con un resultado esperado. 
 \end{enumerate}
 
 \subsubsection{Búsqueda de Operandos}
 
-Para verificar la búsqueda de operandos, tomamos una instrucción cualquiera y probamos todas las combinaciones de modos de direccionamiento para cada operando, teniendo en cuenta que son invalidas todas las combinaciones de 1/2 operando/s que tenga el operando destino el modo de direccionamiento Inmediato. Al tener la instrucción elegida procedemos a obtener el valor de cada operando, este valor se lo compara con el valor esperado. 
+Para verificar la búsqueda de operandos, se toma una instrucción cualquiera y se prueba todas las combinaciones de modos de direccionamiento para cada operando, teniendo en cuenta que son inválidas todas las combinaciones que tienen en el operando destino el modo de direccionamiento \textbf{Inmediato}. Se ejecuta entonces cada combinación para obtener el valor de cada operando, y este valor se lo compara con el valor esperado. 
  
 \subsubsection{Almacenamiento de Operandos}
 
-Para verificar el almacenamiento de operandos, salvo algunas instrucciones todas pasan por la etapa de almacenamiento.
-Tomamos cada una de las instrucciones de un programa Qi y realizamos el ciclo de ejecución mencionado anteriormente.
-Cuando estamos en la etapa de ejecución, cada una tiene un operando destinado a guardar el resultado de su efecto.
-En esta instancia sabemos que  dicho operando tiene el valor guardado, a este valor lo comparamos con el valor esperado.
+Para verificar el almacenamiento de operandos, se ejecuta cada una de las instrucciones de un programa Qi. Durante la etapa de ejecución, cada una tiene un operando destinado a guardar el resultado de su efecto, y luego de ese momento se puede comparar el valor final del operando con el valor esperado.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ejemplos de uso}
@@ -160,16 +157,13 @@ En esta sección se describirán características y funcionalidades que deseamos
 
 \begin{itemize}
 
-\item Habilitar las instrucciones PUSH y POP.
+\item Habilitar las instrucciones PUSH y POP.\\
 
-Estas instrucciones permiten el manejo de la Pila como estructura de datos disponible para el programador. 
-PUSH tiene como efecto agregar el valor del operando origen a la pila. 
-POP permite sacar el primer elemento de la pila y guardarlo en el operando destino.
-Actualmente estas instrcucciones se encuentran implementadas pero no habilitadas en ninguna gramática Qi.
+Estas instrucciones permiten el manejo de la Pila como estructura de datos disponible para el programador. La instrucción \code{PUSH} tiene como efecto agregar el valor del operando origen a la pila, mientras que el \code{POP} permite sacar el primer elemento de la pila y guardarlo en el operando destino. Actualmente estas instrucciones se encuentran implementadas pero no habilitadas en ninguna gramática Qi.
 
 \item Entrada y Salida.
 
-Que el simulador admita la interacción con dispositivos de E/S. Para eso tenemos que modelar dispositivos como el teclado, impresora, monitor, etc.
+\ojo{Que el simulador admita la interacción con dispositivos de E/S. Para eso tenemos que modelar dispositivos como el teclado, impresora, monitor, etc.}{mas chamuyoooo}
 
 \item \ojo{Implementar interrupcciones}{detallar}
 
