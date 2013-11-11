@@ -81,28 +81,28 @@ Codigo de Operación  & \mdest{}& \msrc{}  & \dest{} & \src{}\\
 Las instrucciones de dos operandos descriptas a continuación son instrucciones aritméticas o lógicas donde se asume que el resultado de la operación se almacena en uno de los dos operandos de entrada, y por lo tanto se lo denomina \textbf{operando destino}.
 
 \begin{enumerate}
-\item  \mostrarinst{MUL destino, origen}{0000}
+\item  \mostrarinst{MUL destino, origen}{0000}\\
 Esta instrucción describe la multiplicación entre los datos de los dos operandos. Esta operación es la única que cuyo resultado puede ser 32 bits, que son lo que ocuparía más de una celda de memoria en código binario, por lo que los primeros 16 bits, es decir, la primer mitad, es guardada en el registro \textbf{R7} y la segunda en el operando destino.
  
-\item  \mostrarinst{ADD destino, origen}{0010}
+\item  \mostrarinst{ADD destino, origen}{0010}\\
 Esta instrucción describe la suma entre los datos de los dos operandos. El resultado de la ejecución de la suma es guardado en el operando destino.
 
-\item  \mostrarinst{SUB destino, origen}{0011}
+\item  \mostrarinst{SUB destino, origen}{0011}\\
 Esta instrucción describe la resta entre los datos de los dos operandos. El resultado de la ejecución de dicha resta es guardado en el operando destino.
 
-\item  \mostrarinst{DIV destino, origen}{0111}
+\item  \mostrarinst{DIV destino, origen}{0111}\\
 Esta instrucción describe la división entre el dato en el operando destino como dividendo y el dato en el operando origen como divisor. El resultado de la ejecución de la división es guardado en el operando destino.
 
-\item  \mostrarinst{MOV destino, origen}{0001}
+\item  \mostrarinst{MOV destino, origen}{0001}\\
 Esta instrucción describe la copia de datos del dato alojado en el operando origen al operando destino. El resultado de la ejecución del MOV es el dato guardado en el operando origen ahora también guardado en el operando destino.
 
-\item  \mostrarinst{AND destino, origen}{0100}
+\item  \mostrarinst{AND destino, origen}{0100}\\
 Esta instrucción describe la conjunción bit a bit entre los datos de los dos operandos. El resultado de la ejecución de esta operación es guardado en el operando destino.
 
-\item  \mostrarinst{CMP destino, origen}{0110}
+\item  \mostrarinst{CMP destino, origen}{0110}\\
 Esta instrucción describe la resta entre dos operandos, sin guardar el resultado. Su único efecto es la actualización de flags en la cpu.
 
-\item  \mostrarinst{OR destino, origen}{0101}
+\item  \mostrarinst{OR destino, origen}{0101}\\
 Esta instrucción describe la disyunción bit a bit entre los datos de los dos operandos. El resultado de la ejecución de esta operación es guardado en el operando destino.
 \end{enumerate}
 
@@ -117,10 +117,10 @@ El formato de instrucción de un operando origen es el siguiente:\\
 }
 
 \begin{enumerate}
-\item  \mostrarinst{CALL origen}{1011}
+\item  \mostrarinst{CALL origen}{1011}\\
 El efecto del CALL es guardar la dirección de memoria en la celda de la dirección que se encuentra guardada en el SP (Stack pointer) aumentar el SP y guardar en el PC (Program Counter) el dato que se encuentra guardado en el operando origen ya que describe el llamado a una subrutina que comienza en la celda de memoria cuya dirección esta guardada en el operando origen.
 
-\item  \mostrarinst{JMP origen}{0110}
+\item  \mostrarinst{JMP origen}{0110}\\
 El efecto del JMP es cambiar el PC (Program Counter) por el dato que esta guardado en el operando origen ya que esta operación describe el salto a otra parte de la memoria para continuar con la ejecución del programa.
 \end{enumerate}
 
@@ -135,7 +135,7 @@ El formato de instrucción de un operando destino es el siguiente:\\
 } 
 
 \begin{enumerate}
-\item  \mostrarinst{NOT destino}{1001}
+\item  \mostrarinst{NOT destino}{1001}\\
 Esta instrucción describe la operación lógica "negación" bit a bit en el datos del operando destino. El resultado de la ejecución de esta operación es guardado en la misma celda o registro de donde es leído el dato inicialmente.
 \end{enumerate}
 
@@ -164,37 +164,37 @@ El formato de instrucción de salto condicional es el siguiente:\\
 El efecto de cualquier salto condicional es aumentar el PC (Program Counter) en la cantidad de celdas que indique el desplazamiento si sólo la condición que cada salto condicional tiene da como resultado 1, lo cual es interpretado como verdadero.
 
 \begin{enumerate}
-\item  \mostrarinst{JE desplazamiento}{0001}
+\item  \mostrarinst{JE desplazamiento}{0001}\\
 La condición del salto es que el flag \textbf{Z} (Cero) sea 1, es decir la ultima operación matemática dió como resultado el número cero.
 
-\item  \mostrarinst{JNE desplazamiento}{1001}
+\item  \mostrarinst{JNE desplazamiento}{1001}\\
 La condición del salto es que el flag \textbf{Z} (Cero) sea 0, es decir la ultima operación matemática no dió como resultado el número cero.
 
-\item  \mostrarinst{JLE desplazamiento}{0010}
+\item  \mostrarinst{JLE desplazamiento}{0010}\\
 La condición del salto es el resultado de la siguiente operación lógica \textbf{Z OR ( N XOR V )}, es decir la ultima operación matemática es menor o igual con signo.
 
-\item  \mostrarinst{JG desplazamiento}{1010}
+\item  \mostrarinst{JG desplazamiento}{1010}\\
 La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (Z OR ( N XOR V ))}, es decir la ultima operación matemática es mayor con signo.
 
-\item  \mostrarinst{JL desplazamiento}{0011}
+\item  \mostrarinst{JL desplazamiento}{0011}\\
 La condición del salto es el resultado de la siguiente operación lógica \textbf{N XOR V}, es decir la ultima operación matemática es menor con signo.
 
-\item  \mostrarinst{JGE desplazamiento}{1011}
+\item  \mostrarinst{JGE desplazamiento}{1011}\\
 La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (N XOR V)}, es decir la ultima operación matemática es mayor o igual con signo.
 
-\item  \mostrarinst{JLEU desplazamiento}{0100}
+\item  \mostrarinst{JLEU desplazamiento}{0100}\\
 La condición del salto es el resultado de la siguiente operación lógica \textbf{C OR Z}, es decir la ultima operación matemática es menor o igual sin signo.
 
-\item  \mostrarinst{JGU desplazamiento}{1100}
+\item  \mostrarinst{JGU desplazamiento}{1100}\\
 La condición del salto es el resultado de la siguiente operación lógica \textbf{NOT (C OR Z)}, es decir la ultima operación matemática es mayor sin signo.
 
-\item  \mostrarinst{JCS desplazamiento}{0101}
+\item  \mostrarinst{JCS desplazamiento}{0101}\\
 La condición del salto es que el flag \textbf{C} sea 1, es decir la ultima operación matemática es menor sin signo.
 
-\item  \mostrarinst{JNEG desplazamiento}{0101}
+\item  \mostrarinst{JNEG desplazamiento}{0101}\\
 La condición del salto es que el flag \textbf{N} sea 1, es decir si el último resultado de una operación dio negativo.
 
-\item  \mostrarinst{JVS desplazamiento}{0111}
+\item  \mostrarinst{JVS desplazamiento}{0111}\\
 La condición del salto es que el flag \textbf{V} sea 1, es decir si el último resultado de una operación dio overflow.
 
 \end{enumerate}
