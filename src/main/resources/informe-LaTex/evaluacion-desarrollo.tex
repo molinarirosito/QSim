@@ -161,10 +161,12 @@ En esta sección se describirán características y funcionalidades que deseamos
 
 Estas instrucciones permiten el manejo de la Pila como estructura de datos disponible para el programador. La instrucción \code{PUSH} tiene como efecto agregar el valor del operando origen a la pila, mientras que el \code{POP} permite sacar el primer elemento de la pila y guardarlo en el operando destino. Actualmente estas instrucciones se encuentran implementadas pero no habilitadas en ninguna gramática Qi.
 
-\item Entrada y Salida.
+\item Entrada y Salida\\
 
-\ojo{Que el simulador admita la interacción con dispositivos de E/S. Para eso tenemos que modelar dispositivos como el teclado, impresora, monitor, etc.}{mas chamuyoooo}
+Que el simulador admita la interacción con dispositivos de E/S. Para esto habría que modelar buses de entrada hacia los puertos y dispositivos tales como el teclado, impresora, monitor que esten conectados a los puertos y un programa pueda detectar su cambios y utilizar sus datos como input para luego procesarlos en un programa.
 
-\item \ojo{Implementar interrupcciones}{detallar}
+\item Implementar interrupcciones}\\
+
+Para completar el modelo de entrada y salida sería necesario implementar tambien y agrar al modelo actual las interrupcciones de entrada y salida, ya que de esta manera los dispositivos de entrada y salida pueden dar aviso a la cpu que hay nuevos datos para ser procesados.
 
 \end{itemize}
