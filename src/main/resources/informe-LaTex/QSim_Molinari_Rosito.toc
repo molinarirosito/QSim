@@ -43,10 +43,10 @@
 \contentsline {subsection}{\numberline {A.1}Caracter\IeC {\'\i }sticas generales}{24}{subsection.Alph1.1}
 \contentsline {subsection}{\numberline {A.2}Modos de direccionamiento}{24}{subsection.Alph1.2}
 \contentsline {subsection}{\numberline {A.3}Repertorio de instrucciones}{25}{subsection.Alph1.3}
-\contentsline {subsubsection}{\numberline {A.3.1}Instrucciones de 2 operandos}{25}{subsubsection.Alph1.3.1}
+\contentsline {subsubsection}{\numberline {A.3.1}Instrucciones de 2 operandos}{26}{subsubsection.Alph1.3.1}
 \contentsline {subsubsection}{\numberline {A.3.2}Instrucciones de 1 operando origen (falta revisar Mara)}{27}{subsubsection.Alph1.3.2}
 \contentsline {subsubsection}{\numberline {A.3.3}Instrucciones de 1 operando destino (falta revisar Mara)}{27}{subsubsection.Alph1.3.3}
-\contentsline {subsubsection}{\numberline {A.3.4}Instrucciones sin operandos (falta revisar Mara)}{27}{subsubsection.Alph1.3.4}
+\contentsline {subsubsection}{\numberline {A.3.4}Instrucciones sin operandos (falta revisar Mara)}{28}{subsubsection.Alph1.3.4}
 \contentsline {subsubsection}{\numberline {A.3.5}Instrucciones de salto condicional (falta revisar Mara)}{28}{subsubsection.Alph1.3.5}
 \contentsline {section}{\numberline {B}Como utilizar el simulador}{29}{appendix.Alph2}
 \contentsline {section}{\numberline {C}Errores comunes}{29}{appendix.Alph3}
