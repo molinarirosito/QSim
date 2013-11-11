@@ -2,9 +2,11 @@
 
 \subsection{Errores de Sintaxis} 
 
+En esta seccion se detallan las diferentes situaciones que pueden dar como resultado un mensaje de error, que informará en que línea del programa se encuentra, durante la etapa de ensamblado.
+
 \begin{itemize}
 
-\item Enfoquemonos en esta situación, que pasaría si un alumno escribe el siguiente programa Qi:
+\item Dado el siguiente programa Qi:
 
 \begin{verbatim}
 ADD R0, 0x0002
@@ -15,11 +17,11 @@ MOV R2, R3
 ADD R1, R7
 \end{verbatim}
 
-En la linea numero 2 el modo de direccionamiento inmediato esta incompleto, (le faltan dos dígitos). Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 2 el modo de direccionamiento inmediato esta incompleto, (le faltan dos dígitos). Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up\footnote{Ventana emergente.} el siguiente mensaje:
  
 "Ha ocurrido un error en la linea 2 : MUL R4, 0x01" \\  
 
-\item Otra situación seria si un alumno escribe el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:\\
 
 \begin{verbatim}
 MOV 0x0006, 0x0056
@@ -27,40 +29,40 @@ ADD R2, R3
 SUB R1, R7
 \end{verbatim}
 
-En la linea numero 1 el operando destino es inmediato lo cual es invalido\footnote{El operando nunca puede tener como modo de direccionamiento un inmediato}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 el operando destino es inmediato lo cual es invalido\footnote{El operando nunca puede tener como modo de direccionamiento un inmediato}. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
 "Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056" \\
 
-\item Una situación peculiar puede ser si un alumno escribe el siguiente programa Q1:\\
+\item Dado el siguiente programa escrito en Q1:\\
 
 \begin{verbatim}
 1.ADD R0, [0x0002]
 2.MOV R4, R0
 \end{verbatim}
 
-En la linea numero 1 el operando destino es directo lo cual es invalido en Q1\footnote{El modo de direccionamiento no es parte de Q1}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 el operando origen es directo lo cual es invalido en la arquitectura Q1\footnote{El modo de direccionamiento Directo se incorpora en las arquitecturas Qi desde la arquitectura Q2 en adelante.}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
 "Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]" \\ 
 
-\item Una situación peculiar puede ser si un alumno escribe el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:\\
 
 \begin{verbatim}
 CMP R3, [0xA000]
 MOV R4 R0 
 \begin{verbatim}
 
-En la linea numero 2 entre los operandos no se encuentra la coma que los separa, eso es invalido\footnote{las instrucciones de dos operandos tiene que tener la coma para separarlos}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la línea numero 2 entre los operandos no se encuentra la coma que los separa \footnote{Lasintáxis de las instrucciones de dos operandos especifica que debe haber una coma separando los operandos.}. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
 "Ha ocurrido un error en la linea 2 : MOV R4, R0" \\ 
 
-\item Algo común que podría ocurrir es si un alumno escribe el siguiente programa Qi:\\
+\item Dado el siguiente programa Qi:\\
 
 \begin{verbatim}
 sub [[0x0004]], [0xA000]
 ADD R4, R0
 \end{verbatim}
 
-En la linea numero 1 la instrucción sub se escribió en minúscula esto es invalido\footnote{Los nombres de las instrucciones son estrictamente en mayúscula}. Cuando el alumno quiera ensamblar este programa, el ensamblador detectara este error y en la pantalla recibirá el error descriptivo como el siguiente:
+En la linea numero 1 la instrucción sub esta escrita en minúscula esto es inválido\footnote{La sintáxis define que los nombres de las instrucciones son estrictamente en mayúscula}. Cuando se quiera ensamblar este programa, el ensamblador detectará este error y en la pantalla se mostrará mediante un pop-up el siguiente mensaje:
 
 "Ha ocurrido un error en la linea 1: sub [[0x0004]], [0xA000]" \\ 
 
