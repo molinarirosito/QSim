@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.7.11)  11 NOV 2013 17:54
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.10)  11 NOV 2013 19:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -509,26 +509,6 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 (./QSim_Molinari_Rosito.aux
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.95 <<
-       <<<<< HEAD
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-LaTeX Font Info:    Try loading font information for U+lasy on input line 95.
-(/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
-File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-)
-
-LaTeX Warning: Label `tablamodos' multiply defined.
-
 )
 \openout1 = `QSim_Molinari_Rosito.aux'.
 
@@ -548,12 +528,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
 LaTeX Info: Redefining \. on input line 14.
 LaTeX Info: Redefining \% on input line 14.
- (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
-Overfull \hbox (3.69406pt too wide) in paragraph at lines 95--13
-[][]\OT1/cmr/m/n/10 ```<HEAD      =======      '''[]>27f92fdfcb29043a3fc501e851
-53c292ea1aa811
- []
 
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count113
 \scratchdimen=\dimen118
@@ -605,32 +581,26 @@ LaTeX Info: Redefining \nameref on input line 14.
 File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 16.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logoQSim.png>]
-File: logoQSim.png Graphic file (type png)
-
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 16.
 (pdftex.def)             Requested size: 113.81102pt x 50.83435pt.
 LaTeX Font Info:    Try loading font information for U+msa on input line 16.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 16.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [2]
-(./QSim_Molinari_Rosito.toc
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logoQSim.png>] (./QSim_M
+olinari_Rosito.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 LaTeX Info: Redefining \. on input line 39.
 LaTeX Info: Redefining \% on input line 39.
 LaTeX Info: Redefining \. on input line 39.
 LaTeX Info: Redefining \% on input line 39.
-
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 13.07225pt.
@@ -641,7 +611,7 @@ File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 39.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [3])
+ [2])
 \tf@toc=\write4
 \openout4 = `QSim_Molinari_Rosito.toc'.
 
@@ -653,7 +623,7 @@ File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 20.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [4] (./introduccion.tex
+ [3] (./introduccion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
@@ -679,7 +649,7 @@ File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 19.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [5]
+ [4]
 Underfull \hbox (badness 10000) in paragraph at lines 20--21
 
  []
@@ -700,7 +670,7 @@ File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 29.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [6]
+ [5]
 Underfull \hbox (badness 10000) in paragraph at lines 30--31
 
  []
@@ -728,7 +698,7 @@ File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 48.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [7] <ciclo.pdf, id=313, 492.89142pt x 446.14178pt>
+ [6] <ciclo.pdf, id=304, 492.89142pt x 446.14178pt>
 File: ciclo.pdf Graphic file (type pdf)
 
 <use ciclo.pdf>
@@ -752,7 +722,7 @@ File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 66.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [8 <./ciclo.pdf>]
+ [7 <./ciclo.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 67--69
 
  []
@@ -767,12 +737,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 73--74
 
  []
 
-<ArquitecturasQ.pdf, id=339, 448.48805pt x 426.84468pt>
+<ArquitecturasQ.pdf, id=332, 448.48805pt x 426.84468pt>
 File: ArquitecturasQ.pdf Graphic file (type pdf)
 
 <use ArquitecturasQ.pdf>
 Package pdftex.def Info: ArquitecturasQ.pdf used on input line 82.
-(pdftex.def)             Requested size: 345.0pt x 328.3588pt.
+(pdftex.def)             Requested size: 256.0748pt x 243.72084pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -782,43 +752,46 @@ File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 5.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [9]
+ [8]
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 22.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [10 <./ArquitecturasQ.pdf>]
-LaTeX Info: Redefining \. on input line 42.
-LaTeX Info: Redefining \% on input line 42.
-LaTeX Info: Redefining \. on input line 42.
-LaTeX Info: Redefining \% on input line 42.
+ [9 <./ArquitecturasQ.pdf>]
+LaTeX Info: Redefining \. on input line 47.
+LaTeX Info: Redefining \% on input line 47.
+LaTeX Info: Redefining \. on input line 47.
+LaTeX Info: Redefining \% on input line 47.
 File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 42.
+Package pdftex.def Info: logoQSim.png used on input line 47.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [10]
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
+File: logoQSim.png Graphic file (type png)
+ <use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 77.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [11]
-LaTeX Info: Redefining \. on input line 72.
-LaTeX Info: Redefining \% on input line 72.
-LaTeX Info: Redefining \. on input line 72.
-LaTeX Info: Redefining \% on input line 72.
-File: logoQSim.png Graphic file (type png)
- <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 72.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [12]
-<ALU.pdf, id=382, 746.53906pt x 475.7775pt>
+<ALU.pdf, id=375, 746.53906pt x 475.7775pt>
 File: ALU.pdf Graphic file (type pdf)
  <use ALU.pdf>
 Package pdftex.def Info: ALU.pdf used on input line 92.
 (pdftex.def)             Requested size: 345.0pt x 219.8694pt.
+LaTeX Info: Redefining \. on input line 98.
+LaTeX Info: Redefining \% on input line 98.
+LaTeX Info: Redefining \. on input line 98.
+LaTeX Info: Redefining \% on input line 98.
+File: logoQSim.png Graphic file (type png)
+ <use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 98.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-<BusEntradaSalida_Memoria_CeldasPuertos.pdf, id=384, 1232.22859pt x 359.66873pt
+[12 <./ALU.pdf>]
+<BusEntradaSalida_Memoria_CeldasPuertos.pdf, id=385, 1232.22859pt x 359.66873pt
 >
 File: BusEntradaSalida_Memoria_CeldasPuertos.pdf Graphic file (type pdf)
  <use BusEntradaSalida_Memoria_CeldasPuertos.pdf>
@@ -826,26 +799,13 @@ Package pdftex.def Info: BusEntradaSalida_Memoria_CeldasPuertos.pdf used on inp
 ut line 99.
 (pdftex.def)             Requested size: 345.0pt x 100.69557pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-LaTeX Info: Redefining \. on input line 104.
-LaTeX Info: Redefining \% on input line 104.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 104.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [13] <CPU.pdf, id=394, 1284.29813pt x 542.025pt>
+<CPU.pdf, id=387, 1284.29813pt x 542.025pt>
 File: CPU.pdf Graphic file (type pdf)
-
-<use CPU.pdf>
+ <use CPU.pdf>
 Package pdftex.def Info: CPU.pdf used on input line 105.
 (pdftex.def)             Requested size: 345.0pt x 145.60434pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<Interprete.pdf, id=396, 816.17422pt x 266.9975pt>
+<Interprete.pdf, id=389, 816.17422pt x 266.9975pt>
 File: Interprete.pdf Graphic file (type pdf)
  <use Interprete.pdf>
 Package pdftex.def Info: Interprete.pdf used on input line 111.
@@ -862,35 +822,35 @@ File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 118.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [14 <./ALU.pdf> <./BusEntradaSalida_Memoria_CeldasPuertos.pdf
+ [13 <./BusEntradaSalida_Memoria_CeldasPuertos.pdf> <./CPU.pdf
 
-pdfTeX warning: pdflatex (file ./BusEntradaSalida_Memoria_CeldasPuertos.pdf): P
-DF inclusion: multiple pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./CPU.pdf): PDF inclusion: multiple pdfs with pa
+ge group included in a single page
 >]
 Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
 
-LaTeX Info: Redefining \. on input line 135.
-LaTeX Info: Redefining \% on input line 135.
-LaTeX Info: Redefining \. on input line 135.
-LaTeX Info: Redefining \% on input line 135.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 135.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [15 <./CPU.pdf> <./Interprete.pdf
-
-pdfTeX warning: pdflatex (file ./Interprete.pdf): PDF inclusion: multiple pdfs 
-with page group included in a single page
->] <ModoDireccionamiento.pdf, id=416, 1238.37656pt x 541.39766pt>
+<ModoDireccionamiento.pdf, id=402, 1238.37656pt x 541.39766pt>
 File: ModoDireccionamiento.pdf Graphic file (type pdf)
 
 <use ModoDireccionamiento.pdf>
 Package pdftex.def Info: ModoDireccionamiento.pdf used on input line 140.
 (pdftex.def)             Requested size: 426.79134pt x 186.58412pt.
 
-<Instruccion.pdf, id=418, 926.6921pt x 489.32813pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Info: Redefining \. on input line 147.
+LaTeX Info: Redefining \% on input line 147.
+LaTeX Info: Redefining \. on input line 147.
+LaTeX Info: Redefining \% on input line 147.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 147.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [14 <./Interprete.pdf>]
+<Instruccion.pdf, id=412, 926.6921pt x 489.32813pt>
 File: Instruccion.pdf Graphic file (type pdf)
  <use Instruccion.pdf>
 Package pdftex.def Info: Instruccion.pdf used on input line 155.
@@ -899,7 +859,7 @@ Package pdftex.def Info: Instruccion.pdf used on input line 155.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Instruccion_SinOperandos.pdf, id=420, 282.93204pt x 209.6081pt>
+<Instruccion_SinOperandos.pdf, id=414, 282.93204pt x 209.6081pt>
 File: Instruccion_SinOperandos.pdf Graphic file (type pdf)
 
 <use Instruccion_SinOperandos.pdf>
@@ -909,16 +869,7 @@ Package pdftex.def Info: Instruccion_SinOperandos.pdf used on input line 160.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Info: Redefining \. on input line 167.
-LaTeX Info: Redefining \% on input line 167.
-LaTeX Info: Redefining \. on input line 167.
-LaTeX Info: Redefining \% on input line 167.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 167.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [16 <./ModoDireccionamiento.pdf>]
-<Instruccion_UnOperando.pdf, id=431, 1335.61484pt x 635.07263pt>
+<Instruccion_UnOperando.pdf, id=417, 1335.61484pt x 635.07263pt>
 File: Instruccion_UnOperando.pdf Graphic file (type pdf)
 
 <use Instruccion_UnOperando.pdf>
@@ -928,7 +879,16 @@ Package pdftex.def Info: Instruccion_UnOperando.pdf used on input line 172.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Instruccion_DosOperandos.pdf, id=433, 1547.0297pt x 656.8289pt>
+LaTeX Info: Redefining \. on input line 178.
+LaTeX Info: Redefining \% on input line 178.
+LaTeX Info: Redefining \. on input line 178.
+LaTeX Info: Redefining \% on input line 178.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 178.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [15 <./ModoDireccionamiento.pdf>]
+<Instruccion_DosOperandos.pdf, id=428, 1547.0297pt x 656.8289pt>
 File: Instruccion_DosOperandos.pdf Graphic file (type pdf)
 
 <use Instruccion_DosOperandos.pdf>
@@ -938,25 +898,12 @@ Package pdftex.def Info: Instruccion_DosOperandos.pdf used on input line 179.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Programa.pdf, id=436, 859.46094pt x 380.79765pt>
+<Programa.pdf, id=431, 859.46094pt x 380.79765pt>
 File: Programa.pdf Graphic file (type pdf)
  <use Programa.pdf>
 Package pdftex.def Info: Programa.pdf used on input line 191.
 (pdftex.def)             Requested size: 345.0pt x 152.85672pt.
-LaTeX Info: Redefining \. on input line 191.
-LaTeX Info: Redefining \% on input line 191.
-LaTeX Info: Redefining \. on input line 191.
-LaTeX Info: Redefining \% on input line 191.
-File: logoQSim.png Graphic file (type png)
 
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 191.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [17 <./Instruccion.pdf> <./Instruccion_SinOperandos.pdf
-
-pdfTeX warning: pdflatex (file ./Instruccion_SinOperandos.pdf): PDF inclusion: 
-multiple pdfs with page group included in a single page
->]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -965,10 +912,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 196--197
 
  []
 
+LaTeX Info: Redefining \. on input line 199.
+LaTeX Info: Redefining \% on input line 199.
+LaTeX Info: Redefining \. on input line 199.
+LaTeX Info: Redefining \% on input line 199.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 199.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [16 <./Instruccion.pdf> <./Instruccion_SinOperandos.pdf
 
-LaTeX Warning: Reference `interprete' on page 18 undefined on input line 198.
-
-<simulador.pdf, id=449, 1169.49422pt x 447.37138pt>
+pdfTeX warning: pdflatex (file ./Instruccion_SinOperandos.pdf): PDF inclusion: 
+multiple pdfs with page group included in a single page
+>] <simulador.pdf, id=445, 1169.49422pt x 447.37138pt>
 File: simulador.pdf Graphic file (type pdf)
  <use simulador.pdf>
 Package pdftex.def Info: simulador.pdf used on input line 200.
@@ -978,79 +934,100 @@ Package pdftex.def Info: simulador.pdf used on input line 200.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 ) (./evaluacion-desarrollo.tex
-LaTeX Info: Redefining \. on input line 8.
-LaTeX Info: Redefining \% on input line 8.
-File: logoQSim.png Graphic file (type png)
- <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 8.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [18 <./Instruccion_UnOperando.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
 
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
-LaTeX Info: Redefining \. on input line 11.
-LaTeX Info: Redefining \% on input line 11.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 11.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [19 <./Instruccion_DosOperandos.pdf> <./Programa.pdf
+ [17 <./Instruccion_UnOperando.pdf>]
+LaTeX Info: Redefining \. on input line 11.
+LaTeX Info: Redefining \% on input line 11.
+LaTeX Info: Redefining \. on input line 11.
+LaTeX Info: Redefining \% on input line 11.
+File: logoQSim.png Graphic file (type png)
+ <use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 11.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+
+[18 <./Instruccion_DosOperandos.pdf> <./Programa.pdf
 
 pdfTeX warning: pdflatex (file ./Programa.pdf): PDF inclusion: multiple pdfs wi
 th page group included in a single page
 >]
-LaTeX Info: Redefining \. on input line 27.
-LaTeX Info: Redefining \% on input line 27.
-LaTeX Info: Redefining \. on input line 27.
-LaTeX Info: Redefining \% on input line 27.
+LaTeX Info: Redefining \. on input line 35.
+LaTeX Info: Redefining \% on input line 35.
 File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 27.
+Package pdftex.def Info: logoQSim.png used on input line 35.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [20 <./simulador.pdf>]
-LaTeX Info: Redefining \. on input line 51.
-LaTeX Info: Redefining \% on input line 51.
+ [19 <./simulador.pdf>]
+LaTeX Info: Redefining \. on input line 57.
+LaTeX Info: Redefining \% on input line 57.
+LaTeX Info: Redefining \. on input line 57.
+LaTeX Info: Redefining \% on input line 57.
 File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 51.
+Package pdftex.def Info: logoQSim.png used on input line 57.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [21]
-LaTeX Info: Redefining \. on input line 87.
-LaTeX Info: Redefining \% on input line 87.
-LaTeX Info: Redefining \. on input line 87.
-LaTeX Info: Redefining \% on input line 87.
+ [20]
+LaTeX Info: Redefining \. on input line 90.
+LaTeX Info: Redefining \% on input line 90.
+LaTeX Info: Redefining \. on input line 90.
+LaTeX Info: Redefining \% on input line 90.
 File: logoQSim.png Graphic file (type png)
 
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 87.
+Package pdftex.def Info: logoQSim.png used on input line 90.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [22]
+ [21]
 Overfull \hbox (2.75171pt too wide) in paragraph at lines 100--101
 []\OT1/cmr/m/n/10 Para ver-i-ficar la b^^Susque-da de operan-dos, se toma una i
 n-struc-ci^^Son cualquiera
  []
 
-LaTeX Info: Redefining \. on input line 120.
-LaTeX Info: Redefining \% on input line 120.
+LaTeX Info: Redefining \. on input line 124.
+LaTeX Info: Redefining \% on input line 124.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 120.
+Package pdftex.def Info: logoQSim.png used on input line 124.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [23]
+ [22]
 Underfull \hbox (badness 10000) in paragraph at lines 160--161
 
  []
 
-LaTeX Info: Redefining \. on input line 163.
-LaTeX Info: Redefining \% on input line 163.
+
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
+
+ []
+
+LaTeX Info: Redefining \. on input line 168.
+LaTeX Info: Redefining \% on input line 168.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 163.
+Package pdftex.def Info: logoQSim.png used on input line 168.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [24]) (./arquitecturasQ.tex
+ [23]
+! Extra }, or forgotten \endgroup.
+l.168 \item Implementar interrupcciones}
+                                        \\
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 168--169
+
+ []
+
+) (./arquitecturasQ.tex
 Underfull \hbox (badness 10000) in paragraph at lines 6--8
 
  []
@@ -1060,42 +1037,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--12
 
  []
 
-LaTeX Info: Redefining \. on input line 21.
-LaTeX Info: Redefining \% on input line 21.
+LaTeX Info: Redefining \. on input line 22.
+LaTeX Info: Redefining \% on input line 22.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 21.
+Package pdftex.def Info: logoQSim.png used on input line 22.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [25]
+ [24]
 Overfull \hbox (2.118pt too wide) in paragraph at lines 53--56
 \OT1/cmr/m/n/10 memo-ria cuya di-rec-ci^^Son est^^Sa en el reg-istro \OT1/cmr/b
 x/n/10 R0\OT1/cmr/m/n/10 . \OT1/cmr/bx/n/10 [R7] \OT1/cmr/m/n/10 de-no-ta un op
 eran-
  []
 
-
+LaTeX Info: Redefining \. on input line 72.
+LaTeX Info: Redefining \% on input line 72.
+LaTeX Info: Redefining \. on input line 72.
+LaTeX Info: Redefining \% on input line 72.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 72.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [25]
 Overfull \hbox (14.36174pt too wide) in paragraph at lines 78--78
  [] 
  []
 
-LaTeX Info: Redefining \. on input line 78.
-LaTeX Info: Redefining \% on input line 78.
-LaTeX Info: Redefining \. on input line 78.
-LaTeX Info: Redefining \% on input line 78.
+LaTeX Info: Redefining \. on input line 105.
+LaTeX Info: Redefining \% on input line 105.
+LaTeX Info: Redefining \. on input line 105.
+LaTeX Info: Redefining \% on input line 105.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 78.
+Package pdftex.def Info: logoQSim.png used on input line 105.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [26]
-LaTeX Info: Redefining \. on input line 107.
-LaTeX Info: Redefining \% on input line 107.
-LaTeX Info: Redefining \. on input line 107.
-LaTeX Info: Redefining \% on input line 107.
-File: logoQSim.png Graphic file (type png)
- <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 107.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [27]
 Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
@@ -1110,20 +1086,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 145--146
 
  []
 
-
+LaTeX Info: Redefining \. on input line 153.
+LaTeX Info: Redefining \% on input line 153.
+LaTeX Info: Redefining \. on input line 153.
+LaTeX Info: Redefining \% on input line 153.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 153.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [27]
 Underfull \hbox (badness 10000) in paragraph at lines 159--160
 
  []
 
-LaTeX Info: Redefining \. on input line 161.
-LaTeX Info: Redefining \% on input line 161.
-LaTeX Info: Redefining \. on input line 161.
-LaTeX Info: Redefining \% on input line 161.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 161.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [28]
 ! Undefined control sequence.
 l.161 ...el campo \code{Cod\_Op} es la cadena \bin
                                                   {1111}. Si \textbf{al eval...
@@ -1142,20 +1117,26 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-LaTeX Info: Redefining \. on input line 199.
-LaTeX Info: Redefining \% on input line 199.
-LaTeX Info: Redefining \. on input line 199.
-LaTeX Info: Redefining \% on input line 199.
+LaTeX Info: Redefining \. on input line 188.
+LaTeX Info: Redefining \% on input line 188.
+LaTeX Info: Redefining \. on input line 188.
+LaTeX Info: Redefining \% on input line 188.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 199.
+Package pdftex.def Info: logoQSim.png used on input line 188.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [29]) (./howto.tex) (./erroresComunes.tex
+ [28]) (./howto.tex) (./erroresComunes.tex
 Overfull \hbox (19.29791pt too wide) in paragraph at lines 22--23
 [][] 
  []
 
-
+LaTeX Info: Redefining \. on input line 24.
+LaTeX Info: Redefining \% on input line 24.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 24.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [29]
 Overfull \hbox (0.55615pt too wide) in paragraph at lines 32--33
 \OT1/cmr/m/n/10 vali-do (El operan-do nun-ca puede ten-er co-mo mo-do de di-rec
 -cionamien-
@@ -1166,13 +1147,7 @@ Overfull \hbox (19.29791pt too wide) in paragraph at lines 34--35
 [][] 
  []
 
-LaTeX Info: Redefining \. on input line 38.
-LaTeX Info: Redefining \% on input line 38.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 38.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [30]
+
 Overfull \hbox (19.29791pt too wide) in paragraph at lines 45--46
 [][] 
  []
@@ -1187,20 +1162,20 @@ Overfull \hbox (19.29791pt too wide) in paragraph at lines 67--68
 [][] 
  []
 
-
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
+LaTeX Info: Redefining \. on input line 77.
+LaTeX Info: Redefining \% on input line 77.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 77.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [30]
 Overfull \hbox (19.29791pt too wide) in paragraph at lines 78--79
 [][] 
  []
 
-LaTeX Info: Redefining \. on input line 88.
-LaTeX Info: Redefining \% on input line 88.
-LaTeX Info: Redefining \. on input line 88.
-LaTeX Info: Redefining \% on input line 88.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 88.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [31]
+
 Overfull \hbox (19.29791pt too wide) in paragraph at lines 89--90
 [][] 
  []
@@ -1220,20 +1195,20 @@ Overfull \hbox (19.29791pt too wide) in paragraph at lines 124--125
 [][] 
  []
 
-
+LaTeX Info: Redefining \. on input line 134.
+LaTeX Info: Redefining \% on input line 134.
+LaTeX Info: Redefining \. on input line 134.
+LaTeX Info: Redefining \% on input line 134.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 134.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [31]
 Overfull \hbox (19.29791pt too wide) in paragraph at lines 135--136
 [][] 
  []
 
-LaTeX Info: Redefining \. on input line 145.
-LaTeX Info: Redefining \% on input line 145.
-LaTeX Info: Redefining \. on input line 145.
-LaTeX Info: Redefining \% on input line 145.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 145.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [32]
+
 Overfull \hbox (19.29791pt too wide) in paragraph at lines 146--147
 [][] 
  []
@@ -1254,6 +1229,15 @@ Overfull \hbox (19.29791pt too wide) in paragraph at lines 177--178
  []
 
 )
+LaTeX Info: Redefining \. on input line 38.
+LaTeX Info: Redefining \% on input line 38.
+LaTeX Info: Redefining \. on input line 38.
+LaTeX Info: Redefining \% on input line 38.
+File: logoQSim.png Graphic file (type png)
+ <use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 38.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [32]
 
 ! LaTeX Error: \begin{enumerate} on input line 32 ended by \end{document}.
 
@@ -1286,13 +1270,6 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 46.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 46.
 Package rerunfilecheck Info: File `QSim_Molinari_Rosito.out' has not changed.
 (rerunfilecheck)             Checksum: 5163B39857BD9386618F1EE51DAB6903;3921.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
  )
 (\end occurred inside a group at level 1)
@@ -1300,13 +1277,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
 ### semi simple group (level 1) entered at line 32 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7617 strings out of 495059
- 104449 string characters out of 3182030
- 203078 words of memory out of 3000000
- 10512 multiletter control sequences out of 15000+200000
- 13204 words of font info for 52 fonts, out of 3000000 for 9000
+ 7596 strings out of 495059
+ 104024 string characters out of 3182030
+ 201995 words of memory out of 3000000
+ 10497 multiletter control sequences out of 15000+200000
+ 13098 words of font info for 51 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
- 36i,14n,45p,1680b,729s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,15n,45p,1680b,681s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></u
@@ -1320,12 +1297,11 @@ blic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb>
-Output written on QSim_Molinari_Rosito.pdf (33 pages, 2240719 bytes).
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on QSim_Molinari_Rosito.pdf (33 pages, 2229642 bytes).
 PDF statistics:
- 676 PDF objects out of 1000 (max. 8388607)
- 596 compressed objects within 6 object streams
- 157 named destinations out of 1000 (max. 500000)
+ 667 PDF objects out of 1000 (max. 8388607)
+ 588 compressed objects within 6 object streams
+ 155 named destinations out of 1000 (max. 500000)
  487 words of extra memory for PDF output out of 10000 (max. 10000000)
 

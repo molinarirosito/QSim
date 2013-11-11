@@ -105,7 +105,7 @@ Como se observa en la figura \ref{CPU}, la CPU conoce a la ALU, contiene los reg
 \graf{CPU}{Diagrama de clase de la CPU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Intérprete}
+\subsubsection{Intérprete} \label{claseinterprete}
 Como se observa en la figura \ref{Interprete} el Interprete es un \textit{singleton} que tiene la entera responsabilidad de construir un objeto que representa una instrucción determinada a partir de la decodificación de las celdas de memoria que ocupa su código máquina. Se ocupa de la decodificación de la instrucción.
 
 \graf{Interprete}{Diagrama de clase del Interprete}
@@ -195,7 +195,7 @@ Como se observa en la figura \ref{Programa} la clase Programa conoce un grupo de
 
 Esta e la clase principal del modelo y la encargada de coordinar la ejecución del programa paso a paso. Como se observa en la figura \ref{simulador} la clase \textbf{Simulador} conoce a una instancia de la clase \textbf{CPU}, a una instancia de la clase \textbf{BusEntradaSalida} y a una intancia de la clase \textbf{Instruccion}, que representa a la instrucción que se esta ejecutando en ese momento.\\
 
-La clase Simulador tiene la responsabilidad de obtener el \codmaq\ de la siguiente instrucción, colaborando con el Interprete (ver \ref{interprete}), calcular las etiquetas de un programa, cargar el programa en memoria y los datos en registros,  ejecutar las instrucciones o delegar su ejecución al objeto \textbf{ALU} que conoce a través de la \textbf{CPU} según corresponda, y guardar datos en memoria o registros (almacenamiento de resultados).
+La clase Simulador tiene la responsabilidad de obtener el \codmaq\ de la siguiente instrucción, colaborando con el Interprete (ver \ref{claseinterprete}), calcular las etiquetas de un programa, cargar el programa en memoria y los datos en registros,  ejecutar las instrucciones o delegar su ejecución al objeto \textbf{ALU} que conoce a través de la \textbf{CPU} según corresponda, y guardar datos en memoria o registros (almacenamiento de resultados).
 
 \graf[15cm]{simulador}{Diagrama de clase de la Simulador}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
