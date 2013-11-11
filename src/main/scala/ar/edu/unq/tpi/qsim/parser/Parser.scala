@@ -7,8 +7,8 @@ import org.uqbar.commons.utils.Observable
 
 object Parser extends Ensamblador {
 
-  var arquitecturas = List(ArquitecturaQ("Q1"), ArquitecturaQ("Q2"), ArquitecturaQ("Q3"), ArquitecturaQ("Q4"), ArquitecturaQ("Q5"), ArquitecturaQ("Q6"))
-
+  var arquitecturas = List(ArquitecturaQ("Q1", ensamblarQ1), ArquitecturaQ("Q2",ensamblarQ2), ArquitecturaQ("Q3", ensamblarQ3), ArquitecturaQ("Q4", ensamblarQ4), ArquitecturaQ("Q5", ensamblarQ5), ArquitecturaQ("Q6", ensamblarQ6))
+  
   def readFile(path: String): String = {
     val input = io.Source.fromFile(path)
     return input.mkString
@@ -29,7 +29,7 @@ object Parser extends Ensamblador {
     result(parse(str, this.programQ3))
   }
 
-  def ensamblarQ3SDFADSDFDSFASFASDFASDFASDFASD(codigo: String): Programa = {
+  def ensamblarQ3SDFADSDFDSFASFASDFASDFASDFASDAccionesAccionesAccionesAccionesAccionesAccionesAccionesAcciones(codigo: String): Programa = {
     result(parse(codigo, this.programQ3))
   }
 
@@ -43,8 +43,8 @@ object Parser extends Ensamblador {
     result(parse(str, this.programQ5))
   }
   def ensamblarQ6(path: String): Programa = {
-    val str = readFile(path)
-    result(parse(str, this.programQ6))
+    //val str = readFile(path)
+    result(parse(path, this.programQ6))
   }
 
   def result(resultado: ParseResult[Programa]): Programa = resultado match {
@@ -57,13 +57,13 @@ object Parser extends Ensamblador {
   }
 
   def createMessage(output: Input): String = {
-    var lineOfProgram = output.source.toString().split("\n")
-    var characterCount = output.offset - (lineOfProgram.length - 1)
-
-    return searchLineWithError(lineOfProgram, characterCount)
+    var characterCount = output.offset 
+    ""
+    //var cadena 
+    //return getLineWithError(lineOfProgram, characterCount)
   }
 
-  def searchLineWithError(lineOfProgram: Array[String], amountCharactersBeforeError: Int): String = {
+  def getLineWithError(lineOfProgram: Array[String], amountCharactersBeforeError: Int): String = {
     var countCharaters = 0
     var mensaje = ""
     lineOfProgram.foreach(line ⇒ {
@@ -77,24 +77,7 @@ object Parser extends Ensamblador {
   }
 }
 
-case class ArquitecturaQ(var name: String) {}
-
 @Observable
-object Acciones {
-  
-  var agregar = true
-  var eliminar = false
-  var ensamblar = false
-  var cargar = false
-
-  def inicializar() {
-    var agregar = true
-    var eliminar = false
-    var ensamblar = false
-    var cargar = false
-  }
-  
-  def agregarArchivos()
-  {}
- 
+case class ArquitecturaQ(var name: String, parser:(String)=>Programa) {
+  override def toString = name
 }

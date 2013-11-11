@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.7.11)  11 NOV 2013 15:11
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.7.11)  11 NOV 2013 15:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1222,11 +1222,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--25
-
- []
-
 ! Undefined control sequence.
 l.34 \mensaje
              {"Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056"} \\
@@ -1270,11 +1265,6 @@ l.35
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-
- []
 
 ! Undefined control sequence.
 l.45 \mensaje
@@ -1320,31 +1310,56 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 47--48
-
- []
-
-LaTeX Info: Redefining \. on input line 49.
-LaTeX Info: Redefining \% on input line 49.
+LaTeX Info: Redefining \. on input line 52.
+LaTeX Info: Redefining \% on input line 52.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 49.
+Package pdftex.def Info: logoQSim.png used on input line 52.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [29]
-Overfull \hbox (1464.98447pt too wide) in paragraph at lines 63--63
- []\OT1/cmtt/m/n/10 En la l^^S^^Pnea numero 2 entre los operandos no se encuent
-ra la coma que los separa (La sint^^Saxis de las instrucciones de dos operandos
- especifica que debe haber una coma separando los operandos.). Cuando se quiera
- ensamblar este programa, el ensamblador detectar^^Sa este error y en la pantal
-la se mostrar^^Sa mediante un pop-up el siguiente mensaje:[] 
- []
+! Undefined control sequence.
+l.56 \mensaje
+             {"Ha ocurrido un error en la linea 2 : MOV R4, R0"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.56 ...rido un error en la linea 2 : MOV R4, R0"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.56 ...rido un error en la linea 2 : MOV R4, R0"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
 
 
-Overfull \hbox (5.4972pt too wide) in paragraph at lines 63--63
- []\OT1/cmtt/m/n/10 \mensaje{"Ha ocurrido un error en la linea 2 : MOV R4, R0"}
- \\[] 
- []
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.57 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 ! Undefined control sequence.
 l.67 \mensaje
@@ -1389,11 +1404,6 @@ l.68
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 69--70
-
- []
 
 
 ! LaTeX Error: \begin{itemize} on input line 7 ended by \end{quoting}.
@@ -1461,18 +1471,13 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.80 \item D
-            ado el siguiente programa Qi:\\
+            ado el siguiente programa Qi:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Underfull \hbox (badness 10000) detected at line 80
 [][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--81
-
  []
 
 ! Undefined control sequence.
@@ -1527,7 +1532,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.91 \item D
-            ado el siguiente programa Qi:\\
+            ado el siguiente programa Qi:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -1536,20 +1541,6 @@ Underfull \hbox (badness 10000) detected at line 91
 [][]
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
-
- []
-
-LaTeX Info: Redefining \. on input line 99.
-LaTeX Info: Redefining \% on input line 99.
-LaTeX Info: Redefining \. on input line 99.
-LaTeX Info: Redefining \% on input line 99.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 99.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [30]
 ! Undefined control sequence.
 l.100 \mensaje
               {"Ha ocurrido un error en la linea 1: MUL R7, R4"} \\
@@ -1594,6 +1585,15 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
+LaTeX Info: Redefining \. on input line 102.
+LaTeX Info: Redefining \% on input line 102.
+LaTeX Info: Redefining \. on input line 102.
+LaTeX Info: Redefining \% on input line 102.
+File: logoQSim.png Graphic file (type png)
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 102.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [30]
 
 ! LaTeX Error: Lonely \item--perhaps a missing list environment.
 
@@ -1602,18 +1602,13 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.102 \item D
-             ado el siguiente programa Qi:\\
+             ado el siguiente programa Qi:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Underfull \hbox (badness 10000) detected at line 102
 [][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 102--103
-
  []
 
 ! Undefined control sequence.
@@ -1638,18 +1633,13 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.115 \item D
-             ado el siguiente programa Qi :\\
+             ado el siguiente programa Qi :
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Underfull \hbox (badness 10000) detected at line 115
 [][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 115--116
-
  []
 
 ! Undefined control sequence.
@@ -1704,18 +1694,13 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.126 \item D
-             ado el siguiente programa Qi:\\
+             ado el siguiente programa Qi:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Underfull \hbox (badness 10000) detected at line 126
 [][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
-
  []
 
 ! Undefined control sequence.
@@ -1770,18 +1755,13 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.137 \item D
-             ado el siguiente programa Qi :\\
+             ado el siguiente programa Qi:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Underfull \hbox (badness 10000) detected at line 137
 [][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 137--138
-
  []
 
 ! Undefined control sequence.
@@ -1836,7 +1816,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.148 \item D
-             ado el siguiente programa Qi  :\\
+             ado el siguiente programa Qi:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -1845,18 +1825,13 @@ Underfull \hbox (badness 10000) detected at line 148
 [][]
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 148--149
-
- []
-
-LaTeX Info: Redefining \. on input line 149.
-LaTeX Info: Redefining \% on input line 149.
-LaTeX Info: Redefining \. on input line 149.
-LaTeX Info: Redefining \% on input line 149.
+LaTeX Info: Redefining \. on input line 156.
+LaTeX Info: Redefining \% on input line 156.
+LaTeX Info: Redefining \. on input line 156.
+LaTeX Info: Redefining \% on input line 156.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 149.
+Package pdftex.def Info: logoQSim.png used on input line 156.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [31]
 ! Undefined control sequence.
@@ -1881,18 +1856,13 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.159 \item D
-             ado el siguiente programa Qi  :\\
+             ado el siguiente programa Qi:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Underfull \hbox (badness 10000) detected at line 159
 [][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--160
-
  []
 
 ! Undefined control sequence.
@@ -1947,18 +1917,13 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.169 \item D
-             ado el siguiente programa Qi  :\\
+             ado el siguiente programa Qi:
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Underfull \hbox (badness 10000) detected at line 169
 [][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
-
  []
 
 ! Undefined control sequence.
@@ -2073,7 +2038,7 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on QSim_Molinari_Rosito.pdf (32 pages, 2231182 bytes).
+Output written on QSim_Molinari_Rosito.pdf (32 pages, 2228766 bytes).
 PDF statistics:
  671 PDF objects out of 1000 (max. 8388607)
  593 compressed objects within 6 object streams
