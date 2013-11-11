@@ -9,42 +9,37 @@ object Parser extends Ensamblador {
 
   var arquitecturas = List(ArquitecturaQ("Q1", ensamblarQ1), ArquitecturaQ("Q2",ensamblarQ2), ArquitecturaQ("Q3", ensamblarQ3), ArquitecturaQ("Q4", ensamblarQ4), ArquitecturaQ("Q5", ensamblarQ5), ArquitecturaQ("Q6", ensamblarQ6))
   
+  // TODO que el parser tenga uno que obtiene el contenido del archivo y que el el test trabaje con el contenido, parsea este contenido
+  
   def readFile(path: String): String = {
     val input = io.Source.fromFile(path)
     return input.mkString
   }
-
-  def ensamblarQ1(path: String): Programa = {
-    val str = readFile(path)
-    result(parse(str, this.programQ1))
+  def ensamblarQ1(code: String): Programa = {
+    result(parse(code, this.programQ1))
   }
 
-  def ensamblarQ2(path: String): Programa = {
-    val str = readFile(path)
-    result(parse(str, this.programQ2))
+  def ensamblarQ2(code: String): Programa = {
+    result(parse(code, this.programQ2))
   }
 
-  def ensamblarQ3(path: String): Programa = {
-    val str = readFile(path)
-    result(parse(str, this.programQ3))
+  def ensamblarQ3(code: String): Programa = {
+    result(parse(code, this.programQ3))
   }
 
   def ensamblarQ3SDFADSDFDSFASFASDFASDFASDFASDAccionesAccionesAccionesAccionesAccionesAccionesAccionesAcciones(codigo: String): Programa = {
     result(parse(codigo, this.programQ3))
   }
 
-  def ensamblarQ4(path: String): Programa = {
-    val str = readFile(path)
-    result(parse(str, this.programQ4))
+  def ensamblarQ4(code: String): Programa = {
+    result(parse(code, this.programQ4))
   }
 
-  def ensamblarQ5(path: String): Programa = {
-    val str = readFile(path)
-    result(parse(str, this.programQ5))
+  def ensamblarQ5(code: String): Programa = {
+    result(parse(code, this.programQ5))
   }
-  def ensamblarQ6(path: String): Programa = {
-    //val str = readFile(path)
-    result(parse(path, this.programQ6))
+  def ensamblarQ6(code: String): Programa = {
+    result(parse(code, this.programQ6))
   }
 
   def result(resultado: ParseResult[Programa]): Programa = resultado match {
@@ -57,6 +52,7 @@ object Parser extends Ensamblador {
   }
 
   def createMessage(output: Input): String = {
+    var lala : Parser[Programa]= this.programQ1
     var characterCount = output.offset 
     var cadenaCaracteres = output.source
     var lineas = output.source.toString().split("\n")
