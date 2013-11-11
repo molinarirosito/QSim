@@ -4,8 +4,8 @@
 \subsection{Características generales} 
 
 La Arquitectura Q tiene 8 registros de uso general de 16 bits, denominados R0..R7, registros especiales de 16 bits tales como PC - \textit{Program counter}, SP\footnote{Comienza en la dirección FFEF.} - \textit{Stack Pointer} y los Flags de un bit como Negative, oVerflow, Carry, Zero. También tiene un conjunto de instrucciones que detallaran mas adelante. Todas las instrucciones Alteran los flags excepto MOV, CALL, RET, JMP, Jxx. De las instrucciones que alteran los Flags, todas dejan C y V en 0 a excepción de ADD, SUB y CMP.  
-\ojo{La instrucción DIV tiene como efecto [destino (- destino \%\footnote{El carácter \% denota el cociente de la división entera.} origen ]. 
-La instrucción MUL\footnote{El resultado de la operación \textbf{MUL} ocupa 32 bits, almacenándose los 16 bits menos significativos en el operando destino y los 16 bits mas significativos en el registro \textbf{R7}.} tiene como efecto [destino (- destino * origen].}{esto va mas adelante!}
+%\ojo{La instrucción DIV tiene como efecto [destino (- destino \%\footnote{El carácter \% denota el cociente de la %división entera.} origen ]. 
+%La instrucción MUL\footnote{El resultado de la operación \textbf{MUL} ocupa 32 bits, almacenándose los 16 bits menos %significativos en el operando destino y los 16 bits mas significativos en el registro \textbf{R7}.} tiene como %efecto [destino (- destino * origen].}{esto va mas adelante!}
 Por ultimo tiene una Memoria que tiene direcciones de 16 bit, donde el tamaño de cada celda también es de 16 bit. La Memoria tiene un tamanio de 65536 celdas. \\ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Modos de direccionamiento}
@@ -83,7 +83,7 @@ Las instrucciones de dos operandos descriptas a continuación son instrucciones 
 \begin{enumerate}
 \item \textbf{MUL destino, origen}
 Código de operación: 0000
-Esta instrucción describe la multiplicación entre los datos de los dos operandos. Esta operación es la única que cuyo resultado puede ser 32 bits, que son \ojo{lo que ocuparía más de una celda de memoria en código binario.}{(mara)No entiendo!. Así esta mejor??}, por lo que los primeros 16 bits, es decir, la primer mitad, es guardada en el registro R7 y la segunda en el operando destino.
+Esta instrucción describe la multiplicación entre los datos de los dos operandos. Esta operación es la única que cuyo resultado puede ser 32 bits, que son lo que ocuparía más de una celda de memoria en código binario, por lo que los primeros 16 bits, es decir, la primer mitad, es guardada en el registro \textbf{R7} y la segunda en el operando destino.
  
 \item \textbf{ADD destino, origen}
 Código de operación: 0010

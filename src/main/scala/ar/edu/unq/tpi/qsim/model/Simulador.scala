@@ -14,6 +14,25 @@ object Ciclo
   var fetch = true
   var decode = false
   var execute = false
+  
+   def ninguna_etapa(){
+    fetch = false
+    decode = false
+    execute = false
+  }
+  
+  def pasarAFetch(){
+    fetch = true
+    execute = false
+  }
+  def pasarADecode(){
+    fetch = false
+    decode = true
+  }
+  def pasarAExecute(){
+    decode = false
+    execute = true
+  }
 }
 
 @Observable
@@ -187,8 +206,7 @@ case class Simulador() {
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
     cambiarEstadoCeldasInstruccionActual(State.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
-    ciclo.fetch = false
-    ciclo.decode = true
+    ciclo.pasarADecode
     println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
     
   }
@@ -213,8 +231,7 @@ case class Simulador() {
     println("----------DECODE------------")
     agregarMensaje("Se decodifico la instruccion : " + (instruccionActual.toString))
     println(mensaje_al_usuario)
-    ciclo.decode = false
-    ciclo.execute = true
+    ciclo.pasarAExecute
     (instruccionActual.toString)
   }
 
@@ -291,8 +308,7 @@ case class Simulador() {
       }
       case iOp2: Instruccion_DosOperandos ⇒ store(iOp2.destino, execute_instruccion_matematica())
     }
-    ciclo.execute = false
-    ciclo.fetch = true
+    ciclo.pasarAFetch
     println("Ejecuta la instruccion!!!")
   }
 

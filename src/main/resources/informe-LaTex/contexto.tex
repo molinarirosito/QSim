@@ -1,6 +1,6 @@
 \part{Contexto}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Sobre la materia \orga (susi)}
+\section{Sobre la materia \orga}
 
 
 Si bien los conceptos fundamentales de la ejecución de programas son independientes de las arquitecturas de computadoras comerciales, es conveniente explicar los mismos dando un marco específico. Por otro lado, las diferentes arquitecturas que subyacen los numerosos modelos disponibles en el mercado, incluyen un basto conjunto de herramientas y recursos de lenguaje para el control del funcionamiento de una computadora, pero que agregan complejidad innecesaria a la comprensión de los conceptos funcionales y la didáctica de la materia.
@@ -29,7 +29,10 @@ La CPU (Unidad Central de Procesamiento del inglés: Central Processing Unit), e
 
 La \UC\ dirige el ciclo de ejecución de cada instrucción, pidiendo la lectura de celdas de memoria donde esta alojada, decodificándola  y ejecutándola luego en colaboración con los otros componentes del sistema: si es una operación lógica o aritmética le ordena a la ALU su ejecución, si es de movimiento de datos colabora con la memoria ó el módulo de Entrada/Salida.\\
 
-Entre los registros de uso específico, los más importantes son el \textbf{\PC} y el \textbf{\IR}. El \PC\ es un registro que indica la posición de memoria donde estará la siguiente instrucción que debe ejecutarse. Luego de completar el ciclo de ejecución de una instrucción, el PC se incrementa en función de la cantidad de celdas que ocupa el código máquina de esta. El registro de instrucción contiene el código máquina de la instrucción actual una vez que la misma es leída de memoria para luego decodificarla y ejecutarla.\verde{Falta hablar del SP y los flagsssss}{}\\
+Entre los registros de uso específico, los más importantes son el \textbf{\PC}, el \textbf{\IR}, el \textbf{\SP} y los \textbf{\FLAGS}. El \PC\ es un registro que indica la posición de memoria donde estará la siguiente instrucción que debe ejecutarse. Luego de completar el ciclo de ejecución de una instrucción, el PC se incrementa en función de la cantidad de celdas que ocupa el código máquina de esta. 
+El registro de instrucción, \textbf{\IR}, contiene el código máquina de la instrucción actual una vez que la misma es leída de memoria para luego decodificarla y ejecutarla.
+El \SP\ es un registro que indica la posición de memoria donde está el dato que representa a la última direccion de memoria que fue guardada al llamar a una sub-rutina, para que cuando esta termine, el programa pueda seguir ejecutandose a partir de ese punto.
+Los \FLAGS\ representan carateristicas del último computo realizado como si el resultado fue negativo, cero, etc.
 
 El diseño de cada arquitectura ofrece un conjunto diferente de registros de uso general para ser usados en los programas. Estos registros son elementos de memoria de alta velocidad y poca capacidad que pueden ser utilizados como variables en los programas. Es importante marcar que pueden almacenar tanto datos como direcciones de memoria.\\
 

@@ -1,5 +1,5 @@
 \BOOKMARK [0][-]{part.1}{I Contexto}{}% 1
-\BOOKMARK [1][-]{section.1}{Sobre la materia Organizaci\363n de Computadoras\(susi\)}{part.1}% 2
+\BOOKMARK [1][-]{section.1}{Sobre la materia Organizaci\363n de Computadoras}{part.1}% 2
 \BOOKMARK [1][-]{section.2}{Conceptos importantes}{part.1}% 3
 \BOOKMARK [2][-]{subsection.2.1}{Enfoque de Von Neumann}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.2}{Organizaci\363n de la computadora}{section.2}% 5
@@ -13,7 +13,7 @@
 \BOOKMARK [2][-]{subsection.5.3}{Cargado en memoria}{section.5}% 13
 \BOOKMARK [2][-]{subsection.5.4}{Ejecuci\363n paso a paso}{section.5}% 14
 \BOOKMARK [1][-]{section.6}{Implementaci\363n}{part.2}% 15
-\BOOKMARK [2][-]{subsection.6.1}{Tecnolog\355a utilizada \(tati\)}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.1}{Tecnolog\355a utilizada}{section.6}% 16
 \BOOKMARK [2][-]{subsection.6.2}{Dise\361o Orientado a Objetos}{section.6}% 17
 \BOOKMARK [3][-]{subsubsection.6.2.1}{ALU}{subsection.6.2}% 18
 \BOOKMARK [3][-]{subsubsection.6.2.2}{Bus de entrada y salida, memoria y puertos}{subsection.6.2}% 19
@@ -27,15 +27,15 @@
 \BOOKMARK [1][-]{section.7}{Dificultades encontradas}{part.3}% 27
 \BOOKMARK [2][-]{subsection.7.1}{Dificultades presentadas por el dominio}{section.7}% 28
 \BOOKMARK [2][-]{subsection.7.2}{Dificultades de dise\361o}{section.7}% 29
-\BOOKMARK [1][-]{section.8}{Casos de prueba}{part.3}% 30
+\BOOKMARK [1][-]{section.8}{Casos de prueba \(revisar redaccion!!\)}{part.3}% 30
 \BOOKMARK [2][-]{subsection.8.1}{Chequeo de sintaxis en la distintas Qi}{section.8}% 31
-\BOOKMARK [2][-]{subsection.8.2}{Ensamblado \(Objetos \205+ C\363digo Maquina\)}{section.8}% 32
-\BOOKMARK [2][-]{subsection.8.3}{Decodificaci\363n C\363digo Maquina \205+ Objetos \(Interprete\)}{section.8}% 33
+\BOOKMARK [2][-]{subsection.8.2}{Ensamblado}{section.8}% 32
+\BOOKMARK [2][-]{subsection.8.3}{Decodificaci\363n}{section.8}% 33
 \BOOKMARK [2][-]{subsection.8.4}{Ejecuci\363n}{section.8}% 34
 \BOOKMARK [3][-]{subsubsection.8.4.1}{Operaciones de ALU}{subsection.8.4}% 35
 \BOOKMARK [3][-]{subsubsection.8.4.2}{B\372squeda de Operandos}{subsection.8.4}% 36
 \BOOKMARK [3][-]{subsubsection.8.4.3}{Almacenamiento de Operandos}{subsection.8.4}% 37
-\BOOKMARK [1][-]{section.9}{Ejemplos de uso}{part.3}% 38
+\BOOKMARK [1][-]{section.9}{Ejemplos de uso \(Revisar!!\)}{part.3}% 38
 \BOOKMARK [2][-]{subsection.9.1}{Errores de Sintaxis}{section.9}% 39
 \BOOKMARK [2][-]{subsection.9.2}{Para Experimentar}{section.9}% 40
 \BOOKMARK [1][-]{section.10}{Trabajo Futuro}{part.3}% 41

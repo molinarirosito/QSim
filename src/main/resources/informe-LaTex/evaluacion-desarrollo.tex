@@ -20,7 +20,7 @@ Por otro lado, tuvieron que solicitarse extensiones al equipo de desarrolladores
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\section{Casos de prueba (revisar redacci´on!!)}
+\section{Casos de prueba (revisar redaccion!!)}
 
 \ojo{En esta sección se describen los casos de prueba de la aplicación.}{Falta explicar porqué es importante esta sección}
 
@@ -42,11 +42,12 @@ Agarramos el programa Qi invalido y se lo pasamos al Parser, cuando termina de c
 \end{enumerate}
 
 \subsection{Ensamblado}
-%(Objetos --+ Código Maquina)
-Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto programa que contiene un conjunto de objetos instrucciones, el ensamblado simplemente lo realiza cada instrucción, esto quiere decir que cada instrucción sabe ensamblarse. De esta forma realizamos el ensamblado del programa y obtenemos una lista de código maquina como resultado y como ultimo paso comparamos la lista de código maquina resultado con la lista código maquina esperado.
+\ojo{(Objetos --+ Código Maquina)}{}
+Para poder verificar que el Ensamblado se realizo correctamente tomamos el programa Qi mencionado anteriormente y como sabemos que el resultado del parser nos devuelve un objeto de la clase \textbf{Programa} que contiene un conjunto de objetos de la clase \textbf{Instruccion}, el ensamblado simplemente lo realiza cada instrucción, esto quiere decir que cada instrucción tiene el comportamiento para generar su propio \codmaq. De esta forma realizamos el ensamblado del programa y obtenemos una lista de código maquina como resultado y como ultimo paso comparamos la lista de código maquina resultado con la lista código maquina esperado.
 
 \subsection{Decodificación}
-% Código Maquina --+ Objetos (Interprete)
+\ojo{Código Maquina --+ Objetos (Interprete)}{}
+
 La Decodificación se verifica correctamente a la inversa del Ensamblado tomando el ensamblado del programa Qi que como sabemos es la lista de código maquina, la cual se itera para pasar cada elemento al objeto Interprete que es el encargado de Decodificar. Como resultado puede devolver dos cosas: 
 \begin{enumerate}
 \item \textbf{Lista de de Instrucciones (decodificación)} 
@@ -103,7 +104,7 @@ Cuando estamos en la etapa de ejecución, cada una tiene un operando destinado a
 En esta instancia sabemos que  dicho operando tiene el valor guardado, a este valor lo comparamos con el valor esperado.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\section{Ejemplos de uso}
+\section{Ejemplos de uso (Revisar!!)}
 
 En esta sección vamos a mostrar las diferentes situaciones que pueden ocurrir a la hora de utilizar el simulador.
 

@@ -5,8 +5,8 @@
 /.project
 /bin
 /.cache
-*.aux
-*.log
-*.synctex.gz
-*.toc
-*/QSim_Molinari_Rosito.pdf
+*/*.aux
+*/*.log
+*/*.synctex.gz
+*/*.toc
+/*/QSim_Molinari_Rosito.pdf
