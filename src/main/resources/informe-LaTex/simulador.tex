@@ -39,7 +39,7 @@ Una vez ensamblado, la representación binaria (o código máquina) del programa
 \item Si en cambio, se intenta ejecutar el contenido de una celda con datos (y no una instrucción) podrá ocurrir que se encuentre una instrucción invalida (por ejemplo, una combinación incorrecta de modos de direccionamiento y códigos de operación) y el alumno verá el mensaje de error pertinente.
 \end{itemize}}{Esto me parece que no corresponde aca, sino mas adelante}
 
-Durante la carga del programa en memoria puede \ojo{producirse un OutOfMemoryError?, que significa que}{ocurrir que } el programa \ojo{no entra en la ubicación elegida en memoria}{no cuenta con el espacio suficiente a partir de la ubicación elegida} ya que ocupa más celdas que las que se encuentran disponibles \ojo{debajo de ella}{,} ya que como se \ojo{mencionó}{especifica} en el apéndice \ref{apendiceQ}, la memoria disponible tiene un tamaño limitado y por este motivo la alocación en memoria del código máquina puede exceder el espacio disponible a partir de la celda inicial anteriormente elegida. Si por el contrario, no se produce este error, el alumno podrá ver el programa cargado en memoria exitosamente.
+Durante la carga del programa en memoria puede ocurrir que el programa no cuenta con el espacio suficiente a partir de la ubicación elegida ya que ocupa más celdas que las que se encuentran disponibles, ya que como se especifica en el apéndice \ref{apendiceQ}, la memoria disponible tiene un tamaño limitado y por este motivo la alocación en memoria del código máquina puede exceder el espacio disponible a partir de la celda inicial anteriormente elegida. Si por el contrario, no se produce este error, el alumno podrá ver el programa cargado en memoria exitosamente.
 
 \subsection{Ejecución paso a paso}
 
@@ -48,7 +48,7 @@ Se provee la funcionalidad de la ejecución paso a paso ya que se desea que el a
 \begin{itemize}
 \item Tomar un dato de un sector de memoria equivocado.
 \item Que el programa sobrescriba su mismo código máquina.
-\item Permitir que la ejecución continue una vez \ojo{terminado el}{procesadas las instrucciones del} programa cargado en memoria.
+\item Permitir que la ejecución continue una vez procesadas las instrucciones del programa cargado en memoria.
 \end{itemize}
 
 El paso a paso que provee el simulador consiste en las siguientes etapas pertenecientes al \ciclo:
@@ -68,23 +68,23 @@ El execute ejecuta los efectos de la instrucción y muestra en pantalla los camb
 \section{Implementación}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Tecnología utilizada (tati)}
+\subsection{Tecnología utilizada}
 En la presente sección se indica la tecnología elegida para la implementación del simulador, justificando dichas elecciones en cada caso.
 
 \begin{itemize}
 
 
 \item  \textbf{Lenguaje Scala.}
-Elegimos el lenguaje Scala para realizar el simulador ya que \ojo{, en la materia llamada Objetos III, lo utilizamos un pequeño lapso de tiempo y creímos que era una buena oportunidad para, en vez de elegir un lenguaje que hayamos utilizado más en la carrera como java, profundizar en la utilización de Scala y }{durante las cursadas de las asignaturas de TPI no tuvimos la oportunidad de profundizar el dominio de este lenguaje ni} aprovechar las ventajas que este ofrecía al combinar el manejo de objetos y las características de un lenguaje funcional. \ojo{}{Es por ello que descartamos la elección de un lenguaje con el que estábamos mas familiarizadas, como por ejemplo Java}
+Elegimos el lenguaje Scala para realizar el simulador ya que durante las cursadas de las asignaturas de TPI no tuvimos la oportunidad de profundizar el dominio de este lenguaje ni aprovechar las ventajas que este ofrecía al combinar el manejo de objetos y las características de un lenguaje funcional. Es por ello que descartamos la elección de un lenguaje con el que estábamos mas familiarizadas, como por ejemplo Java.
 
 \item  \textbf{Framework Arena.}
-Utilizamos el framework Arena para realizar la interfaz de usuario del simulador porque es \ojo{un framawork}{una herramienta} de código abierto \ojo{, que también pudimos utilizar en una de las materias}{que tuvimos la oportunidad de conocer en la materia \ui}. Al poder ser combinado con \textbf{Scala} nos pareció una buena oportunidad de explotar lo que nos ofrecía para \ojo{que este simulador en su totalidad sea de codigo abierto.}{simplificar la definición de la interfaz de usuario, permitiéndonos así enforcarnos en la implementación del modelo}. 
+Utilizamos el framework Arena para realizar la interfaz de usuario del simulador porque es una herramienta de código abierto que tuvimos la oportunidad de conocer en la materia \ui. Al poder ser combinado con \textbf{Scala} nos pareció una buena oportunidad de explotar lo que nos ofrecía para simplificar la definición de la interfaz de usuario, permitiéndonos así enforcarnos en la implementación del modelo. 
 
 \item  \textbf{Eclipse.}
-Se eligió utilizar el entorno de programación Eclipse ya que \ojo{ambas trabajamos en diferentes sistemas operativos para los cuales Eclipse es funcional y puede tener los mismos pluggins que hace que pueda soportar proyectos MVN y Scala, además de que, al ser el entorno de programación que más hemos usado nos sentíamos cómodas con esa elección.}{es una herramienta multiplataforma, lo que nos permitió trabajar en diferentes sistemas operativos y con la cual estábamos familizadas.  Por otro lado, la comunidad provee pluggins para manejar proyectos para Scala}
+Se eligió utilizar el entorno de programación Eclipse ya que es una herramienta multiplataforma, lo que nos permitió trabajar en diferentes sistemas operativos y con la cual estábamos familizadas.  Por otro lado, la comunidad provee pluggins para manejar proyectos para Scala.
 
 \item  \textbf{Git}
-Elegimos git como repositorio externo para \ojo{sincronizar nuestro código}{trabajar colaborativamente durante el desarrollo}, dado que es una herramienta que muy extendida en los desarrollos de software libre.
+Elegimos git como repositorio externo para trabajar colaborativamente durante el desarrollo, dado que es una herramienta que muy extendida en los desarrollos de software libre.
 
 \end{itemize}
 
@@ -92,35 +92,35 @@ Elegimos git como repositorio externo para \ojo{sincronizar nuestro código}{tra
 \subsection{Diseño Orientado a Objetos}
 
 \subsubsection{ALU}
-Como se observa en la figura \ref{ALU} la ALU tiene toda la responsabilidad en la ejecución de operaciones matemáticas y lógicas, además del \ojo{análisis sobre}{cómputo de} los flags luego de cada operación. 
+Como se observa en la figura \ref{ALU} la ALU tiene toda la responsabilidad en la ejecución de operaciones matemáticas y lógicas, además del cómputo de los flags luego de cada operación. 
 
 \graf{ALU}{Diagrama de clase de la \ALU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Bus de entrada y salida, memoria y puertos}
-Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la \ojo{modificación de una celda o el leer un dato}{escritura o lectura de un dato}. Para ello conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
-Ambas clases conocen \ojo{muchas intancias}{una colección de instancias} de la clase Celda, y cada Celda a su vez conoce un dato: una instancia \ojo{del W16}{de la clase W16} que representa \ojo{a los datos guardados en memoria o en los puertos}{al dato almacenado en una celda de memoria o en un puerto}.  
+Como se observa en la figura \ref{BusEntradaSalida_Memoria_CeldasPuertos} el Bus de entrada y salida tiene la responsabilidad de derivar según donde corresponda (Memoria o Puertos) la escritura o lectura de un dato. Para ello conoce a una instancia de la clase Memoria y a otra de la clase CeldasPuertos. 
+Ambas clases conocen una colección de instancias de la clase Celda, y cada Celda a su vez conoce un dato: una instancia de la clase W16 que representa al dato almacenado en una celda de memoria o en un puerto.  
 
 \graf{BusEntradaSalida_Memoria_CeldasPuertos}{Diagrama de las clases del la BusEntradaSalida, Memoria, CeldasPuertos y Celda}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{CPU}
-Como se observa en la figura \ref{CPU}, la CPU conoce a la ALU, contiene los registros IR y PC, los flags (V,Z,C,N) y los ocho registros \ojo{}{de uso general} (R0...R7). La responsabilidad de la CPU es actualizar los flags, los registros, actualizar el PC y el IR, y ser la conexión con la ALU.
+Como se observa en la figura \ref{CPU}, la CPU conoce a la ALU, contiene los registros IR y PC, los flags (V,Z,C,N) y los ocho registros de uso general (R0...R7). La responsabilidad de la CPU es actualizar los flags, los registros, actualizar el PC y el IR, y ser la conexión con la ALU.
 
 \graf{CPU}{Diagrama de clase de la CPU}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Intérprete}
-Como se observa en la figura \ref{Interprete} el Interprete es un \textit{singleton} que tiene la entera responsabilidad \ojo{de recibir los datos leídos desde, una celda de memoria hasta tres celdas, y bit a bit, según los códigos de operación y de modo de direccionamiento saber de que instrucción se trata y cuales son sus operandos si es que los tiene y devolver el objeto que la representa}{de construir un objeto que representa una instrucción determinada a partir de la decodificación de las celdas de memoria que ocupa su código máquina}. Se ocupa de la decodificación de la instrucción.
+Como se observa en la figura \ref{Interprete} el Interprete es un \textit{singleton} que tiene la entera responsabilidad de construir un objeto que representa una instrucción determinada a partir de la decodificación de las celdas de memoria que ocupa su código máquina. Se ocupa de la decodificación de la instrucción.
 
 \graf{Interprete}{Diagrama de clase del Interprete}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Modos de direccionamiento y W16}
-Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del trait ModoDireccionamiento, donde se encuentran declarados mensajes necesarios para manejar todas las subclases \ojo{poliformicamente}{de manera polimórfica}. \ojo{Entre los cuales se encuentran los mensajes:}{Entre estos mensajes podemos enumerar:}
+Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del trait ModoDireccionamiento, donde se encuentran declarados mensajes necesarios para manejar todas las subclases de manera polimórfica. Entre estos mensajes podemos enumerar:
 \begin{itemize}
 \item  \textbf{representacionString:}
-Devuelve la representación en string como código fuente, por ejemplo la representación de un \ojo{}{objeto?} \textbf{ADD(R0,R7)}, sería: \textbf{''ADD R0, R7''}
+Devuelve la representación en string como código fuente, por ejemplo la representación de un objeto? \textbf{ADD(R0,R7)}, sería: \textbf{''ADD R0, R7''}
 \item  \textbf{codigo:}
 Retorna el string que representa al código del modo de direccionamiento, por el ejemplo, el código de modo de direccionamiento del R7 es \code{100111}.
 \item  \textbf{getValorString:}
@@ -134,7 +134,7 @@ Los modos de direccionamiento diferentes a Inmediato y Registro, conocen en vez 
 \end{itemize}
 Esto se implemento de esta manera para que el leer datos de memoria, puertos o registros, o guardarlos en los mismos sea más sencillo ya que se delega en el modo de direccionamiento que conoce.
 
-La clase Etiqueta representa las etiquetas creadas por el alumno cuando realiza el programa. Cuando el mismo es cargado en memoria, según cual sea la celda de inicio y cuanto ocupen las instrucciones, se calcula la dirección de memoria \textbf{que representa }{a la que hace referencia} la etiqueta y luego se la descarta reemplazándola por un modo de direccionamiento Inmediato.
+La clase Etiqueta representa las etiquetas creadas por el alumno cuando realiza el programa. Cuando el mismo es cargado en memoria, según cual sea la celda de inicio y cuanto ocupen las instrucciones, se calcula la dirección de memoria a la que hace referencia la etiqueta y luego se la descarta reemplazándola por un modo de direccionamiento Inmediato.
 
 La clase W16 que también esta en la figura \ref{ModoDireccionamiento}, representa el dato que es guardado en memoria. Tiene la responsabilidad de incrementarse, decrementarse, sumar una entero, devolver su representación binaria y su valor en decimal.
 
