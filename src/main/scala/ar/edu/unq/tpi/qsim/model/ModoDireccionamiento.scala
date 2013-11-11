@@ -18,7 +18,6 @@ trait ModoDireccionamiento {
 abstract class Registro() extends ModoDireccionamiento{
 
 var valor : W16 = new W16("0000")
-var cambio = false
 
 def numero(): Int
 

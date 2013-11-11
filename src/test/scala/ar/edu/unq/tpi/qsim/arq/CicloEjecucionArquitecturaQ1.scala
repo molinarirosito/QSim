@@ -12,7 +12,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
     var parser = Parser
-    var resultadoQ1 = parser.ensamblarQ1("src/main/resources/programaQ1.qsim")
+    var resultadoQ1 = parser.ensamblarQ1("src/main/resources/casos-test/programaQ1.qsim")
   }
 
   def programas = new {
@@ -38,7 +38,7 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
     var mensaje_esperado = "Ha ocurrido un error en la linea 2 MUL R4, 0x01"
 
     val exception = intercept[SyntaxErrorException] {
-      set_parser.parser.ensamblarQ1("src/main/resources/programaQ1SyntaxError.qsim")
+      set_parser.parser.ensamblarQ1("src/main/resources/casos-test/programaQ1SyntaxError.qsim")
     }
     assert(exception.getMessage().equals(mensaje_esperado))
   }
