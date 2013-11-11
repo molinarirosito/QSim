@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.10)  11 NOV 2013 11:12
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.7.11)  11 NOV 2013 14:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1004,222 +1004,945 @@ File: logoQSim.png Graphic file (type png)
 Package pdftex.def Info: logoQSim.png used on input line 148.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [24]) (./arquitecturasQ.tex
-Underfull \hbox (badness 10000) in paragraph at lines 6--11
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-LaTeX Info: Redefining \. on input line 16.
-LaTeX Info: Redefining \% on input line 16.
+LaTeX Info: Redefining \. on input line 14.
+LaTeX Info: Redefining \% on input line 14.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 16.
+Package pdftex.def Info: logoQSim.png used on input line 14.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [25]
-LaTeX Info: Redefining \. on input line 71.
-LaTeX Info: Redefining \% on input line 71.
-LaTeX Info: Redefining \. on input line 71.
-LaTeX Info: Redefining \% on input line 71.
+LaTeX Info: Redefining \. on input line 70.
+LaTeX Info: Redefining \% on input line 70.
+LaTeX Info: Redefining \. on input line 70.
+LaTeX Info: Redefining \% on input line 70.
 File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 71.
+Package pdftex.def Info: logoQSim.png used on input line 70.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [26]
-LaTeX Info: Redefining \. on input line 107.
-LaTeX Info: Redefining \% on input line 107.
-LaTeX Info: Redefining \. on input line 107.
-LaTeX Info: Redefining \% on input line 107.
+LaTeX Info: Redefining \. on input line 106.
+LaTeX Info: Redefining \% on input line 106.
+LaTeX Info: Redefining \. on input line 106.
+LaTeX Info: Redefining \% on input line 106.
 File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 107.
+Package pdftex.def Info: logoQSim.png used on input line 106.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [27]
-LaTeX Info: Redefining \. on input line 170.
-LaTeX Info: Redefining \% on input line 170.
-LaTeX Info: Redefining \. on input line 170.
-LaTeX Info: Redefining \% on input line 170.
-File: logoQSim.png Graphic file (type png)
+! Undefined control sequence.
+\formatoinst #1#2#3-> \codepeq 
+                               {\begin {tabular}{#1} \headermulti {#2}{\norm...
+l.126 }
+       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
+! Undefined control sequence.
+\formatoinst ...\begin {tabular}{#1} \headermulti 
+                                                  {#2}{\normal {Formato de I...
+l.126 }
+       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\formatoinst ...ar}{#1} \headermulti {#2}{\normal 
+                                                  {Formato de Instrucción}}...
+l.126 }
+       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (31.38962pt too wide) in paragraph at lines 126--127
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+
+ []
+
+! Undefined control sequence.
+\formatoinst #1#2#3-> \codepeq 
+                               {\begin {tabular}{#1} \headermulti {#2}{\norm...
+l.148 }
+       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\formatoinst ...\begin {tabular}{#1} \headermulti 
+                                                  {#2}{\normal {Formato de I...
+l.148 }
+       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\formatoinst ...ar}{#1} \headermulti {#2}{\normal 
+                                                  {Formato de Instrucción}}...
+l.148 }
+       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (31.38962pt too wide) in paragraph at lines 148--149
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
+
+ []
+
+! Undefined control sequence.
+\formatoinst #1#2#3-> \codepeq 
+                               {\begin {tabular}{#1} \headermulti {#2}{\norm...
+l.161 ...odOp & Relleno \\  (4b) & (000000000000)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\formatoinst ...\begin {tabular}{#1} \headermulti 
+                                                  {#2}{\normal {Formato de I...
+l.161 ...odOp & Relleno \\  (4b) & (000000000000)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\formatoinst ...ar}{#1} \headermulti {#2}{\normal 
+                                                  {Formato de Instrucción}}...
+l.161 ...odOp & Relleno \\  (4b) & (000000000000)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Too many }'s.
+l.162 }
+       
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+LaTeX Info: Redefining \. on input line 177.
+LaTeX Info: Redefining \% on input line 177.
+LaTeX Info: Redefining \. on input line 177.
+LaTeX Info: Redefining \% on input line 177.
+File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 170.
+Package pdftex.def Info: logoQSim.png used on input line 177.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [28]
-Overfull \hbox (0.6661pt too wide) in paragraph at lines 173--174
+! Undefined control sequence.
+l.177 ...el campo \code{Cod\_Op} es la cadena \bin
+                                                  {1111}. Si \textbf{al eval...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.177 ...el desplazamiento, representado en \cados
+                                                  {8}. En caso contrario la ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Too many }'s.
+l.178 }
+       
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+Overfull \hbox (0.6661pt too wide) in paragraph at lines 180--181
 []\OT1/cmr/m/n/10 El efec-to de cualquier salto condi-cional es au-men-tar el P
 C (Pro-gram Counter)
  []
 
-) (./howto.tex
-LaTeX Info: Redefining \. on input line 4.
-LaTeX Info: Redefining \% on input line 4.
-LaTeX Info: Redefining \. on input line 4.
-LaTeX Info: Redefining \% on input line 4.
+LaTeX Info: Redefining \. on input line 227.
+LaTeX Info: Redefining \% on input line 227.
+LaTeX Info: Redefining \. on input line 227.
+LaTeX Info: Redefining \% on input line 227.
 File: logoQSim.png Graphic file (type png)
- <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 4.
+<use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 227.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [29]) (./erroresComunes.tex
-Underfull \hbox (badness 10000) in paragraph at lines 20--21
-
- []
-
-
+ [29]) (./howto.tex) (./erroresComunes.tex
 Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--33
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
 
  []
 
+! Undefined control sequence.
+l.34 \mensaje
+             {"Ha ocurrido un error en la linea 1 : MOV 0x0006, 0x0056"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--35
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.34 ...error en la linea 1 : MOV 0x0006, 0x0056"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.34 ...error en la linea 1 : MOV 0x0006, 0x0056"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
 
-LaTeX Info: Redefining \. on input line 42.
-LaTeX Info: Redefining \% on input line 42.
+LaTeX Info: Redefining \. on input line 38.
+LaTeX Info: Redefining \% on input line 38.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 42.
+Package pdftex.def Info: logoQSim.png used on input line 38.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [30]
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+! Undefined control sequence.
+l.45 \mensaje
+             {"Ha ocurrido un error en la linea 1 : ADD R0, [0x0002]"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.45 ...n error en la linea 1 : ADD R0, [0x0002]"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.45 ...n error en la linea 1 : ADD R0, [0x0002]"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--46
+Overfull \hbox (1464.98447pt too wide) in paragraph at lines 63--63
+ []\OT1/cmtt/m/n/10 En la l^^S^^Pnea numero 2 entre los operandos no se encuent
+ra la coma que los separa (La sint^^Saxis de las instrucciones de dos operandos
+ especifica que debe haber una coma separando los operandos.). Cuando se quiera
+ ensamblar este programa, el ensamblador detectar^^Sa este error y en la pantal
+la se mostrar^^Sa mediante un pop-up el siguiente mensaje:[] 
+ []
+
+
+Overfull \hbox (5.4972pt too wide) in paragraph at lines 63--63
+ []\OT1/cmtt/m/n/10 \mensaje{"Ha ocurrido un error en la linea 2 : MOV R4, R0"}
+ \\[] 
+ []
+
+! Undefined control sequence.
+l.67 \mensaje
+             {"Ha ocurrido un error en la linea 1: sub [[0x0004]], [0xA000]"...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.67 ... en la linea 1: sub [[0x0004]], [0xA000]"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.67 ... en la linea 1: sub [[0x0004]], [0xA000]"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.68 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
 
  []
 
 
-Overfull \hbox (1428.23479pt too wide) in paragraph at lines 61--61
- []\OT1/cmtt/m/n/10 En la linea numero 2 entre los operandos no se encuentra la
- coma que los separa, eso es invalido\footnote{las instrucciones de dos operand
-os tiene que tener la coma para separarlos}. Cuando el alumno quiera ensamblar 
-este programa, el ensamblador detectara este error y en la pantalla recibir^^Sa
- el error descriptivo como el siguiente:[] 
+! LaTeX Error: \begin{itemize} on input line 7 ended by \end{quoting}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.76 ... registros empiezan estrictamente con "R"'
+                                                   mayúscula). Cuando se qu...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.78 \mensaje
+             {"Ha ocurrido un error en la linea 1: MUL [R6], r4"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.78 ...ido un error en la linea 1: MUL [R6], r4"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.78 ...ido un error en la linea 1: MUL [R6], r4"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.80 \item D
+            ado el siguiente programa Qi:\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 80
+[][]
  []
 
 
-Overfull \hbox (136.74605pt too wide) in paragraph at lines 61--61
- []\OT1/cmtt/m/n/10 \item Algo com^^Sun que podr^^S^^Pa ocurrir es si un alumno
- escribe el siguiente programa Qi:\\[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
+Underfull \hbox (badness 10000) in paragraph at lines 80--81
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 67--68
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
-
- []
-
-LaTeX Info: Redefining \. on input line 83.
-LaTeX Info: Redefining \% on input line 83.
-LaTeX Info: Redefining \. on input line 83.
-LaTeX Info: Redefining \% on input line 83.
+LaTeX Info: Redefining \. on input line 85.
+LaTeX Info: Redefining \% on input line 85.
+LaTeX Info: Redefining \. on input line 85.
+LaTeX Info: Redefining \% on input line 85.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 83.
+Package pdftex.def Info: logoQSim.png used on input line 85.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [31]
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+! Undefined control sequence.
+l.89 \mensaje
+             {"Ha ocurrido un error en la linea 1: AND R2, R8"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.89 ...rrido un error en la linea 1: AND R2, R8"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.89 ...rrido un error en la linea 1: AND R2, R8"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.90 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.91 \item D
+            ado el siguiente programa Qi:\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 91
+[][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
+! Undefined control sequence.
+l.100 \mensaje
+              {"Ha ocurrido un error en la linea 1: MUL R7, R4"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.100 ...rido un error en la linea 1: MUL R7, R4"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
 
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.100 ...rido un error en la linea 1: MUL R7, R4"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101 
+      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.102 \item D
+             ado el siguiente programa Qi:\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 102
+[][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--101
+Underfull \hbox (badness 10000) in paragraph at lines 102--103
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
-
- []
+! Undefined control sequence.
+l.112 \mensaje
+              {"Ha ocurrido un error en la linea 3: JMP incio" \\}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
 
-LaTeX Info: Redefining \. on input line 118.
-LaTeX Info: Redefining \% on input line 118.
-LaTeX Info: Redefining \. on input line 118.
-LaTeX Info: Redefining \% on input line 118.
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.115 \item D
+             ado el siguiente programa Qi :\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 115
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
+ []
+
+! Undefined control sequence.
+l.124 \mensaje
+              {"Ha ocurrido un error en la linea 2: NOT 0x0004"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.124 ...rido un error en la linea 2: NOT 0x0004"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.124 ...rido un error en la linea 2: NOT 0x0004"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.125 
+      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.126 \item D
+             ado el siguiente programa Qi:\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 126
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+
+ []
+
+LaTeX Info: Redefining \. on input line 134.
+LaTeX Info: Redefining \% on input line 134.
+LaTeX Info: Redefining \. on input line 134.
+LaTeX Info: Redefining \% on input line 134.
 File: logoQSim.png Graphic file (type png)
 <use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 118.
+Package pdftex.def Info: logoQSim.png used on input line 134.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
  [32]
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
+! Undefined control sequence.
+l.135 \mensaje
+              {"Ha ocurrido un error en la linea 1: ADD [0009], R4"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.135 ... un error en la linea 1: ADD [0009], R4"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.135 ... un error en la linea 1: ADD [0009], R4"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.136 
+      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.137 \item D
+             ado el siguiente programa Qi :\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 137
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
+
+ []
+
+! Undefined control sequence.
+l.146 \mensaje
+              {"Ha ocurrido un error en la linea 1: ADD [0x900000000000], R4...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.146 ...en la linea 1: ADD [0x900000000000], R4"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.146 ...en la linea 1: ADD [0x900000000000], R4"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.147 
+      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.148 \item D
+             ado el siguiente programa Qi  :\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 148
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
+
+ []
+
+! Undefined control sequence.
+l.157 \mensaje
+              {"Ha ocurrido un error en la linea 1: ZDD [0x900000000000], R4...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.159 \item D
+             ado el siguiente programa Qi  :\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 159
+[][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
 
  []
 
+! Undefined control sequence.
+l.167 \mensaje
+              {"Ha ocurrido un error en la linea 1: SUB [], 0x000A"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--139
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.167 ... un error en la linea 1: SUB [], 0x000A"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 149--150
-
- []
-
-LaTeX Info: Redefining \. on input line 154.
-LaTeX Info: Redefining \% on input line 154.
-LaTeX Info: Redefining \. on input line 154.
-LaTeX Info: Redefining \% on input line 154.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 154.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [33]
-Underfull \hbox (badness 10000) in paragraph at lines 158--159
-
- []
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.167 ... un error en la linea 1: SUB [], 0x000A"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--161
+! LaTeX Error: There's no line here to end.
 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.168 
+      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.169 \item D
+             ado el siguiente programa Qi  :\\
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 169
+[][]
  []
 
 
@@ -1227,55 +1950,80 @@ Underfull \hbox (badness 10000) in paragraph at lines 169--170
 
  []
 
+! Undefined control sequence.
+l.177 \mensaje
+              {"Ha ocurrido un error en la linea 1: JMP"} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
+! Argument of \language@active@arg" has an extra }.
+<inserted text> 
+                \par 
+l.177 ...Ha ocurrido un error en la linea 1: JMP"}
+                                                   \\
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 180--181
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
-
- []
-
-LaTeX Info: Redefining \. on input line 189.
-LaTeX Info: Redefining \% on input line 189.
-LaTeX Info: Redefining \. on input line 189.
-LaTeX Info: Redefining \% on input line 189.
-File: logoQSim.png Graphic file (type png)
-<use logoQSim.png>
-Package pdftex.def Info: logoQSim.png used on input line 189.
-(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [34]
-Underfull \hbox (badness 10000) in paragraph at lines 190--191
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
-
- []
+Runaway argument?
+! Paragraph ended before \language@active@arg" was complete.
+<to be read again> 
+                   \par 
+l.177 ...Ha ocurrido un error en la linea 1: JMP"}
+                                                   \\
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--201
+! LaTeX Error: There's no line here to end.
 
- []
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.178 
+      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--203
+! LaTeX Error: \begin{document} ended by \end{itemize}.
 
- []
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.180 \end{itemize}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
-
- []
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.180 \end{itemize}
+                   
+Things are pretty mixed up, but I think the worst is over.
 
 )
+LaTeX Info: Redefining \. on input line 39.
+LaTeX Info: Redefining \% on input line 39.
+LaTeX Info: Redefining \. on input line 39.
+LaTeX Info: Redefining \% on input line 39.
+File: logoQSim.png Graphic file (type png)
+ <use logoQSim.png>
+Package pdftex.def Info: logoQSim.png used on input line 39.
+(pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
+ [33]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 47.
 LaTeX Info: Redefining \. on input line 47.
 LaTeX Info: Redefining \% on input line 47.
@@ -1285,7 +2033,7 @@ File: logoQSim.png Graphic file (type png)
  <use logoQSim.png>
 Package pdftex.def Info: logoQSim.png used on input line 47.
 (pdftex.def)             Requested size: 56.9055pt x 25.41617pt.
- [35]
+ [34]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 47.
  (./QSim_Molinari_Rosito.aux
 LaTeX Info: Redefining \. on input line 21.
@@ -1302,13 +2050,13 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 47.
  ) 
 Here is how much of TeX's memory you used:
- 7645 strings out of 495059
- 104396 string characters out of 3182030
- 201817 words of memory out of 3000000
- 10492 multiletter control sequences out of 15000+200000
+ 7633 strings out of 495059
+ 104260 string characters out of 3182030
+ 202817 words of memory out of 3000000
+ 10493 multiletter control sequences out of 15000+200000
  13098 words of font info for 51 fonts, out of 3000000 for 9000
  15 hyphenation exceptions out of 8191
- 36i,15n,45p,1740b,666s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,14n,45p,1680b,666s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
@@ -1323,10 +2071,10 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on QSim_Molinari_Rosito.pdf (35 pages, 2226148 bytes).
+Output written on QSim_Molinari_Rosito.pdf (34 pages, 2221276 bytes).
 PDF statistics:
- 743 PDF objects out of 1000 (max. 8388607)
- 666 compressed objects within 7 object streams
- 210 named destinations out of 1000 (max. 500000)
+ 713 PDF objects out of 1000 (max. 8388607)
+ 637 compressed objects within 7 object streams
+ 197 named destinations out of 1000 (max. 500000)
  490 words of extra memory for PDF output out of 10000 (max. 10000000)
 

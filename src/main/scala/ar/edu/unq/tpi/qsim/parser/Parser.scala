@@ -4,8 +4,11 @@ import ar.edu.unq.tpi.qsim.model.Programa
 import scala.util.parsing.input.CharSequenceReader
 import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
 
+
 object Parser extends Ensamblador {
 
+  var arquitecturas = List(ArquitecturaQ("Q1"), ArquitecturaQ("Q2"), ArquitecturaQ("Q3"), ArquitecturaQ("Q4"), ArquitecturaQ("Q5"), ArquitecturaQ("Q6"))
+  
   def readFile(path: String): String = {
     val input = io.Source.fromFile(path)
     return input.mkString
@@ -73,3 +76,5 @@ object Parser extends Ensamblador {
     return mensaje
   }
 }
+
+case class ArquitecturaQ(var name:String){}
