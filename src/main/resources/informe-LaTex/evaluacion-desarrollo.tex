@@ -62,7 +62,7 @@ Al Intrepretar una secuencia de código máquina que no representa a ninguna ins
 
 \subsection{Ejecución}
 
-Para verificar que la ejecución de un programa Qi con el \textbf{Ciclo de Instrucción} se realice correctamente lo que hacemos es cargar el programa en la memoria a través del objeto \textbf{Simulador}, de esta forma cuando se encuentra cargado esta listo para la ejecución. Los pasos que se verifican son 3:
+Para verificar que la ejecución de un programa Qi fue necesario separar la verificación en los tres pasos del \textbf{Ciclo de Instrucción}:
 
 \begin{itemize}
 \item \textbf{Fetch} 
@@ -116,22 +116,25 @@ Esta sección describe situaciones particulares que los alumnos pueden experimen
 
 \begin{itemize}
 
-\item Supongamos que un alumno escribe el siguiente programa Qi:
+\item Dado el siguiente programa Qi:
 
-1.ADD R0, [0x0002]\\
-2.MUL R4, 0x0001 \\
-3.SUB [0x0003], 0x000A \\
-4.MOV R5, 0x0056 \\
-5.MOV [0x0005], etiqueta \\
-6.CALL [0x0005] \\
-7.etiqueta: ADD R0, 0x0002 \\
-8.RET \\
+\begin{verbatim}
+ADD R0, [0x0002]
+MUL R4, 0x0001
+SUB [0x0003], 0x000A
+MOV R5, 0x0056
+MOV [0x0005], etiqueta
+CALL [0x0005]
+etiqueta: ADD R0, 0x0002
+RET
+\end{verbatim}
 
 Lo interesante es que luego de ejecutar el CALL se ejecuta la instrucción ADD R0, 0x0002 y el RET. Cuando vuelve para ejecutar la próxima instrucción el PC se encuentra en la linea 7, donde vuelve a ejecutar la instrucción ADD antes mencionada. Ya lo ultimo que le queda es ejecutar el RET.
 Vamos a hacer un mapa del estado del registro SP antes de seguir: Antes de ejecutar el RET  el registro SP tiene el valor inicial que es FFEF, luego en la ejecución lo primero que se hace es incrementar el SP osea que ahora tiene el valor FFFO y luego buscar el valor de esa dirección para actualizar el registro PC. Para informarles la dirección FFFO es un puerto de E/S. La conclusión es que en esta instancia el flujo de ejecución del programa depende del valor que tiene ese puerto, puede pasar que el valor sea 0x0000 y se actualice el PC nos lleve al inicio de la memoria donde se encuentra inicializado otro programa y empiece a ejecutar desde allí. 
 
 
-\item Para los que son curiosos, supongamos que un alumno escribe el siguiente programa Qi:
+\item Dado el siguiente programa Qi:
+
 \begin{verbatim}
 ADD R0, [0x0002]
 MUL R4, 0x0001
