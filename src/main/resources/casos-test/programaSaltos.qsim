@@ -1,0 +1,2 @@
+inicio: ADD [0x0003], R4 
+JMP inicio
