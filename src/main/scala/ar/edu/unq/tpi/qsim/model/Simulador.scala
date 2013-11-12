@@ -320,8 +320,8 @@ case class Simulador() {
     var direccion: Int = 0
     modoDir match {
       case Inmediato(valor: W16) ⇒ { throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.") }
-      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setStateCelda(direccion, State.STORE); busIO.setValorC(direccion, un_valor); }
-      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setStateCelda(direccion, State.STORE); busIO.setValorC(direccion, un_valor); }
+      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE);  }
+      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value;  busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
       case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
       case r: Registro ⇒
         r.valor = un_valor
@@ -334,8 +334,13 @@ case class Simulador() {
    *
    */
   def executeRet() {
+    
+    if(cpu.sp.value >= busIO.memoria.tamanioMemoria - 1)
+    { val nuevo_sp = ((cpu.sp.value - busIO.memoria.tamanioMemoria) + 65520) 
+      cpu.sp.:=(Util.toHex4(nuevo_sp))  
+    }
     cpu.sp.++
-    cpu.pc.:=(busIO.memoria.getValor(cpu.sp.toString).toString)
+    cpu.pc.:=(busIO.getValor(cpu.sp).toString)
   }
   /**
    * Delega en la ALU la ejecucion del CMP y luego actualiza los flags.
@@ -365,8 +370,14 @@ case class Simulador() {
    * @param W16
    */
   def executeCall(valor: W16) {
-    busIO.memoria.setValor(cpu.sp.toString, cpu.pc)
-    cpu.sp.--
+    val prepararValorsp = new W16(cpu.sp.toString)
+    val prepararValorpc = new W16(cpu.pc.toString)
+    store(Directo(Inmediato(prepararValorsp)), prepararValorpc)
+    if(cpu.sp.value == 65520)
+    { val nuevo_sp = (busIO.memoria.tamanioMemoria - 1) 
+      cpu.sp.:=(Util.toHex4(nuevo_sp))  
+    }
+    else {cpu.sp.--}
     cpu.pc.:=(valor.hex)
   }
 
