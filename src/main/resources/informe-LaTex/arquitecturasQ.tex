@@ -3,11 +3,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Características generales} 
 
-La Arquitectura Q tiene 8 registros de uso general de 16 bits, denominados R0..R7, registros especiales de 16 bits tales como PC - \textit{Program counter}, SP\footnote{Comienza en la dirección FFEF.} - \textit{Stack Pointer} y los Flags de un bit como Negative, oVerflow, Carry, Zero. También tiene un conjunto de instrucciones que detallaran mas adelante. \\
-Todas las instrucciones alteran los flags excepto MOV, CALL, RET, JMP y los saltos condicionales. De las instrucciones que alteran los Flags, todas dejan C y V en 0 a excepción de ADD, SUB y CMP.  \\
+La Arquitectura Q tiene 8 registros de uso general de 16 bits, denominados R0..R7, registros especiales de 16 bits tales como PC - \textit{Program counter}, SP\footnote{Comienza en la dirección FFEF.} - \textit{Stack Pointer} y los Flags de un bit como Negative, oVerflow, Carry, Zero. 
 
-
-Por ultimo tiene una Memoria que tiene direcciones de 16 bit, donde el tamaño de cada celda también es de 16 bit. La Memoria tiene un tamaño de 65536 celdas. \\ 
+Por ultimo tiene una Memoria Principal con direcciones de 16 bit, donde el tamaño de cada celda también es de 16 bit. Entonces la memoria tiene un tamaño de 65536 celdas. \\ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Modos de direccionamiento}
 Los siguientes son los modos de direccionamiento implementados en la Arquitectura \Q.
@@ -67,7 +65,11 @@ Registro indirecto &  110rrr\\ \hline
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Repertorio de instrucciones}
-En esta sección se detalla cómo se construye el código máquina de las instrucciones de la arquitectura.
+En esta sección se detalla cómo se construye el código máquina de las instrucciones de la arquitectura.\\
+
+Todas las instrucciones alteran los flags excepto MOV, CALL, RET, JMP y los saltos condicionales. De las instrucciones que alteran los Flags, todas dejan C y V en 0 a excepción de ADD, SUB y CMP.  \\
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Instrucciones de 2 operandos}
 

@@ -34,28 +34,30 @@ Mas detalle al respecto de este proceso en el apéndice \ref{apendiceQ}.
 
 Una vez ensamblado, la representación binaria (o código máquina) del programa será cargado en memoria a partir de una ubicación (celda de memoria) que el alumno puede elegir. Esto permite visualizar el contenido de la memoria (con el programa cargado) y el estado de los registros de la CPU. 
 
-Durante la carga del programa en memoria puede ocurrir que el programa no cuenta con el espacio suficiente a partir de la ubicación elegida ya que ocupa más celdas que las que se encuentran disponibles, ya que como se especifica en el apéndice \ref{apendiceQ}, la memoria disponible tiene un tamaño limitado y por este motivo la alocación en memoria del código máquina puede exceder el espacio disponible a partir de la celda inicial anteriormente elegida. Si por el contrario, no se produce este error, el alumno podrá ver el programa cargado en memoria exitosamente.
+Durante la carga del programa en memoria puede ocurrir que el programa no cuente con el espacio suficiente a partir de la ubicación elegida ya que ocupa más celdas que las que se encuentran disponibles, ya que como se especifica en el apéndice \ref{apendiceQ}, la memoria disponible tiene un tamaño limitado y por este motivo la alocación en memoria del código máquina puede exceder el espacio disponible a partir de la celda inicial anteriormente elegida. Si por el contrario, no se produce este error, el alumno podrá ver el programa cargado en memoria exitosamente.
 
 \subsection{Ejecución paso a paso}
 
-Se provee la funcionalidad de la ejecución paso a paso ya que se desea que el alumno pueda experimentar y así comprender los pasos del ciclo de ejecución. Además puede ejercitarse situaciones que se denominan ''errores conceptuales de programación'' Esto es a lo que llamamos Errores conceptuales, entre los cuales es posible mencionar:
-
-\begin{itemize}
-\item Tomar un dato de un sector de memoria equivocado.
-\item Que el programa sobrescriba su mismo código máquina.
-\item Permitir que la ejecución continue una vez procesadas las instrucciones del programa cargado en memoria.
-\end{itemize}
-
-El paso a paso que provee el simulador consiste en las siguientes etapas pertenecientes al \ciclo:
+Se provee la funcionalidad de la ejecución paso a paso ya que se desea que el alumno pueda experimentar y así comprender los pasos del \ciclo. El paso a paso que provee el simulador consiste en las siguientes etapas pertenecientes al \ciclo:
 
 \begin{enumerate}
-\item \textbf{Búsqueda de instrucción:} El alumno podrá visualizar el valor que contiene PC (Program counter) donde se encuentra la dirección de la celda en memoria que contiene la próxima instrucción a ejecutar (por ejemplo, en caso de ser la primer instrucción del programa recién cargado, el pc tendrá la dirección de memoria elegida por el alumno para iniciar el cargado del programa en memoria). El simulador, toma de la memoria el código maquina correspondiente a la instrucción que comienza en esa dirección tomada de PC (una instrucción puede ocupar más de una celda de memoria) y los guarda en el \IR\ (\textit{Instruction Register}). Será observable también para el alumno el incremento del registro PC, tantas como celdas ocupe la instrucción actual, lo que conceptualmente es, preparar el contexto de ejecución para tomar la siguiente instrucción.
+\item \textbf{Búsqueda de instrucción:} El alumno podrá visualizar el valor que contiene PC (Program counter) donde se encuentra la dirección de la celda en memoria que contiene la próxima instrucción a ejecutar (por ejemplo, en caso de ser la primer instrucción del programa recién cargado, el pc tendrá la dirección de memoria elegida por el alumno para iniciar el cargado del programa en memoria). El simulador, toma de la memoria el código maquina correspondiente a la instrucción que comienza en esa dirección tomada de PC (una instrucción puede ocupar más de una celda de memoria) y los guarda en el \IR\ (\textit{Instruction Register}). Será observable también para el alumno el incremento del registro PC, tanto como celdas ocupe la instrucción actual, lo que conceptualmente es, preparar el contexto de ejecución para tomar la siguiente instrucción.
 
 \item  \textbf{Decodificación:}
-En la decodificación el Interprete se encarga de desensamblar el código máquina (abreviado en hexadecimal) que ya fue ubicado en el \IR para mostrar el código fuente de la instrucción actual con sus respectivos operandos. Si el programa escrito por el alumno es sintacticamente y conceptualmente correcto, este paso le permite comprobar que la instrucción actual es la que él mismo escribió y no otra, visualizandola en pantalla. En esta etapa se provee también la oportunidad de que el alumno aprecie otros conceptos, tales como los errores conceptuales mencionados antes.
+En la decodificación el interprete se encarga de desensamblar el código máquina (abreviado en hexadecimal) que ya fue ubicado en el \IR\ para mostrar el código fuente de la instrucción actual con sus respectivos operandos. Si el programa escrito por el alumno es sintacticamente y conceptualmente correcto, este paso le permite comprobar que la instrucción actual es la que él mismo escribió y no otra, visualizandola en pantalla. \\
+
+La decodificación con desensamblado, es decir con la reconstrucción del código fuente, permite al alumno experimentar otros escenarios y efectos laterales, entre los cuales podemos enumerar:
+
+\begin{itemize}
+\item Si la ejecución paso a paso excede los límites del programa, pueden tomarse instrucciones de otra rutina y procesarse como una nueva instrucción.
+\item Si en cambio, se intenta ejecutar el contenido de una celda con datos (y no una instrucción) podrá ocurrir que se encuentre una instrucción invalida (por ejemplo, una combinación incorrecta de modos de direccionamiento y códigos de operación) y el alumno verá el mensaje de error pertinente.
+\item Que el programa sobrescriba su mismo código máquina.
+\end{itemize}
+
+Mas detalle de estas situaciones en la sección \ref{erroresconceptuales}.
 
 \item  \textbf{Ejecución}
-El execute ejecuta los efectos de la instrucción y muestra en pantalla los cambios en el estado de ejecución: memoria, puertos, registros y flags. Dentro de esta misma etapa se lleva a cabo el almacenamiento de resultados que, cuando sea necesario, guardará el valor resultante de la operación descripta por la instrucción en el operando destino. Esto cambiará el valor de una celda de memoria o de un registro y será visto en pantalla por el alumno.
+La ejecución lleva a cabo los efectos de la instrucción y muestra en pantalla los cambios en el estado de ejecución: contenidos de memoria, puertos, registros y flags. Esto quiere decir que es en esta etapa cuando se lleva a cabo el almacenamiento de resultados que, si es necesario, guardará el valor resultante de la operación descripta por la instrucción en el operando destino. Esto cambiará el valor de una celda de memoria o de un registro y será visto en pantalla por el alumno.
 \end{enumerate}
 
 
@@ -114,7 +116,7 @@ Como se observa en la figura \ref{Interprete} el Interprete es un \textit{single
 \subsubsection{Modos de direccionamiento y W16}
 
 Esta jerarquía de clases permite controlar el acceso a los operandos, mediante un objeto ModoDireccionamiento que controla el acceso a un objeto W16, que es quien contiene el valor propiamente dicho. 
-Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del trait ModoDireccionamiento, donde se encuentran declarados mensajes necesarios para manejar todas las subclases de manera polimórfica. Entre estos mensajes podemos enumerar:
+Como se observa en la figura \ref{ModoDireccionamiento} los modos de direccionamiento extienden del \ojo{\textit{trait}}{agregar definición de trait} ModoDireccionamiento, donde se encuentran declarados mensajes necesarios para manejar todas las subclases de manera polimórfica. Entre estos mensajes podemos enumerar:
 \begin{itemize}
 \item  \textbf{representacionString:}
 Devuelve la representación en string como código fuente, por ejemplo la representación de un objeto

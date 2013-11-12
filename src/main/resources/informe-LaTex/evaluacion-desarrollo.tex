@@ -7,15 +7,15 @@
 Las dificultades del dominio estuvieron relacionadas a la comprensión no solamente del modelo de arquitectura Q si no también a su propósito didáctico, ya que el objetivo del simulador no es solamente la simulación de la arquitectura y la ejecución de programas, sino también el proveer a los alumnos la capacidad de ejercitar situaciones conceptualmente erróneas, por lo que se requería una comprensión didáctica del problema más allá de la especificación de las arquitecturas Q. 
 
 \subsection{Dificultades de diseño}
-En primera instancia se optó por implementar un modelo de objetos que utilizaba un objeto de la clase \textbf{Programa} a lo largo de toda la ejecución.Esto implica que no leía de la memoria principal las instrucciones a ejecutar, sino que solicitaba la siguiente instrucción al objeto instancia de la clase Programa, sobreviviendo así las distintas etapas una vez que fue creado por el \textit{parser}. Este enfoque evitaba la creación de un objeto que tuviera que interpretar el código máquina alojado en la memoria, evitaba la nueva creación de instancias de la clase \textbf{Instrucción} y simplificaba en gran medida el modelo ya que la memoria era sólo una clase que contenía datos que se reflejaban en pantalla y no se extraían datos de celdas en ningún momento. Luego entendimos que un programa no sólo podía modificar su entorno al ser ejecutado (otras celdas de memoria que no ocupen su código maquina, celdas de puertos, registros, etc) si no que también podría sobrescribir su código maquina (ya sea con ese propósito o sólo por un error conceptual), o bien, que el alumno debía tener la posibilidad de seguir ejecutando más allá del código máquina alojado en memoria o más. A partir de eso fue necesario corregir gran parte del modelo agregando una clase denominada \textbf{Intérprete}, cuya responsabilidad es interpretar la siguiente instrucción alojada en memoria para que luego sea ejecutada, otorgando más responsabilidad a la clase \textbf{Memoria} y descartando el objeto instancia de \textbf{Programa} una vez que éste es cargado en memoria con éxito.\\
+En primera instancia se optó por implementar un modelo de objetos que utilizaba un objeto de la clase \textbf{Programa} a lo largo de toda la ejecución. Esto permitía evitar la lectura de la memoria principal para obtener las instrucciones a ejecutar, solicitando cada instrucción al objeto de la clase Programa, sobreviviendo así las distintas etapas una vez que fue creado por el \textit{parser}. Este enfoque evitaba la necesidad de un objeto que tuviera que interpretar el código máquina alojado en la memoria, evitaba la nueva creación de instancias de la clase \textbf{Instrucción} y simplificaba en gran medida el modelo ya que la memoria era sólo una clase que contenía datos que se reflejaban en pantalla y no se la utilizaba en el la búsqueda de instrucciones. Luego entendimos que un programa no sólo podía modificar su entorno al ser ejecutado (otras celdas de memoria que no ocupen su código maquina, celdas de puertos, registros, etc) si no que también podría sobrescribir su código maquina (ya sea con ese propósito o sólo por un error conceptual), o bien, que el alumno debía tener la posibilidad de seguir ejecutando más allá del código máquina alojado en memoria o más. A partir de eso fue necesario corregir gran parte del modelo agregando una clase denominada \textbf{Intérprete}, cuya responsabilidad es interpretar la siguiente instrucción alojada en memoria para que luego sea ejecutada, otorgando más responsabilidad a la clase \textbf{Memoria} y descartando el objeto instancia de \textbf{Programa} una vez que éste es cargado en memoria con éxito.\\
 
-Por otro lado, tuvieron que solicitarse extensiones al equipo de desarrolladores de Arena para poder realizar la interfaz con dicho framework:
+Por otro lado, tuvieron que solicitarse extensiones al equipo de desarrolladores de Arena para poder implementar la interfaz del simulador utilizando dicho framework. Entre dichas extensiones podemos enumerar:
 
 \begin{itemize}
-\item FileSelector para que los alumnos puedan cargar el archivo .Qsim en el cual se encuentra su programa
-\item CodeEditor (O actualmente llamado KeywordTextArea). Es el espacio donde se visualiza el programa Qi que realizaron los alumnos una vez que esta cargado.
-\item Bindings contra el background de componentes y celdas de una tabla, para permitir la visualización de cambios de colores en la memoria luego de las etapas de ejecución y de realizar algún cambio en la misma.
-\item TexBox multiLine (TextArea) con scroll para ser utilizado como consola de devolucion.
+\item \textbf{FileSelector}: que permite la carga de archivos de código fuente.
+\item \textbf{CodeEditor} (O actualmente llamado KeywordTextArea): Es un área en la ventana donde se visualiza el el código fuente de los programas   una vez que han sido elegidos del navegador de archivos.
+\item \textbf{Bindings} contra el background de componentes y celdas de una tabla, para permitir la visualización de cambios de colores en la memoria a partir de que se recorren las celdas del programa o se realiza algún cambio en el contenido de una celda.
+\item \textbf{TexBox multiline} es un area de texto que puede navegarse (utilizando el \textit{scroll}) para ser utilizado como consola de devolución.
 \item Icono para la aplicación, solo por cuestiones estéticas.
 \end{itemize}
 
@@ -26,24 +26,22 @@ En esta sección se describen los casos de prueba de la aplicación realizados p
 
 \subsection{Chequeo de sintaxis en la distintas Qi}
 
-El chequeo de sintaxis de cada \textbf{Arquitectura Q} se lleva a cabo escribiendo un programa Qi en un archivo con extension .qsim y luego, haciendo que este mismo archivo sea tomado por el objeto Parser cuya responsabilidad es chequear la sintaxis. 
-
-Para chequear la sintaxis de cada \textbf{Arquitectura Q} se realizaron dos casos de prueba por cada Qi:
+El chequeo de sintaxis de cada versión de la \textbf{Arquitectura Q} se lleva a cabo procesando algunos programas con el \textit{parser}, y con este objetivo se confeccionaron  dos casos de prueba por cada Qi:
 \begin{enumerate}
 \item \textbf{Chequear programa Qi válido}
 
-Se toma como input del objeto instancia Parser un programa Qi válido\footnote{Un programa Qi válido es un programa sintáticamente correcto en alguna arquitectura Q.}, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Por ejemplo, un programa sintácticamente válido en Q6 puede no ser sintácticamente válido en Q1 si utiliza modos de direccionamiento o instrucciones Q1 no incluye. Al terminar de chequear el programa, el objeto parser retorna un objeto instancia de la clase Programa con la lista de instrucciones que fueron ensambladas. 
-Se toma dicho resultado y como ultimo paso se compara si el programa resultado es igual al programa esperado (que concuerda en objetos con el programa en código fuente escrito en el input).
+Se utiliza como parámetro para el objeto de la clase \textbf{Parser} un programa Qi válido, es decir que es sintáticamente correcto en la arquitectura Qi, y éste comprobará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Por ejemplo, un programa sintácticamente válido en Q6 puede no ser sintácticamente válido en Q1 si utiliza modos de direccionamiento o instrucciones que Q1 no incluye. Al terminar de chequear el programa, el objeto Parser retorna un objeto instancia de la clase Programa con la lista de instrucciones que fueron ensambladas. 
+Se toma dicho resultado y como ultimo paso se compara con el programa esperado (que concuerda en objetos con el programa en código fuente escrito en el input).
 
 
 \item \textbf{Chequear programa Qi es invalido} 
 
-Se toma como input del objeto instancia Parser un programa Qi invalido, este chequeará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Al terminar de chequear el programa, el objeto parser retorna un objeto de la clase Exception del tipo \textbf{SyntaxErrorException}, se captura la excepción y se toma de ella el mensaje de error para corroborar que sea el mensaje esperado (que describe la línea donde esta el error de sintáxis).
+Se utiliza como parámetro para el objeto de la clase \textbf{Parser}  un programa Qi inválido, y el parser este comprobará la sintaxis del programa acorde a la arquitectura Qi seleccionada. Al terminar de chequear el programa, el objeto parser retorna un objeto de la clase Exception del tipo \textbf{SyntaxErrorException}, se captura la excepción y se toma de ella el mensaje de error para corroborar que sea el mensaje esperado (que describe la línea donde esta el error de sintáxis).
 
 \end{enumerate}
 \subsection{Ensamblado}
 
-Para poder verificar que el ensamblado se realizó correctamente se toma un programa Qi y teniendo en cuenta que el resultado del parser genera un objeto de la clase \textbf{Programa} que contiene un conjunto de objetos de la clase \textbf{Instruccion}, además que cada instrucción tiene el comportamiento necesario para generar su propio \codmaq, se delega la generación del \codmaq a cada una, con la intención de comparar la secuencia resultante con la secuencia de \codmaq esperada.
+Para poder verificar que el ensamblado se realiza correctamente se toma un programa Qi y teniendo en cuenta que el resultado del parser genera un objeto de la clase \textbf{Programa} que contiene un conjunto de objetos de la clase \textbf{Instruccion}, además que cada instrucción tiene el comportamiento necesario para generar su propio \codmaq, se delega la generación del \codmaq a cada una, con la intención de comparar la secuencia resultante con la secuencia de \codmaq esperada.
 
 \subsection{Decodificación}
 
@@ -79,7 +77,7 @@ Para verificar el efecto de cada instrucción se preparó un caso de prueba por 
 
 \end{itemize}
 
-Las siguiente secciones son pasos que se realizan de acuerdo al efecto de la instrucción
+Las siguiente secciones son pasos que se realizan de acuerdo al efecto esperado de cada instrucción en el repertorio de la arquitectura \Q\ (detallada en el apéndice \ref{apendiceQ}).
   
 \subsubsection{Operaciones de ALU}
 
@@ -104,22 +102,22 @@ Para verificar la búsqueda de operandos, se toma una instrucción cualquiera y 
 Para verificar el almacenamiento de operandos, se ejecuta cada una de las instrucciones de un programa Qi. Durante la etapa de ejecución, cada una tiene un operando destinado a guardar el resultado de su efecto, y luego de ese momento se puede comparar el valor final del operando con el valor esperado.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Ejemplos de uso}
+\section{Ejemplos de uso}\label{erroresconceptuales}
 
 Durante el desarrollo del simulador se encontraron situaciones especiales de uso que mostraron la potencialidad didáctica de la herramienta, según fue confirmado con los docentes de la materia \orga, dado que los estudiantes pueden experimentar mas allá de la resolución de problemas mediante programas \qi. En esta sección se muestran algunos ejemplos de estas situaciones.
 
 \begin{enumerate}
 
-\item En el siguiente programa \qi\ se ve que el uso de etiquetas permite enmascarar el modo de direccionamiento inmediato difiriendo la resolución de su valor al momento del ensamblado, y dado que se trata de un valor constante, puede asignarse a cualquier operando destino. En este ejemplo, se almacena en la celda de memoria \code{0005}
+\item En el siguiente programa \qi\ se ve que el uso de etiquetas permite enmascarar el modo de direccionamiento inmediato difiriendo la resolución de su valor al momento del ensamblado, ya que a partir de entonces es manejado como un valor constante, y por lo tanto puede asignarse a cualquier operando destino. En este ejemplo, la dirección inicial de la rutina \code{rutinaA} se almacena en la celda de memoria \code{0005}, para luego ser recuperada en el \code{CALL}
 
 \begin{verbatim}
-etiqueta: ADD R0, 0x0002 
+rutinaA:  ADD R0, 0x0002 
           ...
-          MOV [0x0005], etiqueta
+          MOV [0x0005], rutinaA
           CALL [0x0005] 
 \end{verbatim}
 
-\item En el siguiente ejemplo se puede ejercitar como el uso de subrutinas, puede afectar el \ciclo. En particular, como efecto de la ejecución del \code{CALL} se apila la dirección de la siguiente instrucción (en este caso \code{ADD}), y la ejecución del \code{RET} hace que se vuelva entonces a ejecutar esa misma instrucción y luego un \code{RET} que no tuvo su correspondiente \code{CALL}.
+\item En el siguiente ejemplo se puede ejercitar como el uso de subrutinas, puede alterar el \ciclo. En particular en el siguiente ejemplo, como efecto de la ejecución del \code{CALL} se apila la dirección de la siguiente instrucción (en este caso un \code{ADD}), y la ejecución del \code{RET} hace que se vuelva entonces a ejecutar esa misma instrucción y luego un \code{RET} que no tuvo su correspondiente \code{CALL}.
 
 \begin{verbatim}
         CALL rutina 
@@ -138,16 +136,10 @@ MUL R4, 0x0001
 SUB [0x0003], 0x000A 
 \end{verbatim}
 
-Si el valor de PC hace referencia a la ultima instrucción y se lleva a cabo el \ciclo, como estado final se tiene el valor de PC apuntando a la siguiente instrucción a ejecutar. Como el programa no tiene mas instrucciones, si se continúa la simulación se comienza la búsqueda de una instrucción inválida.
+Si el valor de PC hace referencia a la ultima instrucción (en este caso un \code{SUB}) y se lleva a cabo el \ciclo, como estado final se tiene el valor de PC apuntando a la siguiente instrucción a ejecutar. Como el programa no tiene mas instrucciones, si se continúa la simulación se comienza la búsqueda de una instrucción inválida.
 
 \end{enumerate} 
 
-\verde{La decodificación con desensamblado permite al alumno experimentar otros escenarios y efectos laterales, entre los cuales podemos enumerar:
-
-\begin{itemize}
-\item Si la ejecución paso a paso excede los límites del programa, pueden tomarse instrucciones de otra rutina y procesarse como una nueva instrucción.
-\item Si en cambio, se intenta ejecutar el contenido de una celda con datos (y no una instrucción) podrá ocurrir que se encuentre una instrucción invalida (por ejemplo, una combinación incorrecta de modos de direccionamiento y códigos de operación) y el alumno verá el mensaje de error pertinente.
-\end{itemize}}{ACOMODAR!!!}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,7 +155,7 @@ Estas instrucciones permiten el manejo de la Pila como estructura de datos dispo
 
 \item Entrada y Salida\\
 
-Que el simulador admita la interacción con dispositivos de E/S. Para esto habría que modelar buses de entrada hacia los puertos y dispositivos tales como el teclado, impresora, monitor que estén conectados a los puertos y un programa pueda detectar su cambios y utilizar sus datos como input para luego procesarlos en un programa.
+Es deseable que en el futuro el simulador admita la interacción con dispositivos de Entrada/Salida o con simuladores de estos últimos. Para esto habría que modelar buses de entrada hacia los puertos y dispositivos tales como el teclado, impresora, monitor que estén conectados a los puertos y un programa pueda detectar su cambios y utilizar sus datos como input para luego procesarlos en un programa.
 
 \item Implementar interrupcciones\\
 
