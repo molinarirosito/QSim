@@ -10,7 +10,7 @@ case class BusEntradaSalida {
   def initialize() {
     println("--------INIT------")
    // memoria = Memoria(65536)
-   memoria = Memoria(415)
+   memoria = Memoria(65536)
     memoria.initialize
     puertos = CeldasPuertos()
     puertos.initialize
@@ -74,18 +74,4 @@ case class BusEntradaSalida {
   }
     else { this.memoria.setStateCelda(num_celda,state) }
   }
-}
-	
-
-object purr extends App() {
-
-  var bus = BusEntradaSalida()
-  bus.initialize
-  println(bus.getValor("FFF0"))
-  println(bus.getValor("FFFF"))
-  println(bus.getValor("FFF4"))
-  println(bus.getValor("000F")) 
-  println(bus.getValor("FFEF"))
-     
-  
 }
