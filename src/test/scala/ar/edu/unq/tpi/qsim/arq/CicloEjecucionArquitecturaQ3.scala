@@ -27,8 +27,11 @@ import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
 class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
+    var path = PathTest()
+    var programa_valido = path.getContenido("Q3", 1)
+    var programa_invalido = path.getContenido("Q3", 2)
     var parser = Parser
-    var resultadoQ3 = parser.ensamblarQ3("src/main/resources/casos-test/programaQ3.qsim")
+    var resultadoQ3 = parser.ensamblarQ3(programa_valido)
   }
 
   def programas = new {
@@ -56,10 +59,10 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
     var set_parser = parsers_resultados
     var set_programas = programas
 
-    var mensaje_esperado = "Ha ocurrido un error en la linea 5 MOV [0x0005], etiq"
+    var mensaje_esperado = "Ha ocurrido un error en la linea 5 : MOV [0x0005], etiq"
 
     val exception = intercept[SyntaxErrorException] {
-      set_parser.parser.ensamblarQ2("src/main/resources/casos-test/programaQ3SyntaxError.qsim")
+      set_parser.parser.ensamblarQ2(set_parser.programa_invalido)
     }
     println(exception.getMessage())
     //assert(exception.getMessage().equals(mensaje_esperado))

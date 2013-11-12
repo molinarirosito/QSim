@@ -12,8 +12,11 @@ import scala.collection.mutable.Map
 class CicloEjecucionArquitecturaQ5 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
+    var path  = PathTest()
+    var programa_valido = path.getContenido("Q5", 1)
+    var programa_invalido = path.getContenido("Q5", 2)
     var parser = Parser
-    var resultadoQ5 = parser.ensamblarQ5("src/main/resources/casos-test/programaQ5.qsim")
+    var resultadoQ5 = parser.ensamblarQ5(programa_valido)
   }
 
   def programas = new {
@@ -33,10 +36,10 @@ class CicloEjecucionArquitecturaQ5 extends FlatSpec with Matchers {
   it should "tirar un Failure cuando parsea un programa con sintaxis invalida" in {
     var set_parser = parsers_resultados
     var set_programas = programas
-    var mensaje_esperado = "Ha ocurrido un error en la linea 3 MOV [[0x0011] , "
+    var mensaje_esperado = "Ha ocurrido un error en la linea 3 : MOV [[0x0011] , "
     val exception = intercept[SyntaxErrorException] {
       
-      set_parser.parser.ensamblarQ5("src/main/resources/casos-test/programaQ5SyntaxError.qsim")
+      set_parser.parser.ensamblarQ5(set_parser.programa_invalido)
     }
     assert(exception.getMessage().equals(mensaje_esperado))
   }

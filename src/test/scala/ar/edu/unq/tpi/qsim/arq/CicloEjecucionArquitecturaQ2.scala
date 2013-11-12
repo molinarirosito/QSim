@@ -11,8 +11,11 @@ import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
 class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
+    var path = PathTest()
+    var programa_valido = path.getContenido("Q2", 1)
+    var programa_invalido = path.getContenido("Q2", 2)
     var parser = Parser
-    var resultadoQ2 = parser.ensamblarQ2("src/main/resources/casos-test/programaQ2.qsim")
+    var resultadoQ2 = parser.ensamblarQ2(programa_valido)
   }
 
   def programas = new {
@@ -36,9 +39,9 @@ class CicloEjecucionArquitecturaQ2 extends FlatSpec with Matchers {
     var set_parser = parsers_resultados
     var set_programas = programas
 
-    var mensaje_esperado = "Ha ocurrido un error en la linea 3 SUB [], 0x000A"
+    var mensaje_esperado = "Ha ocurrido un error en la linea 3 : SUB [], 0x000A"
     val exception = intercept[SyntaxErrorException] {
-      set_parser.parser.ensamblarQ2("src/main/resources/casos-test/programaQ2SyntaxError.qsim")
+      set_parser.parser.ensamblarQ2(set_parser.programa_invalido)
     }
     assert(exception.getMessage().equals(mensaje_esperado))
   }

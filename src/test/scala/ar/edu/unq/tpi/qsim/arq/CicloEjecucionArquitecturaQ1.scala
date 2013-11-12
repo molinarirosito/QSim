@@ -11,8 +11,11 @@ import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
 class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
+    var path : PathTest = PathTest()
+    var programa_valido = path.getContenido("Q1",1)
+    var programa_invalido = path.getContenido("Q1",2)
     var parser = Parser
-    var resultadoQ1 = parser.ensamblarQ1("src/main/resources/casos-test/programaQ1.qsim")
+    var resultadoQ1 = parser.ensamblarQ1(programa_valido)
   }
 
   def programas = new {
@@ -35,10 +38,10 @@ class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
   it should "tirar un Failure cuando parsea un programa con sintaxis invalida" in {
     var set_parser = parsers_resultados
     var set_programas = programas
-    var mensaje_esperado = "Ha ocurrido un error en la linea 2 MUL R4, 0x01"
+    var mensaje_esperado = "Ha ocurrido un error en la linea 2 : MUL R4, 0x01"
 
     val exception = intercept[SyntaxErrorException] {
-      set_parser.parser.ensamblarQ1("src/main/resources/casos-test/programaQ1SyntaxError.qsim")
+      set_parser.parser.ensamblarQ1(set_parser.programa_invalido)
     }
     assert(exception.getMessage().equals(mensaje_esperado))
   }
