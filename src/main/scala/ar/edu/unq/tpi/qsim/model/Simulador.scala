@@ -136,7 +136,7 @@ case class Simulador() {
       instruccion.position.++
       var posicionActual = instruccion.position
       var posicionASaltar = programa.etiquetas(instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.representacionString).position
-      resultado = Math.abs((posicionASaltar - posicionActual).value)
+      resultado = Math.abs(posicionASaltar.value - posicionActual.value)
     }
     resultado
   }
@@ -322,7 +322,7 @@ case class Simulador() {
       case Inmediato(valor: W16) ⇒ { throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.") }
       case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE);  }
       case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value;  busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
-      case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
+      case RegistroIndirecto(registro: Registro) ⇒ {direccion = obtenerValor(registro).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE);}
       case r: Registro ⇒
         r.valor = un_valor
         println(s"Se guarda el resutado $un_valor en " + modoDir.toString)

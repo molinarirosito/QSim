@@ -227,7 +227,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   /**
    * Se agregan los saltos al conjunto de instrucciones de Q4
    */
-  def instruccionsQ4Saltos = "JE" | "JNE" | "JLE" | "JG" | "JL" | "JGE" | "JLEU" | "JGU" | "JCS" | "JNEG" | "JVS"
+  def instruccionsQ4Saltos = "JE" | "JNE" | "JLE" | "JL" | "JGE" | "JLEU" | "JGU" | "JCS" | "JNEG" | "JVS" | "JG"
 
   /**
    * Este parser ensambla los saltos en Q4.
@@ -368,6 +368,50 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
 object lala extends App {
 
-  println(Parser.parse("""MUL R7, R7""", Parser.programQ6))
+  val programa = Parser.parse("""
+      MOV R0, 0x0100
+MOV [R0],0x0003
+ADD R0, 0x0001
+MOV [R0],0x0005
+ADD R0, 0x0001
+MOV [R0],0x0007
+ADD R0, 0x0001
+MOV [R0],0x0002
+ADD R0, 0x0001
+MOV [R0],0x0009
+ADD R0, 0x0001
+MOV [R0],0x0004
+ADD R0, 0x0001
+MOV [R0],0x0006
+ADD R0, 0x0001
+MOV [R0],0x0008
+ADD R0, 0x0001
+MOV [R0],0x0001
+ADD R0, 0x0001
+MOV [R0],0x0000
 
+MOV R5, 0x0100
+MOV R2, 0x0010 
+siguiente: MOV R3, R5
+MOV R6, R5
+seguir: ADD R6, 0x0001
+CMP R6, 0x010B
+JE esigual
+CMP [R6], [R3]
+JGE seguir
+MOV R3, R6
+JMP seguir
+esigual: MOV R4, [R5]
+MOV [R5], [R3]
+MOV [R3], R4
+ADD R5, 0x0001
+SUB R2, 0x0001
+JNE siguiente
+
+""", Parser.programQ5).get
+
+println(programa)
+val sim = new Simulador()
+sim.inicializarSim
+sim.cargarProgramaYRegistros(programa, "0000" , scala.collection.mutable.Map[String, W16]())
 } 
