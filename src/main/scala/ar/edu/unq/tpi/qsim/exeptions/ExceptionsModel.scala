@@ -3,6 +3,10 @@ import org.uqbar.commons.model.UserException
 
 import scala.util.control.Exception
 
+case class EtiquetaInvalidaException(smth:String) extends UserException(smth) {
+
+}
+
 case class CodigoInvalidoException(smth:String) extends UserException(smth) {
 
 }
