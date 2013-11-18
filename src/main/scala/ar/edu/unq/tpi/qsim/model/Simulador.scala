@@ -165,7 +165,8 @@ case class Simulador() {
       var programaSinEtiquetas = calcularEtiquetas(programa)
 
       busIO.memoria.cargarPrograma(programaSinEtiquetas, pc)
-      ciclo.pasarAFetch;
+      ciclo.ninguna_etapa
+      ciclo.pasarAFetch
     } else {
       throw new EtiquetaInvalidaException("Una de las etiquetas utilizadas es invalida")
       println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
