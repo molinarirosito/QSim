@@ -389,5 +389,16 @@ JNE siguiente""", Parser.programQ5).get
   val sim = new Simulador()
   sim.inicializarSim
   sim.cargarProgramaYRegistros(programa, "0000" , scala.collection.mutable.Map[String, W16]())
-  println(sim.busIO.memoria.show("0000"))
+  var count = 0
+  do {
+      //FETCH
+      sim.fetch()
+      //DECODE
+      var decode = sim.decode()
+      println(decode)
+      // Execute
+      sim.execute
+      count += 1
+    } while (count < programa.instrucciones.length)
+
 } 

@@ -130,10 +130,17 @@ case class Simulador() {
    */
   def calcularValorSaltoEtiqueta(instruccion: JUMP_condicional, programa: Programa) = {
     var resultado = instruccion.desplazamiento.salto
+    var signo = 0
     if (instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.codigo.equals("111111")) {
       instruccion.position.++
       var posicionActual = instruccion.position
       var posicionASaltar = programa.etiquetas(instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.representacionString).position
+      signo = posicionASaltar.value - posicionActual.value
+      if (signo < 0) {
+        var salto: Salto = instruccion.desplazamiento.asInstanceOf[Salto]
+        salto.isNegative = true
+        instruccion.desplazamiento = salto
+      }
       resultado = Math.abs(posicionASaltar.value - posicionActual.value)
     }
     resultado
@@ -144,7 +151,7 @@ case class Simulador() {
       inst match {
         case inst_dp: Instruccion_DosOperandos ⇒ inst_dp.origen = calcularValorOrigenEtiqueta(inst_dp, programa)
         case inst_up: Instruccion_UnOperando ⇒ inst_up.operando = calcularValorOperandoEtiqueta(inst_up, programa)
-        case inst_sc: JUMP_condicional ⇒ inst_sc.desplazamiento.salto = calcularValorSaltoEtiqueta(inst_sc, programa)
+        case inst_sc: JUMP_condicional ⇒ { inst_sc.desplazamiento.salto = calcularValorSaltoEtiqueta(inst_sc, programa); } // inst_sc.desplazamiento.asInstanceOf[Salto].isNegative = true}
         case inst ⇒
       }
     })
@@ -171,7 +178,7 @@ case class Simulador() {
       throw new EtiquetaInvalidaException("Una de las etiquetas utilizadas es invalida")
       println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
-    
+
   }
 
   /**
@@ -322,9 +329,9 @@ case class Simulador() {
     var direccion: Int = 0
     modoDir match {
       case Inmediato(valor: W16) ⇒ { throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.") }
-      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE);  }
-      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value;  busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
-      case RegistroIndirecto(registro: Registro) ⇒ {direccion = obtenerValor(registro).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE);}
+      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
+      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
+      case RegistroIndirecto(registro: Registro) ⇒ { direccion = obtenerValor(registro).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
       case r: Registro ⇒
         r.valor = un_valor
         println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
@@ -336,10 +343,10 @@ case class Simulador() {
    *
    */
   def executeRet() {
-    
-    if(cpu.sp.value >= busIO.memoria.tamanioMemoria - 1)
-    { val nuevo_sp = ((cpu.sp.value - busIO.memoria.tamanioMemoria) + 65520) 
-      cpu.sp.:=(Util.toHex4(nuevo_sp))  
+
+    if (cpu.sp.value >= busIO.memoria.tamanioMemoria - 1) {
+      val nuevo_sp = ((cpu.sp.value - busIO.memoria.tamanioMemoria) + 65520)
+      cpu.sp.:=(Util.toHex4(nuevo_sp))
     }
     cpu.sp.++
     cpu.pc.:=(busIO.getValor(cpu.sp).toString)
@@ -363,7 +370,23 @@ case class Simulador() {
    *  @param Salto, Boolean
    */
   def executeJMPCondicional(salto: Salto, condicion: Boolean) {
-    if (condicion) { cpu.incrementarPc(salto.value) }
+    println("es salto etiqueta?" + salto.isInstanceOf[SaltoEtiqueta])
+    println("es salto normal"+ salto.isInstanceOf[Salto])
+    if (condicion) {
+      incrementOrDecrementPc(salto)
+    }
+  }
+
+  /**
+   *  Ejecuta el JUMP condicional fijandose si decrementa o incrementa el PC con dicho valor. Recibe el valor del desplazamiento.
+   *  @param Salto, Boolean
+   */
+  def incrementOrDecrementPc(salto: Salto) {
+    if (salto.signo) {
+      cpu.decrementarPc(salto.value)
+    } else {
+      cpu.incrementarPc(salto.value)
+    }
   }
 
   /**
@@ -375,11 +398,10 @@ case class Simulador() {
     val prepararValorsp = new W16(cpu.sp.toString)
     val prepararValorpc = new W16(cpu.pc.toString)
     store(Directo(Inmediato(prepararValorsp)), prepararValorpc)
-    if(cpu.sp.value == 65520)
-    { val nuevo_sp = (busIO.memoria.tamanioMemoria - 1) 
-      cpu.sp.:=(Util.toHex4(nuevo_sp))  
-    }
-    else {cpu.sp.--}
+    if (cpu.sp.value == 65520) {
+      val nuevo_sp = (busIO.memoria.tamanioMemoria - 1)
+      cpu.sp.:=(Util.toHex4(nuevo_sp))
+    } else { cpu.sp.-- }
     cpu.pc.:=(valor.hex)
   }
 
