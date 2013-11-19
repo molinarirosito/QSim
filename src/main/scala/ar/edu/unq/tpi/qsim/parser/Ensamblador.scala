@@ -367,35 +367,27 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
 object lala extends App {
 
-  //  val programa = Parser.parse("""
-  //JE 
-  //JNE 
-  //JLE esigual
-  //JL esigual
-  //JGE esigual
-  //JLEU esigual
-  //JGU esigual
-  //JCS esigual
-  //JNEG esigual
-  //JVS esigual
-  //""", Parser.programQ5).get
-
-  println(Parser.parse("""
-JE ee
-JG aaa
-JNEG oo
-JGU aa
-JLE ss
-JLEU aa
-JL gg
-JGE aa
-JNE dd
-JCS d
-JVS q
-""", Parser.programQ6))
-
-  //println(programa)
-  //val sim = new Simulador()
-  //sim.inicializarSim
-  //sim.cargarProgramaYRegistros(programa, "0000" , scala.collection.mutable.Map[String, W16]())
+    val programa = Parser.parse("""
+MOV R5, 0x0100
+MOV R2, 0x0010 
+siguiente: MOV R3, R5
+MOV R6, R5
+seguir: ADD R6, 0x0001
+CMP R6, 0x010B
+JE esigual
+CMP [R6], [R3]
+JGE seguir
+MOV R3, R6
+JMP seguir
+esigual: MOV R4, [R5]
+MOV [R5], [R3]
+MOV [R3], R4
+ADD R5, 0x0001
+SUB R2, 0x0001
+JNE siguiente""", Parser.programQ5).get
+  println(programa)
+  val sim = new Simulador()
+  sim.inicializarSim
+  sim.cargarProgramaYRegistros(programa, "0000" , scala.collection.mutable.Map[String, W16]())
+  println(sim.busIO.memoria.show("0000"))
 } 
