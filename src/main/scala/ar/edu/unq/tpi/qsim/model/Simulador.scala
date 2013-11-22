@@ -8,6 +8,7 @@ import ar.edu.unq.tpi.qsim.exeptions.CeldaFueraDeMemoriaException
 import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
 import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tpi.qsim.exeptions.EtiquetaInvalidaException
+import ar.edu.unq.tpi.qsim.exeptions.DesplazamientoSaltoInvalidoException
 
 @Observable
 object Ciclo {
@@ -80,7 +81,6 @@ case class Simulador() {
     if (operando.codigo.equals("111111")) {
       respuesta = (!programa.etiquetas.contains(operando.representacionString()))
     }
-
     respuesta
   }
 
@@ -130,20 +130,17 @@ case class Simulador() {
    */
   def calcularValorSaltoEtiqueta(instruccion: JUMP_condicional, programa: Programa) = {
     var resultado = instruccion.desplazamiento.salto
-    var signo = 0
     if (instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.codigo.equals("111111")) {
       instruccion.position.++
       var posicionActual = instruccion.position
       var posicionASaltar = programa.etiquetas(instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.representacionString).position
-      signo = posicionASaltar.value - posicionActual.value
-      if (signo < 0) {
-        var salto: Salto = instruccion.desplazamiento.asInstanceOf[Salto]
-        salto.isNegative = true
-        instruccion.desplazamiento = salto
-      }
-      resultado = Math.abs(posicionASaltar.value - posicionActual.value)
+      resultado = posicionASaltar.value - posicionActual.value
     }
-    resultado
+    if (resultado >= -128 & resultado <= 127) {
+      Util.binaryToInteger(Util.intToCa2_8B(resultado))
+    } else {
+      throw new DesplazamientoSaltoInvalidoException("Revisar los saltos utilizados, uno desplazamiento sobrepasa el limite permitido.")
+    }
   }
 
   def calcularEtiquetas(programa: Programa): Programa = {
@@ -151,7 +148,7 @@ case class Simulador() {
       inst match {
         case inst_dp: Instruccion_DosOperandos ⇒ inst_dp.origen = calcularValorOrigenEtiqueta(inst_dp, programa)
         case inst_up: Instruccion_UnOperando ⇒ inst_up.operando = calcularValorOperandoEtiqueta(inst_up, programa)
-        case inst_sc: JUMP_condicional ⇒ { inst_sc.desplazamiento.salto = calcularValorSaltoEtiqueta(inst_sc, programa); } // inst_sc.desplazamiento.asInstanceOf[Salto].isNegative = true}
+        case inst_sc: JUMP_condicional ⇒ inst_sc.desplazamiento.salto = calcularValorSaltoEtiqueta(inst_sc, programa)
         case inst ⇒
       }
     })
@@ -370,25 +367,19 @@ case class Simulador() {
    *  @param Salto, Boolean
    */
   def executeJMPCondicional(salto: Salto, condicion: Boolean) {
-    println("es salto etiqueta?" + salto.isInstanceOf[SaltoEtiqueta])
-    println("es salto normal"+ salto.isInstanceOf[Salto])
     if (condicion) {
-      incrementOrDecrementPc(salto)
+      var desplazamiento = sacarSaltoCA2(salto.salto)
+      cpu.incrementarPc(desplazamiento)
     }
   }
 
-  /**
-   *  Ejecuta el JUMP condicional fijandose si decrementa o incrementa el PC con dicho valor. Recibe el valor del desplazamiento.
-   *  @param Salto, Boolean
-   */
-  def incrementOrDecrementPc(salto: Salto) {
-    if (salto.signo) {
-      cpu.decrementarPc(salto.value)
-    } else {
-      cpu.incrementarPc(salto.value)
+  def sacarSaltoCA2(salto: Int) = {
+    var saltoCa2 = salto
+    if (salto > 127) {
+      saltoCa2 = (-1) * Util.binaryToInteger(Util.representarNumeroEnCA2(salto))
     }
+    saltoCa2
   }
-
   /**
    * Ejecuta el CALL. Guarda el pc segund donde aputa el stack pointer (sp), decrementa el stack pointer y
    * pone en el pc el valor que tiene el CALL para llamar a la subrutina correspondiente.

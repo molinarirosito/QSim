@@ -7,6 +7,10 @@ case class EtiquetaInvalidaException(smth:String) extends UserException(smth) {
 
 }
 
+case class DesplazamientoSaltoInvalidoException(smth:String) extends UserException(smth) {
+
+}
+
 case class CodigoInvalidoException(smth:String) extends UserException(smth) {
 
 }

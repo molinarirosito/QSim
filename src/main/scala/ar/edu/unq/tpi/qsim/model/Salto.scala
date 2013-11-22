@@ -3,7 +3,6 @@ import ar.edu.unq.tpi.qsim.utils._
 
 class Salto(var salto: Int) {
 
-  var isNegative = false
   /**
    * Devuelve el numero que tiene el salto en String
    * @return String
@@ -15,12 +14,6 @@ class Salto(var salto: Int) {
    * @return String
    */
   def toBinary: String = Util.toBinary8B(salto)
-
-  /**
-   * Devuelve si es incrementar o decrementar el desplazamiento
-   * @return Int
-   */
-  def signo: Boolean = isNegative
 
   /**
    * Devuelve el numero que tiene el salto
