@@ -23,8 +23,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Estos son los 8 registros que se van a usar.
    * Lo que hace este parser es reemplazar el valor del (string) por el objeto (registro) correspondiente.
    */
-  def registers = "R0" ^^^ R0 | "R1" ^^^ R1 | "R2" ^^^ R2 | "R3" ^^^ R3 |
-    "R4" ^^^ R4 | "R5" ^^^ R5 | "R6" ^^^ R6 | "R7" ^^^ R7
+  def registers = registerMUL | "R7" ^^^ R7
 
   /**
    * Defino el parser del modo de direccionamiento registro.

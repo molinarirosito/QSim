@@ -30,3 +30,7 @@ case class ModoDeDireccionamientoInvalidoException(smth:String) extends UserExce
 case class SyntaxErrorException(smth:String) extends UserException(smth) {
 
 }
+
+case class StackPointerExeption(smth:String) extends UserException(smth) {
+
+}

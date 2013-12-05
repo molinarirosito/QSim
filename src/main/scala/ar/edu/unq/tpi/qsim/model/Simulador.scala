@@ -4,11 +4,9 @@ import java.util.Calendar
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Map
 import org.uqbar.commons.utils.Observable
-import ar.edu.unq.tpi.qsim.exeptions.CeldaFueraDeMemoriaException
-import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
 import ar.edu.unq.tpi.qsim.utils.Util
-import ar.edu.unq.tpi.qsim.exeptions.EtiquetaInvalidaException
-import ar.edu.unq.tpi.qsim.exeptions.DesplazamientoSaltoInvalidoException
+import ar.edu.unq.tpi.qsim.exeptions._
+
 
 @Observable
 object Ciclo {
@@ -342,8 +340,7 @@ case class Simulador() {
   def executeRet() {
 
     if (cpu.sp.value >= busIO.memoria.tamanioMemoria - 1) {
-      val nuevo_sp = ((cpu.sp.value - busIO.memoria.tamanioMemoria) + 65520)
-      cpu.sp.:=(Util.toHex4(nuevo_sp))
+      throw new StackPointerExeption("Error, Estado de Pila Vacia.")
     }
     cpu.sp.++
     cpu.pc.:=(busIO.getValor(cpu.sp).toString)
