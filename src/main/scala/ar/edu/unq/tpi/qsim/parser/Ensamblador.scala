@@ -207,7 +207,6 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
   def instructionQ3 = instruction2Q3 | instruction1Q3 | instruction2movQ3 | instruction0Q3 | instructionMUL2Q3
 
-  //TODO HACER QUE MUL CON R7 como DESTINO NO SE PERMITA
 
   ///////////////////////////////////////////////////////////////////////////////////
 
