@@ -11,7 +11,8 @@ case class PathTest {
     ("Q4" -> ("src/main/resources/casos-test/programaQ4.qsim", "src/main/resources/casos-test/programaQ4SyntaxError.qsim")),
     ("Q5" -> ("src/main/resources/casos-test/programaQ5.qsim", "src/main/resources/casos-test/programaQ5SyntaxError.qsim")),
     ("Q6" -> ("src/main/resources/casos-test/programaQ6.qsim", "src/main/resources/casos-test/programaQ6SyntaxError.qsim")),
-    ("CALLRET" -> ("src/main/resources/casos-test/programaQ3CALLRET.qsim", "src/main/resources/casos-test/programaSaltos.qsim")))
+    ("CALLRET" -> ("src/main/resources/casos-test/programaQ3CALLRET.qsim", "src/main/resources/casos-test/programaSaltos.qsim")),
+    ("JMP" -> ("src/main/resources/casos-test/programCon.qsim", "src/main/resources/casos-test/programaSaltos.qsim")))
 
   def getContenido(arqQ: String, elegido: Int): String = {
     var pathQ = ""

@@ -29,11 +29,19 @@ case class CPU() {
   def registro(registroString: String) = registros.find(_.representacionString == registroString)
 
   /**
-   * Incrementa el pc en una cantidad que se se pasa por parametro
+   * Incrementa el pc en una cantidad que se pasa por parametro
    * @params cantidad: Int
    */
   def incrementarPc(cantidad: Int) = {
     pc.++(cantidad)
+  }
+
+   /**
+   * Decrementa el pc en una cantidad que se pasa por parametro
+   * @params cantidad: Int
+   */
+  def decrementarPc(cantidad: Int) = {
+    pc.--(cantidad)
   }
 
   /**

@@ -134,7 +134,7 @@ case class Memoria(var tamanio: Int) {
    */
   def setValorC(num_celda: Int, dato: W16) = {
     if (num_celda < Memoria.this.tamanioMemoria()) {
-      celdas(num_celda).getW16.:=(dato.hex)
+      celdas(num_celda).value = dato
     } else {
       throw new CeldaFueraDeMemoriaException("La memoria no tiene ese numero de celda")
     }

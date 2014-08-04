@@ -3,6 +3,14 @@ import org.uqbar.commons.model.UserException
 
 import scala.util.control.Exception
 
+case class EtiquetaInvalidaException(smth:String) extends UserException(smth) {
+
+}
+
+case class DesplazamientoSaltoInvalidoException(smth:String) extends UserException(smth) {
+
+}
+
 case class CodigoInvalidoException(smth:String) extends UserException(smth) {
 
 }
@@ -20,5 +28,9 @@ case class ModoDeDireccionamientoInvalidoException(smth:String) extends UserExce
 }
 
 case class SyntaxErrorException(smth:String) extends UserException(smth) {
+
+}
+
+case class StackPointerExeption(smth:String) extends UserException(smth) {
 
 }

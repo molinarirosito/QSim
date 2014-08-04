@@ -1,0 +1,8 @@
+MOV R4, 0x0000
+CMP R4, 0x0000
+JE esigual
+esigual: MOV R1, R4
+MOV R4, 0x0005
+CMP R4, 0x0000
+JNE noesigual
+noesigual: MOV R1, R4

@@ -1,15 +1,12 @@
 package ar.edu.unq.tpi.qsim.model
 
 import java.util.Calendar
-
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Map
-
 import org.uqbar.commons.utils.Observable
-
-import ar.edu.unq.tpi.qsim.exeptions.CeldaFueraDeMemoriaException
-import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
 import ar.edu.unq.tpi.qsim.utils.Util
+import ar.edu.unq.tpi.qsim.exeptions._
+
 
 @Observable
 object Ciclo {
@@ -82,7 +79,6 @@ case class Simulador() {
     if (operando.codigo.equals("111111")) {
       respuesta = (!programa.etiquetas.contains(operando.representacionString()))
     }
-
     respuesta
   }
 
@@ -136,9 +132,13 @@ case class Simulador() {
       instruccion.position.++
       var posicionActual = instruccion.position
       var posicionASaltar = programa.etiquetas(instruccion.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta.representacionString).position
-      resultado = Math.abs((posicionASaltar - posicionActual).value)
+      resultado = posicionASaltar.value - posicionActual.value
     }
-    resultado
+    if (resultado >= -128 & resultado <= 127) {
+      Util.binaryToInteger(Util.intToCa2_8B(resultado))
+    } else {
+      throw new DesplazamientoSaltoInvalidoException("Revisar los saltos utilizados, uno desplazamiento sobrepasa el limite permitido.")
+    }
   }
 
   def calcularEtiquetas(programa: Programa): Programa = {
@@ -167,9 +167,13 @@ case class Simulador() {
       var programaSinEtiquetas = calcularEtiquetas(programa)
 
       busIO.memoria.cargarPrograma(programaSinEtiquetas, pc)
+      ciclo.ninguna_etapa
+      ciclo.pasarAFetch
     } else {
+      throw new EtiquetaInvalidaException("Una de las etiquetas utilizadas es invalida")
       println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
+
   }
 
   /**
@@ -320,9 +324,9 @@ case class Simulador() {
     var direccion: Int = 0
     modoDir match {
       case Inmediato(valor: W16) ⇒ { throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.") }
-      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE);  }
-      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value;  busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
-      case RegistroIndirecto(registro: Registro) ⇒ busIO.setValor(obtenerValor(registro).hex, un_valor)
+      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
+      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
+      case RegistroIndirecto(registro: Registro) ⇒ { direccion = obtenerValor(registro).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
       case r: Registro ⇒
         r.valor = un_valor
         println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
@@ -334,10 +338,9 @@ case class Simulador() {
    *
    */
   def executeRet() {
-    
-    if(cpu.sp.value >= busIO.memoria.tamanioMemoria - 1)
-    { val nuevo_sp = ((cpu.sp.value - busIO.memoria.tamanioMemoria) + 65520) 
-      cpu.sp.:=(Util.toHex4(nuevo_sp))  
+
+    if (cpu.sp.value >= busIO.memoria.tamanioMemoria - 1) {
+      throw new StackPointerExeption("Error, Estado de Pila Vacia.")
     }
     cpu.sp.++
     cpu.pc.:=(busIO.getValor(cpu.sp).toString)
@@ -361,9 +364,19 @@ case class Simulador() {
    *  @param Salto, Boolean
    */
   def executeJMPCondicional(salto: Salto, condicion: Boolean) {
-    if (condicion) { cpu.incrementarPc(salto.value) }
+    if (condicion) {
+      var desplazamiento = sacarSaltoCA2(salto.salto)
+      cpu.incrementarPc(desplazamiento)
+    }
   }
 
+  def sacarSaltoCA2(salto: Int) = {
+    var saltoCa2 = salto
+    if (salto > 127) {
+      saltoCa2 = (-1) * Util.binaryToInteger(Util.representarNumeroEnCA2(salto))
+    }
+    saltoCa2
+  }
   /**
    * Ejecuta el CALL. Guarda el pc segund donde aputa el stack pointer (sp), decrementa el stack pointer y
    * pone en el pc el valor que tiene el CALL para llamar a la subrutina correspondiente.
@@ -373,11 +386,10 @@ case class Simulador() {
     val prepararValorsp = new W16(cpu.sp.toString)
     val prepararValorpc = new W16(cpu.pc.toString)
     store(Directo(Inmediato(prepararValorsp)), prepararValorpc)
-    if(cpu.sp.value == 65520)
-    { val nuevo_sp = (busIO.memoria.tamanioMemoria - 1) 
-      cpu.sp.:=(Util.toHex4(nuevo_sp))  
-    }
-    else {cpu.sp.--}
+    if (cpu.sp.value == 65520) {
+      val nuevo_sp = (busIO.memoria.tamanioMemoria - 1)
+      cpu.sp.:=(Util.toHex4(nuevo_sp))
+    } else { cpu.sp.-- }
     cpu.pc.:=(valor.hex)
   }
 

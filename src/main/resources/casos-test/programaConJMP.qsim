@@ -1,0 +1,3 @@
+inicio: MOV R7, [0x000A]
+CMP R4, 0x00000
+JMP inicio

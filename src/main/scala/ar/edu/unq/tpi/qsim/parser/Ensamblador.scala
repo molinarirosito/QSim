@@ -23,9 +23,8 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Estos son los 8 registros que se van a usar.
    * Lo que hace este parser es reemplazar el valor del (string) por el objeto (registro) correspondiente.
    */
-  def registers = "R0" ^^^ R0 | "R1" ^^^ R1 | "R2" ^^^ R2 | "R3" ^^^ R3 |
-    "R4" ^^^ R4 | "R5" ^^^ R5 | "R6" ^^^ R6 | "R7" ^^^ R7
-  
+  def registers = registerMUL | "R7" ^^^ R7
+
   /**
    * Defino el parser del modo de direccionamiento registro.
    */
@@ -34,11 +33,11 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   /**
    * Estos son los 7 registros que se van a usar para el operando destino de la instrucion MUL.
    * Lo que hace este parser es reemplazar el valor del (string) por el objeto (registro) correspondiente.
-   */  	 
+   */
   def registersMUL = "R0" ^^^ R0 | "R1" ^^^ R1 | "R2" ^^^ R2 | "R3" ^^^ R3 |
     "R4" ^^^ R4 | "R5" ^^^ R5 | "R6" ^^^ R6
-  
-    /**
+
+  /**
    * Defino el parser del modo de direccionamiento registro para la instruccion MUL.
    */
   def registerMUL = registersMUL
@@ -88,13 +87,13 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   /**
    *  Este parser indica que parser se van a usar para ensamblar el operando destino de la instruccion MUL de Q1
    */
-  def asignableMULQ1 = registerMUL 
-  
+  def asignableMULQ1 = registerMUL
+
   /**
    *  Estas son las instrucciones validas en Q1
    */
-  def instruccionsQ1DosOperandos = "MOV" | "SUB" | "DIV" | "ADD" 
-   
+  def instruccionsQ1DosOperandos = "MOV" | "SUB" | "DIV" | "ADD"
+
   /**
    *  Esta es la instruccion MUL de Q1
    */
@@ -104,14 +103,14 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q1.
    */
   def instruction2Q1 = instruccionesDosOperandos(instruccionsQ1DosOperandos, asignableQ1, directionableQ1)
-  
+
   /**
    * Este parser ensambla la instruccion MUL de Q1
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q1.
    */
   def instructionMUL2Q1 = instruccionesDosOperandos(instrucionMULQ1, asignableMULQ1, directionableQ1)
-  
-  def instructionQ1 = instruction2Q1 | instructionMUL2Q1 
+
+  def instructionQ1 = instruction2Q1 | instructionMUL2Q1
 
   ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -126,7 +125,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Este parser indica que parser se van a usar para ensamblar el operando destino de las instrucciones de Q2
    */
   def asignableQ2 = asignableQ1 | direct
-  
+
   /**
    * Este parser indica que parser se van a usar para ensamblar el operando destino de la instruccion MUL de Q2
    */
@@ -137,15 +136,15 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q2.
    */
   def instruction2Q2 = instruccionesDosOperandos(instruccionsQ1DosOperandos, asignableQ2, directionableQ2)
-  
-   /**
+
+  /**
    * Este parser ensambla la instruccion MUL de Q2
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q2.
    */
   def instructionMUL2Q2 = instruccionesDosOperandos(instrucionMULQ1, asignableMULQ2, directionableQ2)
-  
+
   def instructionQ2 = instruction2Q2 | instructionMUL2Q2
-  
+
   ///////////////////////////////////////////////////////////////////////////////////
 
   // PARSER ENSAMBLADOR - Q3
@@ -159,7 +158,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    *  Estas son las instrucciones validas en Q3
    */
   def instruccionsQ3DosOperandos = "SUB" | "DIV" | "ADD"
-    
+
   /**
    * Se agrega la instruccion MOV con etiqueta al conjunto de instrucciones de Q3
    */
@@ -180,7 +179,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q3.
    */
   def instruction2Q3 = instruccionesDosOperandos(instruccionsQ3DosOperandos, asignableQ2, directionableQ2)
-  
+
   /**
    * Este parser ensambla la instruccion MUL de Q3
    * Toma la instruccion, el operando1 y el operando2 para poder crear una Instruccion en Q3.
@@ -208,7 +207,6 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
   def instructionQ3 = instruction2Q3 | instruction1Q3 | instruction2movQ3 | instruction0Q3 | instructionMUL2Q3
 
-  //TODO HACER QUE MUL CON R7 como DESTINO NO SE PERMITA
 
   ///////////////////////////////////////////////////////////////////////////////////
 
@@ -227,7 +225,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   /**
    * Se agregan los saltos al conjunto de instrucciones de Q4
    */
-  def instruccionsQ4Saltos = "JE" | "JNE" | "JLE" | "JG" | "JL" | "JGE" | "JLEU" | "JGU" | "JCS" | "JNEG" | "JVS"
+  def instruccionsQ4Saltos = "JNEG" | "JNE" | "JLEU" | "JLE" | "JL" | "JGE" | "JGU" | "JCS" | "JVS" | "JG" | "JE"
 
   /**
    * Este parser ensambla los saltos en Q4.
@@ -250,7 +248,6 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   def instruction2Q4 = instruccionesDosOperandos(instruccionsQ4DosOperandos, asignableQ2, directionableQ2)
 
   def instructionQ4 = instruction2Q4 | instruction1Q4 | instructionQ4Saltos | instruction2movQ3 | instruction0Q3 | instructionMUL2Q3
-  
 
   ///////////////////////////////////////////////////////////////////////////////////
 
@@ -331,7 +328,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   def instruction2Q6 = instruccionesDosOperandos(instruccionsQ6DosOperandos, asignableQ5, directionableQ5)
 
   def instructionQ6 = instructionQ4Saltos | instruction2movQ5 | instruction1Q5 | instruction1Q6 | instruction2Q6 | instruction0Q3 | instructionMUL2Q5
-//--------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------
   // Construccion de Instrucciones de Dos Operandos !!!
   def instruccionesDosOperandos(instrucciones: Parser[String], asignable: Parser[ModoDireccionamiento], direccionable: Parser[ModoDireccionamiento]) = instrucciones ~ asignable ~ ("," ~> direccionable) ^^
     { case ins ~ dir1 ~ dir2 ⇒ Class.forName(s"ar.edu.unq.tpi.qsim.model.$ins").getConstructor(classOf[ModoDireccionamiento], classOf[ModoDireccionamiento]).newInstance(dir1, dir2).asInstanceOf[Instruccion_DosOperandos] }
@@ -368,6 +365,38 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
 object lala extends App {
 
-  println(Parser.parse("""MUL R7, R7""", Parser.programQ6))
+    val programa = Parser.parse("""
+MOV R5, 0x0100
+MOV R2, 0x0010 
+siguiente: MOV R3, R5
+MOV R6, R5
+seguir: ADD R6, 0x0001
+CMP R6, 0x010B
+JE esigual
+CMP [R6], [R3]
+JGE seguir
+MOV R3, R6
+JMP seguir
+esigual: MOV R4, [R5]
+MOV [R5], [R3]
+MOV [R3], R4
+ADD R5, 0x0001
+SUB R2, 0x0001
+JNE siguiente""", Parser.programQ5).get
+  println(programa)
+  val sim = new Simulador()
+  sim.inicializarSim
+  sim.cargarProgramaYRegistros(programa, "0000" , scala.collection.mutable.Map[String, W16]())
+  var count = 0
+  do {
+      //FETCH
+      sim.fetch()
+      //DECODE
+      var decode = sim.decode()
+      println(decode)
+      // Execute
+      sim.execute
+      count += 1
+    } while (count < programa.instrucciones.length)
 
 } 

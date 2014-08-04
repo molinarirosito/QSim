@@ -79,14 +79,14 @@ class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Match
   }
 
   "Un JMP" should "enviar el hilo de ejecucion a la celda que indica el valor del operando origen que recibe -(cambiar pc por el valor del operando)" in {
-//    var set_simuladores = simuladores
-//    var simulador = set_simuladores.simuladorSaltos
-//    simulador.fetch()
-//    var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_UnOperando_Origen]
-//    simulador.decode()
-//    simulador.execute()
-//    // probar que la ejecucion de la instruccion JMP funciona    
-//    assert(simulador.cpu.pc.equals(instruccion.operando.getValor))
+    var set_simuladores = simuladores
+    var simulador = set_simuladores.simuladorSaltos
+    simulador.fetch()
+    var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_UnOperando_Origen]
+    simulador.decode()
+    simulador.execute()
+    // probar que la ejecucion de la instruccion JMP funciona    
+    assert(simulador.cpu.pc.equals(instruccion.operando.getValor))
   }
 
 //  "Un lal" should "buscar el valor del tope de la pila y actualizar el pc con ese valor" in {

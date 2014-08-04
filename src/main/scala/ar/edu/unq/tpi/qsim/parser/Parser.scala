@@ -31,22 +31,54 @@ object Parser extends Ensamblador {
   }
 
   def createMessage(output: Input): String = {
-    var lala: Parser[Programa] = this.programQ1
     var characterCount = output.offset
     var cadenaCaracteres = output.source
     var lineas = output.source.toString().split("\n")
-    return lineWithError(cadenaCaracteres.toString().substring(0, characterCount), lineas)
+    var numeroLinea = buscarLineaConError(lineas, characterCount)
+    return lineaResultado(numeroLinea, lineas)
   }
 
-  def lineWithError(cadenaConError: String, lineas: Array[String]): String = {
-    var lineasCortadasEnError = cadenaConError.split("\n")
-    var numeroLinea = lineasCortadasEnError.length
-    var linea = lineas(numeroLinea - 1)
-    return s"Ha ocurrido un error en la linea $numeroLinea : $linea"
+  def buscarLineaConError(lineas: Array[String], characterError: Int): Int = {
+    var lineaConErrorBordeIzq = 0
+    var cantCaracteres = 0
+    var encontreLinea = false
+    var i = 0
+    while (i < lineas.size && !(encontreLinea)) {
+      var linea = lineas(i)
+      cantCaracteres = linea.length() + cantCaracteres + 1
+      if (cantCaracteres > 0 && cantCaracteres > characterError) {
+        lineaConErrorBordeIzq = i + 1
+        encontreLinea = true
+      }
+      i = i + 1
+    }
+    return lineaConErrorBordeIzq
   }
+
+  def lineaResultado(numeroLinea: Int, lineas: Array[String]): String = {
+    var linea = lineas(numeroLinea - 1)
+    s"Ha ocurrido un error en la linea $numeroLinea : $linea"
+  }
+
 }
 
 @Observable
 case class ArquitecturaQ(var name: String, parser: (String) ⇒ Programa) {
   override def toString = name
 }
+
+object pruebaError extends App {
+
+  var string = """CMP R7, R1
+ADD R2, R2
+SUB R2, 0x0001"""
+  var parser = Parser
+  try {
+    parser.ensamblarQ1(string)
+  } catch {
+    case ex: SyntaxErrorException ⇒ {
+      print(ex.getMessage())
+    }
+  }
+
+} 
