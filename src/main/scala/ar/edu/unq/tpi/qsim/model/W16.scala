@@ -118,6 +118,9 @@ class W16(var hex: String) {
    new W16(result_value)
   }
   
+  def >(w16:W16)= hex > w16.hex
+  def <(w16:W16)= hex < w16.hex
+  
 }
 
 object prueba extends App() {
