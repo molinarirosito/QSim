@@ -46,13 +46,23 @@ object Parser extends Ensamblador {
     while (i < lineas.size && !(encontreLinea)) {
       var linea = lineas(i)
       cantCaracteres = linea.length() + cantCaracteres + 1
-      if (cantCaracteres > 0 && cantCaracteres > characterError) {
+      if (siLineasPrincipioSoloIntrSinOPoUnOpSonLineasConError(linea) || cantCaracteres > 0 && cantCaracteres > characterError ) {
         lineaConErrorBordeIzq = i + 1
         encontreLinea = true
       }
       i = i + 1
     }
     return lineaConErrorBordeIzq
+  }
+
+  def siLineasPrincipioSoloIntrSinOPoUnOpSonLineasConError(linea: String): Boolean = {
+    var estaNotoJMP = false
+    if (linea.length() <= 4) {
+      if (!(linea.trim().contains("RET")) || linea.trim().equals("JMP") || linea.trim().equals("NOT")) {
+        estaNotoJMP = true
+      }
+    }
+    return estaNotoJMP
   }
 
   def lineaResultado(numeroLinea: Int, lineas: Array[String]): String = {
@@ -68,13 +78,15 @@ case class ArquitecturaQ(var name: String, parser: (String) ⇒ Programa) {
 }
 
 object pruebaError extends App {
-
-  var string = """CMP R7, R1
-ADD R2, R2
-SUB R2, 0x0001"""
+  
+    var string = """NOT 
+AND [R6], [0x0006]
+OR [[0x0023]], 0x0300
+AND R5, [0x0005]
+OR R6, 0x0005"""
   var parser = Parser
   try {
-    parser.ensamblarQ1(string)
+    parser.ensamblarQ6(string)
   } catch {
     case ex: SyntaxErrorException ⇒ {
       print(ex.getMessage())
