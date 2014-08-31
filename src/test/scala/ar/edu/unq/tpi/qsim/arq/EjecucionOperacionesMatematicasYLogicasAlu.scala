@@ -12,6 +12,8 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     val alu = ALU
     var op1 = new W16("0002")
     var op2 = new W16("0006")
+    var op3 = new W16("0001")
+    var op4 = new W16("FFE0")
     var opunoresta = new W16("1000")
     var opdosresta = new W16("F000")
   }
@@ -25,6 +27,7 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     var resultado_and = new W16("0002")
     var resultado_or = new W16("0006")
     var resultado_sub = new W16("2000")
+    var resultado_suma_ca2 = new W16("FFE1")
   }
   def resultados_flags = new {
     var v = (0, 1)
@@ -48,7 +51,24 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     assert(mapa_resultados("z") === set_resultados_flags.z._1)
     assert(mapa_resultados("n") === set_resultados_flags.n._1)
   }
+  
+  "Una Alu" should "ejecutar la sumaca2 entre dos numeros en CA2 y actualizar los flags" in {
+    var ctx = contexto_ejecucion
+    var mapa_resultados = ctx.alu.execute_add(ctx.op3, ctx.op4)
+    print(mapa_resultados)
+    var set_resultados = resultados_esperados
+    var set_resultados_flags = resultados_flags
 
+    // VERIFICA EL RESULTADO
+    assert(mapa_resultados("resultado").asInstanceOf[W16].equals(set_resultados.resultado_suma_ca2))
+
+    // VERIFICA LOS FLAGS
+    assert(mapa_resultados("v") === set_resultados_flags.v._1)
+    assert(mapa_resultados("c") === set_resultados_flags.c._1)
+    assert(mapa_resultados("z") === set_resultados_flags.z._1)
+    assert(mapa_resultados("n") === set_resultados_flags.n._2)
+  }
+  
   it should "ejecutar la resta entre dos numeros hexadecimales en el sist CA2 y actualizar todos los flags " in {
     var ctx = contexto_ejecucion
     var mapa_resultados = ctx.alu.execute_sub(ctx.op2, ctx.op1)
@@ -164,7 +184,7 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     assert(mapa_resultados("v") === set_resultados_flags.v._1)
     assert(mapa_resultados("c") === set_resultados_flags.c._2)
     assert(mapa_resultados("z") === set_resultados_flags.z._1)
-    assert(mapa_resultados("n") === set_resultados_flags.n._2)
+    assert(mapa_resultados("n") === set_resultados_flags.n._1)
 
   }
 }

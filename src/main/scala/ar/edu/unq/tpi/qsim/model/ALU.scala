@@ -13,6 +13,9 @@ object ALU {
    */
   def execute_operacion_matematica(operacion: (Int, Int) ⇒ Int, op1: W16, op2: W16): Map[String, Any] = {
     val valor = operacion(op1.value, op2.value)
+    print("valor 01 !! : " + op1.value.toString)
+    print("valor 02 !! : " + op2.value.toString)
+    print("valor !! : " + valor)
     val resultado_binario = Util.toBinary16BOverflow(valor)
     val flags = takeFlags(valor)
 
@@ -125,7 +128,7 @@ object ALU {
    * @return Int
    */
   def actualizarNegative(resultado: Int): Int = resultado match {
-    case r if (r < 0) ⇒ 1
+  	case r if (r.shortValue() < 0) ⇒ 1
     case _ ⇒ 0
   }
 
@@ -321,5 +324,5 @@ object ALU {
     }
 }
 object ttaa extends App {
-  println(ALU.execute_add(new W16("E000"), new W16("F000")))
+  println(ALU.execute_sub(new W16("1000"), new W16("F000")))
 }
