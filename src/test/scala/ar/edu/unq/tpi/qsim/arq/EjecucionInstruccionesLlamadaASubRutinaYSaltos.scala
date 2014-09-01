@@ -9,7 +9,7 @@ import ar.edu.unq.tpi.qsim.parser.Parser
 class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Matchers {
 
   def contexto_programas = new {
-    var path = PathTest()
+    var path : PathTest = PathTest()
     var programaCALLRET = path.getContenido("CALLRET", 1)
     var programa_salt = path.getContenido("CALLRET", 2)
     var parser = Parser
@@ -52,7 +52,7 @@ class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Match
     var set_simuladores = simuladores
     var simulador = set_simuladores.simulador
     var pcActual = new W16("0004")
-    var spActual = new W16("02DF")
+    var spActual = new W16("FFEF")
     simulador.fetch()
     var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_UnOperando_Origen]
     simulador.decode()
@@ -66,7 +66,7 @@ class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Match
     var set_simuladores = simuladores
     var simulador = set_simuladores.simuladorRET
     var pcActual = new W16("0004")
-    var spActual = new W16("02DF")
+    var spActual = new W16("FFEF")
 
     simulador.fetch()
     var instruccion = simulador.instruccionActual.asInstanceOf[Instruccion_SinOperandos]
