@@ -13,7 +13,7 @@ case class CPU() {
 
   var registros = ArrayBuffer[Registro](R0, R1, R2, R3, R4, R5, R6, R7)
   var pc = new W16("0000")
-  var sp = new W16("02DF")
+  var sp = new W16("FFEF")
   var ir = ""
   var alu = ALU
 

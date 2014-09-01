@@ -6,6 +6,7 @@ import scala.collection.mutable.Map
 import org.uqbar.commons.utils.Observable
 import ar.edu.unq.tpi.qsim.utils.Util
 import ar.edu.unq.tpi.qsim.exeptions._
+import ar.edu.unq.tpi.qsim.parser._
 
 
 @Observable
@@ -13,24 +14,29 @@ object Ciclo {
   var fetch = true
   var decode = false
   var execute = false
-
+  var execute_complete = true
+  
   def ninguna_etapa() {
     fetch = false
     decode = false
     execute = false
+    execute_complete = false
   }
 
   def pasarAFetch() {
     fetch = true
     execute = false
+    execute_complete = true
   }
   def pasarADecode() {
     fetch = false
     decode = true
+    execute_complete = false
   }
   def pasarAExecute() {
     decode = false
     execute = true
+    execute_complete = false
   }
 }
 
@@ -273,7 +279,17 @@ case class Simulador() {
     cpu.actualizarFlags(resultado)
     resultado("resultado").asInstanceOf[W16]
   }
-
+  	
+  /**
+   * Simula el fetch decode and execute. Ejecuta todas las etapas de ciclo de instruccion a la ves,
+   * de la instruccion actual anteriormente ensamblada.
+   */
+  def execute_complete() {
+	  fetch()
+	  decode()
+	  execute()
+  }
+  
   /**
    * Simula el execute. Ejecuta la instruccion actual anteriormente ensamblada.
    */
@@ -323,7 +339,7 @@ case class Simulador() {
   def store(modoDir: ModoDireccionamiento, un_valor: W16) {
     var direccion: Int = 0
     modoDir match {
-      case Inmediato(valor: W16) ⇒ { throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino.") }
+      case Inmediato(valor: W16) ⇒ { ciclo.pasarAFetch(); throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino."); }
       case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
       case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
       case RegistroIndirecto(registro: Registro) ⇒ { direccion = obtenerValor(registro).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
@@ -424,11 +440,16 @@ case class Simulador() {
 }
 
 object tt extends App {
-  var l = ArrayBuffer[Int]()
-  l.+=(1)
-  l.+=(2)
-  println(l)
-  //  var sim = Simulador(programa)
-  // sim.inicializarSim()
-  // sim.cargarPrograma("0003")
+  //var l = ArrayBuffer[Int]()
+  //l.+=(1)
+  //l.+=(2)
+  //println(l)
+  
+//  var programa = Parser.parse("""
+//MOV R5, 0x0001
+//MOV R2, 0xFFE0 
+//ADD R2, R5""", Parser.programQ5).get
+//  var sim = Simulador()
+//  sim.inicializarSim()
+//  sim.busIO.memoria.cargarPrograma(programa,"0000")
 }
