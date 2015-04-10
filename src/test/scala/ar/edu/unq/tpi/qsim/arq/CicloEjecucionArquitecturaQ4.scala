@@ -29,7 +29,7 @@ import scala.collection.mutable.Map
 
 class CiclodeEjecucionArquitecturaQ4 extends FlatSpec with Matchers {
   def parsers_resultados = new {
-    var path = PathTest()
+    var path = new PathTest()
     var programa_valido = path.getContenido("Q4", 1)
     var programa_invalido = path.getContenido("Q4", 2)
     var parser = Parser

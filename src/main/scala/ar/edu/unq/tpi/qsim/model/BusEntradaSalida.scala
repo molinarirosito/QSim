@@ -21,7 +21,7 @@ package ar.edu.unq.tpi.qsim.model
 
 import ar.edu.unq.tpi.qsim.utils.Util
 
-case class BusEntradaSalida {
+class BusEntradaSalida {
   
   var memoria: Memoria = _
   var puertos: CeldasPuertos = _
@@ -32,7 +32,7 @@ case class BusEntradaSalida {
     memoria = Memoria(65536)
 //   memoria = Memoria(736)
     memoria.initialize
-    puertos = CeldasPuertos()
+    puertos = new CeldasPuertos()
     puertos.initialize
     println("--------TERMINO------")
   }

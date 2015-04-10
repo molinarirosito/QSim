@@ -30,7 +30,7 @@ import ar.edu.unq.tpi.qsim.exeptions.SyntaxErrorException
 class CicloDeEjecucionArquitecturaQ1 extends FlatSpec with Matchers {
 
   def parsers_resultados = new {
-    var path : PathTest = PathTest()
+    var path : PathTest = new PathTest()
     var programa_valido = path.getContenido("Q1",1)
     var programa_invalido = path.getContenido("Q1",2)
     var parser = Parser

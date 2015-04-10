@@ -22,7 +22,7 @@ import org.uqbar.commons.utils.Observable
 
 
 @Observable
-case class CeldasPuertos {  
+class CeldasPuertos {  
   
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.utils.Util

@@ -21,7 +21,7 @@ package ar.edu.unq.tpi.qsim.arq
 
 import scala.collection.mutable.Map
 
-case class PathTest {
+class PathTest {
 
   var paths: Map[String, (String, String)] = Map[String, (String, String)](
     ("Q1" -> ("src/main/resources/casos-test/programaQ1.qsim", "src/main/resources/casos-test/programaQ1SyntaxError.qsim")),

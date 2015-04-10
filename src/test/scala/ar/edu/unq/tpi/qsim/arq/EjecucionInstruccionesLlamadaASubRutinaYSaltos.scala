@@ -28,7 +28,7 @@ import ar.edu.unq.tpi.qsim.parser.Parser
 class EjecucionInstruccionesLlamadaASubRutinaYSaltos extends FlatSpec with Matchers {
 
   def contexto_programas = new {
-    var path : PathTest = PathTest()
+    var path : PathTest = new PathTest()
     var programaCALLRET = path.getContenido("CALLRET", 1)
     var programa_salt = path.getContenido("CALLRET", 2)
     var parser = Parser

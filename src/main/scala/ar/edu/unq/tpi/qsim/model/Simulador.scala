@@ -75,7 +75,7 @@ case class Simulador() {
   def inicializarSim() {
     println("--------INIT------")
     cpu = CPU()
-    busIO = BusEntradaSalida()
+    busIO = new BusEntradaSalida()
     busIO.initialize()
     agregarMensaje("******************INFORMACION*******************")
     agregarMensaje("El programa compilado ha sido cargado en la memoria con exito")

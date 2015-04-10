@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.uqbar-project</groupId>
 		<artifactId>uqbar-scala-parent</artifactId>
-		<version>1.0</version>
+		<version>1.3</version>
 	</parent>
 	
 
@@ -16,7 +16,11 @@
 		<dependency>
 			<groupId>org.uqbar-project</groupId>
 			<artifactId>uqbar-domain</artifactId>
-			<version>3.4-SNAPSHOT</version>
+			<version>3.5.1</version>
+			<exclusions>
+				<exclusion>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
