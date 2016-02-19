@@ -1,32 +1,16 @@
 package ar.edu.unq.tpi.qsim.model
 
-/**
-* Copyright 2014 Tatiana Molinari.
-* Copyright 2014 Susana Rosito
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*
-*/
-
 import java.util.Calendar
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Map
 import org.uqbar.commons.utils.Observable
+import ar.edu.unq.tpi.qsim.exeptions.CeldaFueraDeMemoriaException
+import ar.edu.unq.tpi.qsim.exeptions.DesplazamientoSaltoInvalidoException
+import ar.edu.unq.tpi.qsim.exeptions.EtiquetaInvalidaException
+import ar.edu.unq.tpi.qsim.exeptions.ModoDeDireccionamientoInvalidoException
+import ar.edu.unq.tpi.qsim.exeptions.StackPointerExeption
 import ar.edu.unq.tpi.qsim.utils.Util
-import ar.edu.unq.tpi.qsim.exeptions._
-import ar.edu.unq.tpi.qsim.parser._
-
+import ar.edu.unq.tpi.qsim.integracion.mumuki.JsonResult
 
 @Observable
 object Ciclo {
@@ -34,7 +18,7 @@ object Ciclo {
   var decode = false
   var execute = false
   var execute_complete = true
-  
+
   def ninguna_etapa() {
     fetch = false
     decode = false
@@ -68,15 +52,17 @@ case class Simulador() {
   var busIO: BusEntradaSalida = _
   var instruccionActual: Instruccion = _
   var celdaInstruccionActual: ArrayBuffer[Celda] = ArrayBuffer[Celda]()
+  var programaActual: Programa = _
+  var jsonResult: JsonResult = _
 
   /**
    * Inicializa el sumulador, crea la memoria y el CPU.
    */
   def inicializarSim() {
-    println("--------INIT------")
     cpu = CPU()
     busIO = new BusEntradaSalida()
     busIO.initialize()
+    jsonResult = new JsonResult()
     agregarMensaje("******************INFORMACION*******************")
     agregarMensaje("El programa compilado ha sido cargado en la memoria con exito")
   }
@@ -89,9 +75,9 @@ case class Simulador() {
   def etiquetasInvalidas(programa: Programa): Boolean = {
     programa.instrucciones.exists(instr ⇒ instr match {
       case inst_dp: Instruccion_DosOperandos ⇒ verificarOperandoEtiqueta(inst_dp.origen, programa)
-      case inst_up: Instruccion_UnOperando ⇒ verificarOperandoEtiqueta(inst_up.operando, programa)
-      case inst_sc: JUMP_condicional ⇒ verificarOperandoEtiqueta(inst_sc.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta, programa)
-      case _ ⇒ false
+      case inst_up: Instruccion_UnOperando   ⇒ verificarOperandoEtiqueta(inst_up.operando, programa)
+      case inst_sc: JUMP_condicional         ⇒ verificarOperandoEtiqueta(inst_sc.desplazamiento.asInstanceOf[SaltoEtiqueta].etiqueta, programa)
+      case _                                 ⇒ false
     })
   }
   /**
@@ -170,9 +156,9 @@ case class Simulador() {
     programa.instrucciones.foreach(inst ⇒ {
       inst match {
         case inst_dp: Instruccion_DosOperandos ⇒ inst_dp.origen = calcularValorOrigenEtiqueta(inst_dp, programa)
-        case inst_up: Instruccion_UnOperando ⇒ inst_up.operando = calcularValorOperandoEtiqueta(inst_up, programa)
-        case inst_sc: JUMP_condicional ⇒ inst_sc.desplazamiento.salto = calcularValorSaltoEtiqueta(inst_sc, programa)
-        case inst ⇒
+        case inst_up: Instruccion_UnOperando   ⇒ inst_up.operando = calcularValorOperandoEtiqueta(inst_up, programa)
+        case inst_sc: JUMP_condicional         ⇒ inst_sc.desplazamiento.salto = calcularValorSaltoEtiqueta(inst_sc, programa)
+        case inst                              ⇒
       }
     })
     programa
@@ -192,11 +178,11 @@ case class Simulador() {
       var programaSinEtiquetas = calcularEtiquetas(programa)
 
       busIO.memoria.cargarPrograma(programaSinEtiquetas, pc)
+      programaActual = programaSinEtiquetas
       ciclo.ninguna_etapa
       ciclo.pasarAFetch
     } else {
       throw new EtiquetaInvalidaException("Una de las etiquetas utilizadas es invalida")
-      println("ERROR ------- ETIQUETAS INVALIDAS -----NO SE CARGA EN MEMORIA!! ")
     }
 
   }
@@ -223,31 +209,23 @@ case class Simulador() {
    *
    */
   def fetch() {
-    println("----------FETCH ---------")
-    println("Valor del Pc: " + cpu.pc.toString())
     cambiarEstadoCeldasInstruccionActual(State.EXECUTED)
     val cadena_binaria = obtenerProximaInstruccionBinario()
     instruccionActual = Interprete.interpretarInstruccion(cadena_binaria)
     val instruccion_fech = instruccionActual.representacionHexadecimal()
-    println("------Trajo la instruccion a Ejecutar que apunta pc :" + instruccion_fech)
     cpu.ir = instruccion_fech
     agregarMensaje("La intruccion actual ocupa: " + instruccionActual.cantidadCeldas().toString)
     celdaInstruccionActual = obtenerCeldasInstruccionActual()
     cambiarEstadoCeldasInstruccionActual(State.FECH_DECODE)
     cpu.incrementarPc(instruccionActual.cantidadCeldas())
     ciclo.pasarADecode
-    println("Cual es el valor de Pc luego del Fetch: " + cpu.pc)
-
   }
 
-  def obtenerCeldasInstruccionActual(): ArrayBuffer[Celda] =
-    {
-      busIO.memoria.getCeldas(cpu.pc.value, instruccionActual.cantidadCeldas())
-
-    }
+  def obtenerCeldasInstruccionActual(): ArrayBuffer[Celda] = {
+    busIO.memoria.getCeldas(cpu.pc.value, instruccionActual.cantidadCeldas())
+  }
 
   def cambiarEstadoCeldasInstruccionActual(estado: State.Type) {
-
     celdaInstruccionActual.foreach(celda ⇒
       celda.state = estado)
   }
@@ -257,9 +235,8 @@ case class Simulador() {
    *
    */
   def decode() = {
-    println("----------DECODE------------")
+    Console.println("Se decodifico la instruccion : " + (instruccionActual.toString))
     agregarMensaje("Se decodifico la instruccion : " + (instruccionActual.toString))
-    println(mensaje_al_usuario)
     ciclo.pasarAExecute
     (instruccionActual.toString)
   }
@@ -270,10 +247,10 @@ case class Simulador() {
    * @return W16
    */
   def obtenerValor(modoDir: ModoDireccionamiento): W16 = modoDir match {
-    case Directo(inmediato: Inmediato) ⇒ busIO.getValor(inmediato.getValorString())
-    case Indirecto(directo: Directo) ⇒ busIO.getValor(obtenerValor(directo))
+    case Directo(inmediato: Inmediato)         ⇒ busIO.getValor(inmediato.getValorString())
+    case Indirecto(directo: Directo)           ⇒ busIO.getValor(obtenerValor(directo))
     case RegistroIndirecto(registro: Registro) ⇒ busIO.getValor(obtenerValor(registro))
-    case _ ⇒ modoDir.getValor
+    case _                                     ⇒ modoDir.getValor
   }
 
   /**
@@ -282,7 +259,6 @@ case class Simulador() {
    *
    */
   def execute_instruccion_matematica(): W16 = {
-    println("--------INSTRUCCION PARA ALU------")
     var resultado = Map[String, Any]()
     instruccionActual match {
       case ADD(op1, op2) ⇒ resultado = ALU.execute_add(obtenerValor(op1), obtenerValor(op2))
@@ -298,41 +274,51 @@ case class Simulador() {
     cpu.actualizarFlags(resultado)
     resultado("resultado").asInstanceOf[W16]
   }
-  	
+
   /**
    * Simula el fetch decode and execute. Ejecuta todas las etapas de ciclo de instruccion a la ves,
    * de la instruccion actual anteriormente ensamblada.
    */
   def execute_complete() {
-	  fetch()
-	  decode()
-	  execute()
+    fetch()
+    decode()
+    execute()
   }
-  
+
+  /**
+   * Simula la ejecucion de todas las etapas de ciclo de instruccion a cada una de las instrucciones del programa. Ejecuta todo el programa.
+   */
+  def execute_all_program() {
+    while (!programaActual.finalizo()) {
+      execute_complete()
+      programaActual.actualizarIndice()
+    }
+    jsonResult.buildJsonOk(cpu)
+  }
+
   /**
    * Simula el execute. Ejecuta la instruccion actual anteriormente ensamblada.
    */
   def execute() {
-    println("-------------EXECUTE---------")
     instruccionActual match {
 
-      case RET() ⇒ executeRet()
-      case CALL(op1) ⇒ executeCall(obtenerValor(op1))
-      case JMP(op1) ⇒ executeJMP(obtenerValor(op1))
-      case PUSH(op1) ⇒ executePUSH(obtenerValor(op1))
-      case POP(op1) ⇒ executePOP(op1)
-      case NOT(op1) ⇒ store(op1, ALU.NOT(obtenerValor(op1)))
-      case JE(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.z))
-      case JNE(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(cpu.z)))
-      case JLE(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.OR(cpu.z, ALU.XOR(cpu.n, cpu.v))))
-      case JG(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.z, ALU.XOR(cpu.n, cpu.v)))))
-      case JL(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.XOR(cpu.n, cpu.v)))
-      case JGE(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.XOR(cpu.n, cpu.v))))
-      case JLEU(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.OR(cpu.c, cpu.z)))
-      case JGU(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.c, cpu.z))))
-      case JCS(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.c))
-      case JNEG(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.n))
-      case JVS(salto) ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.v))
+      case RET()         ⇒ executeRet()
+      case CALL(op1)     ⇒ executeCall(obtenerValor(op1))
+      case JMP(op1)      ⇒ executeJMP(obtenerValor(op1))
+      case PUSH(op1)     ⇒ executePUSH(obtenerValor(op1))
+      case POP(op1)      ⇒ executePOP(op1)
+      case NOT(op1)      ⇒ store(op1, ALU.NOT(obtenerValor(op1)))
+      case JE(salto)     ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.z))
+      case JNE(salto)    ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(cpu.z)))
+      case JLE(salto)    ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.OR(cpu.z, ALU.XOR(cpu.n, cpu.v))))
+      case JG(salto)     ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.z, ALU.XOR(cpu.n, cpu.v)))))
+      case JL(salto)     ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.XOR(cpu.n, cpu.v)))
+      case JGE(salto)    ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.XOR(cpu.n, cpu.v))))
+      case JLEU(salto)   ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.OR(cpu.c, cpu.z)))
+      case JGU(salto)    ⇒ executeJMPCondicional(salto, ALU.interpretarBit(ALU.NOT(ALU.OR(cpu.c, cpu.z))))
+      case JCS(salto)    ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.c))
+      case JNEG(salto)   ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.n))
+      case JVS(salto)    ⇒ executeJMPCondicional(salto, ALU.interpretarBit(cpu.v))
       case CMP(op1, op2) ⇒ executeCmp(obtenerValor(op1), obtenerValor(op2))
       case MOV(op1, op2) ⇒ store(op1, obtenerValor(op2))
       case AND(op1, op2) ⇒ {
@@ -348,7 +334,6 @@ case class Simulador() {
       case iOp2: Instruccion_DosOperandos ⇒ store(iOp2.destino, execute_instruccion_matematica())
     }
     ciclo.pasarAFetch
-    println("Ejecuta la instruccion!!!")
   }
 
   /**
@@ -358,13 +343,12 @@ case class Simulador() {
   def store(modoDir: ModoDireccionamiento, un_valor: W16) {
     var direccion: Int = 0
     modoDir match {
-      case Inmediato(valor: W16) ⇒ { ciclo.pasarAFetch(); throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino."); }
-      case Directo(inmediato: Inmediato) ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
-      case Indirecto(directo: Directo) ⇒ { direccion = obtenerValor(directo).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
+      case Inmediato(valor: W16)                 ⇒ { ciclo.pasarAFetch(); throw new ModoDeDireccionamientoInvalidoException("Un Inmediato no puede ser un operando destino."); }
+      case Directo(inmediato: Inmediato)         ⇒ { direccion = inmediato.getValor().value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
+      case Indirecto(directo: Directo)           ⇒ { direccion = obtenerValor(directo).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
       case RegistroIndirecto(registro: Registro) ⇒ { direccion = obtenerValor(registro).value; busIO.setValorC(direccion, un_valor); busIO.setStateCelda(direccion, State.STORE); }
       case r: Registro ⇒
         r.valor = un_valor
-        println(s"Se guarda el resutado $un_valor en " + modoDir.toString)
         agregarMensaje(s"Se guardado el resutado $un_valor en " + modoDir.toString)
     }
   }
@@ -457,18 +441,17 @@ case class Simulador() {
 
   }
 }
-
 object tt extends App {
   //var l = ArrayBuffer[Int]()
   //l.+=(1)
   //l.+=(2)
   //println(l)
-  
-//  var programa = Parser.parse("""
-//MOV R5, 0x0001
-//MOV R2, 0xFFE0 
-//ADD R2, R5""", Parser.programQ5).get
-//  var sim = Simulador()
-//  sim.inicializarSim()
-//  sim.busIO.memoria.cargarPrograma(programa,"0000")
+
+  //  var programa = Parser.parse("""
+  //MOV R5, 0x0001
+  //MOV R2, 0xFFE0 
+  //ADD R2, R5""", Parser.programQ5).get
+  //  var sim = Simulador()
+  //  sim.inicializarSim()
+  //  sim.busIO.memoria.cargarPrograma(programa,"0000")
 }
