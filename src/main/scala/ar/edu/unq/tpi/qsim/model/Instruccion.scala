@@ -2,23 +2,23 @@ package ar.edu.unq.tpi.qsim.model
 import ar.edu.unq.tpi.qsim.utils._
 
 /**
-* Copyright 2014 Tatiana Molinari.
-* Copyright 2014 Susana Rosito
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*
-*/
+ * Copyright 2014 Tatiana Molinari.
+ * Copyright 2014 Susana Rosito
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 abstract class Instruccion(val codigoDeOperacion: String, val operacion: String) {
   var position: W16 = null
@@ -190,14 +190,14 @@ case class JVS(desp: Salto) extends JUMP_condicional("0111", "JVS", desp) {}
 
 object Testuds extends App {
 
-   //instrucciones sin operandos
-   val ret = RET().representacionHexadecimal
-    var string_split = Util.hexToBinary(ret)
-    println(string_split)
-    
-    println(Util.hexToBinary(ret))
-    
-    //instruccione modo origen
+  //instrucciones sin operandos
+  //val ret = RET().representacionHexadecimal
+  //var string_split = Util.hexToBinary(ret)
+  //println(string_split)
+
+  //println(Util.hexToBinary(ret))
+
+  //instruccione modo origen
   /*  val call=CALL(Inmediato("000F")).representacionHexadecimal
     val jmp=JMP(Inmediato("000F")).representacionHexadecimal
     

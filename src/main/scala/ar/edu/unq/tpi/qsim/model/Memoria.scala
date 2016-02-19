@@ -1,23 +1,23 @@
 package ar.edu.unq.tpi.qsim.model
 
 /**
-* Copyright 2014 Tatiana Molinari.
-* Copyright 2014 Susana Rosito
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*
-*/
+ * Copyright 2014 Tatiana Molinari.
+ * Copyright 2014 Susana Rosito
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 import scala.collection.mutable.ArrayBuffer
 import ar.edu.unq.tpi.qsim.utils.Util
@@ -157,8 +157,7 @@ case class Memoria(var tamanio: Int) {
     } else {
       throw new CeldaFueraDeMemoriaException("La memoria no tiene ese numero de celda")
     }
-    }
-    
+  }
 
   /**
    * Pone un valor (W16) en la celda que se le indica por parametro en valor hexadecimal.
@@ -189,18 +188,18 @@ case class Memoria(var tamanio: Int) {
 }
 
 object Testing extends App {
-  var numero = 10 % 10
-  var memory = Memoria(14)
-  memory.initialize
+  
+  //var numero = 10 % 10
+  //var memory = Memoria(14)
+  //memory.initialize
   //var string = "2354 4567 0000"
   //var prueba = string.split(" ")
   //println(prueba.toList.toString())
-
-  memory.setValorC(0, new W16("3456"))
-  memory.setValorC(1, new W16("3456"))
-  memory.setValorC(2, new W16("3456"))
-  memory.setValorC(3, new W16("3456"))
-  println(memory.celdas)
+  //memory.setValorC(0, new W16("3456"))
+  //memory.setValorC(1, new W16("3456"))
+  //memory.setValorC(2, new W16("3456"))
+  //memory.setValorC(3, new W16("3456"))
+  //println(memory.celdas)
   //println(memory.celdas(0))
   //println(memory.getValor("0000"))
   //memory.setValorC(1, new W16("A222"))
@@ -208,5 +207,4 @@ object Testing extends App {
   //memory.setValorC(3, new W16("8996"))
   //memory.setValorC(4, new W16("1234"))
   //println(s"" + memory.show("0000"))
-
 }

@@ -1,23 +1,23 @@
 package ar.edu.unq.tpi.qsim.model
 
 /**
-* Copyright 2014 Tatiana Molinari.
-* Copyright 2014 Susana Rosito
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*
-*/
+ * Copyright 2014 Tatiana Molinari.
+ * Copyright 2014 Susana Rosito
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 import ar.edu.unq.tpi.qsim.utils.Util
 import scala.collection.mutable.Map
@@ -33,9 +33,6 @@ object ALU {
    */
   def execute_operacion_matematica(operacion: (Int, Int) ⇒ Int, op1: W16, op2: W16): Map[String, Any] = {
     val valor = operacion(op1.value, op2.value)
-    print("valor 01 !! : " + op1.value.toString)
-    print("valor 02 !! : " + op2.value.toString)
-    print("valor !! : " + valor)
     val resultado_binario = Util.toBinary16BOverflow(valor)
     val flags = takeFlags(valor)
 
@@ -148,8 +145,8 @@ object ALU {
    * @return Int
    */
   def actualizarNegative(resultado: Int): Int = resultado match {
-  	case r if (r.shortValue() < 0) ⇒ 1
-    case _ ⇒ 0
+    case r if (r.shortValue() < 0) ⇒ 1
+    case _                         ⇒ 0
   }
 
   /**
@@ -159,7 +156,7 @@ object ALU {
    */
   def actualizarZero(resultado: Int): Int = resultado match {
     case r if (r == 0) ⇒ 1
-    case _ ⇒ 0
+    case _             ⇒ 0
   }
 
   /**
@@ -169,7 +166,7 @@ object ALU {
    */
   def actualizarBorrow(valor: Int): Int = valor match {
     case r if (r < 0) ⇒ 1
-    case _ ⇒ 0
+    case _            ⇒ 0
   }
   /**
    * Devuelve el valor del flag Carry segun el entero que recibe.
@@ -284,7 +281,7 @@ object ALU {
     {
       val result = (un_bit, otro_bit) match {
         case (1, 1) ⇒ 1
-        case _ ⇒ 0
+        case _      ⇒ 0
       }
       result
     }
@@ -299,7 +296,7 @@ object ALU {
       val result = (un_bit, otro_bit) match {
         case (1, 0) ⇒ 1
         case (0, 1) ⇒ 1
-        case _ ⇒ 0
+        case _      ⇒ 0
       }
       result
     }
@@ -313,7 +310,7 @@ object ALU {
       val result = (un_bit, otro_bit) match {
         case (1, _) ⇒ 1
         case (_, 1) ⇒ 1
-        case _ ⇒ 0
+        case _      ⇒ 0
       }
       result
     }
@@ -344,5 +341,5 @@ object ALU {
     }
 }
 object ttaa extends App {
-  println(ALU.execute_sub(new W16("1000"), new W16("F000")))
+  //println(ALU.execute_sub(new W16("1000"), new W16("F000")))
 }

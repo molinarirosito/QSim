@@ -1,24 +1,23 @@
 package ar.edu.unq.tpi.qsim.model
 
 /**
-* Copyright 2014 Tatiana Molinari.
-* Copyright 2014 Susana Rosito
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*
-*/
-
+ * Copyright 2014 Tatiana Molinari.
+ * Copyright 2014 Susana Rosito
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 import scala.collection.mutable.Buffer
 import scala.collection.mutable.Map
@@ -36,7 +35,7 @@ object Programa {
     datas.foreach(entry => {
       entry match {
         case (Some(etiqueta), i) => etiquetas(etiqueta) = i
-        case _ =>
+        case _                   =>
       }
     })
     new Programa(datas.map(_._2), etiquetas)
@@ -93,7 +92,7 @@ class Programa(var instrucciones: List[Instruccion], var etiquetas: Map[String, 
 
       indice = indice + 1
     } while (indice < (this.instrucciones.length - 1) && isSame)
-    
+
     isSame
   }
 
@@ -108,13 +107,12 @@ class Programa(var instrucciones: List[Instruccion], var etiquetas: Map[String, 
 }
 
 object dd extends App {
-  
- var inst = JE(new Salto(1))
- println(inst.representacionHexadecimal)
- println(inst.toString)
- 
+
+  //var inst = JE(new Salto(1))
+  //println(inst.representacionHexadecimal)
+  //println(inst.toString)
   //print(List(ADD(R1, Inmediato(new W16("0013"))), ADD(R1, Inmediato(new W16("0013")))))
- var instruccion = MOV(new Directo(new Inmediato(new W16("0005"))), new Etiqueta("etiqueta"))
- println(instruccion.representacionHexadecimal)  
+  //var instruccion = MOV(new Directo(new Inmediato(new W16("0005"))), new Etiqueta("etiqueta"))
+  //println(instruccion.representacionHexadecimal)  
 }
 	

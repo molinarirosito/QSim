@@ -195,7 +195,6 @@ class EjecucionOperacionesMatematicasYLogicasAlu extends FlatSpec with Matchers 
     var mapa_resultados = ctx.alu.execute_sub(ctx.opunoresta, ctx.opdosresta)
     var set_resultados = resultados_esperados
     var set_resultados_flags = resultados_flags
-    println(mapa_resultados("resultado").asInstanceOf[W16].toString)
     // VERIFICA EL RESULTADO
     assert(mapa_resultados("resultado").asInstanceOf[W16].equals(set_resultados.resultado_sub))
 

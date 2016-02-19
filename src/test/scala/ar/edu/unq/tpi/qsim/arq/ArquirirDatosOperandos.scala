@@ -148,7 +148,6 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     var instruccionActual = sim.simulador3.instruccionActual.asInstanceOf[Instruccion_DosOperandos]
     var destino = instruccionActual.destino.getValor()
     var origen = sim.simulador3.obtenerValor(instruccionActual.origen)
-    println(origen)
     assert(sim.registro3.getValor.equals(destino))
     assert(sim.simulador3.obtenerValor(ctx.inst3.origen) === origen)
 
@@ -200,7 +199,6 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
     var instruccionActual = sim.simulador6.instruccionActual.asInstanceOf[Instruccion_DosOperandos]
     var destino = sim.simulador6.obtenerValor(instruccionActual.destino)
     var origen = instruccionActual.origen.getValor()
-    println(destino)
     assert(sim.simulador6.obtenerValor(ctx.inst6.destino).equals(destino))
     assert(ctx.inst6.origen.getValor.equals(origen))
     sim.simulador6.decode()
@@ -234,9 +232,7 @@ class ArquirirDatosOperandos extends FlatSpec with Matchers {
 
     var instruccionActual = sim.simulador8.instruccionActual.asInstanceOf[Instruccion_DosOperandos]
     var destino = sim.simulador8.obtenerValor(instruccionActual.destino)
-    println(destino)
     var origen = instruccionActual.origen.getValor()
-    println(origen)
     assert(sim.simulador8.obtenerValor(ctx.inst8.destino).equals(destino))
     assert(ctx.inst8.origen.getValor.equals(origen))
     sim.simulador8.decode()

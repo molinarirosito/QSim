@@ -83,7 +83,6 @@ class CicloEjecucionArquitecturaQ3 extends FlatSpec with Matchers {
     val exception = intercept[SyntaxErrorException] {
       set_parser.parser.ensamblarQ2(set_parser.programa_invalido)
     }
-    println(exception.getMessage())
     //assert(exception.getMessage().equals(mensaje_esperado))
   }
 

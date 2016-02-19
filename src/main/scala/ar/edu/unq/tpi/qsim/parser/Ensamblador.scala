@@ -1,24 +1,23 @@
 package ar.edu.unq.tpi.qsim.parser
 
 /**
-* Copyright 2014 Tatiana Molinari.
-* Copyright 2014 Susana Rosito
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*
-*/
-
+ * Copyright 2014 Tatiana Molinari.
+ * Copyright 2014 Susana Rosito
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 import scala.util.matching.Regex
 import scala.util.parsing.combinator._
@@ -227,7 +226,6 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
   def instructionQ3 = instruction2Q3 | instruction1Q3 | instruction2movQ3 | instruction0Q3 | instructionMUL2Q3
 
-
   ///////////////////////////////////////////////////////////////////////////////////
 
   // PARSER ENSAMBLADOR - Q4
@@ -357,7 +355,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
   def instructionsQ1 = instructionQ1
   def instructionsQ2 = instructionQ2
 
-  // Agregar a partor de Q3 la idea de etiqueta :
+  // Agregar a parser de Q3 la idea de etiqueta :
   def instructionsQ3 = ((ident <~ ":")?) ~ instructionQ3
   def instructionsQ4 = ((ident <~ ":")?) ~ instructionQ4
   def instructionsQ5 = ((ident <~ ":")?) ~ instructionQ5
@@ -385,7 +383,7 @@ trait Ensamblador extends JavaTokenParsers with ImplicitConversions {
 
 object lala extends App {
 
-    val programa = Parser.parse("""
+  val programa = Parser.parse("""
 MOV R5, 0x0100
 MOV R2, 0x0010 
 siguiente: MOV R3, R5
@@ -403,20 +401,19 @@ MOV [R3], R4
 ADD R5, 0x0001
 SUB R2, 0x0001
 JNE siguiente""", Parser.programQ5).get
-  println(programa)
-  val sim = new Simulador()
-  sim.inicializarSim
-  sim.cargarProgramaYRegistros(programa, "0000" , scala.collection.mutable.Map[String, W16]())
-  var count = 0
-  do {
-      //FETCH
-      sim.fetch()
-      //DECODE
-      var decode = sim.decode()
-      println(decode)
-      // Execute
-      sim.execute
-      count += 1
-    } while (count < programa.instrucciones.length)
-
+  //println(programa)
+  //val sim = new Simulador()
+  //sim.inicializarSim
+  //sim.cargarProgramaYRegistros(programa, "0000" , scala.collection.mutable.Map[String, W16]())
+  //var count = 0
+  //do {
+  //// FETCH
+  //sim.fetch()
+  //// DECODE
+  //var decode = sim.decode()
+  //println(decode)
+  //// Execute
+  //sim.execute
+  //count += 1
+  //} while (count < programa.instrucciones.length)
 } 
